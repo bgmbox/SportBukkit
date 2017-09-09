@@ -1,9 +1,11 @@
+From a0b1135d0308453c3efb71503dd33109e7c70aa9 Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Thu, 2 Aug 2012 17:00:13 -0700
 Subject: [PATCH] Update the POM to distinguish SportBukkit from CraftBukkit.
 
 
 diff --git a/pom.xml b/pom.xml
+index fc024498..1f1096fd 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -1,25 +1,46 @@

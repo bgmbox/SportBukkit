@@ -1,9 +1,11 @@
+From cd4699d82a4ec974fbaf7c6ddbb0d3ff7d486ea7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:18:12 -0500
 Subject: [PATCH] Multi-trade API
 
 
 diff --git a/src/main/java/org/bukkit/entity/HumanEntity.java b/src/main/java/org/bukkit/entity/HumanEntity.java
+index 518aa2a9..e6dbe96c 100644
 --- a/src/main/java/org/bukkit/entity/HumanEntity.java
 +++ b/src/main/java/org/bukkit/entity/HumanEntity.java
 @@ -120,6 +120,14 @@ public interface HumanEntity extends LivingEntity, AnimalTamer, Permissible, Inv

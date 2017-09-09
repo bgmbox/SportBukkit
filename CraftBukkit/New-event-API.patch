@@ -1,9 +1,11 @@
+From 96e6b3353ded0cdf5e134e4e1e2dbb1a7036324d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 2 Dec 2016 01:48:56 -0500
 Subject: [PATCH] New event API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index afdb5ab8..7251cddf 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -55,7 +55,7 @@ public abstract class PlayerList {
@@ -25,6 +27,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/
          // CraftBukkit end
  
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
+index 16e16341..8eec729c 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -1,9 +1,10 @@
@@ -74,6 +77,7 @@ diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/or
          return CraftKey.get(prefix, id);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index b77778f3..30d108fb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -24,6 +24,8 @@ import java.util.regex.Pattern;
@@ -235,6 +239,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
          if (!(sender instanceof EntityPlayer)) {
              return ImmutableList.of();
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
+index 893ea461..98cb45f4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -11,12 +11,17 @@ import java.util.TimeZone;
@@ -268,6 +273,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/
          };
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java b/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java
+index 26a2fb89..799785d1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java
 @@ -17,7 +17,7 @@ public class ColouredConsoleSender extends CraftConsoleCommandSender {
@@ -293,6 +299,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.
 -    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+index 685dd39e..90d4eb72 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -1,5 +1,6 @@

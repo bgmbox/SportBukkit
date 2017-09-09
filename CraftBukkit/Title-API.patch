@@ -1,9 +1,11 @@
+From eb6cb684b78d2c7482bf74f9542d24bb4adb40d2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 28 Feb 2015 04:32:45 -0500
 Subject: [PATCH] Title API
 
 
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutTitle.java b/src/main/java/net/minecraft/server/PacketPlayOutTitle.java
+index 22564b7b..15a041bb 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutTitle.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutTitle.java
 @@ -12,6 +12,18 @@ public class PacketPlayOutTitle implements Packet<PacketListenerPlayOut> {
@@ -41,6 +43,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutTitle.java b/src/ma
  
          if (this.a == EnumTitleAction.TIMES) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 39fceff8..c70e8108 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1839,4 +1839,48 @@ public class CraftPlayer extends CraftHumanEntity implements Player {

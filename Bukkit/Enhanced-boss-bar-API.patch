@@ -1,9 +1,11 @@
+From 65a6e047671d93c7633de4a187697f6b0388b720 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 01:41:34 -0500
 Subject: [PATCH] Enhanced boss bar API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index dc28167c..b4e438e4 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -1178,7 +1178,7 @@ public final class Bukkit {
@@ -16,6 +18,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
      }
  
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index bcd6030f..446acc49 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -979,7 +979,7 @@ public interface Server extends PluginMessageRecipient, tc.oc.minecraft.api.serv
@@ -28,6 +31,7 @@ diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Ser
      /**
       * Gets an entity on the server by its UUID
 diff --git a/src/main/java/org/bukkit/boss/BossBar.java b/src/main/java/org/bukkit/boss/BossBar.java
+index effc3295..1a7ca565 100644
 --- a/src/main/java/org/bukkit/boss/BossBar.java
 +++ b/src/main/java/org/bukkit/boss/BossBar.java
 @@ -1,8 +1,10 @@

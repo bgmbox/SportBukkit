@@ -1893,7 +1893,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
             107, 108, 109, 110, // 1.9
             210,                // 1.10
             315, 316,           // 1.11
-            335                 // 1.12
+            335, 338            // 1.12
         );
     }
 

@@ -1,9 +1,11 @@
+From db0f159a3b4acbea10562b58a2e89f32a6d81431 Mon Sep 17 00:00:00 2001
 From: thinkofdeath <purggames@gmail.com>
 Date: Fri, 12 Apr 2013 18:19:11 +0100
 Subject: [PATCH] Allow playEffect to spawn particles
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java b/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
+index 16721835..582d7bfb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
 @@ -58,6 +58,8 @@ public class CraftEffect {
@@ -16,6 +18,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java b/src/main/ja
              datavalue = 0;
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index b3276695..f187d4a8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -815,6 +815,10 @@ public class CraftWorld implements World {
@@ -79,6 +82,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/jav
          radius *= radius;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index b400b535..0ae82ff7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -62,6 +62,7 @@ import org.bukkit.event.player.PlayerUnregisterChannelEvent;

@@ -1,9 +1,11 @@
+From e1d2d818e03eeda1607c9f68304ae0a6b0809bc7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 1 Jun 2015 06:28:48 -0400
 Subject: [PATCH] Improve BlockState API
 
 
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
+index 866a73d9..911a4d13 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -26,17 +26,49 @@ public interface BlockState extends Metadatable {

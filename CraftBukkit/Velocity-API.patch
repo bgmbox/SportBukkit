@@ -1,9 +1,11 @@
+From 431548b89c0e1c063bba3f195dc826e034dfd5dc Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 22:09:17 -0400
 Subject: [PATCH] Velocity API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
+index b81e6d73..a9e828da 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1363,13 +1363,41 @@ public abstract class Entity implements ICommandListener {
@@ -53,6 +55,7 @@ diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/
          this.velocityChanged = true;
      }
 diff --git a/src/main/java/net/minecraft/server/EntityArrow.java b/src/main/java/net/minecraft/server/EntityArrow.java
+index 8452f8cd..2f0a30b6 100644
 --- a/src/main/java/net/minecraft/server/EntityArrow.java
 +++ b/src/main/java/net/minecraft/server/EntityArrow.java
 @@ -283,7 +283,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
@@ -65,6 +68,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityArrow.java b/src/main/java
                      }
  
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index 7465e940..537ec9c3 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -1022,10 +1022,10 @@ public abstract class EntityHuman extends EntityLiving {
@@ -104,6 +108,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java
                          }
  
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index f4d4e15d..b2ca4350 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -935,7 +935,7 @@ public abstract class EntityLiving extends Entity {
@@ -174,6 +179,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/jav
      public float getHeadRotation() {
          return this.aP;
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
+index 20f9af94..69628076 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -5,8 +5,10 @@ import com.mojang.authlib.GameProfile;
@@ -356,6 +362,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/jav
          super(worldserver, gameprofile);
          playerinteractmanager.player = this;
 diff --git a/src/main/java/net/minecraft/server/EntityTrackerEntry.java b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
+index 1be9dba6..0c2214a4 100644
 --- a/src/main/java/net/minecraft/server/EntityTrackerEntry.java
 +++ b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
 @@ -255,6 +255,8 @@ public class EntityTrackerEntry {
@@ -384,6 +391,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityTrackerEntry.java b/src/ma
  
      private void d() {
 diff --git a/src/main/java/net/minecraft/server/Explosion.java b/src/main/java/net/minecraft/server/Explosion.java
+index 98c2bdcf..a0eabda9 100644
 --- a/src/main/java/net/minecraft/server/Explosion.java
 +++ b/src/main/java/net/minecraft/server/Explosion.java
 @@ -142,9 +142,18 @@ public class Explosion {
@@ -406,6 +414,7 @@ diff --git a/src/main/java/net/minecraft/server/Explosion.java b/src/main/java/n
                              EntityHuman entityhuman = (EntityHuman) entity;
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 0ea41df8..9e43f0ee 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -58,6 +58,7 @@ import org.bukkit.inventory.CraftingInventory;
@@ -487,6 +496,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main
          return System.nanoTime() / 1000000L;
      }
 diff --git a/src/main/java/net/minecraft/server/WorldServer.java b/src/main/java/net/minecraft/server/WorldServer.java
+index a13089f9..b24e84ff 100644
 --- a/src/main/java/net/minecraft/server/WorldServer.java
 +++ b/src/main/java/net/minecraft/server/WorldServer.java
 @@ -1224,7 +1224,10 @@ public class WorldServer extends World implements IAsyncTaskHandler {
@@ -502,6 +512,7 @@ diff --git a/src/main/java/net/minecraft/server/WorldServer.java b/src/main/java
          }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index edf479b1..79d075c9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -600,6 +600,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
@@ -517,6 +528,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
          return this.configuration.getInt("ticks-per.animal-spawns");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index 229a1b1b..2d6cebe4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -37,6 +37,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
@@ -573,6 +585,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index d962e9c9..75aa1109 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -74,6 +74,7 @@ import org.bukkit.plugin.Plugin;

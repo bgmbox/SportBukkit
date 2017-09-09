@@ -1,9 +1,11 @@
+From 7c465de3ed771b39faf45997d3f01302db8eadb2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 18 Nov 2016 04:34:02 -0500
 Subject: [PATCH] Geometry API
 
 
 diff --git a/src/main/java/net/minecraft/server/BlockPosition.java b/src/main/java/net/minecraft/server/BlockPosition.java
+index 1a107283..f6f7e711 100644
 --- a/src/main/java/net/minecraft/server/BlockPosition.java
 +++ b/src/main/java/net/minecraft/server/BlockPosition.java
 @@ -8,8 +8,93 @@ import javax.annotation.concurrent.Immutable;
@@ -228,6 +230,7 @@ diff --git a/src/main/java/net/minecraft/server/BlockPosition.java b/src/main/ja
              this.b = i;
              this.c = j;
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
+index 11c733e2..f8487998 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -1,10 +1,12 @@
@@ -265,6 +268,7 @@ diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/or
          return CraftItemFactory.instance();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 32253ae8..edf479b1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1077,12 +1077,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {

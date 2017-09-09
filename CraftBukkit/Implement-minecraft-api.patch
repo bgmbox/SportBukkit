@@ -1,9 +1,11 @@
+From c20e293af127d1b6d4d5addc5d334af2fdd4bbed Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 4 Feb 2016 04:59:57 -0500
 Subject: [PATCH] Implement minecraft-api
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
+index 5bba4042..89d20814 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -81,6 +81,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -15,6 +17,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/jav
  
      public EntityPlayer(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
 diff --git a/src/main/java/net/minecraft/server/HandshakeListener.java b/src/main/java/net/minecraft/server/HandshakeListener.java
+index 58bf9ff6..049e3658 100644
 --- a/src/main/java/net/minecraft/server/HandshakeListener.java
 +++ b/src/main/java/net/minecraft/server/HandshakeListener.java
 @@ -70,6 +70,7 @@ public class HandshakeListener implements PacketHandshakingInListener {
@@ -26,6 +29,7 @@ diff --git a/src/main/java/net/minecraft/server/HandshakeListener.java b/src/mai
  
                  // SportBukkit Start - BungeeCord support
 diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/java/net/minecraft/server/NetworkManager.java
+index d0112b22..93a7fb99 100644
 --- a/src/main/java/net/minecraft/server/NetworkManager.java
 +++ b/src/main/java/net/minecraft/server/NetworkManager.java
 @@ -70,6 +70,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
@@ -37,6 +41,7 @@ diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/j
      private IChatBaseComponent n;
      private boolean o;
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index c53cf935..33eb721a 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -493,6 +493,7 @@ public abstract class PlayerList {
@@ -48,6 +53,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress());
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index c35da60f..2c358ff5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -23,6 +23,7 @@ import java.util.regex.Pattern;
@@ -107,6 +113,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
+index be7f7d8e..4a295355 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 @@ -3,6 +3,8 @@ package org.bukkit.craftbukkit.command;
@@ -136,6 +143,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSe
          return getCallee().getServer();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
+index 716f7c8a..6bae3685 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 @@ -1,5 +1,6 @@
@@ -161,6 +169,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.ja
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index cbd92147..229a1b1b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -9,6 +9,7 @@ import java.util.List;
@@ -187,6 +196,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/
          return getHandle().getName();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 6d789949..dbf950ef 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -24,7 +24,10 @@ import java.util.WeakHashMap;

@@ -468,7 +468,7 @@ public class Vector extends VectorBase<Vector> implements Cloneable, Configurati
      * @return This vector.
      */
     public Vector setX(double x) {
-        setX(x);
+        super.setX(x);
         return this;
     }
 
@@ -534,7 +534,7 @@ public class Vector extends VectorBase<Vector> implements Cloneable, Configurati
      * @return This vector.
      */
     public Vector setZ(double z) {
-        setZ(z);
+        super.setZ(z);
         return this;
     }
 

@@ -1,9 +1,11 @@
+From 36108b3db30d4a4d9ba2eaf8295a1befe20b8674 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:24:15 -0400
 Subject: [PATCH] Velocity API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index 2c7c0bbc..d3d4e8a9 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -351,6 +351,13 @@ public final class Bukkit {
@@ -21,6 +23,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
       * <p>
       * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 616a8a10..4742c93e 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -266,6 +266,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
@@ -36,6 +39,7 @@ diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Ser
       * <p>
       * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index 9b7b828a..cdd832c7 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -55,6 +55,48 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
@@ -88,6 +92,7 @@ diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/buk
       *
       * @return height of entity
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 50c498b2..7fc6494f 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -13,6 +13,7 @@ import org.bukkit.map.MapView;
@@ -142,6 +147,7 @@ index 00000000..74116330
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java b/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
+index 69d2fce4..4afa8377 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
 @@ -11,11 +11,13 @@ import org.bukkit.util.Vector;

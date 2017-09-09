@@ -1,9 +1,11 @@
+From 0a6ef2f40329df43936a839f7e4606b3b99291fa Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 28 Apr 2012 01:39:04 -0400
 Subject: [PATCH] Entity collision API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index f9d76e25..50c498b2 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1061,6 +1061,18 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

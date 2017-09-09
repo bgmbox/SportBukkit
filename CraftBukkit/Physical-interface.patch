@@ -1,9 +1,11 @@
+From 0990f201bc99d8a0bc9c9ee942139a6815a0ec54 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 01:08:46 -0400
 Subject: [PATCH] Physical interface
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index e218353f..b4bfe45c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -92,6 +92,11 @@ public class CraftWorld implements World {
@@ -19,6 +21,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/jav
          return getChunkAt(x >> 4, z >> 4).getBlock(x & 0xF, y, z & 0xF);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
+index 4866d1ae..e7ea1bef 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 @@ -19,6 +19,7 @@ import net.minecraft.server.TileEntityShulkerBox;
@@ -42,6 +45,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java 
          return inventory.getMaxStackSize();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/projectiles/CraftBlockProjectileSource.java b/src/main/java/org/bukkit/craftbukkit/projectiles/CraftBlockProjectileSource.java
+index 744da023..42823da5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/projectiles/CraftBlockProjectileSource.java
 +++ b/src/main/java/org/bukkit/craftbukkit/projectiles/CraftBlockProjectileSource.java
 @@ -4,6 +4,7 @@ import java.util.Random;

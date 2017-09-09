@@ -1,9 +1,11 @@
+From 3763db9933f14c30d75e14fea87c75550e2d442f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Mar 2015 04:29:17 -0400
 Subject: [PATCH] Relative teleport API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 2ccc5aa4..b036fec5 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -711,14 +711,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -63,6 +65,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main
  
          try {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index c70e8108..11795951 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1883,4 +1883,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player {

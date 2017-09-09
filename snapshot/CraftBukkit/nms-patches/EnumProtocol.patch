@@ -1,30 +1,6 @@
 --- a/net/minecraft/server/EnumProtocol.java
 +++ b/net/minecraft/server/EnumProtocol.java
-@@ -59,7 +59,6 @@
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutEntity.PacketPlayOutEntityLook.class);
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutVehicleMove.class);
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutOpenSignEditor.class);
--        this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutAutoRecipe.class);
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutAbilities.class);
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutCombatEvent.class);
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutPlayerInfo.class);
-@@ -97,6 +96,7 @@
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutUpdateAttributes.class);
-         this.a(EnumProtocolDirection.CLIENTBOUND, PacketPlayOutEntityEffect.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInTeleportAccept.class);
-+        this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInAutoRecipe.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInTabComplete.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInChat.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInClientCommand.class);
-@@ -114,7 +114,6 @@
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInFlying.PacketPlayInLook.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInVehicleMove.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInBoatMove.class);
--        this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInAutoRecipe.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInAbilities.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInBlockDig.class);
-         this.a(EnumProtocolDirection.SERVERBOUND, PacketPlayInEntityAction.class);
-@@ -159,7 +158,7 @@
+@@ -159,7 +159,7 @@
      }
  
      protected EnumProtocol a(EnumProtocolDirection enumprotocoldirection, Class<? extends Packet<?>> oclass) {

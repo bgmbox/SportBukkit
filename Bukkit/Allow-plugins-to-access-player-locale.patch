@@ -1,9 +1,11 @@
+From a60d2d2938cf4dd4362285016182e45645984d03 Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Sun, 5 Jan 2014 20:32:00 -0600
 Subject: [PATCH] Allow plugins to access player locale
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 6647378e..54b06bbe 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1420,6 +1420,12 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
@@ -20,6 +22,7 @@ diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/buk
       * to connect to this server. This is generated client-side, and it may
       * return a blank string if the client didn't send it, or an invalid
 diff --git a/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java b/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java
+index fbbfcccc..33c95f3c 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java
 @@ -4,26 +4,38 @@ import org.bukkit.entity.Player;

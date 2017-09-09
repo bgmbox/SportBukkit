@@ -1,9 +1,11 @@
+From 4817f29afe5cf16e1ae3874982362811ce96298b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 01:08:40 -0400
 Subject: [PATCH] Physical interface
 
 
 diff --git a/src/main/java/org/bukkit/Chunk.java b/src/main/java/org/bukkit/Chunk.java
+index 8014d832..5e62e887 100644
 --- a/src/main/java/org/bukkit/Chunk.java
 +++ b/src/main/java/org/bukkit/Chunk.java
 @@ -10,7 +10,7 @@ import java.util.Set;
@@ -27,6 +29,7 @@ index 00000000..1cb686db
 +    Location getLocation();
 +}
 diff --git a/src/main/java/org/bukkit/Location.java b/src/main/java/org/bukkit/Location.java
+index 5c3d42cc..3896c63e 100644
 --- a/src/main/java/org/bukkit/Location.java
 +++ b/src/main/java/org/bukkit/Location.java
 @@ -16,7 +16,7 @@ import org.bukkit.util.Vector;
@@ -40,7 +43,7 @@ diff --git a/src/main/java/org/bukkit/Location.java b/src/main/java/org/bukkit/L
      private double y;
 diff --git a/src/main/java/org/bukkit/Physical.java b/src/main/java/org/bukkit/Physical.java
 new file mode 100644
-index 00000000..24a58ffd
+index 00000000..e2bc7661
 --- /dev/null
 +++ b/src/main/java/org/bukkit/Physical.java
 @@ -0,0 +1,55 @@
@@ -100,6 +103,7 @@ index 00000000..24a58ffd
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index 8a46f37f..2f67d701 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -13,7 +13,6 @@ import org.bukkit.block.Block;
@@ -120,6 +124,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Gets the {@link Block} at the given coordinates
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
+index fe325374..5f3a6ffc 100644
 --- a/src/main/java/org/bukkit/block/Block.java
 +++ b/src/main/java/org/bukkit/block/Block.java
 @@ -3,6 +3,7 @@ package org.bukkit.block;
@@ -140,6 +145,7 @@ diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukki
      /**
       * Gets the metadata for this block
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
+index 911a4d13..aaaecb05 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -1,6 +1,7 @@
@@ -160,6 +166,7 @@ diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/
      /**
       * Gets the block represented by this BlockState
 diff --git a/src/main/java/org/bukkit/block/DoubleChest.java b/src/main/java/org/bukkit/block/DoubleChest.java
+index 663fcbbd..1b0d1eac 100644
 --- a/src/main/java/org/bukkit/block/DoubleChest.java
 +++ b/src/main/java/org/bukkit/block/DoubleChest.java
 @@ -1,5 +1,6 @@
@@ -179,6 +186,7 @@ diff --git a/src/main/java/org/bukkit/block/DoubleChest.java b/src/main/java/org
  
      public DoubleChest(DoubleChestInventory chest) {
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index 84ae807c..9b7b828a 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -1,5 +1,6 @@
@@ -198,6 +206,7 @@ diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/buk
      /**
       * Gets the entity's current position
 diff --git a/src/main/java/org/bukkit/event/block/BlockEvent.java b/src/main/java/org/bukkit/event/block/BlockEvent.java
+index 24052051..47205ce8 100644
 --- a/src/main/java/org/bukkit/event/block/BlockEvent.java
 +++ b/src/main/java/org/bukkit/event/block/BlockEvent.java
 @@ -1,12 +1,14 @@
@@ -227,6 +236,7 @@ diff --git a/src/main/java/org/bukkit/event/block/BlockEvent.java b/src/main/jav
 +    }
  }
 diff --git a/src/main/java/org/bukkit/event/entity/EntityEvent.java b/src/main/java/org/bukkit/event/entity/EntityEvent.java
+index c9a4ab30..fa7b1301 100644
 --- a/src/main/java/org/bukkit/event/entity/EntityEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/EntityEvent.java
 @@ -1,5 +1,7 @@
@@ -257,6 +267,7 @@ diff --git a/src/main/java/org/bukkit/event/entity/EntityEvent.java b/src/main/j
 +    }
  }
 diff --git a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java b/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
+index 74d458a8..abe2bb81 100644
 --- a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
 @@ -1,5 +1,7 @@
@@ -289,6 +300,7 @@ diff --git a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java b
          return handlers;
      }
 diff --git a/src/main/java/org/bukkit/event/hanging/HangingEvent.java b/src/main/java/org/bukkit/event/hanging/HangingEvent.java
+index b370afe7..a680c804 100644
 --- a/src/main/java/org/bukkit/event/hanging/HangingEvent.java
 +++ b/src/main/java/org/bukkit/event/hanging/HangingEvent.java
 @@ -1,15 +1,16 @@
@@ -311,6 +323,7 @@ diff --git a/src/main/java/org/bukkit/event/hanging/HangingEvent.java b/src/main
      }
  
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryEvent.java
+index 973c392e..e84debce 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryEvent.java
 +++ b/src/main/java/org/bukkit/event/inventory/InventoryEvent.java
 @@ -3,6 +3,8 @@ package org.bukkit.event.inventory;
@@ -344,6 +357,7 @@ diff --git a/src/main/java/org/bukkit/event/inventory/InventoryEvent.java b/src/
          return handlers;
      }
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
+index 06ec99ae..e751fbfd 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
 +++ b/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
 @@ -1,6 +1,8 @@
@@ -377,6 +391,7 @@ diff --git a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.jav
          return cancelled;
      }
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java
+index af6ad5b7..1eb684d7 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java
 +++ b/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java
 @@ -1,5 +1,7 @@
@@ -409,6 +424,7 @@ diff --git a/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.j
          return cancelled;
      }
 diff --git a/src/main/java/org/bukkit/event/player/PlayerEvent.java b/src/main/java/org/bukkit/event/player/PlayerEvent.java
+index 0d4833f6..fc183e74 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerEvent.java
 @@ -1,12 +1,14 @@
@@ -438,6 +454,7 @@ diff --git a/src/main/java/org/bukkit/event/player/PlayerEvent.java b/src/main/j
 +    }
  }
 diff --git a/src/main/java/org/bukkit/event/server/MapInitializeEvent.java b/src/main/java/org/bukkit/event/server/MapInitializeEvent.java
+index 8834489b..62e757a0 100644
 --- a/src/main/java/org/bukkit/event/server/MapInitializeEvent.java
 +++ b/src/main/java/org/bukkit/event/server/MapInitializeEvent.java
 @@ -1,12 +1,14 @@
@@ -469,6 +486,7 @@ diff --git a/src/main/java/org/bukkit/event/server/MapInitializeEvent.java b/src
          return handlers;
      }
 diff --git a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java b/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
+index b8255c01..56f5c2d8 100644
 --- a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
 +++ b/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
 @@ -1,12 +1,14 @@
@@ -498,6 +516,7 @@ diff --git a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java b/src/main
 +    }
  }
 diff --git a/src/main/java/org/bukkit/event/weather/WeatherEvent.java b/src/main/java/org/bukkit/event/weather/WeatherEvent.java
+index 0cae9bcb..ba0d11f4 100644
 --- a/src/main/java/org/bukkit/event/weather/WeatherEvent.java
 +++ b/src/main/java/org/bukkit/event/weather/WeatherEvent.java
 @@ -1,12 +1,13 @@
@@ -516,6 +535,7 @@ diff --git a/src/main/java/org/bukkit/event/weather/WeatherEvent.java b/src/main
  
      public WeatherEvent(final World where) {
 diff --git a/src/main/java/org/bukkit/event/world/WorldEvent.java b/src/main/java/org/bukkit/event/world/WorldEvent.java
+index bd89b81d..400f8ad7 100644
 --- a/src/main/java/org/bukkit/event/world/WorldEvent.java
 +++ b/src/main/java/org/bukkit/event/world/WorldEvent.java
 @@ -1,12 +1,13 @@
@@ -534,6 +554,7 @@ diff --git a/src/main/java/org/bukkit/event/world/WorldEvent.java b/src/main/jav
  
      public WorldEvent(final World world) {
 diff --git a/src/main/java/org/bukkit/inventory/Inventory.java b/src/main/java/org/bukkit/inventory/Inventory.java
+index 3275e172..bac683b1 100644
 --- a/src/main/java/org/bukkit/inventory/Inventory.java
 +++ b/src/main/java/org/bukkit/inventory/Inventory.java
 @@ -6,6 +6,7 @@ import java.util.ListIterator;
@@ -554,6 +575,7 @@ diff --git a/src/main/java/org/bukkit/inventory/Inventory.java b/src/main/java/o
      /**
       * Returns the size of the inventory
 diff --git a/src/main/java/org/bukkit/inventory/InventoryHolder.java b/src/main/java/org/bukkit/inventory/InventoryHolder.java
+index 9c06a3d7..6e128baf 100644
 --- a/src/main/java/org/bukkit/inventory/InventoryHolder.java
 +++ b/src/main/java/org/bukkit/inventory/InventoryHolder.java
 @@ -1,6 +1,8 @@
@@ -567,6 +589,7 @@ diff --git a/src/main/java/org/bukkit/inventory/InventoryHolder.java b/src/main/
      /**
       * Get the object's inventory.
 diff --git a/src/main/java/org/bukkit/map/MapView.java b/src/main/java/org/bukkit/map/MapView.java
+index 18a9936f..e98a1f85 100644
 --- a/src/main/java/org/bukkit/map/MapView.java
 +++ b/src/main/java/org/bukkit/map/MapView.java
 @@ -1,12 +1,13 @@
@@ -585,6 +608,7 @@ diff --git a/src/main/java/org/bukkit/map/MapView.java b/src/main/java/org/bukki
      /**
       * An enum representing all possible scales a map can be set to.
 diff --git a/src/main/java/org/bukkit/projectiles/ProjectileSource.java b/src/main/java/org/bukkit/projectiles/ProjectileSource.java
+index cf909461..bd2d3a1d 100644
 --- a/src/main/java/org/bukkit/projectiles/ProjectileSource.java
 +++ b/src/main/java/org/bukkit/projectiles/ProjectileSource.java
 @@ -1,12 +1,13 @@

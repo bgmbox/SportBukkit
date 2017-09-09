@@ -1,9 +1,11 @@
+From f29dfe40a006c515814f7225cf0b506c09afea0c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 01:41:04 -0400
 Subject: [PATCH] Multi-passenger API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index cdd832c7..309491d1 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -295,6 +295,23 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable

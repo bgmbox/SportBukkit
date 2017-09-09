@@ -1,9 +1,11 @@
+From a8b2ad9b632038dddd4f1577bd39fd4d5f50318a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 6 Mar 2016 03:43:13 -0500
 Subject: [PATCH] Empty chunk API
 
 
 diff --git a/src/main/java/org/bukkit/Chunk.java b/src/main/java/org/bukkit/Chunk.java
+index 5e62e887..4d7ca1fe 100644
 --- a/src/main/java/org/bukkit/Chunk.java
 +++ b/src/main/java/org/bukkit/Chunk.java
 @@ -52,6 +52,11 @@ public interface Chunk extends Physical {

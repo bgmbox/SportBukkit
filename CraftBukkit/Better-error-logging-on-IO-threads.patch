@@ -1,9 +1,11 @@
+From aca770c05478941f85eeba9a2485f454c80cf74e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 5 Apr 2016 10:38:52 -0400
 Subject: [PATCH] Better error logging on IO threads
 
 
 diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/java/net/minecraft/server/NetworkManager.java
+index 93a7fb99..e5348318 100644
 --- a/src/main/java/net/minecraft/server/NetworkManager.java
 +++ b/src/main/java/net/minecraft/server/NetworkManager.java
 @@ -88,7 +88,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {

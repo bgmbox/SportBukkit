@@ -1,9 +1,11 @@
+From 7604405b03a97c7aba1942399526cfc93ac21c05 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 04:14:27 -0500
 Subject: [PATCH] Expand Physical API
 
 
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index ba3d01d0..e60e082d 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -529,6 +529,11 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {

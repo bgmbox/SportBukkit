@@ -1,9 +1,11 @@
+From beba5b549a46eaaba268b420b8634c363a4c6496 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
+index 778e0d63..ffb78aa4 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -285,6 +285,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -23,6 +25,7 @@ diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/
  
      // SportBukkit start
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 251e8b9a..30ee2bfb 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -35,6 +35,7 @@ import java.util.UUID;
@@ -200,6 +203,7 @@ diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/
  
      public void addMainThreadTask(Runnable task) {
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
+index c2881844..ac7b2240 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -185,4 +185,10 @@ public class ServerConnection {
@@ -214,6 +218,7 @@ diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main
 +    // SportBukkit end
  }
 diff --git a/src/main/java/net/minecraft/server/ThreadWatchdog.java b/src/main/java/net/minecraft/server/ThreadWatchdog.java
+index dd18b4e0..a3481c0f 100644
 --- a/src/main/java/net/minecraft/server/ThreadWatchdog.java
 +++ b/src/main/java/net/minecraft/server/ThreadWatchdog.java
 @@ -22,8 +22,17 @@ public class ThreadWatchdog implements Runnable {
@@ -235,6 +240,7 @@ diff --git a/src/main/java/net/minecraft/server/ThreadWatchdog.java b/src/main/j
              long j = MinecraftServer.aw();
              long k = j - i;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 30d108fb..fe7d521b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -6,6 +6,8 @@ import java.io.FileInputStream;

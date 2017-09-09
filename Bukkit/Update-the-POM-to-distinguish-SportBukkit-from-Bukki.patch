@@ -1,9 +1,11 @@
+From d24d844db09221c3cb45b2ed14770fe560b475d2 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 10 Dec 2013 23:16:10 -0600
 Subject: [PATCH] Update the POM to distinguish SportBukkit from Bukkit
 
 
 diff --git a/pom.xml b/pom.xml
+index 8be63a90..9981956e 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,45 +3,48 @@

@@ -1,9 +1,11 @@
+From 85d7d1e355d629a5eea560e81f44c0e307c174fa Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 4 Apr 2015 22:59:54 -0400
 Subject: [PATCH] Complete resource pack API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index f5ebd43a..80e5ab54 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1157,10 +1157,15 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

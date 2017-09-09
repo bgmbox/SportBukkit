@@ -1,9 +1,11 @@
+From c6419704531bc55aedc39a9091a130ead7e7b8c9 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 9 Jul 2013 17:06:59 -0500
 Subject: [PATCH] Fix invalid positions kicking players
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 2f3a729b..5de8c5d6 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -623,6 +623,12 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {

@@ -1,3 +1,4 @@
+From b8188d385536f827035d251ac1f943139195109f Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Sat, 13 Apr 2013 10:50:21 -0700
 Subject: [PATCH] BungeeCord Support
@@ -6,6 +7,7 @@ Subject: [PATCH] BungeeCord Support
 - Ported from Spigot
 
 diff --git a/src/main/java/net/minecraft/server/HandshakeListener.java b/src/main/java/net/minecraft/server/HandshakeListener.java
+index 65b745fc..58bf9ff6 100644
 --- a/src/main/java/net/minecraft/server/HandshakeListener.java
 +++ b/src/main/java/net/minecraft/server/HandshakeListener.java
 @@ -71,6 +71,28 @@ public class HandshakeListener implements PacketHandshakingInListener {
@@ -38,6 +40,7 @@ diff --git a/src/main/java/net/minecraft/server/HandshakeListener.java b/src/mai
              }
              break;
 diff --git a/src/main/java/net/minecraft/server/LoginListener.java b/src/main/java/net/minecraft/server/LoginListener.java
+index ff40e102..833952b6 100644
 --- a/src/main/java/net/minecraft/server/LoginListener.java
 +++ b/src/main/java/net/minecraft/server/LoginListener.java
 @@ -276,6 +276,23 @@ public class LoginListener implements PacketLoginInListener, ITickable {
@@ -65,6 +68,7 @@ diff --git a/src/main/java/net/minecraft/server/LoginListener.java b/src/main/ja
  
      protected GameProfile a(GameProfile gameprofile) {
 diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/java/net/minecraft/server/NetworkManager.java
+index 65793fc5..d0112b22 100644
 --- a/src/main/java/net/minecraft/server/NetworkManager.java
 +++ b/src/main/java/net/minecraft/server/NetworkManager.java
 @@ -65,7 +65,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
@@ -81,6 +85,7 @@ diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/j
      private IChatBaseComponent n;
      private boolean o;
 diff --git a/src/main/java/net/minecraft/server/PacketHandshakingInSetProtocol.java b/src/main/java/net/minecraft/server/PacketHandshakingInSetProtocol.java
+index 1cb9d60d..295f43da 100644
 --- a/src/main/java/net/minecraft/server/PacketHandshakingInSetProtocol.java
 +++ b/src/main/java/net/minecraft/server/PacketHandshakingInSetProtocol.java
 @@ -13,7 +13,7 @@ public class PacketHandshakingInSetProtocol implements Packet<PacketHandshakingI
@@ -93,6 +98,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketHandshakingInSetProtocol.j
          this.d = EnumProtocol.a(packetdataserializer.g());
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index de5a9206..4769dada 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -173,6 +173,8 @@ public final class CraftServer implements Server {
@@ -113,6 +119,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
          pluginManager.useTimings(configuration.getBoolean("settings.plugin-profiling"));
          monsterSpawn = configuration.getInt("spawn-limits.monsters");
 diff --git a/src/main/resources/configurations/bukkit.yml b/src/main/resources/configurations/bukkit.yml
+index 67ea88a4..5a583902 100644
 --- a/src/main/resources/configurations/bukkit.yml
 +++ b/src/main/resources/configurations/bukkit.yml
 @@ -22,6 +22,7 @@ settings:

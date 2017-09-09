@@ -1,9 +1,11 @@
+From 9cb4c6c756f77790b58e0934b57bfd641f428d03 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 9 May 2015 14:30:20 -0400
 Subject: [PATCH] Block digging API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src/main/java/net/minecraft/server/PlayerInteractManager.java
+index 56b4b0ae..0fbd76de 100644
 --- a/src/main/java/net/minecraft/server/PlayerInteractManager.java
 +++ b/src/main/java/net/minecraft/server/PlayerInteractManager.java
 @@ -14,9 +14,9 @@ public class PlayerInteractManager {
@@ -27,6 +29,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src
  
      private boolean c(BlockPosition blockposition) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 7da7cfcb..64146199 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1916,4 +1916,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
@@ -46,6 +49,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+index 51888e0b..1276f15f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -273,6 +273,14 @@ public class CraftEventFactory {

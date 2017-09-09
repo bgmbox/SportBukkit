@@ -1,9 +1,11 @@
+From 4de2f5303fad9f47a24cfcab7a3ee52c45580196 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 14 Feb 2015 08:18:40 -0500
 Subject: [PATCH] Add invis override API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 8f7d6f65..34cfb94d 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1041,6 +1041,10 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

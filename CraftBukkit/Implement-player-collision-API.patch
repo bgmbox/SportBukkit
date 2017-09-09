@@ -1,9 +1,11 @@
+From ffa2d8ac44d16255062a728f1bb1379b1a04d148 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:54:44 -0700
 Subject: [PATCH] Implement player collision API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
+index 892cf8cd..b81e6d73 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -61,7 +61,7 @@ public abstract class Entity implements ICommandListener {
@@ -24,6 +26,7 @@ diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/
              if (!entity.noclip && !this.noclip) {
                  double d0 = entity.locX - this.locX;
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index e8658f98..7465e940 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -399,7 +399,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -36,6 +39,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java
  
                  if (!entity.dead) {
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index d44a2f9a..f4d4e15d 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -2145,7 +2145,7 @@ public abstract class EntityLiving extends Entity {
@@ -48,6 +52,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/jav
              int j;
  
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
+index 89d20814..20f9af94 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -74,6 +74,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -79,6 +84,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/jav
          CriterionTriggers.d.a(this, iblockdata);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index dbf950ef..68c284cd 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1545,6 +1545,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {

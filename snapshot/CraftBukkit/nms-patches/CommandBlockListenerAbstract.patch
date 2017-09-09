@@ -35,7 +35,7 @@
                      } catch (Throwable throwable) {
                          CrashReport crashreport = CrashReport.a(throwable, "Executing command block");
                          CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Command to be executed");
-@@ -149,6 +161,175 @@
+@@ -149,6 +161,167 @@
          }
      }
  
@@ -59,14 +59,6 @@
 +        if (command.startsWith("/")) {
 +            command = command.substring(1);
 +        }
-+
-+        ServerCommandEvent event = new ServerCommandEvent(bSender, command);
-+        org.bukkit.Bukkit.getPluginManager().callEvent(event);
-+        if (event.isCancelled()) {
-+            return 0;
-+        }
-+        command = event.getCommand();
-+
 +        String[] args = command.split(" ");
 +        ArrayList<String[]> commands = new ArrayList<String[]>();
 +

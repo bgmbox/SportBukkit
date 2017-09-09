@@ -1,9 +1,11 @@
+From 64aa04cb6fbf74e6ecf2f95abf06ec95093c9276 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 28 May 2015 04:31:07 -0400
 Subject: [PATCH] Improve Permissible interface
 
 
 diff --git a/src/main/java/org/bukkit/permissions/Permissible.java b/src/main/java/org/bukkit/permissions/Permissible.java
+index 5cd3cff0..a7c0ef58 100644
 --- a/src/main/java/org/bukkit/permissions/Permissible.java
 +++ b/src/main/java/org/bukkit/permissions/Permissible.java
 @@ -1,5 +1,6 @@
@@ -92,6 +94,7 @@ diff --git a/src/main/java/org/bukkit/permissions/Permissible.java b/src/main/ja
 +    Collection<PermissionAttachmentInfo> getAttachments(Plugin plugin, Permission permission);
  }
 diff --git a/src/main/java/org/bukkit/permissions/PermissibleBase.java b/src/main/java/org/bukkit/permissions/PermissibleBase.java
+index bc772e5b..3f053be8 100644
 --- a/src/main/java/org/bukkit/permissions/PermissibleBase.java
 +++ b/src/main/java/org/bukkit/permissions/PermissibleBase.java
 @@ -1,12 +1,17 @@

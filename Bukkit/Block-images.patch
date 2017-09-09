@@ -1,9 +1,11 @@
+From 8bed8a0dab022b2b429e34b193982592d60eabb5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:20:38 -0400
 Subject: [PATCH] Block images
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index a8876b26..2a75925d 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -13,6 +13,7 @@ import java.util.UUID;
@@ -23,6 +25,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
  
      public static PotionBrewRegistry potionRegistry() {
 diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/bukkit/BukkitRuntime.java
+index 9e083daa..493fc98b 100644
 --- a/src/main/java/org/bukkit/BukkitRuntime.java
 +++ b/src/main/java/org/bukkit/BukkitRuntime.java
 @@ -1,5 +1,6 @@
@@ -42,6 +45,7 @@ diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/buk
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index a8897e5b..4872f7ff 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -1,21 +1,24 @@
@@ -208,6 +212,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Represents various map environment types that a world may be
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
+index ff597f1b..410277e9 100644
 --- a/src/main/java/org/bukkit/block/Block.java
 +++ b/src/main/java/org/bukkit/block/Block.java
 @@ -7,6 +7,7 @@ import org.bukkit.Locatable;
@@ -326,6 +331,7 @@ index 00000000..defd64cf
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
+index aaaecb05..cfaceab6 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -5,6 +5,7 @@ import org.bukkit.Locatable;
@@ -354,7 +360,7 @@ diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/
 @@ -95,6 +104,10 @@ public interface BlockState extends Metadatable, Locatable {
       */
      World getWorld();
-
+ 
 +    Vec3 getPosition();
 +
 +    Vec3 tryPosition();
@@ -471,6 +477,7 @@ index 00000000..db43c72d
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/material/Alignable.java b/src/main/java/org/bukkit/material/Alignable.java
+index c9ad81e1..5759f6cd 100644
 --- a/src/main/java/org/bukkit/material/Alignable.java
 +++ b/src/main/java/org/bukkit/material/Alignable.java
 @@ -1,6 +1,6 @@
@@ -482,6 +489,7 @@ diff --git a/src/main/java/org/bukkit/material/Alignable.java b/src/main/java/or
  public interface Alignable {
  
 diff --git a/src/main/java/org/bukkit/material/Lever.java b/src/main/java/org/bukkit/material/Lever.java
+index 3b76ed07..706b5142 100644
 --- a/src/main/java/org/bukkit/material/Lever.java
 +++ b/src/main/java/org/bukkit/material/Lever.java
 @@ -2,7 +2,7 @@ package org.bukkit.material;

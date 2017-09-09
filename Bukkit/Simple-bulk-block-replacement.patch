@@ -1,9 +1,11 @@
+From 3d5c56570eba52d370f5a0400e882c269564b24e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 28 Sep 2014 05:47:53 -0400
 Subject: [PATCH] Simple bulk block replacement
 
 
 diff --git a/src/main/java/org/bukkit/Chunk.java b/src/main/java/org/bukkit/Chunk.java
+index 57b9f690..b493485f 100644
 --- a/src/main/java/org/bukkit/Chunk.java
 +++ b/src/main/java/org/bukkit/Chunk.java
 @@ -3,6 +3,7 @@ package org.bukkit;

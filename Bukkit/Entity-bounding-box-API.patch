@@ -1,9 +1,11 @@
+From bcdbb50ac19e9fc473638c82f426f04650d098ac Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:00:35 -0400
 Subject: [PATCH] Entity bounding box API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index 309491d1..07a66a0d 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -7,6 +7,7 @@ import org.bukkit.Nameable;
@@ -108,6 +110,7 @@ diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/buk
       * Returns the reaction of the entity when moved by a piston.
       *
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
+index 98096ab9..576105ae 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
 @@ -9,6 +9,7 @@ import org.bukkit.Location;

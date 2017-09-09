@@ -1,9 +1,11 @@
+From 1a420bc8a8626d7b032ded2b306bd1d7e3b8fb2b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:23 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit/block/Sign.java
+index 5d7a633d..7ded5ab4 100644
 --- a/src/main/java/org/bukkit/block/Sign.java
 +++ b/src/main/java/org/bukkit/block/Sign.java
 @@ -1,5 +1,7 @@
@@ -47,6 +49,7 @@ diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit
      public void setLine(int index, String line) throws IndexOutOfBoundsException;
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index fe53c1a5..809489c5 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -3,6 +3,7 @@ package org.bukkit.entity;
@@ -68,6 +71,7 @@ diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/buk
  
      /**
 diff --git a/src/main/java/org/bukkit/event/block/SignChangeEvent.java b/src/main/java/org/bukkit/event/block/SignChangeEvent.java
+index f884f3d7..47b0d1f6 100644
 --- a/src/main/java/org/bukkit/event/block/SignChangeEvent.java
 +++ b/src/main/java/org/bukkit/event/block/SignChangeEvent.java
 @@ -1,5 +1,7 @@

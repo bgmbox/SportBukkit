@@ -1,9 +1,11 @@
+From 50d6b91eb17ee0b2fe88bd074f9f02cb848549da Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:14:13 -0500
 Subject: [PATCH] Server suspend API
 
 
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 8650aa7c..ab7d9e46 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -3,6 +3,8 @@ package org.bukkit;
@@ -118,6 +120,7 @@ diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Ser
 +    int interruptions();
  }
 diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+index 9969185c..31876020 100644
 --- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
 +++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
 @@ -32,6 +32,7 @@ public class SimpleCommandMap implements CommandMap {
@@ -188,6 +191,7 @@ index 00000000..2a844e68
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/event/SimpleEventBus.java b/src/main/java/org/bukkit/event/SimpleEventBus.java
+index 4b5fe75a..87b9d799 100644
 --- a/src/main/java/org/bukkit/event/SimpleEventBus.java
 +++ b/src/main/java/org/bukkit/event/SimpleEventBus.java
 @@ -9,15 +9,15 @@ import com.google.common.util.concurrent.SettableFuture;
@@ -268,6 +272,7 @@ index 00000000..bdd41233
 +    private static final HandlerList<ServerSuspendEvent> handlers = new HandlerList<>();
 +}
 diff --git a/src/test/java/org/bukkit/TestServer.java b/src/test/java/org/bukkit/TestServer.java
+index b31e7f19..52672356 100644
 --- a/src/test/java/org/bukkit/TestServer.java
 +++ b/src/test/java/org/bukkit/TestServer.java
 @@ -87,7 +87,7 @@ public class TestServer implements InvocationHandler {

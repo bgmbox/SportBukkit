@@ -42,7 +42,7 @@ public class CraftBlockImage implements BlockImage {
                 tileEntityData.setInt("y", pos.getY());
                 tileEntityData.setInt("z", pos.getZ());
 
-                tileEntity.a(tileEntityData);
+                tileEntity.load(tileEntityData);
                 tileEntity.update();
             }
         }

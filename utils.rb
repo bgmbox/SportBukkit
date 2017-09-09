@@ -138,7 +138,7 @@ module Git
         end
 
         sh "git clean -df"
-        sh "git am --3way --ignore-whitespace --committer-date-is-author-date #{patches.join(' ')}" do |ok, res|
+        sh "git am --3way --ignore-whitespace #{patches.join(' ')}" do |ok, res|
             unless ok
                 error "A patch did not apply cleanly"
             end
@@ -180,14 +180,7 @@ module Git
                     listfile.puts(patch_name)
 
                     File.open(File.join(patch_dir, "#{patch_name}.patch"), 'w') do |io|
-                        if lines[0] =~ /^From \h+/
-                            # Remove the initial "From sha date" line
-                            lines = lines[1..-1]
-                        end
-
                         lines.reject do |line|
-                            # Remove "index sha..sha mode" lines
-                            line =~ /^index \h+\.\.\h+ \d+\s*$/
                         end.each do |line|
                             io.write(line)
                         end

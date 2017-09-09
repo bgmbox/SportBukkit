@@ -1,9 +1,11 @@
+From 10157efdc1144487d35f5509f0936dccadaa4f13 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 23 Jan 2014 00:17:31 -0500
 Subject: [PATCH] Fake name and skin API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index d45c9167..2d59b857 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -422,6 +422,27 @@ public final class Bukkit {
@@ -35,6 +37,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
       *
       * @return a plugin manager for this Server instance
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 2807ece2..1c59f0b2 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -350,6 +350,21 @@ public interface Server extends PluginMessageRecipient {
@@ -143,6 +146,7 @@ index 00000000..c5d17040
 +}
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/command/Command.java b/src/main/java/org/bukkit/command/Command.java
+index 7adc6ee9..322c063e 100644
 --- a/src/main/java/org/bukkit/command/Command.java
 +++ b/src/main/java/org/bukkit/command/Command.java
 @@ -103,7 +103,7 @@ public abstract class Command {
@@ -155,6 +159,7 @@ diff --git a/src/main/java/org/bukkit/command/Command.java b/src/main/java/org/b
                  matchedPlayers.add(name);
              }
 diff --git a/src/main/java/org/bukkit/command/CommandSender.java b/src/main/java/org/bukkit/command/CommandSender.java
+index 148756b9..52c59477 100644
 --- a/src/main/java/org/bukkit/command/CommandSender.java
 +++ b/src/main/java/org/bukkit/command/CommandSender.java
 @@ -32,4 +32,10 @@ public interface CommandSender extends Permissible {
@@ -403,6 +408,7 @@ index 00000000..9105712b
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 54b06bbe..f467cc04 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1,21 +1,9 @@

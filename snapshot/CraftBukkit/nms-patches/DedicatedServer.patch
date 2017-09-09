@@ -154,7 +154,7 @@
                      this.propertyManager.b("announce-player-achievements");
                      this.propertyManager.savePropertiesFile();
                  }
-@@ -213,14 +271,26 @@
+@@ -213,17 +271,28 @@
                      DedicatedServer.LOGGER.info("Starting remote control listener");
                      this.p = new RemoteControlListener(this);
                      this.p.a();
@@ -180,8 +180,11 @@
 +                    watchdogThread = thread1; // SportBukkit
                  }
  
-                 Items.a.a(CreativeModeTab.g, NonNullList.a());
-@@ -299,13 +369,13 @@
+-                Items.a.a(CreativeModeTab.g, NonNullList.a());
+                 return true;
+             }
+         }
+@@ -299,13 +368,13 @@
          return crashreport;
      }
  
@@ -199,7 +202,7 @@
      }
  
      public boolean getAllowNether() {
-@@ -328,13 +398,35 @@
+@@ -328,13 +397,35 @@
  
      public void issueCommand(String s, ICommandListener icommandlistener) {
          this.serverCommandQueue.add(new ServerCommand(s, icommandlistener));
@@ -236,7 +239,7 @@
          }
  
      }
-@@ -382,7 +474,7 @@
+@@ -382,7 +473,7 @@
      }
  
      public int e_() {
@@ -245,7 +248,7 @@
      }
  
      public String f_() {
-@@ -537,16 +629,70 @@
+@@ -537,16 +628,70 @@
      }
  
      public String getPlugins() {

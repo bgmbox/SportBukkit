@@ -1,34 +1,37 @@
+From 495c4b78f1ec15fb49d2bab789db1c29a8d031cb Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 1 Mar 2016 05:48:53 -0500
 Subject: [PATCH] Fix decompilation errors
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityZombieVillager.java b/src/main/java/net/minecraft/server/EntityZombieVillager.java
+index bcbd3691..42ce3e74 100644
 --- a/src/main/java/net/minecraft/server/EntityZombieVillager.java
 +++ b/src/main/java/net/minecraft/server/EntityZombieVillager.java
 @@ -178,15 +178,15 @@ public class EntityZombieVillager extends EntityZombie {
      }
-
+ 
      public SoundEffect d(DamageSource damagesource) {
 -        return SoundEffects.jB;
 +        return SoundEffects.jy;
      }
-
+ 
      public SoundEffect cf() {
 -        return SoundEffects.jA;
 +        return SoundEffects.jx;
      }
-
+ 
      public SoundEffect dm() {
 -        return SoundEffects.jC;
 +        return SoundEffects.jz;
      }
-
+ 
      @Nullable
 diff --git a/src/main/java/net/minecraft/server/EnumProtocol.java b/src/main/java/net/minecraft/server/EnumProtocol.java
+index 19bfe57e..3c93c98b 100644
 --- a/src/main/java/net/minecraft/server/EnumProtocol.java
 +++ b/src/main/java/net/minecraft/server/EnumProtocol.java
-@@ -158,7 +158,7 @@ public enum EnumProtocol {
+@@ -159,7 +159,7 @@ public enum EnumProtocol {
      }
  
      protected EnumProtocol a(EnumProtocolDirection enumprotocoldirection, Class<? extends Packet<?>> oclass) {
@@ -38,6 +41,7 @@ diff --git a/src/main/java/net/minecraft/server/EnumProtocol.java b/src/main/jav
          if (object == null) {
              object = HashBiMap.create();
 diff --git a/src/main/java/net/minecraft/server/GameProfileBanList.java b/src/main/java/net/minecraft/server/GameProfileBanList.java
+index 737035bf..5886e4ce 100644
 --- a/src/main/java/net/minecraft/server/GameProfileBanList.java
 +++ b/src/main/java/net/minecraft/server/GameProfileBanList.java
 @@ -52,7 +52,9 @@ public class GameProfileBanList extends JsonList<GameProfile, GameProfileBanEntr
@@ -51,6 +55,7 @@ diff --git a/src/main/java/net/minecraft/server/GameProfileBanList.java b/src/ma
 +    SportBukkit */
  }
 diff --git a/src/main/java/net/minecraft/server/Item.java b/src/main/java/net/minecraft/server/Item.java
+index aa1afe1a..78bc3a1f 100644
 --- a/src/main/java/net/minecraft/server/Item.java
 +++ b/src/main/java/net/minecraft/server/Item.java
 @@ -33,7 +33,7 @@ public class Item {
@@ -63,12 +68,13 @@ diff --git a/src/main/java/net/minecraft/server/Item.java b/src/main/java/net/mi
  
      public static Item getById(int i) {
 diff --git a/src/main/java/net/minecraft/server/ItemBlock.java b/src/main/java/net/minecraft/server/ItemBlock.java
+index 60149c1c..9d624891 100644
 --- a/src/main/java/net/minecraft/server/ItemBlock.java
 +++ b/src/main/java/net/minecraft/server/ItemBlock.java
 @@ -93,13 +93,6 @@ public class ItemBlock extends Item {
          return this.a.q();
      }
-
+ 
 -    public void a(CreativeModeTab creativemodetab, NonNullList<ItemStack> nonnulllist) {
 -        if (this.a(creativemodetab)) {
 -            this.a.a(creativemodetab, nonnulllist);
@@ -80,6 +86,7 @@ diff --git a/src/main/java/net/minecraft/server/ItemBlock.java b/src/main/java/n
          return this.a;
      }
 diff --git a/src/main/java/net/minecraft/server/ItemDye.java b/src/main/java/net/minecraft/server/ItemDye.java
+index 2dc18dbe..b21c05eb 100644
 --- a/src/main/java/net/minecraft/server/ItemDye.java
 +++ b/src/main/java/net/minecraft/server/ItemDye.java
 @@ -111,13 +111,4 @@ public class ItemDye extends Item {
@@ -97,12 +104,13 @@ diff --git a/src/main/java/net/minecraft/server/ItemDye.java b/src/main/java/net
 -    }
  }
 diff --git a/src/main/java/net/minecraft/server/ItemMonsterEgg.java b/src/main/java/net/minecraft/server/ItemMonsterEgg.java
+index b24f7d8b..4ce7ffee 100644
 --- a/src/main/java/net/minecraft/server/ItemMonsterEgg.java
 +++ b/src/main/java/net/minecraft/server/ItemMonsterEgg.java
-@@ -227,21 +227,6 @@ public class ItemMonsterEgg extends Item {
+@@ -185,21 +185,6 @@ public class ItemMonsterEgg extends Item {
          }
      }
-
+ 
 -    public void a(CreativeModeTab creativemodetab, NonNullList<ItemStack> nonnulllist) {
 -        if (this.a(creativemodetab)) {
 -            Iterator iterator = EntityTypes.eggInfo.values().iterator();
@@ -122,12 +130,13 @@ diff --git a/src/main/java/net/minecraft/server/ItemMonsterEgg.java b/src/main/j
          NBTTagCompound nbttagcompound = itemstack.hasTag() ? itemstack.getTag() : new NBTTagCompound();
          NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 diff --git a/src/main/java/net/minecraft/server/ItemSkull.java b/src/main/java/net/minecraft/server/ItemSkull.java
+index cbb902f5..f5e66465 100644
 --- a/src/main/java/net/minecraft/server/ItemSkull.java
 +++ b/src/main/java/net/minecraft/server/ItemSkull.java
 @@ -83,15 +83,6 @@ public class ItemSkull extends Item {
          }
      }
-
+ 
 -    public void a(CreativeModeTab creativemodetab, NonNullList<ItemStack> nonnulllist) {
 -        if (this.a(creativemodetab)) {
 -            for (int i = 0; i < ItemSkull.a.length; ++i) {
@@ -141,6 +150,7 @@ diff --git a/src/main/java/net/minecraft/server/ItemSkull.java b/src/main/java/n
          return i;
      }
 diff --git a/src/main/java/net/minecraft/server/OpList.java b/src/main/java/net/minecraft/server/OpList.java
+index e5f457bf..bf3bc6e6 100644
 --- a/src/main/java/net/minecraft/server/OpList.java
 +++ b/src/main/java/net/minecraft/server/OpList.java
 @@ -28,7 +28,7 @@ public class OpList extends JsonList<GameProfile, OpListEntry> {
@@ -162,6 +172,7 @@ diff --git a/src/main/java/net/minecraft/server/OpList.java b/src/main/java/net/
 -    }
  }
 diff --git a/src/main/java/net/minecraft/server/PacketEncoder.java b/src/main/java/net/minecraft/server/PacketEncoder.java
+index a6da6f5c..c81822d6 100644
 --- a/src/main/java/net/minecraft/server/PacketEncoder.java
 +++ b/src/main/java/net/minecraft/server/PacketEncoder.java
 @@ -48,7 +48,7 @@ public class PacketEncoder extends MessageToByteEncoder<Packet<?>> {
@@ -174,6 +185,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketEncoder.java b/src/main/ja
      }
  }
 diff --git a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java b/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
+index 7c9389aa..56b386c3 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
 @@ -17,7 +17,7 @@ public class PacketPlayInUseEntity implements Packet<PacketListenerPlayIn> {
@@ -195,6 +207,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java b/src
          packetdataserializer.a((Enum) this.action);
          if (this.action == EnumEntityUseAction.INTERACT_AT) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java b/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
+index 736015cf..030f02fd 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
 @@ -37,7 +37,7 @@ public class PacketPlayOutNamedSoundEffect implements Packet<PacketListenerPlayO
@@ -207,6 +220,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.ja
          packetdataserializer.writeInt(this.c);
          packetdataserializer.writeInt(this.d);
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
+index 6c863414..c0d0ba5f 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 @@ -26,7 +26,7 @@ public class PacketPlayOutSpawnEntityLiving implements Packet<PacketListenerPlay
@@ -219,6 +233,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.j
          this.e = entityliving.locY;
          this.f = entityliving.locZ;
 diff --git a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java b/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
+index df9b08be..8245cb53 100644
 --- a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
 +++ b/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
 @@ -6,7 +6,7 @@ import java.io.IOException;
@@ -231,6 +246,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java b
  
      public PacketStatusOutServerInfo() {}
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index f47e1f16..5819ab4c 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -758,7 +758,7 @@ public abstract class PlayerList {
@@ -243,6 +259,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/
          i = this.server.R() && this.server.worldServer[0].getWorldData().u() ? 4 : i;
          i = this.u ? 4 : i;
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
+index b85c1c58..b92d916f 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -58,8 +58,10 @@ public class ServerConnection {
@@ -268,6 +285,7 @@ diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main
                                      networkmanager.close(chatcomponenttext);
                                  }
 diff --git a/src/main/java/net/minecraft/server/WhiteList.java b/src/main/java/net/minecraft/server/WhiteList.java
+index 85085d54..be2f4c1c 100644
 --- a/src/main/java/net/minecraft/server/WhiteList.java
 +++ b/src/main/java/net/minecraft/server/WhiteList.java
 @@ -52,7 +52,9 @@ public class WhiteList extends JsonList<GameProfile, WhiteListEntry> {

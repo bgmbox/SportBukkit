@@ -1,3 +1,4 @@
+From 6b5192648dd1e997991e82430d72ca5d936b3af2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 9 Oct 2016 08:04:12 -0400
 Subject: [PATCH] Fix several block rotation data values
@@ -18,6 +19,7 @@ index 00000000..c9ad81e1
 +    Axis getAxis();
 +}
 diff --git a/src/main/java/org/bukkit/material/Banner.java b/src/main/java/org/bukkit/material/Banner.java
+index 80a76165..19009536 100644
 --- a/src/main/java/org/bukkit/material/Banner.java
 +++ b/src/main/java/org/bukkit/material/Banner.java
 @@ -56,6 +56,7 @@ public class Banner extends MaterialData implements Attachable {
@@ -38,6 +40,7 @@ diff --git a/src/main/java/org/bukkit/material/Banner.java b/src/main/java/org/b
              return BlockFace.DOWN;
          }
 diff --git a/src/main/java/org/bukkit/material/Button.java b/src/main/java/org/bukkit/material/Button.java
+index fd6a7db8..a81dc4f4 100644
 --- a/src/main/java/org/bukkit/material/Button.java
 +++ b/src/main/java/org/bukkit/material/Button.java
 @@ -83,6 +83,7 @@ public class Button extends SimpleAttachableMaterialData implements Redstone {
@@ -58,6 +61,7 @@ diff --git a/src/main/java/org/bukkit/material/Button.java b/src/main/java/org/b
  
      /**
 diff --git a/src/main/java/org/bukkit/material/CocoaPlant.java b/src/main/java/org/bukkit/material/CocoaPlant.java
+index 6dede93c..0f7667ab 100644
 --- a/src/main/java/org/bukkit/material/CocoaPlant.java
 +++ b/src/main/java/org/bukkit/material/CocoaPlant.java
 @@ -114,11 +114,11 @@ public class CocoaPlant extends MaterialData implements Directional, Attachable
@@ -74,6 +78,7 @@ diff --git a/src/main/java/org/bukkit/material/CocoaPlant.java b/src/main/java/o
  
      @Override
 diff --git a/src/main/java/org/bukkit/material/DirectionalContainer.java b/src/main/java/org/bukkit/material/DirectionalContainer.java
+index b56f0988..5fda3dde 100644
 --- a/src/main/java/org/bukkit/material/DirectionalContainer.java
 +++ b/src/main/java/org/bukkit/material/DirectionalContainer.java
 @@ -68,6 +68,7 @@ public class DirectionalContainer extends MaterialData implements Directional {
@@ -93,6 +98,7 @@ diff --git a/src/main/java/org/bukkit/material/DirectionalContainer.java b/src/m
          }
      }
 diff --git a/src/main/java/org/bukkit/material/Gate.java b/src/main/java/org/bukkit/material/Gate.java
+index 8adc1cfb..363f3f4f 100644
 --- a/src/main/java/org/bukkit/material/Gate.java
 +++ b/src/main/java/org/bukkit/material/Gate.java
 @@ -31,16 +31,16 @@ public class Gate extends MaterialData implements Directional, Openable {
@@ -135,6 +141,7 @@ diff --git a/src/main/java/org/bukkit/material/Gate.java b/src/main/java/org/buk
  
          return BlockFace.EAST;
 diff --git a/src/main/java/org/bukkit/material/Ladder.java b/src/main/java/org/bukkit/material/Ladder.java
+index cd4d6911..4c510d65 100644
 --- a/src/main/java/org/bukkit/material/Ladder.java
 +++ b/src/main/java/org/bukkit/material/Ladder.java
 @@ -54,6 +54,7 @@ public class Ladder extends SimpleAttachableMaterialData {
@@ -179,6 +186,7 @@ diff --git a/src/main/java/org/bukkit/material/Ladder.java b/src/main/java/org/b
              break;
          }
 diff --git a/src/main/java/org/bukkit/material/Lever.java b/src/main/java/org/bukkit/material/Lever.java
+index c6d3882c..3b76ed07 100644
 --- a/src/main/java/org/bukkit/material/Lever.java
 +++ b/src/main/java/org/bukkit/material/Lever.java
 @@ -2,11 +2,12 @@ package org.bukkit.material;
@@ -303,6 +311,7 @@ diff --git a/src/main/java/org/bukkit/material/Lever.java b/src/main/java/org/bu
          return super.toString() + " facing " + getFacing() + " " + (isPowered() ? "" : "NOT ") + "POWERED";
      }
 diff --git a/src/main/java/org/bukkit/material/Sign.java b/src/main/java/org/bukkit/material/Sign.java
+index 0accdbce..5781240a 100644
 --- a/src/main/java/org/bukkit/material/Sign.java
 +++ b/src/main/java/org/bukkit/material/Sign.java
 @@ -65,6 +65,7 @@ public class Sign extends MaterialData implements Attachable {
@@ -323,6 +332,7 @@ diff --git a/src/main/java/org/bukkit/material/Sign.java b/src/main/java/org/buk
              return BlockFace.DOWN;
          }
 diff --git a/src/main/java/org/bukkit/material/Stairs.java b/src/main/java/org/bukkit/material/Stairs.java
+index 7dde0214..48de7f67 100644
 --- a/src/main/java/org/bukkit/material/Stairs.java
 +++ b/src/main/java/org/bukkit/material/Stairs.java
 @@ -76,7 +76,7 @@ public class Stairs extends MaterialData implements Directional {

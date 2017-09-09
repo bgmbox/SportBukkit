@@ -1,9 +1,11 @@
+From 9b4c247f3fd62601d28d3345bf729a64e54204ea Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 05:56:05 -0500
 Subject: [PATCH] Expose various entity packets
 
 
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutEntityTeleport.java b/src/main/java/net/minecraft/server/PacketPlayOutEntityTeleport.java
+index 76a558eb..f482a2a2 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutEntityTeleport.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutEntityTeleport.java
 @@ -12,6 +12,18 @@ public class PacketPlayOutEntityTeleport implements Packet<PacketListenerPlayOut
@@ -26,6 +28,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutEntityTeleport.java
  
      public PacketPlayOutEntityTeleport(Entity entity) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutMount.java b/src/main/java/net/minecraft/server/PacketPlayOutMount.java
+index 06d8960d..e8f1b382 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutMount.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutMount.java
 @@ -8,11 +8,18 @@ public class PacketPlayOutMount implements Packet<PacketListenerPlayOut> {
@@ -45,10 +48,11 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutMount.java b/src/ma
          this.a = entity.getId();
 -        List list = entity.bD();
 +        List list = entity.bF();
-
+ 
          this.b = new int[list.size()];
-
+ 
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java b/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
+index 072c2ba6..5b032dfd 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
 @@ -16,6 +16,19 @@ public class PacketPlayOutNamedEntitySpawn implements Packet<PacketListenerPlayO
@@ -72,6 +76,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.ja
  
      public PacketPlayOutNamedEntitySpawn(EntityHuman entityhuman) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntity.java b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntity.java
+index 428bc93a..86dff716 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntity.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntity.java
 @@ -18,6 +18,23 @@ public class PacketPlayOutSpawnEntity implements Packet<PacketListenerPlayOut> {
@@ -99,6 +104,7 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntity.java b/
  
      public PacketPlayOutSpawnEntity(Entity entity, int i) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
+index c0d0ba5f..8a9bcae7 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 @@ -21,6 +21,24 @@ public class PacketPlayOutSpawnEntityLiving implements Packet<PacketListenerPlay

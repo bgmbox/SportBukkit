@@ -1,9 +1,11 @@
+From 4953ba369fcaed0a87224055d4d47d18eedbbd8b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 19 Jun 2015 14:50:13 -0400
 Subject: [PATCH] Retrieve metadata by plugin
 
 
 diff --git a/src/main/java/org/bukkit/metadata/MetadataStore.java b/src/main/java/org/bukkit/metadata/MetadataStore.java
+index 700d0bfb..1be17ad4 100644
 --- a/src/main/java/org/bukkit/metadata/MetadataStore.java
 +++ b/src/main/java/org/bukkit/metadata/MetadataStore.java
 @@ -17,6 +17,16 @@ public interface MetadataStore<T> {
@@ -24,6 +26,7 @@ diff --git a/src/main/java/org/bukkit/metadata/MetadataStore.java b/src/main/jav
       * have attached metadata, each will value will be included.
       *
 diff --git a/src/main/java/org/bukkit/metadata/MetadataStoreBase.java b/src/main/java/org/bukkit/metadata/MetadataStoreBase.java
+index 093c1445..6db06169 100644
 --- a/src/main/java/org/bukkit/metadata/MetadataStoreBase.java
 +++ b/src/main/java/org/bukkit/metadata/MetadataStoreBase.java
 @@ -43,6 +43,12 @@ public abstract class MetadataStoreBase<T> {
@@ -40,6 +43,7 @@ diff --git a/src/main/java/org/bukkit/metadata/MetadataStoreBase.java b/src/main
       * Returns all metadata values attached to an object. If multiple
       * have attached metadata, each will value will be included.
 diff --git a/src/main/java/org/bukkit/metadata/Metadatable.java b/src/main/java/org/bukkit/metadata/Metadatable.java
+index b47cf2b0..b1df863a 100644
 --- a/src/main/java/org/bukkit/metadata/Metadatable.java
 +++ b/src/main/java/org/bukkit/metadata/Metadatable.java
 @@ -20,6 +20,16 @@ public interface Metadatable {

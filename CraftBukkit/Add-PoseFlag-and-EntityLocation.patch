@@ -1,9 +1,11 @@
+From ac0ebebfaed08fd93cbd8de4350bbd199dfe845a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
+index ce5a7803..9e138858 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -18,12 +18,15 @@ import org.apache.logging.log4j.Logger;
@@ -46,6 +48,7 @@ diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/
                  Entity n = craftn == null ? null : craftn.getHandle();
                  if (event.isCancelled() || n != orig) {
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index 97312342..f2571e2f 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -10,8 +10,10 @@ import java.util.UUID;
@@ -76,6 +79,7 @@ diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java
          // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index a3d65c59..7e513cbb 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -22,7 +22,9 @@ import org.apache.logging.log4j.Logger;
@@ -160,6 +164,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main
                  this.player.abilities.isFlying = packetplayinabilities.isFlying(); // Actually set the player's flying status
              } else {
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index a24e652f..afdb5ab8 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -23,6 +23,7 @@ import org.apache.logging.log4j.Logger;
@@ -187,6 +192,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index ae425edb..5e145cc5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
@@ -249,6 +255,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/
          return new Vector(entity.motX, entity.motY, entity.motZ);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
+index 762e1008..622bc1d9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -3,12 +3,14 @@ package org.bukkit.craftbukkit.entity;
@@ -288,6 +295,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b
          Preconditions.checkArgument(material != null, "material");
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+index a7e1d3a7..7b84b91a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -2,6 +2,7 @@ package org.bukkit.craftbukkit.entity;
@@ -320,6 +328,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java 
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+index 1276f15f..0814232e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -14,7 +14,9 @@ import com.google.common.base.Functions;

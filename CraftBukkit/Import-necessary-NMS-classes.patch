@@ -1,3 +1,4 @@
+From c3842ef8151c44bcce207c07450777a75e8b9963 Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Wed, 7 Jun 2017 16:54:30 -0500
 Subject: [PATCH] Import necessary NMS classes
@@ -1035,7 +1036,7 @@ index 00000000..201f5609
 +}
 diff --git a/src/main/java/net/minecraft/server/EntityHorse.java b/src/main/java/net/minecraft/server/EntityHorse.java
 new file mode 100644
-index 00000000..9830cb32
+index 00000000..f5b5bb3f
 --- /dev/null
 +++ b/src/main/java/net/minecraft/server/EntityHorse.java
 @@ -0,0 +1,281 @@
@@ -1322,7 +1323,7 @@ index 00000000..9830cb32
 +}
 diff --git a/src/main/java/net/minecraft/server/EnumProtocol.java b/src/main/java/net/minecraft/server/EnumProtocol.java
 new file mode 100644
-index 00000000..1d04959e
+index 00000000..19bfe57e
 --- /dev/null
 +++ b/src/main/java/net/minecraft/server/EnumProtocol.java
 @@ -0,0 +1,243 @@
@@ -6731,7 +6732,7 @@ index 00000000..dd18b4e0
 +}
 diff --git a/src/main/java/net/minecraft/server/TileEntitySkull.java b/src/main/java/net/minecraft/server/TileEntitySkull.java
 new file mode 100644
-index 00000000..b7469346
+index 00000000..5bbdef3f
 --- /dev/null
 +++ b/src/main/java/net/minecraft/server/TileEntitySkull.java
 @@ -0,0 +1,152 @@

@@ -1,9 +1,11 @@
+From 41bb9021fc3eb29e9caef084baa8a4c1481c6e84 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:36:30 -0500
 Subject: [PATCH] Arrow damage API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Arrow.java b/src/main/java/org/bukkit/entity/Arrow.java
+index 795e40de..bc1bb9cc 100644
 --- a/src/main/java/org/bukkit/entity/Arrow.java
 +++ b/src/main/java/org/bukkit/entity/Arrow.java
 @@ -6,6 +6,27 @@ package org.bukkit.entity;

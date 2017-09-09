@@ -1,9 +1,11 @@
+From 20bc7849547f83ee0c2803528c0f3f376efa1b4c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 13:57:10 -0500
 Subject: [PATCH] Immutable materials and items
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
+index f22d51e1..bca6dfe5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
 @@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
@@ -36,6 +38,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java 
          return (handle == null) ? Material.AIR.getMaxStackSize() : handle.getItem().getMaxStackSize();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
+index af9ab5c4..b1e327bc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 @@ -61,7 +61,7 @@ import org.bukkit.util.ImmutableMaterialSet;
@@ -173,6 +176,7 @@ index 00000000..0dd64b3a
 +    }
 +}
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java
+index 6140edee..8935fccf 100644
 --- a/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java
 @@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.inventory;
@@ -249,6 +253,7 @@ diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java b
 +    }
  }
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java
+index 1f5a6a32..44ac9db3 100644
 --- a/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java
 @@ -1,14 +1,20 @@

@@ -1,9 +1,11 @@
+From 5b6bc519529ad9f8cdf34f1bf30f8b355ffa0a2b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 29 Dec 2016 23:23:45 -0500
 Subject: [PATCH] Don't tick empty worlds
 
 
 diff --git a/src/main/java/net/minecraft/server/ChunkProviderServer.java b/src/main/java/net/minecraft/server/ChunkProviderServer.java
+index cc99740a..ddaa41e5 100644
 --- a/src/main/java/net/minecraft/server/ChunkProviderServer.java
 +++ b/src/main/java/net/minecraft/server/ChunkProviderServer.java
 @@ -304,6 +304,16 @@ public class ChunkProviderServer implements IChunkProvider {
@@ -24,6 +26,7 @@ diff --git a/src/main/java/net/minecraft/server/ChunkProviderServer.java b/src/m
          return !this.world.savingDisabled;
      }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 30ee2bfb..327cb298 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -848,6 +848,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
@@ -35,6 +38,7 @@ diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/
                  this.methodProfiler.a(() -> {
                      return worldserver.getWorldData().getName();
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index fe7d521b..ecb6140e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -553,6 +553,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
@@ -55,6 +59,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
          return this.configuration.getBoolean("settings.allow-end");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index f61158bd..a6d7ccb4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -93,6 +93,40 @@ public class CraftWorld implements World {

@@ -9,3 +9,17 @@
                  itemstack.subtract(1);
              }
  
+@@ -93,13 +93,6 @@
+         return this.a.q();
+     }
+ 
+-    public void a(CreativeModeTab creativemodetab, NonNullList<ItemStack> nonnulllist) {
+-        if (this.a(creativemodetab)) {
+-            this.a.a(creativemodetab, nonnulllist);
+-        }
+-
+-    }
+-
+     public Block getBlock() {
+         return this.a;
+     }
