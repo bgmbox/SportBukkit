@@ -1,22 +1,26 @@
-From 228c98f4faaf4ea1304830001b1f80fe29988ef7 Mon Sep 17 00:00:00 2001
+From ce2224802a18f8be0bcdf8e3550125997bd7c542 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 6 Aug 2015 22:18:43 -0400
 Subject: [PATCH] Skull skin API
 
 
 diff --git a/src/main/java/org/bukkit/block/Skull.java b/src/main/java/org/bukkit/block/Skull.java
-index 7fbbc6be..2117090a 100644
+index f69f9477..3499a8f6 100644
 --- a/src/main/java/org/bukkit/block/Skull.java
 +++ b/src/main/java/org/bukkit/block/Skull.java
-@@ -2,6 +2,7 @@ package org.bukkit.block;
+@@ -1,8 +1,11 @@
+ package org.bukkit.block;
  
- import java.util.UUID;
  import org.bukkit.OfflinePlayer;
 +import org.bukkit.Skin;
  import org.bukkit.SkullType;
  
++import java.util.UUID;
++
  /**
-@@ -55,6 +56,21 @@ public interface Skull extends BlockState {
+  * Represents a captured state of a skull block.
+  */
+@@ -54,6 +57,21 @@ public interface Skull extends BlockState {
      public void setOwningPlayer(OfflinePlayer player);
  
      /**
@@ -39,22 +43,23 @@ index 7fbbc6be..2117090a 100644
       *
       * @return the rotation of the skull
 diff --git a/src/main/java/org/bukkit/inventory/meta/SkullMeta.java b/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
-index fab31190..81d03432 100644
+index c60860e1..661bcd39 100644
 --- a/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
 +++ b/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
-@@ -1,6 +1,9 @@
+@@ -1,7 +1,10 @@
  package org.bukkit.inventory.meta;
  
 +import java.util.UUID;
 +
  import org.bukkit.Material;
+ import org.bukkit.OfflinePlayer;
 +import org.bukkit.Skin;
  
  /**
   * Represents a skull ({@link Material#SKULL_ITEM}) that can have an owner.
-@@ -32,5 +35,20 @@ public interface SkullMeta extends ItemMeta {
+@@ -55,5 +58,20 @@ public interface SkullMeta extends ItemMeta {
       */
-     boolean setOwner(String owner);
+     boolean setOwningPlayer(OfflinePlayer owner);
  
 +    /**
 +     * Set the owner and appearance of this skull. A skull with this data set

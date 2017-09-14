@@ -1,4 +1,4 @@
-From 1a4152a9927210c4567d43e533cade3f7be11a66 Mon Sep 17 00:00:00 2001
+From 2861c3a8ca6b2f279079a96a2c90d238d6c8e091 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:17 -0400
 Subject: [PATCH] Component support for signs
@@ -48,10 +48,10 @@ index 9f6b9bbd..a3d65c59 100644
               }
              // CraftBukkit end
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java b/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java
-index 42a6f9a7..34ba952b 100644
+index 7a8d4452..5962aa88 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java
-@@ -1,5 +1,7 @@
+@@ -1,79 +1,84 @@
  package org.bukkit.craftbukkit.block;
  
 +import net.md_5.bungee.api.chat.BaseComponent;
@@ -59,100 +59,102 @@ index 42a6f9a7..34ba952b 100644
  import net.minecraft.server.ChatComponentText;
  import net.minecraft.server.IChatBaseComponent;
  import net.minecraft.server.TileEntitySign;
-@@ -7,79 +9,75 @@ import org.bukkit.Material;
+ import org.bukkit.Material;
  import org.bukkit.block.Block;
  import org.bukkit.block.Sign;
- import org.bukkit.craftbukkit.CraftWorld;
++import org.bukkit.craftbukkit.CraftWorld;
 +import org.bukkit.craftbukkit.util.BungeeChatUtils;
  import org.bukkit.craftbukkit.util.CraftChatMessage;
  
- public class CraftSign extends CraftBlockState implements Sign {
-     private final TileEntitySign sign;
--    private final String[] lines;
+-public class CraftSign extends CraftBlockEntityState<TileEntitySign> implements Sign {
+-
+-    private String[] lines;
++public class CraftSign extends CraftBlockState implements Sign {
++    private final TileEntitySign sign;
 +    private final BaseComponent[] lines = new BaseComponent[4];
  
      public CraftSign(final Block block) {
-         super(block);
- 
-         CraftWorld world = (CraftWorld) block.getWorld();
-         sign = (TileEntitySign) world.getTileEntityAt(getX(), getY(), getZ());
--        lines = new String[sign.lines.length];
--        System.arraycopy(revertComponents(sign.lines), 0, lines, 0, lines.length);
+-        super(block, TileEntitySign.class);
++        super(block);
++
++        CraftWorld world = (CraftWorld) block.getWorld();
++        sign = (TileEntitySign) world.getTileEntityAt(getX(), getY(), getZ());
 +        importFromNms();
      }
  
      public CraftSign(final Material material, final TileEntitySign te) {
-         super(material);
-         sign = te;
--        lines = new String[sign.lines.length];
--        System.arraycopy(revertComponents(sign.lines), 0, lines, 0, lines.length);
+-        super(material, te);
++        super(material);
++        sign = te;
 +        importFromNms();
      }
  
--    public String[] getLines() {
+-    @Override
+-    public void load(TileEntitySign sign) {
+-        super.load(sign);
+-
+-        lines = new String[sign.lines.length];
+-        System.arraycopy(revertComponents(sign.lines), 0, lines, 0, lines.length);
 +    private void importFromNms() {
 +        for(int i = 0; i < lines.length; i++) {
 +            lines[i] = sign.lines.length > i ? BungeeChatUtils.toBungee(sign.lines[i])
 +                    : new TextComponent();
 +        }
-+    }
-+
-+    @Override
+     }
+ 
+     @Override
+-    public String[] getLines() {
 +    public BaseComponent[] lines() {
          return lines;
      }
  
+     @Override
 -    public String getLine(int index) throws IndexOutOfBoundsException {
-+    @Override
 +    public BaseComponent line(int index) {
          return lines[index];
      }
  
+     @Override
 -    public void setLine(int index, String line) throws IndexOutOfBoundsException {
-+    @Override
 +    public void setLine(int index, BaseComponent line) {
          lines[index] = line;
      }
  
+-    @Override
+-    public void applyTo(TileEntitySign sign) {
+-        super.applyTo(sign);
 +    public String[] getLines() {
 +        return BaseComponent.toLegacyArray(lines);
 +    }
-+
+ 
+-        IChatBaseComponent[] newLines = sanitizeLines(lines);
+-        System.arraycopy(newLines, 0, sign.lines, 0, 4);
 +    public String getLine(int index) throws IndexOutOfBoundsException {
 +        return lines[index].toLegacyText();
 +    }
 +
 +    public void setLine(int index, String line) throws IndexOutOfBoundsException {
 +        lines[index] = TextComponent.fromLegacyToComponent(line, false);
-+    }
-+
-     @Override
-     public boolean update(boolean force, boolean applyPhysics) {
-         boolean result = super.update(force, applyPhysics);
- 
-         if (result) {
--            IChatBaseComponent[] newLines = sanitizeLines(lines);
--            System.arraycopy(newLines, 0, sign.lines, 0, 4);
-+            for(int i = 0; i < sign.lines.length; i++) {
-+                sign.lines[i] = BungeeChatUtils.toNms(lines[i]);
-+            }
-             sign.update();
-         }
- 
-         return result;
      }
  
 -    public static IChatBaseComponent[] sanitizeLines(String[] lines) {
 -        IChatBaseComponent[] components = new IChatBaseComponent[4];
--
++    @Override
++    public boolean update(boolean force, boolean applyPhysics) {
++        boolean result = super.update(force, applyPhysics);
+ 
 -        for (int i = 0; i < 4; i++) {
 -            if (i < lines.length && lines[i] != null) {
 -                components[i] = CraftChatMessage.fromString(lines[i])[0];
 -            } else {
 -                components[i] = new ChatComponentText("");
--            }
--        }
--
++        if (result) {
++            for(int i = 0; i < sign.lines.length; i++) {
++                sign.lines[i] = BungeeChatUtils.toNms(lines[i]);
+             }
++            sign.update();
+         }
+ 
 -        return components;
 -    }
 -
@@ -162,15 +164,15 @@ index 42a6f9a7..34ba952b 100644
 -            lines[i] = revertComponent(components[i]);
 -        }
 -        return lines;
--    }
--
++        return result;
+     }
+ 
 -    private static String revertComponent(IChatBaseComponent component) {
 -        return CraftChatMessage.fromComponent(component);
--    }
--
-     @Override
-     public TileEntitySign getTileEntity() {
-         return sign;
++    public TileEntitySign getTileEntity() {
++        return sign;
+     }
+ }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 index 03892586..ce56237d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java

@@ -1,11 +1,11 @@
-From c20e293af127d1b6d4d5addc5d334af2fdd4bbed Mon Sep 17 00:00:00 2001
+From 9b99854c898f7b792c0d9ce7e5cc441a32b0ca14 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 4 Feb 2016 04:59:57 -0500
 Subject: [PATCH] Implement minecraft-api
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 5bba4042..89d20814 100644
+index fbd075d4..016c0e4e 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -81,6 +81,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -17,7 +17,7 @@ index 5bba4042..89d20814 100644
  
      public EntityPlayer(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
 diff --git a/src/main/java/net/minecraft/server/HandshakeListener.java b/src/main/java/net/minecraft/server/HandshakeListener.java
-index 58bf9ff6..049e3658 100644
+index de313f7c..44dda75b 100644
 --- a/src/main/java/net/minecraft/server/HandshakeListener.java
 +++ b/src/main/java/net/minecraft/server/HandshakeListener.java
 @@ -70,6 +70,7 @@ public class HandshakeListener implements PacketHandshakingInListener {
@@ -53,7 +53,7 @@ index c53cf935..33eb721a 100644
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress());
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c35da60f..2c358ff5 100644
+index 98214ac7..e650709e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -23,6 +23,7 @@ import java.util.regex.Pattern;
@@ -83,7 +83,7 @@ index c35da60f..2c358ff5 100644
  
  public final class CraftServer implements Server {
      private static final Player[] EMPTY_PLAYER_ARRAY = new Player[0];
-@@ -625,6 +623,11 @@ public final class CraftServer implements Server {
+@@ -635,6 +633,11 @@ public final class CraftServer implements Server {
      }
  
      @Override
@@ -95,7 +95,7 @@ index c35da60f..2c358ff5 100644
      public CraftScheduler getScheduler() {
          return scheduler;
      }
-@@ -1808,4 +1811,16 @@ public final class CraftServer implements Server {
+@@ -1818,4 +1821,16 @@ public final class CraftServer implements Server {
              player.sendMessage(components);
          }
      }

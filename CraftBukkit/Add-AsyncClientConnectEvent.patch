@@ -1,11 +1,11 @@
-From 9db4e8e71b0d21e1c031c57cc32c355bf399f2fb Mon Sep 17 00:00:00 2001
+From 3075eec8e1fb1f769ff42daa9d8b96df349378f9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 14 Dec 2016 23:33:02 -0500
 Subject: [PATCH] Add AsyncClientConnectEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index ac7b2240..d0a5e9b2 100644
+index a27ee39b..79eeee38 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -100,6 +100,7 @@ public class ServerConnection {

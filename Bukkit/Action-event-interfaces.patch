@@ -1,4 +1,4 @@
-From e597f377bad0bba5bac76205e2b04fe1dbd9d037 Mon Sep 17 00:00:00 2001
+From 1e84d8ac8cae9b756938c5ebbf2ec08215dfaedc Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 03:39:45 -0400
 Subject: [PATCH] Action event interfaces
@@ -1081,7 +1081,7 @@ index 628ab0b0..933b5e22 100644
      private final Block bed;
  
 diff --git a/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java b/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java
-index d32c55e4..ffb4c4fc 100644
+index e18feff2..811185da 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java
 @@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
@@ -1107,7 +1107,7 @@ index 5b41b652..f37ce2ba 100644
      private final Item drop;
      private boolean cancel = false;
 diff --git a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
-index ea7ecefe..12299841 100644
+index 2cb8ca28..1fc94b4f 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
 @@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.BookMeta;
@@ -1315,7 +1315,7 @@ index 667acad2..63b6ec60 100644
      private final boolean isSneaking;
      private boolean cancel = false;
 diff --git a/src/main/java/org/bukkit/event/player/PlayerToggleSprintEvent.java b/src/main/java/org/bukkit/event/player/PlayerToggleSprintEvent.java
-index cf065e11..f36f0349 100644
+index 1558f8f7..927bac9d 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerToggleSprintEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerToggleSprintEvent.java
 @@ -7,7 +7,7 @@ import org.bukkit.event.HandlerList;

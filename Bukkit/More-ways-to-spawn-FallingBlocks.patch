@@ -1,70 +1,11 @@
-From d5c2a78d399304f3e6346d79ae33658ad46a9c40 Mon Sep 17 00:00:00 2001
+From dfd179e7fff4ee4b6628982b6bc94d6cd5a41fc2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 7 Dec 2016 04:08:39 -0500
 Subject: [PATCH] More ways to spawn FallingBlocks
 
 
-diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index 4872f7ff..682f950f 100644
---- a/src/main/java/org/bukkit/World.java
-+++ b/src/main/java/org/bukkit/World.java
-@@ -788,7 +788,25 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
-      * @throws IllegalArgumentException if {@link Location} or {@link
-      *     MaterialData} are null or {@link Material} of the {@link MaterialData} is not a block
-      */
--    public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException;
-+    default FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException {
-+        return spawnFallingBlock(location.position(), data);
-+    }
-+
-+    /**
-+     * Spawn a {@link FallingBlock} entity at the given position in this world.
-+     *
-+     * @see #spawnFallingBlock(Location, MaterialData)
-+     */
-+    FallingBlock spawnFallingBlock(Vec3 position, MaterialData data) throws IllegalArgumentException;
-+
-+    /**
-+     * Spawn a {@link FallingBlock} entity at the given coarse position in this world.
-+     * The spawned entity will initially be aligned with the block grid,
-+     * as a naturally falling block would be.
-+     *
-+     * @see #spawnFallingBlock(Location, MaterialData)
-+     */
-+    FallingBlock spawnFallingBlockAligned(Vec3 position, MaterialData data) throws IllegalArgumentException;
- 
-     /**
-      * Spawn a {@link FallingBlock} entity at the given {@link Location} of
-@@ -807,7 +825,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
-      * @deprecated Magic value
-      */
-     @Deprecated
--    public FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException;
-+    default FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException {
-+        return spawnFallingBlock(location.position(), material, data);
-+    }
-+
-+    @Deprecated
-+    FallingBlock spawnFallingBlock(Vec3 position, Material material, byte data) throws IllegalArgumentException;
- 
-     /**
-      * Spawn a {@link FallingBlock} entity at the given {@link Location} of
-@@ -823,7 +846,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
-      * @deprecated Magic value
-      */
-     @Deprecated
--    public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException;
-+    default FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException {
-+        return spawnFallingBlock(location.position(), blockId, blockData);
-+    }
-+
-+    @Deprecated
-+    FallingBlock spawnFallingBlock(Vec3 position, int blockId, byte blockData) throws IllegalArgumentException;
- 
-     /**
-      * Plays an effect to all players within a default radius around a given
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
-index cfaceab6..732c1666 100644
+index 9aae2cc3..5bf11178 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -5,6 +5,7 @@ import org.bukkit.Locatable;
@@ -75,7 +16,7 @@ index cfaceab6..732c1666 100644
  import org.bukkit.geometry.*;
  import org.bukkit.material.MaterialData;
  import org.bukkit.metadata.Metadatable;
-@@ -256,4 +257,23 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -266,4 +267,23 @@ public interface BlockState extends Metadatable, Locatable {
      boolean isPlaced();
  
      boolean hasPosition();

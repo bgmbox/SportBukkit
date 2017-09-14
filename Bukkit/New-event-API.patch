@@ -1,11 +1,11 @@
-From d220fc4c48b4e8a01b864eee828b58b5f4266f98 Mon Sep 17 00:00:00 2001
+From fd95aaca72b82eae43b4038de97e4ef18c5c33c6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 9 Jul 2016 05:27:03 -0400
 Subject: [PATCH] New event API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 2a75925d..7928eac5 100644
+index 9bfa3096..67f4f735 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -25,6 +25,7 @@ import org.bukkit.command.ConsoleCommandSender;
@@ -116,10 +116,19 @@ index 493fc98b..ccf0d112 100644
  
      Key key(String key);
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index a3086fa1..8650aa7c 100644
+index 02efb3cf..30e51979 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -24,6 +24,7 @@ import org.bukkit.command.ConsoleCommandSender;
+@@ -3,6 +3,8 @@ package org.bukkit;
+ import java.awt.image.BufferedImage;
+ import java.io.File;
+ import java.io.Serializable;
++import java.time.Duration;
++import java.time.Instant;
+ import java.util.Collection;
+ import java.util.Collections;
+ import java.util.Iterator;
+@@ -24,6 +26,7 @@ import org.bukkit.command.ConsoleCommandSender;
  import org.bukkit.command.PluginCommand;
  import org.bukkit.entity.Entity;
  import org.bukkit.entity.Player;
@@ -127,16 +136,45 @@ index a3086fa1..8650aa7c 100644
  import org.bukkit.event.inventory.InventoryType;
  import org.bukkit.event.server.ServerListPingEvent;
  import org.bukkit.help.HelpMap;
-@@ -121,6 +122,8 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -50,6 +53,8 @@ import org.bukkit.generator.ChunkGenerator;
+ import org.bukkit.inventory.ItemFactory;
+ import org.bukkit.inventory.meta.ItemMeta;
+ 
++import javax.annotation.Nullable;
++
+ /**
+  * Represents a server implementation.
+  */
+@@ -121,6 +126,14 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
       */
      public Collection<? extends Player> getOnlinePlayers();
  
 +    Map<UUID, Player> playersById();
 +
++    /**
++     * If the server is currently empty of players, return the {@link Instant}
++     * that the last player disconnected. If the server is not empty, return null.
++     */
++    @Nullable Instant emptySince();
++
      /**
       * Get the maximum amount of players which can login to this server.
       *
-@@ -397,12 +400,21 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -314,6 +327,13 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+     public int getTicksPerMonsterSpawns();
+ 
+     /**
++     * Time to wait before automatically suspending an empty server.
++     *
++     * @see #setSuspended(boolean)
++     */
++    @Nullable Duration getEmptyServerSuspendDelay();
++
++    /**
+      * Gets a player object by the given username.
+      * <p>
+      * This method may not return objects for offline players.
+@@ -397,12 +417,21 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
      public ServicesManager getServicesManager();
  
      /**
@@ -158,7 +196,7 @@ index a3086fa1..8650aa7c 100644
      /**
       * Check for a level.dat file belonging to a world with the given name.
       * If found, return a {@link WorldCreator} configured to match the settings
-@@ -885,6 +897,8 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -885,6 +914,8 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
       */
      public WarningState getWarningState();
  
@@ -167,6 +205,72 @@ index a3086fa1..8650aa7c 100644
      /**
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
+@@ -1055,4 +1086,65 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+      *         false if it was added to the main thread queue
+      */
+     boolean runOnMainThread(Plugin plugin, boolean priority, Runnable task);
++
++    /**
++     * Suspend or resume the server.
++     *
++     * A suspended server does not tick or run scheduled tasks. However, it does
++     * execute console commands, and tasks submitted to {@link #postToMainThread},
++     * while remaining suspended.
++     *
++     * The server can only be suspended when no players are connected. The server
++     * will resume when a player successfully logs in. Failed logins due to bans
++     * or whitelisting do not cause the server to resume.
++     *
++     * @param suspend true to suspend the server, false to resume
++     *
++     * @return true if the suspended state of the server changed,
++     *         false if the state did not change, because the server was already
++     *         in the given state, or because the change is not currently possible.
++     *
++     * @see org.bukkit.event.server.ServerSuspendEvent
++     */
++    boolean setSuspended(boolean suspend);
++
++    /**
++     * Can the server be suspended right now?
++     *
++     * The server can be suspended only when it has no players connected,
++     * and is not in the process of shutting down. This method returns
++     * true if the server is already suspended.
++     *
++     * @see #setSuspended(boolean)
++     */
++    boolean canSuspend();
++
++    /**
++     * Is the server currently suspended?
++     *
++     * @see #setSuspended(boolean)
++     */
++    boolean isSuspended();
++
++    /**
++     * The {@link Instant} that the server entered the suspended state,
++     * or null if the server is not currently suspended.
++     *
++     * @see #setSuspended(boolean)
++     */
++    @Nullable Instant suspendedAt();
++
++    /**
++     * The number of times the server has been interrupted from suspension.
++     *
++     * If the server is not currently suspended, returns 0.
++     *
++     * Interruptions are caused by tasks posted to the main thread through
++     * {@link #postToMainThread}, console commands, and various internal events.
++     * Internal interruptions should be rare. If the server is being interrupted
++     * frequently, it is likely caused by a plugin.
++     *
++     * @see #setSuspended(boolean)
++     */
++    int interruptions();
+ }
 diff --git a/src/main/java/org/bukkit/ServerInstanceModule.java b/src/main/java/org/bukkit/ServerInstanceModule.java
 new file mode 100644
 index 00000000..4c82a5ff
@@ -327,8 +431,79 @@ index 00000000..009faf3c
 +        return server.playersById();
 +    }
 +}
+diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+index 9969185c..31876020 100644
+--- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
++++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+@@ -32,6 +32,7 @@ public class SimpleCommandMap implements CommandMap {
+         register("bukkit", new ReloadCommand("reload"));
+         register("bukkit", new PluginsCommand("plugins"));
+         register("bukkit", new TimingsCommand("timings"));
++        register("bukkit", new SuspendCommand());
+     }
+ 
+     public void setFallbackCommands() {
+diff --git a/src/main/java/org/bukkit/command/defaults/SuspendCommand.java b/src/main/java/org/bukkit/command/defaults/SuspendCommand.java
+new file mode 100644
+index 00000000..2a844e68
+--- /dev/null
++++ b/src/main/java/org/bukkit/command/defaults/SuspendCommand.java
+@@ -0,0 +1,53 @@
++package org.bukkit.command.defaults;
++
++import java.time.Duration;
++import java.time.Instant;
++import java.util.Collections;
++
++import net.md_5.bungee.api.ChatColor;
++import net.md_5.bungee.api.chat.ComponentBuilder;
++import org.bukkit.Server;
++import org.bukkit.command.CommandSender;
++
++public class SuspendCommand extends BukkitCommand {
++
++    public SuspendCommand() {
++        super(
++            "suspend",
++            "Suspends the server, if no players are connected",
++            "/suspend [true|false]",
++            Collections.emptyList()
++        );
++    }
++
++    @Override
++    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
++        if(!testPermission(sender)) return true;
++        final Server server = sender.getServer();
++        if(args.length == 0) {
++            final Instant at = server.suspendedAt();
++            if(at == null) {
++                sender.sendMessage(new ComponentBuilder("Server is not suspended").color(ChatColor.WHITE).create());
++            } else {
++                final Duration dur = Duration.between(at, Instant.now());
++                sender.sendMessage(new ComponentBuilder(
++                    "Server suspended for " + dur +
++                    " and interrupted " + server.interruptions() + " times"
++                ).color(ChatColor.WHITE).create());
++            }
++        } else if("true".equals(args[0])) {
++            if(server.isSuspended()) {
++                sender.sendMessage(new ComponentBuilder("Server is already suspended").color(ChatColor.RED).create());
++                return true;
++            }
++            if(!server.setSuspended(true)) {
++                sender.sendMessage(new ComponentBuilder("Server cannot be suspended while players are connected").color(ChatColor.RED).create());
++            }
++        } else if("false".equals(args[0])) {
++            if(!server.setSuspended(false)) {
++                sender.sendMessage(new ComponentBuilder("Server is not currently suspended").color(ChatColor.RED).create());
++            }
++        }
++        return true;
++    }
++}
 diff --git a/src/main/java/org/bukkit/command/defaults/TimingsCommand.java b/src/main/java/org/bukkit/command/defaults/TimingsCommand.java
-index a39ea5dd..7c5063ea 100644
+index 66ea6345..fe591356 100644
 --- a/src/main/java/org/bukkit/command/defaults/TimingsCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/TimingsCommand.java
 @@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
@@ -355,7 +530,7 @@ index a39ea5dd..7c5063ea 100644
 -                for (RegisteredListener listener : handlerList.getRegisteredListeners()) {
 +                for (RegisteredHandler listener : handlerList.getRegisteredListeners()) {
                      if (listener instanceof TimedRegisteredListener) {
-                         ((TimedRegisteredListener)listener).reset();
+                         ((TimedRegisteredListener) listener).reset();
                      }
 diff --git a/src/main/java/org/bukkit/event/BoundEventHandler.java b/src/main/java/org/bukkit/event/BoundEventHandler.java
 new file mode 100644
@@ -1465,10 +1640,10 @@ index 00000000..bd0a7be4
 +}
 diff --git a/src/main/java/org/bukkit/event/SimpleEventBus.java b/src/main/java/org/bukkit/event/SimpleEventBus.java
 new file mode 100644
-index 00000000..4b5fe75a
+index 00000000..87b9d799
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/SimpleEventBus.java
-@@ -0,0 +1,119 @@
+@@ -0,0 +1,133 @@
 +package org.bukkit.event;
 +
 +import java.util.concurrent.ExecutionException;
@@ -1480,15 +1655,15 @@ index 00000000..4b5fe75a
 +public class SimpleEventBus implements EventBus {
 +
 +    private final Thread primaryThread;
-+    private final Object lock;
++    private final Executor syncExecutor;
 +
 +    public SimpleEventBus() {
 +        this(null, null);
 +    }
 +
-+    public SimpleEventBus(@Nullable Thread primaryThread, @Nullable Object lock) {
++    public SimpleEventBus(@Nullable Thread primaryThread, @Nullable Executor syncExecutor) {
 +        this.primaryThread = primaryThread != null ? primaryThread : Thread.currentThread();
-+        this.lock = lock != null ? lock : new Object();
++        this.syncExecutor = syncExecutor != null ? syncExecutor : Runnable::run;
 +    }
 +
 +    @Override
@@ -1509,16 +1684,30 @@ index 00000000..4b5fe75a
 +    @Override
 +    public <T extends Event, X extends Throwable> void callEvent(T event, @Nullable EventPriority priority, @Nullable EventBody<? super T, X> body) throws X {
 +        if(event.isAsynchronous()) {
-+            if(Thread.holdsLock(lock)) {
-+                throw new IllegalStateException(event.getEventName() + " cannot be called asynchronously from inside synchronized code.");
-+            }
 +            if(Thread.currentThread().equals(primaryThread)) {
 +                throw new IllegalStateException(event.getEventName() + " cannot be called asynchronously from primary thread.");
 +            }
 +            callEvent0(event, priority, body);
 +        } else {
-+            synchronized(lock) {
-+                callEvent0(event, priority, body);
++            final SettableFuture future = SettableFuture.create();
++            syncExecutor.execute(() -> {
++                try {
++                    callEvent0(event, priority, body);
++                    future.set(null);
++                } catch(Throwable ex) {
++                    future.setException(ex);
++                }
++            });
++
++            for(;;) {
++                try {
++                    future.get();
++                    return;
++                } catch(InterruptedException e) {
++                    // try again
++                } catch(ExecutionException e) {
++                    throw (X) e.getCause();
++                }
 +            }
 +        }
 +    }
@@ -1590,7 +1779,7 @@ index 00000000..4b5fe75a
 +}
 diff --git a/src/main/java/org/bukkit/event/SimpleEventRegistry.java b/src/main/java/org/bukkit/event/SimpleEventRegistry.java
 new file mode 100644
-index 00000000..3d823c2c
+index 00000000..cd101489
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/SimpleEventRegistry.java
 @@ -0,0 +1,88 @@
@@ -1682,7 +1871,28 @@ index 00000000..3d823c2c
 +        }
 +    }
 +}
-\ No newline at end of file
+diff --git a/src/main/java/org/bukkit/event/server/ServerSuspendEvent.java b/src/main/java/org/bukkit/event/server/ServerSuspendEvent.java
+new file mode 100644
+index 00000000..bdd41233
+--- /dev/null
++++ b/src/main/java/org/bukkit/event/server/ServerSuspendEvent.java
+@@ -0,0 +1,16 @@
++package org.bukkit.event.server;
++
++import org.bukkit.Server;
++import org.bukkit.event.HandlerList;
++
++/**
++ * Fired when the server transitions to a suspended state, which can happen from an
++ * explicit call to {@link Server#setSuspended(boolean)}, or automatically
++ * due to {@link Server#getEmptyServerSuspendDelay()}.
++ *
++ * The suspension happens entirely within the event. A call to {@link #yield()}
++ * will not return until the server has resumed.
++ */
++public class ServerSuspendEvent extends ServerEvent {
++    private static final HandlerList<ServerSuspendEvent> handlers = new HandlerList<>();
++}
 diff --git a/src/main/java/org/bukkit/permissions/PermissionBinder.java b/src/main/java/org/bukkit/permissions/PermissionBinder.java
 new file mode 100644
 index 00000000..bb0172e6
@@ -2090,7 +2300,7 @@ index 00000000..80c562e0
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/plugin/RegisteredListener.java b/src/main/java/org/bukkit/plugin/RegisteredListener.java
-index 9dd0b7a1..89a50a1b 100644
+index 944f9088..89a50a1b 100644
 --- a/src/main/java/org/bukkit/plugin/RegisteredListener.java
 +++ b/src/main/java/org/bukkit/plugin/RegisteredListener.java
 @@ -1,32 +1,32 @@
@@ -2154,11 +2364,8 @@ index 9dd0b7a1..89a50a1b 100644
 -     */
 -    public EventPriority getPriority() {
 -        return priority;
-+    @Override
-+    public boolean isEnabled() {
-+        return getPlugin().isEnabled();
-     }
- 
+-    }
+-
 -    /**
 -     * Calls the event executor
 -     *
@@ -2166,15 +2373,18 @@ index 9dd0b7a1..89a50a1b 100644
 -     * @throws EventException If an event handler throws an exception.
 -     */
 -    public void callEvent(final Event event) throws EventException {
--        if (event instanceof Cancellable){
--            if (((Cancellable) event).isCancelled() && isIgnoringCancelled()){
+-        if (event instanceof Cancellable) {
+-            if (((Cancellable) event).isCancelled() && isIgnoringCancelled()) {
 -                return;
 -            }
 -        }
 -        executor.execute(listener, event);
--    }
--
--     /**
++    @Override
++    public boolean isEnabled() {
++        return getPlugin().isEnabled();
+     }
+ 
+-    /**
 -     * Whether this listener accepts cancelled events
 -     *
 -     * @return True when ignoring cancelled events
@@ -2188,11 +2398,14 @@ index 9dd0b7a1..89a50a1b 100644
 +    public boolean isIgnoringCancelled() { return meta().ignoreCancelled(); }
  }
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 3135f985..1a847613 100644
+index 1079c1c2..545d2d8e 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -24,10 +24,7 @@ import org.bukkit.command.Command;
+@@ -22,12 +22,10 @@ import org.apache.commons.lang.Validate;
+ import org.bukkit.Server;
+ import org.bukkit.command.Command;
  import org.bukkit.command.PluginCommandYamlParser;
++import org.bukkit.command.PluginIdentifiableCommand;
  import org.bukkit.command.SimpleCommandMap;
  import org.bukkit.configuration.serialization.ConfigurationSerialization;
 -import org.bukkit.event.Event;
@@ -2203,7 +2416,7 @@ index 3135f985..1a847613 100644
  import org.bukkit.permissions.Permissible;
  import org.bukkit.permissions.Permission;
  import org.bukkit.permissions.PermissionDefault;
-@@ -49,7 +46,6 @@ public final class SimplePluginManager implements PluginManager {
+@@ -49,7 +47,6 @@ public final class SimplePluginManager implements PluginManager {
      private final Map<Boolean, Set<Permission>> defaultPerms = new LinkedHashMap<Boolean, Set<Permission>>();
      private final Map<String, Map<Permissible, Boolean>> permSubs = new HashMap<String, Map<Permissible, Boolean>>();
      private final Map<Boolean, Map<Permissible, Boolean>> defSubs = new HashMap<Boolean, Map<Permissible, Boolean>>();
@@ -2211,7 +2424,39 @@ index 3135f985..1a847613 100644
  
      public SimplePluginManager(Server instance, SimpleCommandMap commandMap) {
          server = instance;
-@@ -486,83 +482,12 @@ public final class SimplePluginManager implements PluginManager {
+@@ -153,7 +150,7 @@ public final class SimplePluginManager implements PluginManager {
+                     file.getPath(),
+                     replacedFile.getPath(),
+                     directory.getPath()
+-                ));
++                    ));
+             }
+ 
+             Collection<String> softDependencySet = description.getSoftDepend();
+@@ -461,7 +458,7 @@ public final class SimplePluginManager implements PluginManager {
+             try {
+                 server.getMessenger().unregisterIncomingPluginChannel(plugin);
+                 server.getMessenger().unregisterOutgoingPluginChannel(plugin);
+-            } catch (Throwable ex) {
++            } catch(Throwable ex) {
+                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering plugin channels for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+             }
+ 
+@@ -470,6 +467,13 @@ public final class SimplePluginManager implements PluginManager {
+             } catch (Throwable ex) {
+                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering serializables " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+             }
++
++            try {
++                server.getCommandMap().unregisterAll(command -> command instanceof PluginIdentifiableCommand &&
++                        plugin == ((PluginIdentifiableCommand) command).getPlugin());
++            } catch (Throwable ex) {
++                server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering commands for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
++            }
+         }
+     }
+ 
+@@ -486,83 +490,12 @@ public final class SimplePluginManager implements PluginManager {
          }
      }
  
@@ -2297,7 +2542,7 @@ index 3135f985..1a847613 100644
      }
  
      public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority, EventExecutor executor, Plugin plugin) {
-@@ -582,45 +507,7 @@ public final class SimplePluginManager implements PluginManager {
+@@ -582,45 +515,7 @@ public final class SimplePluginManager implements PluginManager {
       *     cancelled
       */
      public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority, EventExecutor executor, Plugin plugin, boolean ignoreCancelled) {
@@ -2344,7 +2589,7 @@ index 3135f985..1a847613 100644
      }
  
      public Permission getPermission(String name) {
-@@ -767,15 +654,6 @@ public final class SimplePluginManager implements PluginManager {
+@@ -767,15 +662,6 @@ public final class SimplePluginManager implements PluginManager {
      }
  
      public boolean useTimings() {
@@ -2454,10 +2699,18 @@ index 80333857..7ffe83fe 100644
                  isEnabled = false;
              }
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-index c6ca9de3..409647b6 100644
+index 5fbfc39b..409647b6 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-@@ -206,92 +206,12 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -137,6 +137,7 @@ public final class JavaPluginLoader implements PluginLoader {
+             loaderLock.readLock().unlock();
+         }
+ 
++
+         final PluginClassLoader loader;
+         try {
+             loader = new PluginClassLoader(this, getClass().getClassLoader(), dependencies, description, dataFolder, file);
+@@ -205,92 +206,12 @@ public final class JavaPluginLoader implements PluginLoader {
      }
  
      public Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener listener, final Plugin plugin) {
@@ -2556,6 +2809,14 @@ index c6ca9de3..409647b6 100644
      }
  
      public void enablePlugin(final Plugin plugin) {
+@@ -303,6 +224,7 @@ public final class JavaPluginLoader implements PluginLoader {
+ 
+             String pluginName = jPlugin.getDescription().getName();
+ 
++
+             loaderLock.writeLock().lock();
+             try {
+                 if (!loaders.containsKey(pluginName)) {
 diff --git a/src/main/java/org/bukkit/plugin/java/ModularPlugin.java b/src/main/java/org/bukkit/plugin/java/ModularPlugin.java
 new file mode 100644
 index 00000000..98941dff
@@ -2581,48 +2842,16 @@ index 00000000..98941dff
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index 276052b6..e1795a7b 100644
+index c651c429..e1795a7b 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-@@ -14,6 +14,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
- import com.google.common.hash.Hashing;
- import com.google.common.hash.HashingInputStream;
- import com.google.common.io.ByteStreams;
-+import com.google.inject.Module;
- import org.apache.commons.lang.Validate;
- import org.bukkit.plugin.InvalidPluginException;
- import org.bukkit.plugin.PluginDescriptionFile;
-@@ -59,14 +60,16 @@ final class PluginClassLoader extends URLClassLoader {
-                 throw new InvalidPluginException("Cannot find main class `" + description.getMain() + "'", ex);
-             }
+@@ -207,4 +207,4 @@ final class PluginClassLoader extends URLClassLoader {
  
--            Class<? extends JavaPlugin> pluginClass;
--            try {
--                pluginClass = jarClass.asSubclass(JavaPlugin.class);
--            } catch (ClassCastException ex) {
--                throw new InvalidPluginException("main class `" + description.getMain() + "' does not extend JavaPlugin", ex);
-+            if(JavaPlugin.class.isAssignableFrom(jarClass)) {
-+                plugin = jarClass.asSubclass(JavaPlugin.class).newInstance();
-+            } else if(Module.class.isAssignableFrom(jarClass)) {
-+                plugin = new ModularPlugin(jarClass.asSubclass(Module.class).newInstance());
-+            } else {
-+                throw new InvalidPluginException("main class `" + jarClass.getName() +
-+                        "' must extend either " + JavaPlugin.class.getName() +
-+                        " or " + Module.class.getName());
-             }
- 
--            plugin = pluginClass.newInstance();
-             return plugin;
-         } catch (IllegalAccessException ex) {
-             throw new InvalidPluginException("No public constructor", ex);
-@@ -197,7 +200,6 @@ final class PluginClassLoader extends URLClassLoader {
- 
-     synchronized void initialize(JavaPlugin javaPlugin) {
-         Validate.notNull(javaPlugin, "Initializing plugin cannot be null");
--        Validate.isTrue(javaPlugin.getClass().getClassLoader() == this, "Cannot initialize plugin outside of this class loader");
- 
-         if (this.plugin != null) {
-             throw new IllegalArgumentException("Plugin already initialized!");
+         javaPlugin.init(pluginLoader, pluginLoader.server, description, dataFolder, file, this);
+     }
+-}
+\ No newline at end of file
++}
 diff --git a/src/main/java/org/bukkit/scheduler/BukkitScheduler.java b/src/main/java/org/bukkit/scheduler/BukkitScheduler.java
 index 6e28205f..28ac02ec 100644
 --- a/src/main/java/org/bukkit/scheduler/BukkitScheduler.java
@@ -2659,7 +2888,7 @@ index 6e28205f..28ac02ec 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/scheduler/BukkitTask.java b/src/main/java/org/bukkit/scheduler/BukkitTask.java
-index e447e64e..ce24c8bb 100644
+index 9c693f83..df33a42b 100644
 --- a/src/main/java/org/bukkit/scheduler/BukkitTask.java
 +++ b/src/main/java/org/bukkit/scheduler/BukkitTask.java
 @@ -1,11 +1,12 @@
@@ -2672,12 +2901,12 @@ index e447e64e..ce24c8bb 100644
   * Represents a task being executed by the scheduler
   */
 -public interface BukkitTask {
-+public interface BukkitTask extends Task {
++public interface BukkitTask extends Task{
  
      /**
       * Returns the taskId for the task.
 diff --git a/src/test/java/org/bukkit/TestServer.java b/src/test/java/org/bukkit/TestServer.java
-index 2d840320..b31e7f19 100644
+index 2d840320..c8a9d17f 100644
 --- a/src/test/java/org/bukkit/TestServer.java
 +++ b/src/test/java/org/bukkit/TestServer.java
 @@ -7,6 +7,8 @@ import java.util.Map;
@@ -2704,11 +2933,20 @@ index 2d840320..b31e7f19 100644
                      Server.class.getMethod("getLogger"),
                      new MethodHandler() {
                          final Logger logger = Logger.getLogger(TestServer.class.getCanonicalName());
+@@ -46,7 +56,7 @@ public class TestServer implements InvocationHandler {
+                             return logger;
+                         }
+                     }
+-                );
++            );
+             methodMap.put(
+                     Server.class.getMethod("getName"),
+                     new MethodHandler() {
 @@ -77,6 +87,7 @@ public class TestServer implements InvocationHandler {
              Server instance = Proxy.getProxyClass(Server.class.getClassLoader(), Server.class).asSubclass(Server.class).getConstructor(InvocationHandler.class).newInstance(server);
              Bukkit.setServer(instance);
              server.pluginManager = new SimplePluginManager(instance, new SimpleCommandMap(instance));
-+            server.eventBus = new SimpleEventBus(null, server.pluginManager);
++            server.eventBus = new SimpleEventBus(null, null);
          } catch (Throwable t) {
              throw new Error(t);
          }

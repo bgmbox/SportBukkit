@@ -202,13 +202,13 @@
      }
  
      public boolean getAllowNether() {
-@@ -328,13 +397,35 @@
+@@ -328,13 +397,36 @@
  
      public void issueCommand(String s, ICommandListener icommandlistener) {
          this.serverCommandQueue.add(new ServerCommand(s, icommandlistener));
 +        interrupt(); // SportBukkit
-     }
- 
++    }
++
 +    // SportBukkit start
 +    @Override
 +    protected void processTasks() {
@@ -218,10 +218,11 @@
 +
 +    public DataConverterManager getDataConverterManager() {
 +        return this.dataConverterManager;
-+    }
+     }
 +    // SportBukkit end
 +
 +    public void processCommands() { aP(); } // SportBukkit - alias
+ 
      public void aP() {
          while (!this.serverCommandQueue.isEmpty()) {
              ServerCommand servercommand = (ServerCommand) this.serverCommandQueue.remove(0);
@@ -239,7 +240,7 @@
          }
  
      }
-@@ -382,7 +473,7 @@
+@@ -382,7 +474,7 @@
      }
  
      public int e_() {
@@ -248,7 +249,7 @@
      }
  
      public String f_() {
-@@ -537,16 +628,70 @@
+@@ -537,16 +629,70 @@
      }
  
      public String getPlugins() {
@@ -269,17 +270,17 @@
 +                if (i > 0) {
 +                    result.append("; ");
 +                }
-+
-+                result.append(plugins[i].getDescription().getName());
-+                result.append(" ");
-+                result.append(plugins[i].getDescription().getVersion().replaceAll(";", ","));
-+            }
-+        }
  
 -    public String executeRemoteCommand(String s) {
 -        this.remoteControlCommandListener.clearMessages();
 -        this.b.a(this.remoteControlCommandListener, s);
 -        return this.remoteControlCommandListener.getMessages();
++                result.append(plugins[i].getDescription().getName());
++                result.append(" ");
++                result.append(plugins[i].getDescription().getVersion().replaceAll(";", ","));
++            }
++        }
++
 +        return result.toString();
 +        // CraftBukkit end
 +    }

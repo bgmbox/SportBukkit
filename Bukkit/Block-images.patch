@@ -1,11 +1,11 @@
-From 8bed8a0dab022b2b429e34b193982592d60eabb5 Mon Sep 17 00:00:00 2001
+From 10182a31847a81a7b7b5e6cdb55a7dac68f30122 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:20:38 -0400
 Subject: [PATCH] Block images
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index a8876b26..2a75925d 100644
+index bf05a0d7..9bfa3096 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -13,6 +13,7 @@ import java.util.UUID;
@@ -16,11 +16,12 @@ index a8876b26..2a75925d 100644
  import org.bukkit.boss.BarColor;
  import org.bukkit.boss.BarFlag;
  import org.bukkit.boss.BarStyle;
-@@ -1282,6 +1283,7 @@ public final class Bukkit {
+@@ -1282,6 +1283,8 @@ public final class Bukkit {
          return runtime().key(id);
      }
  
 +    public static BlockFactory blocks() { return runtime().blocks(); }
++
      public static VectorFactory vectors() { return runtime().vectors(); }
  
      public static PotionBrewRegistry potionRegistry() {
@@ -45,7 +46,7 @@ index 9e083daa..493fc98b 100644
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index a8897e5b..4872f7ff 100644
+index a8897e5b..e60e082d 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -1,21 +1,24 @@
@@ -129,7 +130,96 @@ index a8897e5b..4872f7ff 100644
      /**
       * Gets the {@link Chunk} at the given {@link Location}
       *
-@@ -917,6 +950,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -275,6 +308,8 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+     @Deprecated
+     public boolean unloadChunk(int x, int z, boolean save, boolean safe);
+ 
++    int unloadAllChunks();
++
+     /**
+      * Safely queues the {@link Chunk} at the specified coordinates for
+      * unloading
+@@ -319,6 +354,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+     @Deprecated
+     public boolean refreshChunk(int x, int z);
+ 
++    int getPlayerCount();
++
++    boolean hasPlayers();
++
++    boolean isTicking();
++
+     /**
+      * Drops an item at the specified {@link Location}
+      *
+@@ -488,6 +529,11 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      */
+     public UUID getUID();
+ 
++    @Override
++    default UUID getWorldId() {
++        return getUID();
++    }
++
+     /**
+      * Gets the default spawn {@link Location} of this world
+      *
+@@ -755,7 +801,25 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      * @throws IllegalArgumentException if {@link Location} or {@link
+      *     MaterialData} are null or {@link Material} of the {@link MaterialData} is not a block
+      */
+-    public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException;
++    default FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException {
++        return spawnFallingBlock(location.position(), data);
++    }
++
++    /**
++     * Spawn a {@link FallingBlock} entity at the given position in this world.
++     *
++     * @see #spawnFallingBlock(Location, MaterialData)
++     */
++    FallingBlock spawnFallingBlock(Vec3 position, MaterialData data) throws IllegalArgumentException;
++
++    /**
++     * Spawn a {@link FallingBlock} entity at the given coarse position in this world.
++     * The spawned entity will initially be aligned with the block grid,
++     * as a naturally falling block would be.
++     *
++     * @see #spawnFallingBlock(Location, MaterialData)
++     */
++    FallingBlock spawnFallingBlockAligned(Vec3 position, MaterialData data) throws IllegalArgumentException;
+ 
+     /**
+      * Spawn a {@link FallingBlock} entity at the given {@link Location} of
+@@ -774,7 +838,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      * @deprecated Magic value
+      */
+     @Deprecated
+-    public FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException;
++    default FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException {
++        return spawnFallingBlock(location.position(), material, data);
++    }
++
++    @Deprecated
++    FallingBlock spawnFallingBlock(Vec3 position, Material material, byte data) throws IllegalArgumentException;
+ 
+     /**
+      * Spawn a {@link FallingBlock} entity at the given {@link Location} of
+@@ -790,7 +859,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      * @deprecated Magic value
+      */
+     @Deprecated
+-    public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException;
++    default FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException {
++        return spawnFallingBlock(location.position(), blockId, blockData);
++    }
++
++    @Deprecated
++    FallingBlock spawnFallingBlock(Vec3 position, int blockId, byte blockData) throws IllegalArgumentException;
+ 
+     /**
+      * Plays an effect to all players within a default radius around a given
+@@ -917,6 +991,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      Biome getBiome(int x, int z);
  
@@ -140,7 +230,7 @@ index a8897e5b..4872f7ff 100644
      /**
       * Sets the biome for the given block coordinates
       *
-@@ -926,6 +963,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -926,6 +1004,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      void setBiome(int x, int z, Biome bio);
  
@@ -151,7 +241,7 @@ index a8897e5b..4872f7ff 100644
      /**
       * Gets the temperature for the given block coordinates.
       * <p>
-@@ -938,6 +979,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -938,6 +1020,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public double getTemperature(int x, int z);
  
@@ -162,7 +252,7 @@ index a8897e5b..4872f7ff 100644
      /**
       * Gets the humidity for the given block coordinates.
       * <p>
-@@ -950,6 +995,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -950,6 +1036,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public double getHumidity(int x, int z);
  
@@ -173,7 +263,7 @@ index a8897e5b..4872f7ff 100644
      /**
       * Gets the maximum height of this world.
       * <p>
-@@ -1510,6 +1559,37 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -1510,6 +1600,37 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
  
@@ -331,7 +421,7 @@ index 00000000..defd64cf
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
-index aaaecb05..cfaceab6 100644
+index f081dd78..9aae2cc3 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -5,6 +5,7 @@ import org.bukkit.Locatable;
@@ -342,7 +432,7 @@ index aaaecb05..cfaceab6 100644
  import org.bukkit.material.MaterialData;
  import org.bukkit.metadata.Metadatable;
  
-@@ -54,6 +55,14 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -55,6 +56,14 @@ public interface BlockState extends Metadatable, Locatable {
       */
      void setMaterialData(MaterialData materialData);
  
@@ -355,9 +445,9 @@ index aaaecb05..cfaceab6 100644
 +    void reorient(CoarseTransform transform);
 +
      /**
-      * Gets the metadata for this block
+      * Gets the metadata for this block state.
       *
-@@ -95,6 +104,10 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -98,6 +107,10 @@ public interface BlockState extends Metadatable, Locatable {
       */
      World getWorld();
  
@@ -366,9 +456,9 @@ index aaaecb05..cfaceab6 100644
 +    Vec3 tryPosition();
 +
      /**
-      * Gets the x-coordinate of this block
+      * Gets the x-coordinate of this block state.
       *
-@@ -241,4 +254,6 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -251,4 +264,6 @@ public interface BlockState extends Metadatable, Locatable {
       *         or 'virtual' (e.g. on an itemstack)
       */
      boolean isPlaced();

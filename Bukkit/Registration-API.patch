@@ -1,11 +1,11 @@
-From 6861c1476de00b44755840bfc369e269f23ff241 Mon Sep 17 00:00:00 2001
+From b935acf245998f5935d6f0285b64310a6d92c7c7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:07:43 -0500
 Subject: [PATCH] Registration API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index b4e438e4..a5339cb2 100644
+index fd615d58..0b162c65 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -37,6 +37,7 @@ import org.bukkit.permissions.Permissible;

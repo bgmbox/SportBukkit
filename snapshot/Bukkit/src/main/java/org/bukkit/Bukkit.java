@@ -576,6 +576,10 @@ public final class Bukkit {
         return server.getWorld(name);
     }
 
+    public static World world(UUID uid) {
+        return server.world(uid);
+    }
+
     /**
      * Gets the world from the given Unique ID.
      *
@@ -584,10 +588,6 @@ public final class Bukkit {
      */
     public static World getWorld(UUID uid) {
         return server.getWorld(uid);
-    }
-
-    public static World world(UUID uid) {
-        return server.world(uid);
     }
 
     /**
@@ -866,7 +866,7 @@ public final class Bukkit {
      * @param type the type of list to fetch, cannot be null
      * @return a ban list of the specified type
      */
-    public static BanList getBanList(BanList.Type type){
+    public static BanList getBanList(BanList.Type type) {
         return server.getBanList(type);
     }
 
@@ -1202,12 +1202,12 @@ public final class Bukkit {
 
     /**
      * Create a ChunkData for use in a generator.
-     *
+     * 
      * See {@link ChunkGenerator#generateChunkData(org.bukkit.World, java.util.Random, int, int, org.bukkit.generator.ChunkGenerator.BiomeGrid)}
-     *
+     * 
      * @param world the world to create the ChunkData for
      * @return a new ChunkData for the world
-     *
+     * 
      */
     public static ChunkGenerator.ChunkData createChunkData(World world) {
         return server.createChunkData(world);
@@ -1293,6 +1293,7 @@ public final class Bukkit {
     }
 
     public static BlockFactory blocks() { return runtime().blocks(); }
+
     public static VectorFactory vectors() { return runtime().vectors(); }
 
     public static PotionBrewRegistry potionRegistry() {

@@ -1,11 +1,11 @@
-From 60fce55a468c19d672de9655d2cb5142e8301d59 Mon Sep 17 00:00:00 2001
+From 32e683e8f33c98c9a97901603df6eb76cf76ff00 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 00:25:37 -0500
 Subject: [PATCH] Reduce ItemStack copying
 
 
 diff --git a/src/main/java/org/bukkit/inventory/CraftingInventory.java b/src/main/java/org/bukkit/inventory/CraftingInventory.java
-index f71533c7..2ad43bb4 100644
+index 106367e7..d2d71dbf 100644
 --- a/src/main/java/org/bukkit/inventory/CraftingInventory.java
 +++ b/src/main/java/org/bukkit/inventory/CraftingInventory.java
 @@ -1,5 +1,8 @@

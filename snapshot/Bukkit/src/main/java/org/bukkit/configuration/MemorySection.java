@@ -187,7 +187,7 @@ public class MemorySection extends AbstractConfigurationSection implements Confi
             ConfigurationSection subSection = section.getConfigurationSection(node);
             if (subSection == null) {
                 if (value == null) {
-                	// no need to create missing sub-sections if we want to remove the value:
+                    // no need to create missing sub-sections if we want to remove the value:
                     return;
                 }
                 section = section.createSection(node);

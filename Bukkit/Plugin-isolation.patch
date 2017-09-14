@@ -1,4 +1,4 @@
-From 7119c6d4db89ad2e51f10acaf42f8c12554c5d14 Mon Sep 17 00:00:00 2001
+From c5772af29539187b82726dd3401f11fc67de1e55 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 29 May 2015 01:08:37 -0400
 Subject: [PATCH] Plugin isolation
@@ -136,7 +136,7 @@ index e5ddef25..9cd15f43 100644
  
      /**
 diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
-index d4861714..3ae9399e 100644
+index 4cdaac45..09198aec 100644
 --- a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 +++ b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 @@ -221,6 +221,7 @@ public final class PluginDescriptionFile {
@@ -171,7 +171,7 @@ index d4861714..3ae9399e 100644
  
      private static List<String> makePluginNameList(final Map<?, ?> map, final String key) throws InvalidDescriptionException {
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index d1da6e10..5772c475 100644
+index 0b3cc9e6..8f87bd61 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -23,6 +23,7 @@ import org.bukkit.Server;
@@ -183,7 +183,7 @@ index d1da6e10..5772c475 100644
  import org.bukkit.event.EventPriority;
  import org.bukkit.event.HandlerList;
 @@ -458,6 +459,12 @@ public final class SimplePluginManager implements PluginManager {
-             } catch(Throwable ex) {
+             } catch (Throwable ex) {
                  server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering plugin channels for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
 +
@@ -196,7 +196,7 @@ index d1da6e10..5772c475 100644
      }
  
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-index 885f8ae8..c6ca9de3 100644
+index 885f8ae8..5fbfc39b 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 @@ -6,18 +6,18 @@ import java.io.IOException;
@@ -236,7 +236,7 @@ index 885f8ae8..c6ca9de3 100644
  
      /**
       * This class was not meant to be constructed explicitly
-@@ -114,26 +115,52 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -114,26 +115,51 @@ public final class JavaPluginLoader implements PluginLoader {
              ));
          }
  
@@ -266,7 +266,6 @@ index 885f8ae8..c6ca9de3 100644
 +            loaderLock.readLock().unlock();
          }
  
-+
          final PluginClassLoader loader;
          try {
 -            loader = new PluginClassLoader(this, getClass().getClassLoader(), description, dataFolder, file);
@@ -298,7 +297,7 @@ index 885f8ae8..c6ca9de3 100644
      }
  
      public PluginDescriptionFile getPluginDescription(File file) throws InvalidDescriptionException {
-@@ -178,49 +205,6 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -178,49 +204,6 @@ public final class JavaPluginLoader implements PluginLoader {
          return fileFilters.clone();
      }
  
@@ -348,13 +347,12 @@ index 885f8ae8..c6ca9de3 100644
      public Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener listener, final Plugin plugin) {
          Validate.notNull(plugin, "Plugin can not be null");
          Validate.notNull(listener, "Listener can not be null");
-@@ -318,11 +302,16 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -318,11 +301,15 @@ public final class JavaPluginLoader implements PluginLoader {
  
              JavaPlugin jPlugin = (JavaPlugin) plugin;
  
 -            PluginClassLoader pluginLoader = (PluginClassLoader) jPlugin.getClassLoader();
 +            String pluginName = jPlugin.getDescription().getName();
-+
  
 -            if (!loaders.contains(pluginLoader)) {
 -                loaders.add(pluginLoader);
@@ -369,7 +367,7 @@ index 885f8ae8..c6ca9de3 100644
              }
  
              try {
-@@ -355,14 +344,21 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -355,14 +342,21 @@ public final class JavaPluginLoader implements PluginLoader {
                  server.getLogger().log(Level.SEVERE, "Error occurred while disabling " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
  
@@ -399,10 +397,10 @@ index 885f8ae8..c6ca9de3 100644
              }
          }
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index 13f86338..276052b6 100644
+index 13f86338..c651c429 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-@@ -5,9 +5,15 @@ import java.net.MalformedURLException;
+@@ -5,9 +5,16 @@ import java.net.MalformedURLException;
  import java.net.URL;
  import java.net.URLClassLoader;
  import java.util.HashMap;
@@ -415,10 +413,11 @@ index 13f86338..276052b6 100644
 +import com.google.common.hash.Hashing;
 +import com.google.common.hash.HashingInputStream;
 +import com.google.common.io.ByteStreams;
++import com.google.inject.Module;
  import org.apache.commons.lang.Validate;
  import org.bukkit.plugin.InvalidPluginException;
  import org.bukkit.plugin.PluginDescriptionFile;
-@@ -16,28 +22,39 @@ import org.bukkit.plugin.PluginDescriptionFile;
+@@ -16,40 +23,54 @@ import org.bukkit.plugin.PluginDescriptionFile;
   * A ClassLoader for plugins, to allow shared classes across multiple plugins
   */
  final class PluginClassLoader extends URLClassLoader {
@@ -468,15 +467,28 @@ index 13f86338..276052b6 100644
              } catch (ClassNotFoundException ex) {
                  throw new InvalidPluginException("Cannot find main class `" + description.getMain() + "'", ex);
              }
-@@ -50,6 +67,7 @@ final class PluginClassLoader extends URLClassLoader {
+ 
+-            Class<? extends JavaPlugin> pluginClass;
+-            try {
+-                pluginClass = jarClass.asSubclass(JavaPlugin.class);
+-            } catch (ClassCastException ex) {
+-                throw new InvalidPluginException("main class `" + description.getMain() + "' does not extend JavaPlugin", ex);
++            if(JavaPlugin.class.isAssignableFrom(jarClass)) {
++                plugin = jarClass.asSubclass(JavaPlugin.class).newInstance();
++            } else if(Module.class.isAssignableFrom(jarClass)) {
++                plugin = new ModularPlugin(jarClass.asSubclass(Module.class).newInstance());
++            } else {
++                throw new InvalidPluginException("main class `" + jarClass.getName() +
++                        "' must extend either " + JavaPlugin.class.getName() +
++                        " or " + Module.class.getName());
              }
  
-             plugin = pluginClass.newInstance();
+-            plugin = pluginClass.newInstance();
 +            return plugin;
          } catch (IllegalAccessException ex) {
              throw new InvalidPluginException("No public constructor", ex);
          } catch (InstantiationException ex) {
-@@ -57,50 +75,134 @@ final class PluginClassLoader extends URLClassLoader {
+@@ -57,50 +78,133 @@ final class PluginClassLoader extends URLClassLoader {
          }
      }
  
@@ -576,9 +588,10 @@ index 13f86338..276052b6 100644
 +                resolveClass(cls);
 +            }
 +            return cls;
-+        }
+         }
 +    }
-+
+ 
+-        return result;
 +    /**
 +     * Load a class from the first non-isolated plugin that provides it (including this plugin), in loading order.
 +     */
@@ -594,9 +607,8 @@ index 13f86338..276052b6 100644
 +            }
 +        } finally {
 +            pluginLoader.loaderLock.readLock().unlock();
-         }
- 
--        return result;
++        }
++
 +        throw new ClassNotFoundException(name);
      }
  
@@ -620,7 +632,7 @@ index 13f86338..276052b6 100644
  
      synchronized void initialize(JavaPlugin javaPlugin) {
          Validate.notNull(javaPlugin, "Initializing plugin cannot be null");
-         Validate.isTrue(javaPlugin.getClass().getClassLoader() == this, "Cannot initialize plugin outside of this class loader");
+-        Validate.isTrue(javaPlugin.getClass().getClassLoader() == this, "Cannot initialize plugin outside of this class loader");
 -        if (this.plugin != null || this.pluginInit != null) {
 -            throw new IllegalArgumentException("Plugin already initialized!", pluginState);
 -        }
@@ -634,4 +646,6 @@ index 13f86338..276052b6 100644
 -        javaPlugin.init(loader, loader.server, description, dataFolder, file, this);
 +        javaPlugin.init(pluginLoader, pluginLoader.server, description, dataFolder, file, this);
      }
- }
+-}
++}
+\ No newline at end of file

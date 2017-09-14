@@ -1,11 +1,11 @@
-From 431548b89c0e1c063bba3f195dc826e034dfd5dc Mon Sep 17 00:00:00 2001
+From 8d791244e4a12a26bf5df8236cfca10062e51158 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 22:09:17 -0400
 Subject: [PATCH] Velocity API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index b81e6d73..a9e828da 100644
+index 388f354d..b2a1806e 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1363,13 +1363,41 @@ public abstract class Entity implements ICommandListener {
@@ -179,7 +179,7 @@ index f4d4e15d..b2ca4350 100644
      public float getHeadRotation() {
          return this.aP;
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 20f9af94..69628076 100644
+index 5b1e4149..4d17d99f 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -5,8 +5,10 @@ import com.mojang.authlib.GameProfile;
@@ -512,10 +512,10 @@ index a13089f9..b24e84ff 100644
          }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index edf479b1..79d075c9 100644
+index 1c714eed..8e27e688 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -600,6 +600,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -610,6 +610,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
      @Override

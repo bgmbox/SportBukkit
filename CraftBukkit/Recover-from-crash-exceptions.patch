@@ -1,4 +1,4 @@
-From 617cad23d9833a494457099afa3ac764698ca376 Mon Sep 17 00:00:00 2001
+From 86b02d5b6d1f463c846918870b770bb7ea324ec1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 02:26:14 -0500
 Subject: [PATCH] Recover from crash exceptions
@@ -38,7 +38,7 @@ index c4060cf6..1c862a82 100644
          return this.d;
      }
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 5ee7a4cb..b97160ef 100644
+index b310fc02..bcfb7540 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;

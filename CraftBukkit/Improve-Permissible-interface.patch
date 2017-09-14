@@ -1,4 +1,4 @@
-From a96f1a22d2489e8ab94966dd6c2101b5450ef6f0 Mon Sep 17 00:00:00 2001
+From 77e1980c0d92109ada1f41d51e907b9359d34456 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 28 May 2015 04:31:39 -0400
 Subject: [PATCH] Improve Permissible interface
@@ -243,7 +243,7 @@ index bc5598af..e7242099 100644
          return getPermissibleBase().isOp();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 25e1e5a3..44f7f3ba 100644
+index 90df0ae1..792d10ad 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -1,6 +1,8 @@

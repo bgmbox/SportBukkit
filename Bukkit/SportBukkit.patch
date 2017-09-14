@@ -1,4 +1,4 @@
-From bbf0c25a937614b0ad8b10e649c1055d9a859f98 Mon Sep 17 00:00:00 2001
+From 4381f02994a5431e699ead1a3f218c0e8864fb6b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:05 -0500
 Subject: [PATCH] SportBukkit
@@ -30,7 +30,7 @@ index 3a481844..4038513e 100644
      /**
       * Checks if this player is currently online
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 15a84566..a95c0fa7 100644
+index fcfb1299..8222720a 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -660,6 +660,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
@@ -83,7 +83,7 @@ index 343f238f..ef43a393 100644
      public HandlerList getHandlers() {
          return handlers;
 diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
-index 773868ff..4f55cb2f 100644
+index 545dbffe..53c316c7 100644
 --- a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 +++ b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 @@ -24,6 +24,7 @@ import org.yaml.snakeyaml.nodes.Tag;

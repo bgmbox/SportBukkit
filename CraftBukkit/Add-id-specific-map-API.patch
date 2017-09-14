@@ -1,4 +1,4 @@
-From 3ea4c1494924348059be3675227cf54e03c4e3e8 Mon Sep 17 00:00:00 2001
+From 55480a7e51c152fd4b7dff8fca03d2c25097b4fc Mon Sep 17 00:00:00 2001
 From: Pablete1234 <pabloherrerapalacio@gmail.com>
 Date: Mon, 9 Jan 2017 20:51:49 +0100
 Subject: [PATCH] Add id specific map API
@@ -30,10 +30,10 @@ index db44c1c9..ae59dfe7 100644
              worldmap.scale = 3;
              worldmap.a((double) world.getWorldData().b(), (double) world.getWorldData().d(), worldmap.scale);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index ecb6140e..c587809a 100644
+index c4432f7b..2f4ab3a0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1367,6 +1367,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1379,6 +1379,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
      @Override

@@ -56,7 +56,7 @@ public class TestServer implements InvocationHandler {
                             return logger;
                         }
                     }
-                );
+            );
             methodMap.put(
                     Server.class.getMethod("getName"),
                     new MethodHandler() {

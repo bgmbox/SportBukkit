@@ -1,4 +1,4 @@
-From 96e6b3353ded0cdf5e134e4e1e2dbb1a7036324d Mon Sep 17 00:00:00 2001
+From a0c94a28e507faf0d6eae2d65383ddac44ec4bd9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 2 Dec 2016 01:48:56 -0500
 Subject: [PATCH] New event API
@@ -27,22 +27,16 @@ index afdb5ab8..7251cddf 100644
          // CraftBukkit end
  
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
-index 16e16341..8eec729c 100644
+index 4afc3622..8eec729c 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
-@@ -1,9 +1,10 @@
+@@ -1,5 +1,6 @@
  package org.bukkit;
  
 +import com.google.inject.Injector;
  import net.minecraft.server.DispenserRegistry;
  import org.bukkit.craftbukkit.CraftVectorFactory;
--+import org.bukkit.block.BlockFactory;
--+import org.bukkit.craftbukkit.block.CraftBlockFactory;
-+import org.bukkit.block.BlockFactory;
-+import org.bukkit.craftbukkit.block.CraftBlockFactory;
- import org.bukkit.craftbukkit.inventory.CraftItemFactory;
- import org.bukkit.craftbukkit.potion.CraftPotionBrewRegistry;
- import org.bukkit.craftbukkit.potion.CraftPotionEffectRegistry;
+ import org.bukkit.block.BlockFactory;
 @@ -13,6 +14,8 @@ import org.bukkit.potion.PotionBrewRegistry;
  import org.bukkit.potion.PotionEffectRegistry;
  import org.bukkit.registry.Key;
@@ -77,7 +71,7 @@ index 16e16341..8eec729c 100644
          return CraftKey.get(prefix, id);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b77778f3..30d108fb 100644
+index 53189c32..2161c334 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -24,6 +24,8 @@ import java.util.regex.Pattern;
@@ -97,7 +91,15 @@ index b77778f3..30d108fb 100644
  import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
  import org.bukkit.craftbukkit.entity.CraftPlayer;
  import org.bukkit.craftbukkit.generator.CraftChunkData;
-@@ -73,6 +76,8 @@ import org.bukkit.craftbukkit.util.Versioning;
+@@ -66,6 +69,7 @@ import org.bukkit.craftbukkit.metadata.WorldMetadataStore;
+ import org.bukkit.craftbukkit.potion.CraftPotionBrewer;
+ import org.bukkit.craftbukkit.scheduler.CraftScheduler;
+ import org.bukkit.craftbukkit.scoreboard.CraftScoreboardManager;
++import org.bukkit.craftbukkit.util.CaseInsensitiveNameMap;
+ import org.bukkit.craftbukkit.util.CraftIconCache;
+ import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+ import org.bukkit.craftbukkit.util.DatFileFilter;
+@@ -73,6 +77,8 @@ import org.bukkit.craftbukkit.util.Versioning;
  import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
  import org.bukkit.entity.Entity;
  import org.bukkit.entity.Player;
@@ -106,7 +108,7 @@ index b77778f3..30d108fb 100644
  import org.bukkit.event.inventory.InventoryType;
  import org.bukkit.event.player.PlayerChatTabCompleteEvent;
  import org.bukkit.event.server.BroadcastMessageEvent;
-@@ -131,9 +136,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -131,9 +137,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      private final SimpleHelpMap helpMap = new SimpleHelpMap(this);
      private final StandardMessenger messenger = new StandardMessenger();
      private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap);
@@ -120,7 +122,7 @@ index b77778f3..30d108fb 100644
      private YamlConfiguration configuration;
      private YamlConfiguration commandsConfiguration;
      private final Yaml yaml = new Yaml(new SafeConstructor());
-@@ -149,6 +158,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -149,6 +159,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      public int chunkGCLoadThresh = 0;
      private File container;
      private WarningState warningState = WarningState.DEFAULT;
@@ -128,7 +130,7 @@ index b77778f3..30d108fb 100644
      private final BooleanWrapper online = new BooleanWrapper();
      public CraftScoreboardManager scoreboardManager;
      public boolean playerCommandState;
-@@ -158,6 +168,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -159,6 +170,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      private final Pattern validUserPattern = Pattern.compile("^[a-zA-Z0-9_]{2,16}$");
      private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8));
      private final List<CraftPlayer> playerView;
@@ -136,7 +138,7 @@ index b77778f3..30d108fb 100644
      public int reloadCount;
      public boolean bungee = false;
      public static final com.google.gson.Gson gson = new com.google.gson.Gson();
-@@ -173,13 +184,10 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -174,13 +186,10 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
      public CraftServer(MinecraftServer console, PlayerList playerList) {
          this.console = console;
@@ -153,16 +155,16 @@ index b77778f3..30d108fb 100644
          this.serverVersion = CraftServer.class.getPackage().getImplementationVersion();
          online.value = console.getPropertyManager().getBoolean("online-mode", true);
  
-@@ -236,7 +244,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-         saveCommandsConfig();
+@@ -238,7 +247,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
          bungee = configuration.getBoolean("settings.bungeecord");
          overrideAllCommandBlockCommands = commandsConfiguration.getStringList("command-block-overrides").contains("*");
+         unrestrictedAdvancements = commandsConfiguration.getBoolean("unrestricted-advancements");
 -        pluginManager.useTimings(configuration.getBoolean("settings.plugin-profiling"));
 +        pluginProfiling = configuration.getBoolean("settings.plugin-profiling");
          monsterSpawn = configuration.getInt("spawn-limits.monsters");
          animalSpawn = configuration.getInt("spawn-limits.animals");
          waterAnimalSpawn = configuration.getInt("spawn-limits.water-animals");
-@@ -384,6 +392,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -394,6 +403,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
      @Override
@@ -174,7 +176,7 @@ index b77778f3..30d108fb 100644
      @Deprecated
      public Player getPlayer(final String name, final CommandSender viewer) {
          Validate.notNull(name, "Name cannot be null");
-@@ -630,10 +643,25 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -640,10 +654,26 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
      @Override
@@ -197,10 +199,11 @@ index b77778f3..30d108fb 100644
 +        return worldsByIdView;
 +    }
 +
++
      public DedicatedPlayerList getHandle() {
          return playerList;
      }
-@@ -1034,6 +1062,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1044,6 +1074,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
              }
          }
  
@@ -208,7 +211,7 @@ index b77778f3..30d108fb 100644
          worlds.remove(world.getName().toLowerCase(java.util.Locale.ENGLISH));
          console.worlds.remove(console.worlds.indexOf(handle));
  
-@@ -1095,6 +1124,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1105,6 +1136,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
              System.out.println("World " + world.getName() + " is a duplicate of another world and has been prevented from loading. Please delete the uid.dat file from " + world.getName() + "'s world directory if you want to be able to load the duplicate world.");
              return;
          }
@@ -216,7 +219,7 @@ index b77778f3..30d108fb 100644
          worlds.put(world.getName().toLowerCase(java.util.Locale.ENGLISH), world);
      }
  
-@@ -1478,6 +1508,9 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1488,6 +1520,9 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
      @Override
      public ConsoleCommandSender getConsoleSender() {
@@ -226,7 +229,7 @@ index b77778f3..30d108fb 100644
          return console.console;
      }
  
-@@ -1623,6 +1656,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1633,6 +1668,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
          return warningState;
      }
  
@@ -239,7 +242,7 @@ index b77778f3..30d108fb 100644
          if (!(sender instanceof EntityPlayer)) {
              return ImmutableList.of();
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 893ea461..98cb45f4 100644
+index bb9673c5..738d58d9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -11,12 +11,17 @@ import java.util.TimeZone;

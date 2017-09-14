@@ -1,4 +1,4 @@
-From 5e736f189d3b4d57995c8e427499e0102115932e Mon Sep 17 00:00:00 2001
+From 11e412e91ccd51ba280ee62e6fb2912f3a70238b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 15:16:32 -0500
 Subject: [PATCH] Add missing ItemMeta clone overrides
@@ -21,12 +21,12 @@ index aa1a210a..bdf8a2e7 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java
-index 03d0f5c3..4d862173 100644
+index fe874e0d..8a46dab5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java
-@@ -499,4 +499,13 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
-         blockEntityTag = new NBTTagCompound();
-         te.save(blockEntityTag);
+@@ -495,4 +495,13 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
+ 
+         blockEntityTag = ((CraftBlockEntityState) blockState).getSnapshotNBT();
      }
 +
 +    @Override

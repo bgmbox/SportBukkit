@@ -1,11 +1,11 @@
-From 43145bf744c558fccbcf2d24eca0e60cdbe49b95 Mon Sep 17 00:00:00 2001
+From eb8210f790db4a8b04359386634effc87052d8bb Mon Sep 17 00:00:00 2001
 From: Thinkofdeath <purgames@gmail.com>
 Date: Sun, 17 Mar 2013 22:56:14 +0000
 Subject: [PATCH] Allow playEffect to spawn particles
 
 
 diff --git a/src/main/java/org/bukkit/Effect.java b/src/main/java/org/bukkit/Effect.java
-index ba7dc495..d9cb0ca7 100644
+index 21f7db58..d9cb0ca7 100644
 --- a/src/main/java/org/bukkit/Effect.java
 +++ b/src/main/java/org/bukkit/Effect.java
 @@ -5,6 +5,7 @@ import java.util.Map;
@@ -16,7 +16,7 @@ index ba7dc495..d9cb0ca7 100644
  import org.bukkit.potion.Potion;
  
  /**
-@@ -196,23 +197,173 @@ public enum Effect {
+@@ -196,12 +197,147 @@ public enum Effect {
       * The sound of an enderdragon growling
       */
      ENDERDRAGON_GROWL(3001, Type.SOUND),
@@ -164,11 +164,8 @@ index ba7dc495..d9cb0ca7 100644
 +    private final String particleName;
  
      Effect(int id, Type type) {
--        this(id,type,null);
-+        this(id, type, null);
-     }
- 
-     Effect(int id, Type type, Class<?> data) {
+         this(id, type, null);
+@@ -211,8 +347,23 @@ public enum Effect {
          this.id = id;
          this.type = type;
          this.data = data;

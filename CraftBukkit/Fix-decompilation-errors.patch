@@ -1,32 +1,9 @@
-From 495c4b78f1ec15fb49d2bab789db1c29a8d031cb Mon Sep 17 00:00:00 2001
+From a9ee56ed7797d7cf346ff8ffcd080cc3dc5bbe99 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 1 Mar 2016 05:48:53 -0500
 Subject: [PATCH] Fix decompilation errors
 
 
-diff --git a/src/main/java/net/minecraft/server/EntityZombieVillager.java b/src/main/java/net/minecraft/server/EntityZombieVillager.java
-index bcbd3691..42ce3e74 100644
---- a/src/main/java/net/minecraft/server/EntityZombieVillager.java
-+++ b/src/main/java/net/minecraft/server/EntityZombieVillager.java
-@@ -178,15 +178,15 @@ public class EntityZombieVillager extends EntityZombie {
-     }
- 
-     public SoundEffect d(DamageSource damagesource) {
--        return SoundEffects.jB;
-+        return SoundEffects.jy;
-     }
- 
-     public SoundEffect cf() {
--        return SoundEffects.jA;
-+        return SoundEffects.jx;
-     }
- 
-     public SoundEffect dm() {
--        return SoundEffects.jC;
-+        return SoundEffects.jz;
-     }
- 
-     @Nullable
 diff --git a/src/main/java/net/minecraft/server/EnumProtocol.java b/src/main/java/net/minecraft/server/EnumProtocol.java
 index 19bfe57e..3c93c98b 100644
 --- a/src/main/java/net/minecraft/server/EnumProtocol.java
@@ -55,7 +32,7 @@ index 737035bf..5886e4ce 100644
 +    SportBukkit */
  }
 diff --git a/src/main/java/net/minecraft/server/Item.java b/src/main/java/net/minecraft/server/Item.java
-index aa1afe1a..78bc3a1f 100644
+index deda40e8..97dc673c 100644
 --- a/src/main/java/net/minecraft/server/Item.java
 +++ b/src/main/java/net/minecraft/server/Item.java
 @@ -33,7 +33,7 @@ public class Item {
@@ -185,18 +162,18 @@ index a6da6f5c..c81822d6 100644
      }
  }
 diff --git a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java b/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
-index 7c9389aa..56b386c3 100644
+index c67cb54a..458b4da6 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
 @@ -17,7 +17,7 @@ public class PacketPlayInUseEntity implements Packet<PacketListenerPlayIn> {
-         this.action = EnumEntityUseAction.ATTACK;
+         this.action = PacketPlayInUseEntity.EnumEntityUseAction.ATTACK;
      }
  
 -    public void a(PacketDataSerializer packetdataserializer) throws IOException {
 +    public void a(PacketDataSerializer packetdataserializer) { // SportBukkit - remove throws
          this.a = packetdataserializer.g();
-         this.action = (EnumEntityUseAction) packetdataserializer.a(EnumEntityUseAction.class);
-         if (this.action == EnumEntityUseAction.INTERACT_AT) {
+         this.action = (PacketPlayInUseEntity.EnumEntityUseAction) packetdataserializer.a(PacketPlayInUseEntity.EnumEntityUseAction.class);
+         if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
 @@ -30,7 +30,7 @@ public class PacketPlayInUseEntity implements Packet<PacketListenerPlayIn> {
  
      }
@@ -205,7 +182,7 @@ index 7c9389aa..56b386c3 100644
 +    public void b(PacketDataSerializer packetdataserializer) { // SportBukkit - remove throws
          packetdataserializer.d(this.a);
          packetdataserializer.a((Enum) this.action);
-         if (this.action == EnumEntityUseAction.INTERACT_AT) {
+         if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java b/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
 index 736015cf..030f02fd 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
@@ -233,14 +210,14 @@ index 6c863414..c0d0ba5f 100644
          this.e = entityliving.locY;
          this.f = entityliving.locZ;
 diff --git a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java b/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
-index df9b08be..8245cb53 100644
+index 3926495e..8245cb53 100644
 --- a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
 +++ b/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
 @@ -6,7 +6,7 @@ import java.io.IOException;
  
  public class PacketStatusOutServerInfo implements Packet<PacketStatusOutListener> {
  
--    private static final Gson a = (new GsonBuilder()).registerTypeAdapter(ServerPing.ServerData.class, new ServerPing.ServerData.ServerData$Serializer()).registerTypeAdapter(ServerPing.ServerPingPlayerSample.class, new ServerPing.ServerPingPlayerSample.ServerPingPlayerSample$Serializer()).registerTypeAdapter(ServerPing.class, new ServerPing.Serializer()).registerTypeHierarchyAdapter(IChatBaseComponent.class, new IChatBaseComponent.ChatSerializer()).registerTypeHierarchyAdapter(ChatModifier.class, new ChatModifier.ChatModifierSerializer()).registerTypeAdapterFactory(new ChatTypeAdapterFactory()).create();
+-    private static final Gson a = (new GsonBuilder()).registerTypeAdapter(ServerPing.ServerData.class, new ServerPing.ServerData.Serializer()).registerTypeAdapter(ServerPing.ServerPingPlayerSample.class, new ServerPing.ServerPingPlayerSample.Serializer()).registerTypeAdapter(ServerPing.class, new ServerPing.Serializer()).registerTypeHierarchyAdapter(IChatBaseComponent.class, new IChatBaseComponent.ChatSerializer()).registerTypeHierarchyAdapter(ChatModifier.class, new ChatModifier.ChatModifierSerializer()).registerTypeAdapterFactory(new ChatTypeAdapterFactory()).create();
 +    private static final Gson a = (new GsonBuilder()).registerTypeAdapter(ServerPing.ServerData.class, new ServerPing.Serializer()).registerTypeAdapter(ServerPing.ServerPingPlayerSample.class, new ServerPing.Serializer()).registerTypeAdapter(ServerPing.class, new ServerPing.Serializer()).registerTypeHierarchyAdapter(IChatBaseComponent.class, new IChatBaseComponent.ChatSerializer()).registerTypeHierarchyAdapter(ChatModifier.class, new ChatModifier.ChatModifierSerializer()).registerTypeAdapterFactory(new ChatTypeAdapterFactory()).create();
      private ServerPing b;
  

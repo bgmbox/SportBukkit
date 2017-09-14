@@ -1,11 +1,11 @@
-From 75fb538c1a21145b51d493fc7aab86790eb0a7a5 Mon Sep 17 00:00:00 2001
+From 47add2d0c44502c392e37ba0fc43c66a4da00832 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:08:23 -0500
 Subject: [PATCH] Modernize potion API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index a5339cb2..59b1de6c 100644
+index 0b162c65..de1fe566 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -37,6 +37,8 @@ import org.bukkit.permissions.Permissible;

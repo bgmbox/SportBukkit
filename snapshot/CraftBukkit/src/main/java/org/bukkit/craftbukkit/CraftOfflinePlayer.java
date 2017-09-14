@@ -213,6 +213,12 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
         return new File(storage.getPlayerDir(), getUniqueId() + ".dat");
     }
 
+    @Override
+    public Optional<Instant> lastPlayedAt() {
+        final long milli = getLastPlayed();
+        return milli == 0 ? Optional.empty() : Optional.of(Instant.ofEpochMilli(milli));
+    }
+
     public long getFirstPlayed() {
         Player player = getPlayer();
         if (player != null) return player.getFirstPlayed();
@@ -229,12 +235,6 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
         } else {
             return 0;
         }
-    }
-
-    @Override
-    public Optional<Instant> lastPlayedAt() {
-        final long milli = getLastPlayed();
-        return milli == 0 ? Optional.empty() : Optional.of(Instant.ofEpochMilli(milli));
     }
 
     public long getLastPlayed() {

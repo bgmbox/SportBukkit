@@ -1,4 +1,4 @@
-From 016f08e150a5204fa40dfa85ffa3817162cb2548 Mon Sep 17 00:00:00 2001
+From 2d8d2b1597991330a95d8b8509130ab3990873a2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:13:07 -0400
 Subject: [PATCH] Attack cooldown info API
@@ -31,7 +31,7 @@ index f5ad9a1a..207679b0 100644
      public float aG;
      public float aH;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 0d8488d9..762e1008 100644
+index ed294a3b..cce1fea1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -522,6 +522,17 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {

@@ -1,4 +1,4 @@
-From 9b4c247f3fd62601d28d3345bf729a64e54204ea Mon Sep 17 00:00:00 2001
+From 86fa32a7bc15c2f39ccab6af95d0bc8174afc64c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 05:56:05 -0500
 Subject: [PATCH] Expose various entity packets
@@ -28,10 +28,10 @@ index 76a558eb..f482a2a2 100644
  
      public PacketPlayOutEntityTeleport(Entity entity) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutMount.java b/src/main/java/net/minecraft/server/PacketPlayOutMount.java
-index 06d8960d..e8f1b382 100644
+index 45e82eb0..e8f1b382 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutMount.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutMount.java
-@@ -8,11 +8,18 @@ public class PacketPlayOutMount implements Packet<PacketListenerPlayOut> {
+@@ -8,6 +8,13 @@ public class PacketPlayOutMount implements Packet<PacketListenerPlayOut> {
      private int a;
      private int[] b;
  
@@ -45,12 +45,6 @@ index 06d8960d..e8f1b382 100644
      public PacketPlayOutMount() {}
  
      public PacketPlayOutMount(Entity entity) {
-         this.a = entity.getId();
--        List list = entity.bD();
-+        List list = entity.bF();
- 
-         this.b = new int[list.size()];
- 
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java b/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
 index 072c2ba6..5b032dfd 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java

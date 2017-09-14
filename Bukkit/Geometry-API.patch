@@ -1,11 +1,11 @@
-From f921fba079359fef331e9e0060f8b9bebcf434de Mon Sep 17 00:00:00 2001
+From aeea16cbfc0cd570f441f351b84ea4ee0a5c8600 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 18 Nov 2016 04:34:11 -0500
 Subject: [PATCH] Geometry API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 59b1de6c..2c7c0bbc 100644
+index de1fe566..b4aca63a 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -26,6 +26,7 @@ import org.bukkit.entity.Entity;
@@ -16,17 +16,8 @@ index 59b1de6c..2c7c0bbc 100644
  import org.bukkit.help.HelpMap;
  import org.bukkit.inventory.Inventory;
  import org.bukkit.inventory.InventoryHolder;
-@@ -220,7 +221,7 @@ public final class Bukkit {
-     public static String getServerId() {
-         return server.getServerId();
-     }
--    
-+
-     /**
-      * Get world type (level-type setting) for default world.
-      *
-@@ -571,6 +572,10 @@ public final class Bukkit {
-         return server.getWorld(uid);
+@@ -561,6 +562,10 @@ public final class Bukkit {
+         return server.getWorld(name);
      }
  
 +    public static World world(UUID uid) {
@@ -34,51 +25,8 @@ index 59b1de6c..2c7c0bbc 100644
 +    }
 +
      /**
-      * Gets the map from the given item ID.
+      * Gets the world from the given Unique ID.
       *
-@@ -633,7 +638,7 @@ public final class Bukkit {
-     public static void savePlayers() {
-         server.savePlayers();
-     }
--    
-+
-     /**
-      * Dispatches a command on this server, and executes it if found.
-      *
-@@ -692,7 +697,7 @@ public final class Bukkit {
-     public static void resetRecipes() {
-         server.resetRecipes();
-     }
--    
-+
-     /**
-      * Gets a list of command aliases defined in the server properties.
-      *
-@@ -1028,7 +1033,7 @@ public final class Bukkit {
-     public static int getWaterAnimalSpawnLimit() {
-         return server.getWaterAnimalSpawnLimit();
-     }
--    
-+
-     /**
-      * Gets user-specified limit for number of ambient mobs that can spawn in
-      * a chunk.
-@@ -1179,12 +1184,12 @@ public final class Bukkit {
- 
-     /**
-      * Create a ChunkData for use in a generator.
--     * 
-+     *
-      * See {@link ChunkGenerator#generateChunkData(org.bukkit.World, java.util.Random, int, int, org.bukkit.generator.ChunkGenerator.BiomeGrid)}
--     * 
-+     *
-      * @param world the world to create the ChunkData for
-      * @return a new ChunkData for the world
--     * 
-+     *
-      */
-     public static ChunkGenerator.ChunkData createChunkData(World world) {
-         return server.createChunkData(world);
 @@ -1269,6 +1274,8 @@ public final class Bukkit {
          return runtime().key(id);
      }
@@ -109,7 +57,7 @@ index b452cd30..9e083daa 100644
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/Location.java b/src/main/java/org/bukkit/Location.java
-index 3896c63e..8754c322 100644
+index 3896c63e..9ac548da 100644
 --- a/src/main/java/org/bukkit/Location.java
 +++ b/src/main/java/org/bukkit/Location.java
 @@ -2,28 +2,64 @@ package org.bukkit;
@@ -643,8 +591,15 @@ index 3896c63e..8754c322 100644
  
          data.put("yaw", this.yaw);
          data.put("pitch", this.pitch);
+@@ -614,4 +663,4 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
+ 
+         return new Location(world, NumberConversions.toDouble(args.get("x")), NumberConversions.toDouble(args.get("y")), NumberConversions.toDouble(args.get("z")), NumberConversions.toFloat(args.get("yaw")), NumberConversions.toFloat(args.get("pitch")));
+     }
+-}
++}
+\ No newline at end of file
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 48d7d4e0..616a8a10 100644
+index 48d7d4e0..e443dddb 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -466,6 +466,8 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
@@ -656,24 +611,8 @@ index 48d7d4e0..616a8a10 100644
      /**
       * Gets the map from the given item ID.
       *
-@@ -960,12 +962,12 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
- 
-     /**
-      * Create a ChunkData for use in a generator.
--     * 
-+     *
-      * See {@link ChunkGenerator#generateChunkData(org.bukkit.World, java.util.Random, int, int, org.bukkit.generator.ChunkGenerator.BiomeGrid)}
--     * 
-+     *
-      * @param world the world to create the ChunkData for
-      * @return a new ChunkData for the world
--     * 
-+     *
-      */
-     public ChunkGenerator.ChunkData createChunkData(World world);
- 
 diff --git a/src/main/java/org/bukkit/block/BlockFace.java b/src/main/java/org/bukkit/block/BlockFace.java
-index 58fb195d..bc80cfc7 100644
+index 58fb195d..4de21d23 100644
 --- a/src/main/java/org/bukkit/block/BlockFace.java
 +++ b/src/main/java/org/bukkit/block/BlockFace.java
 @@ -1,43 +1,79 @@
@@ -917,6 +856,7 @@ index 58fb195d..bc80cfc7 100644
  
          return BlockFace.SELF;
      }
+-}
 +
 +    private static final List<BlockFace> HORIZONTAL;
 +
@@ -1067,7 +1007,8 @@ index 58fb195d..bc80cfc7 100644
 +    public Vec3 coarseZero() {
 +        return direction.coarseZero();
 +    }
- }
++}
+\ No newline at end of file
 diff --git a/src/main/java/org/bukkit/geometry/Axis.java b/src/main/java/org/bukkit/geometry/Axis.java
 new file mode 100644
 index 00000000..d0122e61

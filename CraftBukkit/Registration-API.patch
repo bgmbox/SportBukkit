@@ -1,4 +1,4 @@
-From 0b5366e2e3400c24eb7b9f4ddd8253d59f9bafab Mon Sep 17 00:00:00 2001
+From 156ca85bafe37ba07eaf2628c0eabb1c951d5139 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:10:05 -0500
 Subject: [PATCH] Registration API
@@ -52,7 +52,7 @@ index 00000000..a9a30e82
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a8649bda..32253ae8 100644
+index 3731b03b..e0ab5e96 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -27,18 +27,11 @@ import com.google.common.collect.*;

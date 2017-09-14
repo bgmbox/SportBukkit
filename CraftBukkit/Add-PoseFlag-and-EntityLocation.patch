@@ -1,11 +1,11 @@
-From ac0ebebfaed08fd93cbd8de4350bbd199dfe845a Mon Sep 17 00:00:00 2001
+From 9b7bf0c05401b920d2595c75e89f354d0fa83c05 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index ce5a7803..9e138858 100644
+index 2f1a0eda..d5bda027 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -18,12 +18,15 @@ import org.apache.logging.log4j.Logger;
@@ -255,7 +255,7 @@ index ae425edb..5e145cc5 100644
          return new Vector(entity.motX, entity.motY, entity.motZ);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 762e1008..622bc1d9 100644
+index cce1fea1..75996e2a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -3,12 +3,14 @@ package org.bukkit.craftbukkit.entity;

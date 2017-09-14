@@ -1,4 +1,4 @@
-From eb7160591f8a35e35009747a1808262e1b084467 Mon Sep 17 00:00:00 2001
+From 29d67e7dfa44f7baedcc7c4a03520bed04419b02 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 28 Sep 2014 05:48:35 -0400
 Subject: [PATCH] Simple bulk block replacement
@@ -17,17 +17,20 @@ index 26a4c825..071a3d58 100644
      public Material q(IBlockData iblockdata) {
          return this.material;
 diff --git a/src/main/java/net/minecraft/server/BlockPosition.java b/src/main/java/net/minecraft/server/BlockPosition.java
-index 8155f817..1a107283 100644
+index 67b476b2..d73e161c 100644
 --- a/src/main/java/net/minecraft/server/BlockPosition.java
 +++ b/src/main/java/net/minecraft/server/BlockPosition.java
-@@ -383,6 +383,7 @@ public class BlockPosition extends BaseBlockPosition {
+@@ -383,7 +383,9 @@ public class BlockPosition extends BaseBlockPosition {
              return this.d;
          }
  
+-        public BlockPosition.MutableBlockPosition c(int i, int j, int k) {
++
 +        public BlockPosition.MutableBlockPosition set(int x, int y, int z) { return c(x, y, z); } // SportBukkit - alias
-         public MutableBlockPosition c(int i, int j, int k) {
++        public MutableBlockPosition c(int i, int j, int k) {
              this.b = i;
              this.c = j;
+             this.d = k;
 diff --git a/src/main/java/net/minecraft/server/Chunk.java b/src/main/java/net/minecraft/server/Chunk.java
 index 1c1499a9..d8a93d43 100644
 --- a/src/main/java/net/minecraft/server/Chunk.java

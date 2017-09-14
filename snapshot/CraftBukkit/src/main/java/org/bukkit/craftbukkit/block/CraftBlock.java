@@ -1,6 +1,11 @@
 package org.bukkit.craftbukkit.block;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import net.minecraft.server.*;
 
@@ -36,7 +41,7 @@ public class CraftBlock implements Block {
     }
 
     public CraftBlock(CraftChunk chunk, Vec3 position) {
-        this.worldId = chunk.getCraftWorld().getUID();
+        this.worldId = getWorld().getUID();
         this.position = BlockPosition.copyOf(position);
     }
 
@@ -346,7 +351,14 @@ public class CraftBlock implements Block {
         case BED_BLOCK:
             return new CraftBed(this);
         default:
-            return new CraftBlockState(this);
+            TileEntity tileEntity = getWorld().getTileEntityAt(position.coarseX(), position.coarseY(), position.coarseZ());
+            if (tileEntity != null) {
+                // block with unhandled TileEntity:
+                return new CraftBlockEntityState<TileEntity>(this, (Class<TileEntity>) tileEntity.getClass());
+            } else {
+                // Block without TileEntity:
+                return new CraftBlockState(this);
+            }
         }
     }
 
@@ -492,7 +504,6 @@ public class CraftBlock implements Block {
                     if (Blocks.SKULL == block) {
                         net.minecraft.server.ItemStack nmsStack = new net.minecraft.server.ItemStack(item, 1, block.getDropData(data));
                         TileEntitySkull tileentityskull = (TileEntitySkull) nmsWorld().getTileEntity(position);
-
                         if (tileentityskull.getSkullType() == 3 && tileentityskull.getGameProfile() != null) {
                             nmsStack.setTag(new NBTTagCompound());
                             NBTTagCompound nbttagcompound = new NBTTagCompound();

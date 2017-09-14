@@ -1,11 +1,11 @@
-From ca67c1f5033503938b3fea3414bb96ddc9cfc896 Mon Sep 17 00:00:00 2001
+From ffedf8ae7315c87fca395f82dc7f2a11fe3b1733 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 00:30:44 -0500
 Subject: [PATCH] Reduce ItemStack copying
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityMinecartContainer.java b/src/main/java/net/minecraft/server/EntityMinecartContainer.java
-index ce501098..e7feef28 100644
+index d6afa4aa..557381db 100644
 --- a/src/main/java/net/minecraft/server/EntityMinecartContainer.java
 +++ b/src/main/java/net/minecraft/server/EntityMinecartContainer.java
 @@ -13,7 +13,7 @@ import org.bukkit.inventory.InventoryHolder;

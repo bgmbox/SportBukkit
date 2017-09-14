@@ -1,11 +1,11 @@
-From cc75c41226171c5ca63550a2ae6e1cf134ec073d Mon Sep 17 00:00:00 2001
+From 5d78babbe0779375408eef73b908399a02b8e116 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 02:50:33 -0400
 Subject: [PATCH] Fix desync from cancelled vehicle event
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 26aae989..ce5a7803 100644
+index 21f7643c..2f1a0eda 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1890,6 +1890,24 @@ public abstract class Entity implements ICommandListener {
@@ -104,7 +104,7 @@ index 26aae989..ce5a7803 100644
              this.passengers.remove(entity);
              entity.j = 60;
          }
-@@ -2843,6 +2843,8 @@ public abstract class Entity implements ICommandListener {
+@@ -2844,6 +2844,8 @@ public abstract class Entity implements ICommandListener {
      }
  
      @Nullable

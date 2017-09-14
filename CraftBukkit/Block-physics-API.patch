@@ -1,4 +1,4 @@
-From 62874705fb94f3216c60d3b692b5c16e8b8ef1fd Mon Sep 17 00:00:00 2001
+From 28b143a270b4a283c52c4ca687a176682081e8ed Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 18 Jun 2016 08:18:33 -0400
 Subject: [PATCH] Block physics API
@@ -48,7 +48,7 @@ index 3ffa8546..b187defc 100644
                  IBlockData iblockdata = this.getType(blockposition1);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 2cbcbaee..1c754982 100644
+index bc010e67..c5ee75e2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -20,6 +20,7 @@ import org.bukkit.craftbukkit.CraftChunk;
@@ -59,7 +59,7 @@ index 2cbcbaee..1c754982 100644
  import org.bukkit.metadata.MetadataValue;
  import org.bukkit.plugin.Plugin;
  import org.bukkit.util.BlockVector;
-@@ -563,4 +564,38 @@ public class CraftBlock implements Block {
+@@ -570,4 +571,38 @@ public class CraftBlock implements Block {
      public RayBlockIntersection rayTrace(Location start, double distance) {
          return rayTrace(start.toVector(), start.toVector().add(start.getDirection().multiply(distance)));
      }

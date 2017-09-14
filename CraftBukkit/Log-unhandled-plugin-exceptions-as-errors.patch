@@ -1,14 +1,14 @@
-From f6bbde7548c0d29ff93070415bc27dbd54f38e1a Mon Sep 17 00:00:00 2001
+From eaecc42c9120b3cd4f95774fa64d1ca64a76fadf Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 9 Dec 2014 02:54:19 -0500
 Subject: [PATCH] Log unhandled plugin exceptions as errors
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index aa42669f..448b2d8c 100644
+index b918b738..0003602b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -624,7 +624,7 @@ public final class CraftServer implements Server {
+@@ -634,7 +634,7 @@ public final class CraftServer implements Server {
              this.playerCommandState = true;
              return dispatchCommand(sender, serverCommand.command);
          } catch (Exception ex) {

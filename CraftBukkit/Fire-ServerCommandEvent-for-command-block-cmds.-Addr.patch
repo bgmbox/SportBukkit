@@ -1,4 +1,4 @@
-From b10deb76f9489a6bd8f322c643b04f321b935701 Mon Sep 17 00:00:00 2001
+From 6035e413f985ea337b5f44bfe2fbc802faa4c442 Mon Sep 17 00:00:00 2001
 From: Chad Waters <authorblues@gmail.com>
 Date: Sun, 20 Jan 2013 22:04:58 -0500
 Subject: [PATCH] Fire ServerCommandEvent for command block cmds. Addresses
@@ -6,7 +6,7 @@ Subject: [PATCH] Fire ServerCommandEvent for command block cmds. Addresses
 
 
 diff --git a/src/main/java/net/minecraft/server/CommandBlockListenerAbstract.java b/src/main/java/net/minecraft/server/CommandBlockListenerAbstract.java
-index 531bc963..95580b60 100644
+index c11aa516..6b529f4c 100644
 --- a/src/main/java/net/minecraft/server/CommandBlockListenerAbstract.java
 +++ b/src/main/java/net/minecraft/server/CommandBlockListenerAbstract.java
 @@ -181,14 +181,6 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {

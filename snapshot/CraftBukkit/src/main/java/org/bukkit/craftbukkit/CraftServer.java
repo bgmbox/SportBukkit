@@ -3,12 +3,12 @@ package org.bukkit.craftbukkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -178,13 +178,14 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
     private boolean printSaveWarning;
     private CraftIconCache icon;
     private boolean overrideAllCommandBlockCommands = false;
+    private boolean unrestrictedAdvancements;
     private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8));
     private final List<CraftPlayer> playerView;
     private final Map<UUID, Player> playersById;
     public int reloadCount;
     public boolean bungee = false;
     public static final com.google.gson.Gson gson = new com.google.gson.Gson();
-    private final Path root;
+    private static final Path root;
 
     private @Nullable Instant emptySince;
 
@@ -194,12 +195,12 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
 
     static {
         ConfigurationSerialization.registerClass(CraftOfflinePlayer.class);
+        root = Paths.get(".").toAbsolutePath();
         CraftItemFactory.instance();
     }
 
     public CraftServer(MinecraftServer console, PlayerList playerList) {
         this.console = console;
-        this.root = Paths.get(".").toAbsolutePath();
         this.eventBus = new SimpleEventBus(this.console.primaryThread, task -> {
             if(console.isMainThread()) {
                 task.run();
@@ -266,6 +267,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
         saveCommandsConfig();
         bungee = configuration.getBoolean("settings.bungeecord");
         overrideAllCommandBlockCommands = commandsConfiguration.getStringList("command-block-overrides").contains("*");
+        unrestrictedAdvancements = commandsConfiguration.getBoolean("unrestricted-advancements");
         pluginProfiling = configuration.getBoolean("settings.plugin-profiling");
         monsterSpawn = configuration.getInt("spawn-limits.monsters");
         animalSpawn = configuration.getInt("spawn-limits.animals");
@@ -276,6 +278,14 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
         chunkGCPeriod = configuration.getInt("chunk-gc.period-in-ticks");
         chunkGCLoadThresh = configuration.getInt("chunk-gc.load-threshold");
         loadIcon();
+    }
+
+    public boolean getPermissionOverride(ICommandListener listener) {
+        while (listener instanceof CommandListenerWrapper) {
+            listener = ((CommandListenerWrapper) listener).base;
+        }
+
+        return unrestrictedAdvancements && listener instanceof AdvancementRewards.AdvancementCommandListener;
     }
 
     public boolean getCommandBlockOverride(String command) {
@@ -729,6 +739,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
     public Map<UUID, World> worldsById() {
         return worldsByIdView;
     }
+
 
     public DedicatedPlayerList getHandle() {
         return playerList;

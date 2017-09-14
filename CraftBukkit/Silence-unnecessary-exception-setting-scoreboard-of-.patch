@@ -1,4 +1,4 @@
-From 28fc3289090f0b17db2ce58287c407359572b7b6 Mon Sep 17 00:00:00 2001
+From bb4e28e4b9c5fa055f64866f595731f92ce63455 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 31 Mar 2016 09:08:25 -0400
 Subject: [PATCH] Silence unnecessary exception setting scoreboard of

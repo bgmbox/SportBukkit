@@ -1,4 +1,4 @@
-From 41bb9021fc3eb29e9caef084baa8a4c1481c6e84 Mon Sep 17 00:00:00 2001
+From c4ee92b3fcb38b7acc790dedf27c27b30f2354a7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:36:30 -0500
 Subject: [PATCH] Arrow damage API

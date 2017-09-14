@@ -1,4 +1,4 @@
-From bbbe200a344874f76e3a92acabf87cf78ba60b38 Mon Sep 17 00:00:00 2001
+From e8e2812cef34502f1380005bbe313662194ed800 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Wed, 17 Dec 2014 17:26:31 -0600
 Subject: [PATCH] Allow access to ItemStack handle

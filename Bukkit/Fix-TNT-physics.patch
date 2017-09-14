@@ -1,11 +1,11 @@
-From 3fbfd0ea1a75869b4c6090286171e977adca2ffa Mon Sep 17 00:00:00 2001
+From 7d6003db026169e1646806891180aa3c9deee97c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Feb 2015 08:28:02 -0500
 Subject: [PATCH] Fix TNT physics
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 229ef87f..e16e46a1 100644
+index ee3cb967..89a70049 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -321,6 +321,13 @@ public final class Bukkit {
@@ -23,7 +23,7 @@ index 229ef87f..e16e46a1 100644
       * <p>
       * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 05194cff..c11454b8 100644
+index e7121742..ad959874 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -261,6 +261,11 @@ public interface Server extends PluginMessageRecipient {

@@ -1,11 +1,11 @@
-From 9c822cce18857f45281e53fd17168ac7e31f32bc Mon Sep 17 00:00:00 2001
+From 185e7c62063e0a3f1c4613aaefde27649cd476cd Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 13 Feb 2015 02:34:42 -0500
 Subject: [PATCH] Expose the player list packet
 
 
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java b/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
-index 985823db..ae88e960 100644
+index cb3b8a2f..bfda9f6f 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
 @@ -145,6 +145,15 @@ public class PacketPlayOutPlayerInfo implements Packet<PacketListenerPlayOut> {

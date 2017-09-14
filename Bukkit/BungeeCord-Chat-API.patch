@@ -1,11 +1,11 @@
-From 259a635a83760e611bcdc45cfded8c143f0d43ad Mon Sep 17 00:00:00 2001
+From 36c221aae1f36b6330db15ab75e3f2df6e14e268 Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 13 Dec 2014 12:59:14 +1100
 Subject: [PATCH] BungeeCord Chat API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 2d59b857..229ef87f 100644
+index 448354cf..ee3cb967 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -1205,4 +1205,22 @@ public final class Bukkit {
@@ -32,7 +32,7 @@ index 2d59b857..229ef87f 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 1c59f0b2..05194cff 100644
+index a816b91c..e7121742 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -983,4 +983,18 @@ public interface Server extends PluginMessageRecipient {

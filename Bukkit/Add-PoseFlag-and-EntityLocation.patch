@@ -1,4 +1,4 @@
-From a2336771e43d74a4cefcd89912898cf7d6c8002a Mon Sep 17 00:00:00 2001
+From c2380e02775f1a61baf8bcb0d3a2d6339db3f47f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:15 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
@@ -284,7 +284,7 @@ index 7687667a..60160a3c 100644
  
      private void validateLocation(Location loc) {
 diff --git a/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java b/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java
-index 93752f79..e2b31d7d 100644
+index 330311df..3ca72663 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java
 @@ -1,5 +1,7 @@

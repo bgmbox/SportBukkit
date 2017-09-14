@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/PacketPlayInUseEntity.java
 +++ b/net/minecraft/server/PacketPlayInUseEntity.java
-@@ -5,41 +5,50 @@
+@@ -5,11 +5,20 @@
  
  public class PacketPlayInUseEntity implements Packet<PacketListenerPlayIn> {
  
@@ -23,25 +23,16 @@
      public PacketPlayInUseEntity() {}
  
      public PacketPlayInUseEntity(Entity entity) {
-         this.a = entity.getId();
--        this.action = PacketPlayInUseEntity.EnumEntityUseAction.ATTACK;
-+        this.action = EnumEntityUseAction.ATTACK;
+@@ -17,7 +26,7 @@
+         this.action = PacketPlayInUseEntity.EnumEntityUseAction.ATTACK;
      }
  
 -    public void a(PacketDataSerializer packetdataserializer) throws IOException {
 +    public void a(PacketDataSerializer packetdataserializer) { // SportBukkit - remove throws
          this.a = packetdataserializer.g();
--        this.action = (PacketPlayInUseEntity.EnumEntityUseAction) packetdataserializer.a(PacketPlayInUseEntity.EnumEntityUseAction.class);
--        if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
-+        this.action = (EnumEntityUseAction) packetdataserializer.a(EnumEntityUseAction.class);
-+        if (this.action == EnumEntityUseAction.INTERACT_AT) {
-             this.c = new Vec3D((double) packetdataserializer.readFloat(), (double) packetdataserializer.readFloat(), (double) packetdataserializer.readFloat());
-         }
- 
--        if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT || this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
-+        if (this.action == EnumEntityUseAction.INTERACT || this.action == EnumEntityUseAction.INTERACT_AT) {
-             this.d = (EnumHand) packetdataserializer.a(EnumHand.class);
-         }
+         this.action = (PacketPlayInUseEntity.EnumEntityUseAction) packetdataserializer.a(PacketPlayInUseEntity.EnumEntityUseAction.class);
+         if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
+@@ -30,7 +39,7 @@
  
      }
  
@@ -49,24 +40,4 @@
 +    public void b(PacketDataSerializer packetdataserializer) { // SportBukkit - remove throws
          packetdataserializer.d(this.a);
          packetdataserializer.a((Enum) this.action);
--        if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
-+        if (this.action == EnumEntityUseAction.INTERACT_AT) {
-             packetdataserializer.writeFloat((float) this.c.x);
-             packetdataserializer.writeFloat((float) this.c.y);
-             packetdataserializer.writeFloat((float) this.c.z);
-         }
- 
--        if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT || this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
-+        if (this.action == EnumEntityUseAction.INTERACT || this.action == EnumEntityUseAction.INTERACT_AT) {
-             packetdataserializer.a((Enum) this.d);
-         }
- 
-@@ -54,7 +63,7 @@
-         return world.getEntity(this.a);
-     }
- 
--    public PacketPlayInUseEntity.EnumEntityUseAction a() {
-+    public EnumEntityUseAction a() {
-         return this.action;
-     }
- 
+         if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {

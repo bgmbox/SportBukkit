@@ -1,4 +1,4 @@
-From 4817f29afe5cf16e1ae3874982362811ce96298b Mon Sep 17 00:00:00 2001
+From ce69e38d51c5c2fb15c9e5661e4e74036c38220e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 01:08:40 -0400
 Subject: [PATCH] Physical interface
@@ -145,7 +145,7 @@ index fe325374..5f3a6ffc 100644
      /**
       * Gets the metadata for this block
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
-index 911a4d13..aaaecb05 100644
+index 55aabf24..f081dd78 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -1,6 +1,7 @@
@@ -164,7 +164,7 @@ index 911a4d13..aaaecb05 100644
 +public interface BlockState extends Metadatable, Locatable {
  
      /**
-      * Gets the block represented by this BlockState
+      * Gets the block represented by this block state.
 diff --git a/src/main/java/org/bukkit/block/DoubleChest.java b/src/main/java/org/bukkit/block/DoubleChest.java
 index 663fcbbd..1b0d1eac 100644
 --- a/src/main/java/org/bukkit/block/DoubleChest.java

@@ -1,11 +1,11 @@
-From 7c465de3ed771b39faf45997d3f01302db8eadb2 Mon Sep 17 00:00:00 2001
+From 94f2a8af92595bae51d3ee0be16cb028f787145d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 18 Nov 2016 04:34:02 -0500
 Subject: [PATCH] Geometry API
 
 
 diff --git a/src/main/java/net/minecraft/server/BlockPosition.java b/src/main/java/net/minecraft/server/BlockPosition.java
-index 1a107283..f6f7e711 100644
+index d73e161c..edcbb68d 100644
 --- a/src/main/java/net/minecraft/server/BlockPosition.java
 +++ b/src/main/java/net/minecraft/server/BlockPosition.java
 @@ -8,8 +8,93 @@ import javax.annotation.concurrent.Immutable;
@@ -221,10 +221,11 @@ index 1a107283..f6f7e711 100644
          public int getX() {
              return this.b;
          }
-@@ -383,7 +483,6 @@ public class BlockPosition extends BaseBlockPosition {
+@@ -383,8 +483,6 @@ public class BlockPosition extends BaseBlockPosition {
              return this.d;
          }
  
+-
 -        public BlockPosition.MutableBlockPosition set(int x, int y, int z) { return c(x, y, z); } // SportBukkit - alias
          public MutableBlockPosition c(int i, int j, int k) {
              this.b = i;
@@ -268,10 +269,10 @@ index 11c733e2..f8487998 100644
          return CraftItemFactory.instance();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 32253ae8..edf479b1 100644
+index e0ab5e96..1c714eed 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1077,12 +1077,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1087,12 +1087,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
      @Override
      public World getWorld(UUID uid) {

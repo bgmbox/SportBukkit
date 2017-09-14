@@ -1,4 +1,4 @@
-From 1bd53cbd522c5cbf6903e530f3f0a60c9cd457ac Mon Sep 17 00:00:00 2001
+From d81649a97520499d3b7a381402676dc9305e6207 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 11 Feb 2014 22:12:50 -0600
 Subject: [PATCH] Fake name and skin API
@@ -27,7 +27,7 @@ index 97a7f113..991e5109 100644
          this.datawatcher.register(EntityHuman.bt, new NBTTagCompound());
          this.datawatcher.register(EntityHuman.bu, new NBTTagCompound());
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index f025163f..c50e9744 100644
+index fca5a234..273d20a4 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -20,10 +20,12 @@ import org.bukkit.craftbukkit.CraftWorld;
@@ -71,12 +71,12 @@ index f025163f..c50e9744 100644
  
      public EntityHuman.EnumChatVisibility getChatFlags() {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java b/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
-index fc255aba..985823db 100644
+index d385a9c9..cb3b8a2f 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
 @@ -14,6 +14,21 @@ public class PacketPlayOutPlayerInfo implements Packet<PacketListenerPlayOut> {
-     private EnumPlayerInfoAction a;
-     private final List<PlayerInfoData> b = Lists.newArrayList();
+     private PacketPlayOutPlayerInfo.EnumPlayerInfoAction a;
+     private final List<PacketPlayOutPlayerInfo.PlayerInfoData> b = Lists.newArrayList();
  
 +    // SportBukkit start - add constructor
 +    public PacketPlayOutPlayerInfo(EnumPlayerInfoAction a) {
@@ -95,7 +95,7 @@ index fc255aba..985823db 100644
 +
      public PacketPlayOutPlayerInfo() {}
  
-     public PacketPlayOutPlayerInfo(EnumPlayerInfoAction packetplayoutplayerinfo_enumplayerinfoaction, EntityPlayer... aentityplayer) {
+     public PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction packetplayoutplayerinfo_enumplayerinfoaction, EntityPlayer... aentityplayer) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java b/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java
 index 549d4e89..6ecd7036 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java
@@ -255,10 +255,10 @@ index e3fbf95c..c53cf935 100644
          entityplayer.sentListPacket = true;
          // CraftBukkit end
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 52fb2ede..45cabff1 100644
+index 81b11739..c53ec4ee 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -399,7 +399,7 @@ public final class CraftServer implements Server {
+@@ -409,7 +409,7 @@ public final class CraftServer implements Server {
  
      @Override
      @Deprecated
@@ -267,7 +267,7 @@ index 52fb2ede..45cabff1 100644
          Validate.notNull(name, "Name cannot be null");
  
          Player found = getPlayerExact(name);
-@@ -411,8 +411,8 @@ public final class CraftServer implements Server {
+@@ -421,8 +421,8 @@ public final class CraftServer implements Server {
          String lowerName = name.toLowerCase(java.util.Locale.ENGLISH);
          int delta = Integer.MAX_VALUE;
          for (Player player : getOnlinePlayers()) {
@@ -278,7 +278,7 @@ index 52fb2ede..45cabff1 100644
                  if (curDelta < delta) {
                      found = player;
                      delta = curDelta;
-@@ -425,11 +425,18 @@ public final class CraftServer implements Server {
+@@ -435,11 +435,18 @@ public final class CraftServer implements Server {
  
      @Override
      @Deprecated
@@ -300,7 +300,7 @@ index 52fb2ede..45cabff1 100644
      }
  
      @Override
-@@ -454,13 +461,13 @@ public final class CraftServer implements Server {
+@@ -464,13 +471,13 @@ public final class CraftServer implements Server {
  
      @Override
      @Deprecated
@@ -316,7 +316,7 @@ index 52fb2ede..45cabff1 100644
  
              if (partialName.equalsIgnoreCase(iterPlayerName)) {
                  // Exact match
-@@ -478,6 +485,21 @@ public final class CraftServer implements Server {
+@@ -488,6 +495,21 @@ public final class CraftServer implements Server {
      }
  
      @Override
@@ -338,7 +338,7 @@ index 52fb2ede..45cabff1 100644
      public int getMaxPlayers() {
          return playerList.getMaxPlayers();
      }
-@@ -1613,8 +1635,8 @@ public final class CraftServer implements Server {
+@@ -1623,8 +1645,8 @@ public final class CraftServer implements Server {
          PlayerChatTabCompleteEvent event = new PlayerChatTabCompleteEvent(player, message, completions);
          String token = event.getLastToken();
          for (Player p : getOnlinePlayers()) {

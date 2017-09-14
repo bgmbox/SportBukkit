@@ -1,4 +1,4 @@
-From b3ac1932b1223759a66c68cd0fdfbe43f3e6ed5b Mon Sep 17 00:00:00 2001
+From ccc07c98fd837077a9d0ee23d9adcdb8b04e2ec5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 17:23:54 -0500
 Subject: [PATCH] Unregister plugin commands
@@ -65,20 +65,12 @@ index 31876020..030d402e 100644
       * {@inheritDoc}
       */
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 1a847613..545d2d8e 100644
+index 545d2d8e..3042f031 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -22,6 +22,7 @@ import org.apache.commons.lang.Validate;
- import org.bukkit.Server;
- import org.bukkit.command.Command;
- import org.bukkit.command.PluginCommandYamlParser;
-+import org.bukkit.command.PluginIdentifiableCommand;
- import org.bukkit.command.SimpleCommandMap;
- import org.bukkit.configuration.serialization.ConfigurationSerialization;
- import org.bukkit.event.*;
-@@ -466,6 +467,13 @@ public final class SimplePluginManager implements PluginManager {
+@@ -474,6 +474,13 @@ public final class SimplePluginManager implements PluginManager {
              } catch (Throwable ex) {
-                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering serializables " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering commands for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
 +
 +            try {

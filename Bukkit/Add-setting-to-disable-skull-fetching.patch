@@ -1,11 +1,11 @@
-From 8f3238159180f96d696ec4cdd0a6dcbc934ef801 Mon Sep 17 00:00:00 2001
+From 61bbe4d956c1f251f7013cbecb7b15d647443c22 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Feb 2015 03:39:54 -0500
 Subject: [PATCH] Add setting to disable skull fetching
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 023cf451..d45c9167 100644
+index 2a56468e..2610b308 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -314,6 +314,13 @@ public final class Bukkit {
@@ -23,7 +23,7 @@ index 023cf451..d45c9167 100644
       * <p>
       * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index a009c9a3..2807ece2 100644
+index 1829b47e..35501556 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -256,6 +256,11 @@ public interface Server extends PluginMessageRecipient {

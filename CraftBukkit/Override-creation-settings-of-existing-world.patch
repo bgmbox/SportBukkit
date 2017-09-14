@@ -1,14 +1,14 @@
-From 1b363d9f6a5d0b8ae61623ab4633d5858f431887 Mon Sep 17 00:00:00 2001
+From c7bf490b31b5f9373eb473bbf6a0d80a6888f57c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 28 Jun 2015 03:39:14 -0400
 Subject: [PATCH] Override creation settings of existing world
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 5dfe067c..c35da60f 100644
+index b986c5c8..98214ac7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -842,6 +842,25 @@ public final class CraftServer implements Server {
+@@ -852,6 +852,25 @@ public final class CraftServer implements Server {
          return "CraftServer{" + "serverName=" + serverName + ",serverVersion=" + serverVersion + ",minecraftVersion=" + console.getVersion() + '}';
      }
  
@@ -34,7 +34,7 @@ index 5dfe067c..c35da60f 100644
      public World createWorld(String name, World.Environment environment) {
          return WorldCreator.name(name).environment(environment).createWorld();
      }
-@@ -912,15 +931,23 @@ public final class CraftServer implements Server {
+@@ -922,15 +941,23 @@ public final class CraftServer implements Server {
                  }
              }
          } while(used);

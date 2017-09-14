@@ -1,11 +1,11 @@
-From 1a420bc8a8626d7b032ded2b306bd1d7e3b8fb2b Mon Sep 17 00:00:00 2001
+From 063f58563db28bfe3226d2325010eeb1cfa70048 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:23 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit/block/Sign.java
-index 5d7a633d..7ded5ab4 100644
+index f30666a4..541e60e4 100644
 --- a/src/main/java/org/bukkit/block/Sign.java
 +++ b/src/main/java/org/bukkit/block/Sign.java
 @@ -1,5 +1,7 @@
@@ -14,7 +14,7 @@ index 5d7a633d..7ded5ab4 100644
 +import net.md_5.bungee.api.chat.BaseComponent;
 +
  /**
-  * Represents either a SignPost or a WallSign
+  * Represents a captured state of either a SignPost or a WallSign.
   */
 @@ -8,8 +10,11 @@ public interface Sign extends BlockState {
      /**

@@ -1,11 +1,11 @@
-From 36108b3db30d4a4d9ba2eaf8295a1befe20b8674 Mon Sep 17 00:00:00 2001
+From abeb905e623ffcb4f1e18488817269e144f7f1e1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:24:15 -0400
 Subject: [PATCH] Velocity API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 2c7c0bbc..d3d4e8a9 100644
+index b4aca63a..47a5ea72 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -351,6 +351,13 @@ public final class Bukkit {
@@ -23,7 +23,7 @@ index 2c7c0bbc..d3d4e8a9 100644
       * <p>
       * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 616a8a10..4742c93e 100644
+index e443dddb..ffc84c54 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -266,6 +266,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min

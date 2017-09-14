@@ -1,4 +1,4 @@
-From 41425202ef96cba58eb30372c70811492f807c7c Mon Sep 17 00:00:00 2001
+From 5913aaa1133a37b2278427444d9d5dca368ae810 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sat, 7 Dec 2013 17:53:32 -0600
 Subject: [PATCH] Make scoreboard classes public

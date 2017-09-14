@@ -1,4 +1,4 @@
-From 05ac0f98530b14d9acba530aa54c3fdfc0d4863f Mon Sep 17 00:00:00 2001
+From 7010bfaeecaf0ef8423b426369105cd3aace39b4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:27:40 -0700
 Subject: [PATCH] Implement the affectsSpawning API
@@ -68,10 +68,10 @@ index 650ad2c5..667de724 100644
                              entityzombie.setGoalTarget(entityliving, EntityTargetEvent.TargetReason.REINFORCEMENT_TARGET, true);
                              entityzombie.prepare(this.world.D(new BlockPosition(entityzombie)), (GroupDataEntity) null);
 diff --git a/src/main/java/net/minecraft/server/MobSpawnerAbstract.java b/src/main/java/net/minecraft/server/MobSpawnerAbstract.java
-index 477e8574..4fef36d5 100644
+index 36d589f7..2da9ca8c 100644
 --- a/src/main/java/net/minecraft/server/MobSpawnerAbstract.java
 +++ b/src/main/java/net/minecraft/server/MobSpawnerAbstract.java
-@@ -39,7 +39,7 @@ public abstract class MobSpawnerAbstract {
+@@ -40,7 +40,7 @@ public abstract class MobSpawnerAbstract {
      private boolean h() {
          BlockPosition blockposition = this.b();
  
@@ -142,7 +142,7 @@ index 3bf3cbc3..3ffa8546 100644
                  double d4 = entityhuman.d(d0, d1, d2);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 9bf4695f..0d8488d9 100644
+index 7a5892ba..ed294a3b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -496,6 +496,16 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {

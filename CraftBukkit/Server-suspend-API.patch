@@ -1,11 +1,11 @@
-From beba5b549a46eaaba268b420b8634c363a4c6496 Mon Sep 17 00:00:00 2001
+From 1476ebdfbffd5604f56a602904d6c1ae9d01db7c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 778e0d63..ffb78aa4 100644
+index 281fd339..46fe50dc 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -285,6 +285,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -203,10 +203,10 @@ index 251e8b9a..30ee2bfb 100644
  
      public void addMainThreadTask(Runnable task) {
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index c2881844..ac7b2240 100644
+index fd4b0bc8..a27ee39b 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
-@@ -185,4 +185,10 @@ public class ServerConnection {
+@@ -186,4 +186,10 @@ public class ServerConnection {
      public MinecraftServer d() {
          return this.f;
      }
@@ -240,7 +240,7 @@ index dd18b4e0..a3481c0f 100644
              long j = MinecraftServer.aw();
              long k = j - i;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 30d108fb..fe7d521b 100644
+index 2161c334..9c487a20 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -6,6 +6,8 @@ import java.io.FileInputStream;
@@ -260,7 +260,7 @@ index 30d108fb..fe7d521b 100644
  import javax.imageio.ImageIO;
  
  import com.google.common.collect.*;
-@@ -122,6 +125,7 @@ import io.netty.handler.codec.base64.Base64;
+@@ -123,6 +126,7 @@ import io.netty.handler.codec.base64.Base64;
  import jline.console.ConsoleReader;
  import org.bukkit.craftbukkit.util.CraftNamespacedKey;
  import org.bukkit.event.server.TabCompleteEvent;
@@ -268,7 +268,7 @@ index 30d108fb..fe7d521b 100644
  import tc.oc.minecraft.api.plugin.PluginFinder;
  
  public final class CraftServer extends CraftBukkitRuntime implements Server {
-@@ -173,6 +177,8 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -175,6 +179,8 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      public boolean bungee = false;
      public static final com.google.gson.Gson gson = new com.google.gson.Gson();
  
@@ -277,7 +277,7 @@ index 30d108fb..fe7d521b 100644
      private final class BooleanWrapper {
          private boolean value = true;
      }
-@@ -184,7 +190,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -186,7 +192,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
      public CraftServer(MinecraftServer console, PlayerList playerList) {
          this.console = console;
@@ -292,7 +292,7 @@ index 30d108fb..fe7d521b 100644
          this.playerList = (DedicatedPlayerList) playerList;
          this.playerView = Collections.unmodifiableList(Lists.transform(playerList.players, EntityPlayer::getBukkitEntity));
          this.playersById = Collections.unmodifiableMap(Maps.transformValues(playerList.playersById(), EntityPlayer::getBukkitEntity));
-@@ -623,6 +635,17 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -634,6 +646,17 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
      @Override
@@ -310,7 +310,7 @@ index 30d108fb..fe7d521b 100644
      public PluginManager getPluginManager() {
          return pluginManager;
      }
-@@ -1892,4 +1915,53 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1904,4 +1927,53 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
          return task instanceof Wrapped ? task : new Wrapped();
      }

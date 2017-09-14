@@ -1,14 +1,21 @@
 package org.bukkit.craftbukkit.block;
 
 import net.minecraft.server.BlockPosition;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import org.bukkit.Chunk;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.CraftChunk;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.geometry.*;
+import org.bukkit.geometry.BlockReflection;
+import org.bukkit.geometry.BlockRotation;
+import org.bukkit.geometry.BlockRotoflection;
+import org.bukkit.geometry.CoarseTransform;
+import org.bukkit.geometry.Vec3;
 import org.bukkit.material.Attachable;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
@@ -18,15 +25,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import net.minecraft.server.EnumDirection;
 import net.minecraft.server.IBlockData;
-import net.minecraft.server.TileEntity;
 
 import javax.annotation.Nullable;
 
 public class CraftBlockState implements BlockState {
     private final @Nullable UUID worldId;
-    private final BlockPosition position;
+    private final BlockPosition position;;
     protected int type;
     protected MaterialData data;
     protected int flag;
@@ -262,10 +267,6 @@ public class CraftBlockState implements BlockState {
         hash = 73 * hash + this.type;
         hash = 73 * hash + (this.data != null ? this.data.hashCode() : 0);
         return hash;
-    }
-
-    public TileEntity getTileEntity() {
-        return null;
     }
 
     public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {

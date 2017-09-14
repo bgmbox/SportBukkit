@@ -78,7 +78,6 @@ public class CraftSign extends CraftBlockState implements Sign {
         return result;
     }
 
-    @Override
     public TileEntitySign getTileEntity() {
         return sign;
     }

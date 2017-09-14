@@ -1,38 +1,33 @@
-From c70b80cd5fd06a9d2bcbbe806150dfb52cf29e83 Mon Sep 17 00:00:00 2001
+From 19e82e160290bc315a5daca8908bc5527a92fc4f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 6 Aug 2015 22:18:57 -0400
 Subject: [PATCH] Skull skin API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java b/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java
-index 89e4e725..633b89bb 100644
+index f2865688..d4b7d54d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java
-@@ -4,15 +4,15 @@ import com.google.common.base.Preconditions;
- import com.mojang.authlib.GameProfile;
- import net.minecraft.server.MinecraftServer;
- import net.minecraft.server.TileEntitySkull;
--import org.bukkit.Bukkit;
--import org.bukkit.Material;
--import org.bukkit.OfflinePlayer;
-+import org.bukkit.*;
+@@ -8,10 +8,15 @@ import org.bukkit.Bukkit;
+ import org.bukkit.Material;
+ import org.bukkit.OfflinePlayer;
  
--import org.bukkit.SkullType;
++import org.bukkit.Skin;
+ import org.bukkit.SkullType;
  import org.bukkit.block.Block;
  import org.bukkit.block.BlockFace;
  import org.bukkit.block.Skull;
- import org.bukkit.craftbukkit.CraftWorld;
++import org.bukkit.craftbukkit.CraftWorld;
 +import org.bukkit.craftbukkit.util.Skins;
 +
 +import java.util.UUID;
  
- public class CraftSkull extends CraftBlockState implements Skull {
-     private static final int MAX_OWNER_LENGTH = 16;
-@@ -205,6 +205,18 @@ public class CraftSkull extends CraftBlockState implements Skull {
-         this.profile = new GameProfile(player.getUniqueId(), player.getName());
+ public class CraftSkull extends CraftBlockEntityState<TileEntitySkull> implements Skull {
+ 
+@@ -207,6 +212,17 @@ public class CraftSkull extends CraftBlockEntityState<TileEntitySkull> implement
      }
  
-+    @Override
+     @Override
 +    public void setOwner(String name, UUID uuid, Skin skin) {
 +        profile = new GameProfile(uuid, name);
 +        Skins.setProperties(skin, profile.getProperties());
@@ -45,13 +40,13 @@ index 89e4e725..633b89bb 100644
 +    }
 +
      public BlockFace getRotation() {
-     	return getBlockFace(rotation);
+         return getBlockFace(rotation);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
-index b9c54472..690400b8 100644
+index fbc16890..5f03e393 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
-@@ -1,15 +1,18 @@
+@@ -1,6 +1,7 @@
  package org.bukkit.craftbukkit.inventory;
  
  import java.util.Map;
@@ -59,9 +54,10 @@ index b9c54472..690400b8 100644
  
  import net.minecraft.server.GameProfileSerializer;
  import net.minecraft.server.NBTBase;
- import net.minecraft.server.NBTTagCompound;
- 
+@@ -9,9 +10,11 @@ import net.minecraft.server.NBTTagCompound;
+ import org.bukkit.Bukkit;
  import org.bukkit.Material;
+ import org.bukkit.OfflinePlayer;
 +import org.bukkit.Skin;
  import org.bukkit.configuration.serialization.DelegateDeserialization;
  import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
@@ -70,10 +66,10 @@ index b9c54472..690400b8 100644
  import org.bukkit.inventory.meta.SkullMeta;
  
  import com.google.common.collect.ImmutableMap.Builder;
-@@ -126,6 +129,17 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
+@@ -149,6 +152,16 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
+         return true;
      }
  
-     @Override
 +    public void setOwner(String name, UUID uuid, Skin skin) {
 +        profile = new GameProfile(uuid, name);
 +        Skins.setProperties(skin, profile.getProperties());
@@ -84,7 +80,6 @@ index b9c54472..690400b8 100644
 +        profile = null;
 +    }
 +
-+    @Override
+     @Override
      int applyHash() {
          final int original;
-         int hash = original = super.applyHash();

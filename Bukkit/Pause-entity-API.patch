@@ -1,4 +1,4 @@
-From 903369b8f7c87984ab888efe9409a23504be80f3 Mon Sep 17 00:00:00 2001
+From 0eef3b8b88ddb78fa74b7596551135fe3b4ae61f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 3 Dec 2016 23:45:45 -0500
 Subject: [PATCH] Pause entity API

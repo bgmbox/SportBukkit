@@ -386,14 +386,14 @@
 +
 +        String deathmessage = chatmessage.toPlainText();
 +        org.bukkit.event.entity.PlayerDeathEvent event = CraftEventFactory.callPlayerDeathEvent(this, loot, deathmessage, keepInventory);
++
++        String deathMessage = event.getDeathMessage();
  
 -            if (scoreboardteambase != null && scoreboardteambase.getDeathMessageVisibility() != ScoreboardTeamBase.EnumNameTagVisibility.ALWAYS) {
 -                if (scoreboardteambase.getDeathMessageVisibility() == ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OTHER_TEAMS) {
 -                    this.server.getPlayerList().a((EntityHuman) this, this.getCombatTracker().getDeathMessage());
 -                } else if (scoreboardteambase.getDeathMessageVisibility() == ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OWN_TEAM) {
 -                    this.server.getPlayerList().b((EntityHuman) this, this.getCombatTracker().getDeathMessage());
-+        String deathMessage = event.getDeathMessage();
-+
 +        if (deathMessage != null && deathMessage.length() > 0 && flag) { // TODO: allow plugins to override?
 +            if (deathMessage.equals(deathmessage)) {
 +                ScoreboardTeamBase scoreboardteambase = this.aY();
@@ -719,23 +719,24 @@
      }
  
      public void b(List<IRecipe> list) {
-@@ -839,7 +1204,16 @@
+@@ -839,8 +1204,17 @@
  
      public void triggerHealthUpdate() {
          this.lastHealthSent = -1.0E8F;
 +        this.lastSentExp = -1; // CraftBukkit - Added to reset
-+    }
-+
+     }
+ 
 +    // CraftBukkit start - Support multi-line messages
 +    public void sendMessage(IChatBaseComponent[] ichatbasecomponent) {
 +        for (IChatBaseComponent component : ichatbasecomponent) {
 +            this.sendMessage(component);
 +        }
-     }
++    }
 +    // CraftBukkit end
- 
++
      public void a(IChatBaseComponent ichatbasecomponent, boolean flag) {
          this.playerConnection.sendPacket(new PacketPlayOutChat(ichatbasecomponent, flag ? ChatMessageType.GAME_INFO : ChatMessageType.CHAT));
+     }
 @@ -875,11 +1249,11 @@
  
          this.bS = entityplayer.bS;
@@ -884,7 +885,7 @@
      }
  
      public AdvancementDataPlayer getAdvancementData() {
-@@ -1113,4 +1549,154 @@
+@@ -1113,4 +1549,153 @@
      public Vec3D Q() {
          return this.cv;
      }
@@ -984,6 +985,11 @@
 +        return super.isFrozen() || !getBukkitEntity().isOnline();
 +    }
 +
++    @Override
++    public Scoreboard getScoreboard() {
++        return getBukkitEntity().getScoreboard().getHandle();
++    }
++
 +    public void reset() {
 +        float exp = 0;
 +        boolean keepInventory = this.world.getGameRules().getBoolean("keepInventory");
@@ -1032,10 +1038,4 @@
 +    }
 +    // CraftBukkit end
 +
-+    // SportBukkit start - use custom scoreboard
-+    @Override
-+    public Scoreboard getScoreboard() {
-+        return getBukkitEntity().getScoreboard().getHandle();
-+    }
-+    // SportBukkit end
  }

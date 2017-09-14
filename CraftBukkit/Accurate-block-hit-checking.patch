@@ -1,4 +1,4 @@
-From 8ef4469b0025287f3b5a8937405f8d37d2ce719f Mon Sep 17 00:00:00 2001
+From 479d93455673171f56f44a39a001dd3811412ad8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 26 May 2015 04:01:46 -0400
 Subject: [PATCH] Accurate block hit checking
@@ -47,7 +47,7 @@ index af76a1f3..4c9cbf6b 100644
          return CraftBlock.biomeBaseToBiome(this.world.getBiome(new BlockPosition(x, 0, z)));
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index a2d63379..b05baba4 100644
+index ba1cdc18..b499dc37 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -23,6 +23,8 @@ import org.bukkit.inventory.ItemStack;
@@ -59,7 +59,7 @@ index a2d63379..b05baba4 100644
  
  public class CraftBlock implements Block {
      private final CraftChunk chunk;
-@@ -531,4 +533,29 @@ public class CraftBlock implements Block {
+@@ -538,4 +540,29 @@ public class CraftBlock implements Block {
      public void removeMetadata(String metadataKey, Plugin owningPlugin) {
          chunk.getCraftWorld().getBlockMetadata().removeMetadata(this, metadataKey, owningPlugin);
      }

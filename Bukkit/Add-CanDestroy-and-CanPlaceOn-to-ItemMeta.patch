@@ -1,11 +1,11 @@
-From 5983f111ed1712553d74420f23c5734cb6381a94 Mon Sep 17 00:00:00 2001
+From 09e2fe5d43eb88ecbc05f3611ec7f4928c35cd49 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 22 May 2015 00:45:13 -0400
 Subject: [PATCH] Add CanDestroy and CanPlaceOn to ItemMeta
 
 
 diff --git a/src/main/java/org/bukkit/inventory/meta/ItemMeta.java b/src/main/java/org/bukkit/inventory/meta/ItemMeta.java
-index b69f0d54..8f25dd47 100644
+index e30ebe8f..26d6a553 100644
 --- a/src/main/java/org/bukkit/inventory/meta/ItemMeta.java
 +++ b/src/main/java/org/bukkit/inventory/meta/ItemMeta.java
 @@ -5,11 +5,13 @@ import java.util.List;

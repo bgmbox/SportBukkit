@@ -1,11 +1,11 @@
-From 74098a13412e4fd1841f33a328a537320f6aafc0 Mon Sep 17 00:00:00 2001
+From 718520a29e6f7a4098e3ffc0de64dc0d044f1710 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 14 Feb 2015 08:18:51 -0500
 Subject: [PATCH] Add invis override API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 97b889dc..37c16150 100644
+index 2b3c6b0a..ee547583 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -112,7 +112,7 @@ public abstract class Entity implements ICommandListener {

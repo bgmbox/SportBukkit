@@ -1,11 +1,11 @@
-From d74d7625000b09b7bed9f0c55d1baa176a2aac97 Mon Sep 17 00:00:00 2001
+From e7aa794e7dd01eb49ddbec18c62d6ad615b58b00 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Feb 2015 08:28:39 -0500
 Subject: [PATCH] Fix TNT physics
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 37c16150..892cf8cd 100644
+index ee547583..88bb9707 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1097,7 +1097,7 @@ public abstract class Entity implements ICommandListener {
@@ -75,10 +75,10 @@ index 6c3d0192..89b9f0ba 100644
  
      public void setFuseTicks(int i) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 7cecb5da..5dfe067c 100644
+index d8021334..b986c5c8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -605,6 +605,11 @@ public final class CraftServer implements Server {
+@@ -615,6 +615,11 @@ public final class CraftServer implements Server {
      }
  
      @Override

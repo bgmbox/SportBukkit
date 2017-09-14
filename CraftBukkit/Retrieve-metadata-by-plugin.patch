@@ -1,4 +1,4 @@
-From e7819d635143399bee9dbeb73a92a8dd7058168c Mon Sep 17 00:00:00 2001
+From cbab31c192100a0ebf1f124d3d120e11abbcf0a7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 19 Jun 2015 15:02:55 -0400
 Subject: [PATCH] Retrieve metadata by plugin
@@ -21,10 +21,10 @@ index 4c9cbf6b..e218353f 100644
          return server.getWorldMetadata().getMetadata(this, metadataKey);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index b05baba4..2cbcbaee 100644
+index b499dc37..bc010e67 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-@@ -522,6 +522,11 @@ public class CraftBlock implements Block {
+@@ -529,6 +529,11 @@ public class CraftBlock implements Block {
          chunk.getCraftWorld().getBlockMetadata().setMetadata(this, metadataKey, newMetadataValue);
      }
  
@@ -37,10 +37,10 @@ index b05baba4..2cbcbaee 100644
          return chunk.getCraftWorld().getBlockMetadata().getMetadata(this, metadataKey);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-index 84f0097b..78ef0b36 100644
+index 08634fad..7d082117 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-@@ -278,6 +278,12 @@ public class CraftBlockState implements BlockState {
+@@ -271,6 +271,12 @@ public class CraftBlockState implements BlockState {
          chunk.getCraftWorld().getBlockMetadata().setMetadata(getBlock(), metadataKey, newMetadataValue);
      }
  

@@ -83,12 +83,10 @@ More-ways-to-spawn-FallingBlocks
 FallingBlock-form-block-flag
 Chest-lid-API
 New-event-API
-Server-suspend-API
 Do-things-inside-events
 Don-t-tick-empty-worlds
 Unregister-plugin-commands
 Immutable-materials-and-items
 Reduce-ItemStack-copying
-Expand-Physical-API
 Add-id-specific-map-API
 SportBukkit

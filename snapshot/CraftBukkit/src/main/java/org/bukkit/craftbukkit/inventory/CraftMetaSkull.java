@@ -7,7 +7,9 @@ import net.minecraft.server.GameProfileSerializer;
 import net.minecraft.server.NBTBase;
 import net.minecraft.server.NBTTagCompound;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Skin;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
@@ -114,6 +116,21 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
         return hasOwner() ? profile.getName() : null;
     }
 
+    @Override
+    public OfflinePlayer getOwningPlayer() {
+        if (hasOwner()) {
+            if (profile.getId() != null) {
+                return Bukkit.getOfflinePlayer(profile.getId());
+            }
+
+            if (profile.getName() != null) {
+                return Bukkit.getOfflinePlayer(profile.getName());
+            }
+        }
+
+        return null;
+    }
+
     public boolean setOwner(String name) {
         if (name != null && name.length() > MAX_OWNER_LENGTH) {
             return false;
@@ -129,6 +146,12 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
     }
 
     @Override
+    public boolean setOwningPlayer(OfflinePlayer owner) {
+        profile = (owner == null) ? null : new GameProfile(owner.getUniqueId(), owner.getName());
+
+        return true;
+    }
+
     public void setOwner(String name, UUID uuid, Skin skin) {
         profile = new GameProfile(uuid, name);
         Skins.setProperties(skin, profile.getProperties());
