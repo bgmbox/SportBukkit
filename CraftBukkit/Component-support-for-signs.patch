@@ -1,11 +1,11 @@
-From 2861c3a8ca6b2f279079a96a2c90d238d6c8e091 Mon Sep 17 00:00:00 2001
+From d3f22f851f7c949beae773831aa6a461146ee83f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:17 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 9f6b9bbd..a3d65c59 100644
+index 8c8e7aca..05fea2b2 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -12,6 +12,8 @@ import java.util.Arrays;
@@ -25,7 +25,7 @@ index 9f6b9bbd..a3d65c59 100644
  import org.bukkit.craftbukkit.util.CraftChatMessage;
  import org.bukkit.craftbukkit.util.LazyPlayerSet;
  import org.bukkit.craftbukkit.util.Waitable;
-@@ -2243,16 +2246,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2249,16 +2252,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              int x = packetplayinupdatesign.a().getX();
              int y = packetplayinupdatesign.a().getY();
              int z = packetplayinupdatesign.a().getZ();

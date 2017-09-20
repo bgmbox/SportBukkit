@@ -1,11 +1,11 @@
-From 3854a8ade3813d275dc33bbb2aab40817dad4a1a Mon Sep 17 00:00:00 2001
+From f7a326d63800226116d806d933de05c4107f09df Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 25 Jan 2014 14:08:35 +1100
 Subject: [PATCH] Highly Optimized Tick Loop
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 1eea01e1..412f9b63 100644
+index 52b55d19..0e2a902f 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -103,6 +103,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
@@ -29,13 +29,12 @@ index 1eea01e1..412f9b63 100644
  
      public MinecraftServer(OptionSet options, Proxy proxy, DataConverterManager dataconvertermanager, YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
          this.e = proxy;
-@@ -517,48 +524,51 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -517,46 +524,45 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
          this.isRunning = false;
      }
  
 +    // SportBukkit Start
-+    private static double calcTps(double avg, double exp, double tps)
-+    {
++    private static double calcTps(double avg, double exp, double tps) {
 +        return ( avg * exp ) + ( tps * ( 1 - exp ) );
 +    }
 +    // SportBukkit End
@@ -47,7 +46,7 @@ index 1eea01e1..412f9b63 100644
 -                long i = 0L;
 -
                  this.q.setMOTD(new ChatComponentText(this.motd));
-                 this.q.setServerInfo(new ServerPing.ServerData("1.12.1", 338));
+                 this.q.setServerInfo(new ServerPing.ServerData("1.12.2", 340));
                  this.a(this.q);
  
 -                while (this.isRunning) {
@@ -60,56 +59,52 @@ index 1eea01e1..412f9b63 100644
 -                        k = 2000L;
 -                        this.R = this.ab;
 -                    }
-+                // SportBukkit start
-+                Arrays.fill( recentTps, 20 );
-+                long lastTick = System.nanoTime(), catchupTime = 0, curTime, wait, tickSection = lastTick;
- 
+-
 -                    if (k < 0L) {
 -                        MinecraftServer.LOGGER.warn("Time ran backwards! Did the system time change?");
 -                        k = 0L;
-+                while (this.isRunning) {
-+                    setLastTickStart(realTimeMillis());
-+
-+                    curTime = System.nanoTime();
-+                    wait = TICK_TIME - (curTime - lastTick) - catchupTime;
-+                    if (wait > 0) {
-+                        Thread.sleep(wait / 1000000);
-+                        catchupTime = 0;
-+                        continue;
-+                    } else {
-+                        catchupTime = Math.min(1000000000, Math.abs(wait));
-                     }
+-                    }
++                // SportBukkit start
++                Arrays.fill( recentTps, 20 );
++                long lastTick = System.nanoTime(), catchupTime = 0, curTime, wait, tickSection = lastTick;
  
 -                    i += k;
 -                    this.ab = j;
 -                    if (this.worlds.get(0).everyoneDeeplySleeping()) { // CraftBukkit
 -                        this.C();
 -                        i = 0L;
--                    } else {
++                while (this.isRunning) {
++                    setLastTickStart(realTimeMillis());
++                    curTime = System.nanoTime();
++                    wait = TICK_TIME - (curTime - lastTick) - catchupTime;
++                    if (wait > 0) {
++                        Thread.sleep(wait / 1000000);
++                        catchupTime = 0;
++                        continue;
+                     } else {
 -                        while (i > 50L) {
 -                            MinecraftServer.currentTick = (int) (System.currentTimeMillis() / 50); // CraftBukkit
 -                            i -= 50L;
 -                            this.C();
 -                        }
-+                    if ( MinecraftServer.currentTick++ % SAMPLE_INTERVAL == 0 )
-+                    {
++                        catchupTime = Math.min(1000000000, Math.abs(wait));
++                    }
++                    lastTick = curTime;
++
++                    if ( MinecraftServer.currentTick++ % SAMPLE_INTERVAL == 0 ) {
 +                        double currentTps = 1E9 / ( curTime - tickSection ) * SAMPLE_INTERVAL;
 +                        recentTps[0] = calcTps( recentTps[0], 0.92, currentTps ); // 1/exp(5sec/1min)
 +                        recentTps[1] = calcTps( recentTps[1], 0.9835, currentTps ); // 1/exp(5sec/5min)
 +                        recentTps[2] = calcTps( recentTps[2], 0.9945, currentTps ); // 1/exp(5sec/15min)
 +                        tickSection = curTime;
                      }
-+                    lastTick = curTime;
  
 -                    Thread.sleep(Math.max(1L, 50L - i));
 +                    this.runTick();
                      this.Q = true;
                  }
-+                // SportBukkit end
              } else {
-                 this.a((CrashReport) null);
-             }
-@@ -637,6 +647,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -637,6 +643,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
      public void B() {}
  
@@ -117,7 +112,7 @@ index 1eea01e1..412f9b63 100644
      protected void C() throws ExceptionWorldConflict { // CraftBukkit - added throws
          long i = System.nanoTime();
  
-@@ -1340,6 +1351,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -1340,6 +1347,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
          return this.e;
      }
  

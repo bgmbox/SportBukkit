@@ -1,4 +1,4 @@
-From 60af7fa8582886ae6cbac3bc3983569add6d77ae Mon Sep 17 00:00:00 2001
+From fe386478479d7ffb4e8a6ceac9529134557baa6f Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Thu, 2 Aug 2012 18:25:44 -0700
 Subject: [PATCH] Add PlayerInitialSpawnEvent for changing a player's spawn

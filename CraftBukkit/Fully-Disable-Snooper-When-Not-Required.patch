@@ -1,11 +1,11 @@
-From b197591d5cf1eb81c5f1a38de7442ac41e9271ac Mon Sep 17 00:00:00 2001
+From 8d962fd82fb5a068896e42dbf2df0758594792fe Mon Sep 17 00:00:00 2001
 From: agentk20 <agentkid20@gmail.com>
 Date: Sat, 3 Aug 2013 19:28:48 +1000
 Subject: [PATCH] Fully Disable Snooper When Not Required
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index ff625339..1eea01e1 100644
+index 9cd3a6f2..52b55d19 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -674,11 +674,11 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs

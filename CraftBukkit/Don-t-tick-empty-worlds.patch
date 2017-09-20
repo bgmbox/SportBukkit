@@ -1,11 +1,11 @@
-From 55d1a3968e792f12531698a1b0898c4a45162102 Mon Sep 17 00:00:00 2001
+From 115769f865e7a8490b29c740cb388a6c2592f3a5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 29 Dec 2016 23:23:45 -0500
 Subject: [PATCH] Don't tick empty worlds
 
 
 diff --git a/src/main/java/net/minecraft/server/ChunkProviderServer.java b/src/main/java/net/minecraft/server/ChunkProviderServer.java
-index cc99740a..ddaa41e5 100644
+index a9c9d714..3700b8b3 100644
 --- a/src/main/java/net/minecraft/server/ChunkProviderServer.java
 +++ b/src/main/java/net/minecraft/server/ChunkProviderServer.java
 @@ -304,6 +304,16 @@ public class ChunkProviderServer implements IChunkProvider {
@@ -26,10 +26,10 @@ index cc99740a..ddaa41e5 100644
          return !this.world.savingDisabled;
      }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 30ee2bfb..327cb298 100644
+index 3ba6d2b6..6f155133 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -848,6 +848,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -842,6 +842,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
              // if (i == 0 || this.getAllowNether()) {
                  WorldServer worldserver = this.worlds.get(i);
@@ -38,7 +38,7 @@ index 30ee2bfb..327cb298 100644
                  this.methodProfiler.a(() -> {
                      return worldserver.getWorldData().getName();
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 9c487a20..c4432f7b 100644
+index c2a9040c..e5c256b3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -564,6 +564,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {

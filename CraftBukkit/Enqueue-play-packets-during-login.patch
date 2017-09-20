@@ -1,4 +1,4 @@
-From ddfeede8c6a3851e072a0e6c1c8a322f8fd71512 Mon Sep 17 00:00:00 2001
+From e76491d04b10206b7aa10afe80c5e909b838a591 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 18 May 2016 03:31:16 -0400
 Subject: [PATCH] Enqueue play packets during login
@@ -17,7 +17,7 @@ index e5348318..04a893d9 100644
          return this.m;
      }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 03549203..9f6b9bbd 100644
+index 8cded5b6..8c8e7aca 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -88,10 +88,30 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -52,7 +52,7 @@ index 03549203..9f6b9bbd 100644
          this.player = entityplayer;
          entityplayer.playerConnection = this;
  
-@@ -1149,6 +1169,13 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1156,6 +1176,13 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
      }
  
      public void sendPacket(final Packet<?> packet) {

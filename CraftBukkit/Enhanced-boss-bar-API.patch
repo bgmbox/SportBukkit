@@ -1,11 +1,11 @@
-From 0b8e9df782306b502079610b6e44479d885f2a60 Mon Sep 17 00:00:00 2001
+From 7408a6836c0fffaff65617881e7168b6591ac996 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 01:41:17 -0500
 Subject: [PATCH] Enhanced boss bar API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e650709e..3731b03b 100644
+index a44b6e26..23be3439 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1773,7 +1773,7 @@ public final class CraftServer implements Server {

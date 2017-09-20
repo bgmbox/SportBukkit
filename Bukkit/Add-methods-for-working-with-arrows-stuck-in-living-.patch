@@ -1,4 +1,4 @@
-From 5c2fc98699145e2d2a03074072010ca378283e21 Mon Sep 17 00:00:00 2001
+From 2982b376683d8e56b4a081b5fac400e639059c4d Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 25 Nov 2012 13:47:27 -0600
 Subject: [PATCH] Add methods for working with arrows stuck in living entities

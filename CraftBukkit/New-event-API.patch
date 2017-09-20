@@ -1,4 +1,4 @@
-From a0c94a28e507faf0d6eae2d65383ddac44ec4bd9 Mon Sep 17 00:00:00 2001
+From bf7daaf5ebc7cc1159638d10c635c47e58790941 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 2 Dec 2016 01:48:56 -0500
 Subject: [PATCH] New event API
@@ -71,7 +71,7 @@ index 4afc3622..8eec729c 100644
          return CraftKey.get(prefix, id);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 53189c32..2161c334 100644
+index 4fdd56ca..82c34514 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -24,6 +24,8 @@ import java.util.regex.Pattern;

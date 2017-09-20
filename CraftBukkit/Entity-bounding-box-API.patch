@@ -1,11 +1,11 @@
-From d38b7aa84e9e9fb5ae2e2226638a7af43c9cd75e Mon Sep 17 00:00:00 2001
+From 64c32ee8105f3813648a571c6090dbf0d471fe94 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:12:39 -0400
 Subject: [PATCH] Entity bounding box API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 3756e09b..ae425edb 100644
+index 31288347..8f00c844 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -32,6 +32,8 @@ import org.bukkit.permissions.PermissionAttachment;
@@ -17,7 +17,7 @@ index 3756e09b..ae425edb 100644
  import org.bukkit.util.Vector;
  
  public abstract class CraftEntity implements org.bukkit.entity.Entity {
-@@ -870,4 +872,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+@@ -869,4 +871,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
      public Vector getPredictedVelocity() {
          return getVelocity();
      }

@@ -1,4 +1,4 @@
-From 2872ee105f555f1ae4cf97de168322a2d144ed6f Mon Sep 17 00:00:00 2001
+From b8b3343cbe56511ebd3315fcbf279cafebc4506e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 04:15:18 -0500
 Subject: [PATCH] World ID in Block and BlockState

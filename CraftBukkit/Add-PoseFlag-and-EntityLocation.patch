@@ -1,4 +1,4 @@
-From 9b7bf0c05401b920d2595c75e89f354d0fa83c05 Mon Sep 17 00:00:00 2001
+From 2a15f19d01b59990143b82594780932f6ca4ce12 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
@@ -48,7 +48,7 @@ index 2f1a0eda..d5bda027 100644
                  Entity n = craftn == null ? null : craftn.getHandle();
                  if (event.isCancelled() || n != orig) {
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 97312342..f2571e2f 100644
+index 3726d8fe..ebfdc98f 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -10,8 +10,10 @@ import java.util.UUID;
@@ -79,7 +79,7 @@ index 97312342..f2571e2f 100644
          // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index a3d65c59..7e513cbb 100644
+index 05fea2b2..abdfd16e 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -22,7 +22,9 @@ import org.apache.logging.log4j.Logger;
@@ -101,7 +101,7 @@ index a3d65c59..7e513cbb 100644
      public CraftPlayer getPlayer() {
          return (this.player == null) ? null : (CraftPlayer) this.player.getBukkitEntity();
      }
-@@ -419,8 +423,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -425,8 +429,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                      hasMoved = true;
                  }
                  // Spigot End
@@ -112,7 +112,7 @@ index a3d65c59..7e513cbb 100644
  
                  // If the packet contains movement information then we update the To location with the correct XYZ.
                  to.setX(packetplayinvehiclemove.getX());
-@@ -442,6 +446,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -448,6 +452,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                      this.lastPosZ = to.getZ();
                      this.lastYaw = to.getYaw();
                      this.lastPitch = to.getPitch();
@@ -120,7 +120,7 @@ index a3d65c59..7e513cbb 100644
  
                      // Skip the first time we do this
                      if (true) { // Spigot - don't skip any move events
-@@ -669,8 +674,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -675,8 +680,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                              this.player.setLocation(prevX, prevY, prevZ, prevYaw, prevPitch);
  
                              Player player = this.getPlayer();
@@ -131,7 +131,7 @@ index a3d65c59..7e513cbb 100644
  
                              // If the packet contains movement information then we update the To location with the correct XYZ.
                              if (packetplayinflying.hasPos) {
-@@ -701,6 +706,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -707,6 +712,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                                  this.lastPosZ = to.getZ();
                                  this.lastYaw = to.getYaw();
                                  this.lastPitch = to.getPitch();
@@ -139,7 +139,7 @@ index a3d65c59..7e513cbb 100644
  
                                  // Skip the first time we do this
                                  if (from.getX() != Double.MAX_VALUE) {
-@@ -1562,6 +1568,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1569,6 +1575,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              case STOP_SNEAKING:
                  PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this.getPlayer(), packetplayinentityaction.b() == PacketPlayInEntityAction.EnumPlayerAction.START_SNEAKING);
                  this.server.getPluginManager().callEvent(event);
@@ -147,7 +147,7 @@ index a3d65c59..7e513cbb 100644
  
                  if (event.isCancelled()) {
                      return;
-@@ -1571,6 +1578,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1578,6 +1585,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              case STOP_SPRINTING:
                  PlayerToggleSprintEvent e2 = new PlayerToggleSprintEvent(this.getPlayer(), packetplayinentityaction.b() == PacketPlayInEntityAction.EnumPlayerAction.START_SPRINTING);
                  this.server.getPluginManager().callEvent(e2);
@@ -155,7 +155,7 @@ index a3d65c59..7e513cbb 100644
  
                  if (e2.isCancelled()) {
                      return;
-@@ -2289,6 +2297,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2298,6 +2306,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
          if (this.player.abilities.canFly && this.player.abilities.isFlying != packetplayinabilities.isFlying()) {
              PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this.server.getPlayer(this.player), packetplayinabilities.isFlying());
              this.server.getPluginManager().callEvent(event);
@@ -192,7 +192,7 @@ index a24e652f..afdb5ab8 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index ae425edb..5e145cc5 100644
+index 8f00c844..a27077c7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -8,6 +8,7 @@ import com.google.common.collect.Lists;

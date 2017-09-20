@@ -1,4 +1,4 @@
-From 181df3ee8d9c0705c73d533d78bd2ef2463c359c Mon Sep 17 00:00:00 2001
+From d9788f84fdc5c5a90440e7e068454e59d2094289 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 19 May 2015 06:31:14 -0400
 Subject: [PATCH] Item Attribute Modifier API

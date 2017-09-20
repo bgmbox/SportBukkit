@@ -1,14 +1,14 @@
-From 4b1e31c4d3cf4e589c019ab3249e64457eae5419 Mon Sep 17 00:00:00 2001
+From 413d1b1ed21f654ce73453a3ca0ffda0c48d1bca Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Thu, 2 Aug 2012 17:00:13 -0700
 Subject: [PATCH] Update the POM to distinguish SportBukkit from CraftBukkit.
 
 
 diff --git a/pom.xml b/pom.xml
-index d2e84009..3db44bc9 100644
+index e7311e25..d4852908 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -1,25 +1,46 @@
+@@ -1,25 +1,48 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
      <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,8 @@ index d2e84009..3db44bc9 100644
 +    <groupId>tc.oc</groupId>
 +    <artifactId>sportbukkit</artifactId>
      <packaging>jar</packaging>
-     <version>1.12.1-R0.1-SNAPSHOT</version>
++
+     <version>1.12.2-R0.1-SNAPSHOT</version>
 -    <name>CraftBukkit</name>
 -    <url>http://www.bukkit.org</url>
 +    <name>SportBukkit</name>
@@ -26,7 +27,8 @@ index d2e84009..3db44bc9 100644
      <properties>
          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
          <api.version>unknown</api.version>
-         <minecraft.version>1.12.1</minecraft.version>
++
+         <minecraft.version>1.12.2</minecraft.version>
 -        <minecraft_version>1_12_R1</minecraft_version>
 -        <buildtag.prefix>git-Bukkit-</buildtag.prefix>
 +        <buildtag.prefix>git-SportBukkit-</buildtag.prefix>
@@ -61,7 +63,7 @@ index d2e84009..3db44bc9 100644
      <dependencies>
          <!-- bugfixes (netty#6607) -->
          <dependency>
-@@ -29,8 +50,8 @@
+@@ -29,8 +52,8 @@
              <scope>compile</scope>
          </dependency>
          <dependency>
@@ -72,8 +74,8 @@ index d2e84009..3db44bc9 100644
              <version>${project.version}</version>
              <scope>compile</scope>
          </dependency>
-@@ -64,6 +85,16 @@
-             <version>5.1.43</version>
+@@ -64,6 +87,16 @@
+             <version>5.1.44</version>
              <scope>compile</scope>
          </dependency>
 +        <dependency>
@@ -89,7 +91,7 @@ index d2e84009..3db44bc9 100644
          <!-- testing -->
          <dependency>
              <groupId>junit</groupId>
-@@ -77,15 +108,14 @@
+@@ -77,15 +110,14 @@
              <version>1.3</version>
              <scope>test</scope>
          </dependency>
@@ -111,7 +113,7 @@ index d2e84009..3db44bc9 100644
      <pluginRepositories>
          <pluginRepository>
              <id>spigotmc-public</id>
-@@ -117,6 +147,7 @@
+@@ -117,6 +149,7 @@
                  <artifactId>maven-jar-plugin</artifactId>
                  <version>3.0.2</version>
                  <configuration>
@@ -119,7 +121,7 @@ index d2e84009..3db44bc9 100644
                      <archive>
                          <manifestEntries>
                              <Main-Class>org.bukkit.craftbukkit.Main</Main-Class>
-@@ -194,17 +225,6 @@
+@@ -194,17 +227,6 @@
                                      <pattern>it.unimi</pattern>
                                      <shadedPattern>org.bukkit.craftbukkit.libs.it.unimi</shadedPattern>
                                  </relocation>

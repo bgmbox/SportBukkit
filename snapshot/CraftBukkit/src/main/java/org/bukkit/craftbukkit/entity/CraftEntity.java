@@ -891,7 +891,6 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         }
         return perm;
     }
-
     @Override
     public Vector getPredictedVelocity() {
         return getVelocity();

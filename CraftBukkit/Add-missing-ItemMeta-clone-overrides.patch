@@ -1,4 +1,4 @@
-From 11e412e91ccd51ba280ee62e6fb2912f3a70238b Mon Sep 17 00:00:00 2001
+From e7804573e27ac90c47e0f73c9a2b634405c0edae Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 15:16:32 -0500
 Subject: [PATCH] Add missing ItemMeta clone overrides

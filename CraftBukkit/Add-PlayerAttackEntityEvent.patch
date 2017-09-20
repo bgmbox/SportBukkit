@@ -1,11 +1,11 @@
-From 2ac591c068baa1cc7cf12c63625a817c9b507765 Mon Sep 17 00:00:00 2001
+From abdccf7a16b27665dc54dfc6dc48aae07ec5790b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 15 Nov 2014 16:17:49 -0500
 Subject: [PATCH] Add PlayerAttackEntityEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 64f890e9..bf41dcf0 100644
+index 1e891ec1..37e444a9 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -39,6 +39,7 @@ import org.bukkit.event.inventory.InventoryCreativeEvent;
@@ -16,7 +16,7 @@ index 64f890e9..bf41dcf0 100644
  import org.bukkit.event.player.PlayerChatEvent;
  import org.bukkit.event.player.PlayerCommandPreprocessEvent;
  import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-@@ -1578,6 +1579,12 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1584,6 +1585,12 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                          return;
                      }
  

@@ -1,14 +1,14 @@
-From aaa016501bc5e4bbf70e582869985032960e9e19 Mon Sep 17 00:00:00 2001
+From 33f9e3c46878466d792d3da0983d0a9578ab7dc8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 4 Apr 2015 23:17:52 -0400
 Subject: [PATCH] Complete resource pack API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index b036fec5..34c25eb7 100644
+index 71ec20da..4f452e8a 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -1073,7 +1073,9 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1079,7 +1079,9 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
      // CraftBukkit start
      public void a(PacketPlayInResourcePackStatus packetplayinresourcepackstatus) {
          PlayerConnectionUtils.ensureMainThread(packetplayinresourcepackstatus, this, this.player.x());

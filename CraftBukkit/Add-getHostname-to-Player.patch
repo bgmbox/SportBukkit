@@ -1,11 +1,11 @@
-From 418d1f7a08faef9341a9c9908740cbf3f5bd081f Mon Sep 17 00:00:00 2001
+From fc2dcd97998f365dc0802c6fc9fa365c88f5740e Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Sun, 28 Jul 2013 21:57:34 +0200
 Subject: [PATCH] Add getHostname to Player
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index d9db25b6..fe4154c4 100644
+index a0a8cd67..11c7bcaa 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -78,6 +78,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {

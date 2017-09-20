@@ -1,11 +1,11 @@
-From d81649a97520499d3b7a381402676dc9305e6207 Mon Sep 17 00:00:00 2001
+From e90bd6aeec12aacd46936f6768f954f2e95ba19d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 11 Feb 2014 22:12:50 -0600
 Subject: [PATCH] Fake name and skin API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 97a7f113..991e5109 100644
+index 0cbbb57a..8ab0f81d 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -26,7 +26,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -27,7 +27,7 @@ index 97a7f113..991e5109 100644
          this.datawatcher.register(EntityHuman.bt, new NBTTagCompound());
          this.datawatcher.register(EntityHuman.bu, new NBTTagCompound());
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index fca5a234..273d20a4 100644
+index 5a6e9efa..5b55295a 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -20,10 +20,12 @@ import org.bukkit.craftbukkit.CraftWorld;
@@ -132,7 +132,7 @@ index 549d4e89..6ecd7036 100644
          this.e = ScoreboardTeamBase.EnumNameTagVisibility.ALWAYS.e;
          this.f = ScoreboardTeamBase.EnumTeamPush.ALWAYS.e;
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index bf41dcf0..bed57ba5 100644
+index 37e444a9..302e078e 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -8,6 +8,7 @@ import io.netty.util.concurrent.Future;
@@ -143,7 +143,7 @@ index bf41dcf0..bed57ba5 100644
  import java.util.Collections;
  import java.util.Iterator;
  import java.util.Set;
-@@ -1113,6 +1114,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1119,6 +1120,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
      }
  
      public void sendPacket(final Packet<?> packet) {
@@ -151,7 +151,7 @@ index bf41dcf0..bed57ba5 100644
          if (packet instanceof PacketPlayOutChat) {
              PacketPlayOutChat packetplayoutchat = (PacketPlayOutChat) packet;
              EntityHuman.EnumChatVisibility entityhuman_enumchatvisibility = this.player.getChatFlags();
-@@ -1133,10 +1135,59 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1139,10 +1141,59 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              PacketPlayOutSpawnPosition packet6 = (PacketPlayOutSpawnPosition) packet;
              this.player.compassTarget = new Location(this.getPlayer().getWorld(), packet6.position.getX(), packet6.position.getY(), packet6.position.getZ());
          }

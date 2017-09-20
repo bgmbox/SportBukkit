@@ -1,4 +1,4 @@
-From 46aa83777029006753d13b1e845a77a6cc2ecd78 Mon Sep 17 00:00:00 2001
+From 4f5f9dc0c77d7ec1001ca7807eafbdfd288f9f69 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 3 Jun 2015 19:10:45 -0400
 Subject: [PATCH] Mutable ChunkSnapshots

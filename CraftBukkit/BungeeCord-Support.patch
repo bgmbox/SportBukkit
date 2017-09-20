@@ -1,4 +1,4 @@
-From 7c2e3c55e73095382cde15647e9454cafc6e1e31 Mon Sep 17 00:00:00 2001
+From c826cd58f899967f86b6bd12793af0712f8d7836 Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Sat, 13 Apr 2013 10:50:21 -0700
 Subject: [PATCH] BungeeCord Support
@@ -7,7 +7,7 @@ Subject: [PATCH] BungeeCord Support
 - Ported from Spigot
 
 diff --git a/src/main/java/net/minecraft/server/HandshakeListener.java b/src/main/java/net/minecraft/server/HandshakeListener.java
-index 65b745fc..de313f7c 100644
+index d273c9a7..1d857d92 100644
 --- a/src/main/java/net/minecraft/server/HandshakeListener.java
 +++ b/src/main/java/net/minecraft/server/HandshakeListener.java
 @@ -71,6 +71,27 @@ public class HandshakeListener implements PacketHandshakingInListener {

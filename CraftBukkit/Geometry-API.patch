@@ -1,4 +1,4 @@
-From 94f2a8af92595bae51d3ee0be16cb028f787145d Mon Sep 17 00:00:00 2001
+From 0110594f6d3d92cd74cc0239ae55f020d9bd262e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 18 Nov 2016 04:34:02 -0500
 Subject: [PATCH] Geometry API
@@ -269,7 +269,7 @@ index 11c733e2..f8487998 100644
          return CraftItemFactory.instance();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e0ab5e96..1c714eed 100644
+index 0cdc5cad..450c7b7b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1087,12 +1087,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {

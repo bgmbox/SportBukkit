@@ -1,11 +1,11 @@
-From 9d3bf8fc015fc0d2399abe954b2cf92f49d6a849 Mon Sep 17 00:00:00 2001
+From 287bd00ce676ad66750ae2e06d8ff6a69a007546 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Jan 2013 14:12:03 -0500
 Subject: [PATCH] Add PlayerOnGroundEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 8d086050..2f3a729b 100644
+index e8d2f04f..a7f6cc47 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -98,6 +98,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -17,7 +17,7 @@ index 8d086050..2f3a729b 100644
      public PlayerConnection(MinecraftServer minecraftserver, NetworkManager networkmanager, EntityPlayer entityplayer) {
          this.minecraftServer = minecraftserver;
          this.networkManager = networkmanager;
-@@ -664,6 +666,13 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -670,6 +672,13 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                              this.B &= !this.player.hasEffect(MobEffects.LEVITATION) && !this.player.cP() && !worldserver.c(this.player.getBoundingBox().g(0.0625D).b(0.0D, -0.55D, 0.0D));
                              this.player.onGround = packetplayinflying.a();
                              this.minecraftServer.getPlayerList().d(this.player);

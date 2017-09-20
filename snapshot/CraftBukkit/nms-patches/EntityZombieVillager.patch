@@ -29,22 +29,3 @@
          if (this.by != null) {
              EntityHuman entityhuman = this.world.b(this.by);
  
-@@ -172,15 +178,15 @@
-     }
- 
-     public SoundEffect d(DamageSource damagesource) {
--        return SoundEffects.jB;
-+        return SoundEffects.jy;
-     }
- 
-     public SoundEffect cf() {
--        return SoundEffects.jA;
-+        return SoundEffects.jx;
-     }
- 
-     public SoundEffect dm() {
--        return SoundEffects.jC;
-+        return SoundEffects.jz;
-     }
- 
-     @Nullable

@@ -1,14 +1,14 @@
-From 2aec4f544fb21de6ead347f75a0bb5f2b481a60b Mon Sep 17 00:00:00 2001
+From 87390e9ea4ead8e7649cbae17f374d561ce70a98 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Mar 2015 04:29:17 -0400
 Subject: [PATCH] Relative teleport API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 2ccc5aa4..b036fec5 100644
+index 8eea2e67..71ec20da 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -711,14 +711,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -717,14 +717,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
  
      // CraftBukkit start - Delegate to teleport(Location)
      public void a(double d0, double d1, double d2, float f, float f1, PlayerTeleportEvent.TeleportCause cause) {
@@ -29,7 +29,7 @@ index 2ccc5aa4..b036fec5 100644
          Player player = this.getPlayer();
          Location from = player.getLocation();
  
-@@ -759,6 +763,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -765,6 +769,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
          }
  
          this.internalTeleport(d0, d1, d2, f, f1, set);
@@ -37,7 +37,7 @@ index 2ccc5aa4..b036fec5 100644
      }
  
      public void teleport(Location dest) {
-@@ -775,15 +780,15 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -781,15 +786,15 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
          }
  
          if(Double.isNaN(d0)) {
@@ -56,7 +56,7 @@ index 2ccc5aa4..b036fec5 100644
          }
  
          this.justTeleported = true;
-@@ -1209,7 +1214,6 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1215,7 +1220,6 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                  }
              }
          }

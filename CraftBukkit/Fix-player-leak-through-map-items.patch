@@ -1,11 +1,11 @@
-From b4f251078235ae8d6b5bf44a12e4d660ed868f8d Mon Sep 17 00:00:00 2001
+From 440fc488b4859bab29a5162b8f4785abdf965060 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 21 Jan 2017 04:16:04 -0500
 Subject: [PATCH] Fix player leak through map items
 
 
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 896f75ba..b4209876 100644
+index 654f1e7e..9be9d63a 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -1066,6 +1066,16 @@ public abstract class World implements IBlockAccess {

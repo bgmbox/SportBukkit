@@ -1,4 +1,4 @@
-From a5ab2d67c632917593c0d0ab7bbac41f1a55f38d Mon Sep 17 00:00:00 2001
+From 46203808a056cc4c989b898b4146f1890f282813 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:54:44 -0700
 Subject: [PATCH] Implement player collision API
@@ -26,7 +26,7 @@ index 88bb9707..388f354d 100644
              if (!entity.noclip && !this.noclip) {
                  double d0 = entity.locX - this.locX;
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index e8658f98..7465e940 100644
+index 831681ae..d1ad7797 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -399,7 +399,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -52,7 +52,7 @@ index d44a2f9a..f4d4e15d 100644
              int j;
  
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 016c0e4e..5b1e4149 100644
+index c32524fa..8cce6ffb 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -74,6 +74,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {

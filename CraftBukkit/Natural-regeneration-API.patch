@@ -1,11 +1,11 @@
-From e1d80087af3e628e0a0831c5d560654e31dd2d86 Mon Sep 17 00:00:00 2001
+From 96c8eff10c49932f843ef1c3f0d20b3f722600b3 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 04:31:29 -0400
 Subject: [PATCH] Natural regeneration API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 537ec9c3..733f08d2 100644
+index bc26c923..5202a677 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -65,6 +65,11 @@ public abstract class EntityHuman extends EntityLiving {

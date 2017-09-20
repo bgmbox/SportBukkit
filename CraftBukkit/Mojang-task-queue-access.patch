@@ -1,11 +1,11 @@
-From c4384891a97b09298489529fec66a0c4369bb7c9 Mon Sep 17 00:00:00 2001
+From 569662d179b30228e9533ba4d2423645b14c172f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 5 Aug 2016 10:46:15 -0400
 Subject: [PATCH] Mojang task queue access
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 9a6e2056..281fd339 100644
+index 3f7cac09..2bc02200 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -369,7 +369,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -65,7 +65,7 @@ index c96eae85..37de4cf4 100644
      }
      public GameProfile completeOfflineProfile(GameProfile profile) {
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7de125ed..251e8b9a 100644
+index dc36ce84..94732a26 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -49,6 +49,11 @@ import org.bukkit.craftbukkit.CraftServer;
@@ -97,7 +97,7 @@ index 7de125ed..251e8b9a 100644
      public int autosavePeriod;
      // CraftBukkit end
      // SportBukkit start
-@@ -712,19 +718,25 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -708,19 +714,25 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
          this.methodProfiler.a("jobs");
          Queue queue = this.j;
  
@@ -126,7 +126,7 @@ index 7de125ed..251e8b9a 100644
  
          org.bukkit.craftbukkit.chunkio.ChunkIOExecutor.tick();
  
-@@ -1457,6 +1469,47 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -1453,6 +1465,47 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
          return Thread.currentThread() == this.serverThread;
      }
  
@@ -175,10 +175,10 @@ index 7de125ed..251e8b9a 100644
          return 256;
      }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 7e513cbb..4261368f 100644
+index abdfd16e..0b1cd3ab 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -1351,7 +1351,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1358,7 +1358,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                              }
                          };
  
@@ -187,7 +187,7 @@ index 7e513cbb..4261368f 100644
  
                          try {
                              waitable.get();
-@@ -1406,7 +1406,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1413,7 +1413,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                          }
                      };
  
@@ -196,7 +196,7 @@ index 7e513cbb..4261368f 100644
  
                      try {
                          waitable.get();
-@@ -1466,7 +1466,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1473,7 +1473,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                          return null;
                      }};
                  if (async) {
@@ -226,7 +226,7 @@ index c91627dc..fd4b0bc8 100644
              if(futures.isEmpty()) break;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 8e27e688..8ca563d0 100644
+index 4b0d8143..4bf8e953 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -91,12 +91,7 @@ import org.bukkit.inventory.ShapedRecipe;
@@ -244,7 +244,7 @@ index 8e27e688..8ca563d0 100644
  import org.bukkit.plugin.messaging.Messenger;
  import org.bukkit.potion.Potion;
 @@ -1834,4 +1829,44 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-             335, 338            // 1.12
+             335, 338, 340       // 1.12
          );
      }
 +

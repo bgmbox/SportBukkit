@@ -1,11 +1,11 @@
-From 8bb516073a5d2ec4e05cb7a120e72d05b529e7dc Mon Sep 17 00:00:00 2001
+From 38e802adb7533b8e6e6b2136a516fcfebea5e4bd Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Sun, 5 Jan 2014 20:35:57 -0600
 Subject: [PATCH] Allow plugins to access player locale
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index fe4154c4..a5291609 100644
+index 11c7bcaa..c3312439 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -31,7 +31,7 @@ import org.bukkit.inventory.MainHand;

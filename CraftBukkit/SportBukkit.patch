@@ -1,4 +1,4 @@
-From 5ec03d8ae26f58bc35121b585d3360c165dbba01 Mon Sep 17 00:00:00 2001
+From d9c294798374a9a0a6063818f63b605735106c81 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:14 -0500
 Subject: [PATCH] SportBukkit
@@ -15,7 +15,7 @@ index 76d5f4f4..dc183b51 100644
  An implementation of the [Bukkit](https://hub.spigotmc.org/stash/projects/SPIGOT/repos/bukkit) plugin API for [Minecraft](https://minecraft.net/) servers, currently maintained by [SpigotMC](http://www.spigotmc.org/).
  
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 46fe50dc..4165e996 100644
+index 65ede80c..45690080 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -176,6 +176,11 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -59,7 +59,7 @@ index 46fe50dc..4165e996 100644
  
      public String f_() {
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index d8fe1e59..04f8934c 100644
+index 573f153c..cec36a8a 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
@@ -71,7 +71,7 @@ index d8fe1e59..04f8934c 100644
  import org.bukkit.GameMode;
  import org.bukkit.WeatherType;
  import org.bukkit.craftbukkit.CraftWorld;
-@@ -1698,10 +1698,4 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -1699,10 +1699,4 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
      }
      // CraftBukkit end
  
@@ -83,10 +83,10 @@ index d8fe1e59..04f8934c 100644
 -    // SportBukkit end
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 327cb298..6318b9d7 100644
+index 6f155133..0e3f4eee 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -297,6 +297,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -296,6 +296,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
                  world.a(worldsettings);
                  this.server.scoreboardManager = new org.bukkit.craftbukkit.scoreboard.CraftScoreboardManager(this, world.getScoreboard());
@@ -94,7 +94,7 @@ index 327cb298..6318b9d7 100644
              } else {
                  String dim = "DIM" + dimension;
  
-@@ -1196,6 +1197,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -1190,6 +1191,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
          return this.I;
      }
  
@@ -102,7 +102,7 @@ index 327cb298..6318b9d7 100644
      public int P() {
          return this.u;
      }
-@@ -1426,6 +1428,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -1420,6 +1422,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
      }
  
@@ -191,7 +191,7 @@ index 79eeee38..84c65e38 100644
      }
  
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 2453874d..4f0844ca 100644
+index e241d2e1..ebdde784 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -18,7 +18,7 @@ import javax.annotation.Nullable;
@@ -365,7 +365,7 @@ index 00000000..2394dc92
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 2f4ab3a0..9c8c87c1 100644
+index 46edafdb..6b56d822 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -3,6 +3,9 @@ package org.bukkit.craftbukkit;

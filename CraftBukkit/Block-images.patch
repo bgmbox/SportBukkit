@@ -1,4 +1,4 @@
-From 5ceac430ca8e13485a68a1eff09ad465a94456e7 Mon Sep 17 00:00:00 2001
+From 64bbad80506937cfcbb5e708e99d036d771d5f26 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 10 Oct 2016 04:53:27 -0400
 Subject: [PATCH] Block images
@@ -38,7 +38,7 @@ index f8487998..4afc3622 100644
          return vectorFactory;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 8ca563d0..53189c32 100644
+index 4bf8e953..4fdd56ca 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1696,11 +1696,6 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {

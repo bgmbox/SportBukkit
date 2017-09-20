@@ -1,11 +1,11 @@
-From 1476ebdfbffd5604f56a602904d6c1ae9d01db7c Mon Sep 17 00:00:00 2001
+From 510b62c5071306f3daa598165bc17de97eb51d29 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 281fd339..46fe50dc 100644
+index 2bc02200..65ede80c 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -285,6 +285,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -25,7 +25,7 @@ index 281fd339..46fe50dc 100644
  
      // SportBukkit start
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 251e8b9a..30ee2bfb 100644
+index 94732a26..3ba6d2b6 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -35,6 +35,7 @@ import java.util.UUID;
@@ -45,7 +45,7 @@ index 251e8b9a..30ee2bfb 100644
  // CraftBukkit end
  
  // SportBukkit start
-@@ -133,6 +136,14 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -133,6 +136,13 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
      protected boolean abnormalTermination;
      // Sportbukkit end
  
@@ -56,11 +56,10 @@ index 251e8b9a..30ee2bfb 100644
 +    protected Thread watchdogThread;
 +    // SportBukkit end
 +
-+
      public MinecraftServer(OptionSet options, Proxy proxy, DataConverterManager dataconvertermanager, YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
          this.e = proxy;
          this.V = yggdrasilauthenticationservice;
-@@ -535,9 +546,84 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -535,9 +545,83 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
      public void safeShutdown() {
          this.isRunning = false;
@@ -139,14 +138,13 @@ index 251e8b9a..30ee2bfb 100644
 +                }
 +            }
 +        }
-+
      }
  
 -    // SportBukkit Start
-     private static double calcTps(double avg, double exp, double tps)
-     {
+     private static double calcTps(double avg, double exp, double tps) {
          return ( avg * exp ) + ( tps * ( 1 - exp ) );
-@@ -553,19 +639,24 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+     }
+@@ -552,18 +636,23 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
                  // SportBukkit start
                  Arrays.fill( recentTps, 20 );
@@ -155,7 +153,6 @@ index 251e8b9a..30ee2bfb 100644
  
                  while (this.isRunning) {
                      setLastTickStart(realTimeMillis());
- 
                      curTime = System.nanoTime();
 -                    wait = TICK_TIME - (curTime - lastTick) - catchupTime;
 -                    if (wait > 0) {
@@ -164,20 +161,20 @@ index 251e8b9a..30ee2bfb 100644
 +                    if(wait < 0) {
 +                        catchupTime = Math.min(1000000000, Math.abs(wait));
 +                    } else {
-                         catchupTime = 0;
++                        catchupTime = 0;
 +                        if(doSuspension()) {
 +                            tickSection = lastTick = curTime - TICK_TIME;
 +                        } else {
 +                            Thread.sleep(wait / 1000000);
 +                        }
-+
+                         catchupTime = 0;
                          continue;
 -                    } else {
 -                        catchupTime = Math.min(1000000000, Math.abs(wait));
                      }
+                     lastTick = curTime;
  
-                     if ( MinecraftServer.currentTick++ % SAMPLE_INTERVAL == 0 )
-@@ -720,6 +811,8 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -716,6 +805,8 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
          // SportBukkit start - don't lock the task queue while running tasks
          processTasks();
@@ -186,7 +183,7 @@ index 251e8b9a..30ee2bfb 100644
          /*
          synchronized (this.j) {
              while (!this.j.isEmpty()) {
-@@ -1449,6 +1542,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -1445,6 +1536,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
  
              synchronized (this.j) {
                  this.j.add(listenablefuturetask);
@@ -194,7 +191,7 @@ index 251e8b9a..30ee2bfb 100644
                  return listenablefuturetask;
              }
          } else {
-@@ -1482,6 +1576,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+@@ -1478,6 +1570,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
                  taskQueue.addLast(task);
              }
          }
@@ -240,7 +237,7 @@ index dd18b4e0..a3481c0f 100644
              long j = MinecraftServer.aw();
              long k = j - i;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 2161c334..9c487a20 100644
+index 82c34514..c2a9040c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -6,6 +6,8 @@ import java.io.FileInputStream;

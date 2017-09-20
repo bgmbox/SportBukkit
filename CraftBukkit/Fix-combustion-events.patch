@@ -1,4 +1,4 @@
-From c220c5a8252b0225d5eeaf4b4a9e6f2c8dc27a79 Mon Sep 17 00:00:00 2001
+From 038d1f2ea6ce6198c4bce586587a89bbf82234de Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 30 Oct 2014 00:40:07 -0400
 Subject: [PATCH] Fix combustion events
@@ -168,10 +168,10 @@ index 515d6127..2b3c6b0a 100644
          float f4 = f * f + f1 * f1 + f2 * f2;
  
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 9f7b5be9..2fe4bf59 100644
+index 68d33b8a..33c90d30 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -1752,6 +1752,41 @@ public abstract class World implements IBlockAccess {
+@@ -1743,6 +1743,41 @@ public abstract class World implements IBlockAccess {
          return false;
      }
  

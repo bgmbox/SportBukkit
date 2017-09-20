@@ -1,14 +1,14 @@
-From de3a58768f40effb626b2a7f6721e53936cbbbfe Mon Sep 17 00:00:00 2001
+From 988b8890e861508e64fdf2cc221ca48476dca0ed Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Fri, 31 Aug 2012 12:30:14 -0700
 Subject: [PATCH] More complex logic when looking for nearby players
 
 
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 992ab429..9f7b5be9 100644
+index 569c86f8..68d33b8a 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -2587,7 +2587,7 @@ public abstract class World implements IBlockAccess {
+@@ -2578,7 +2578,7 @@ public abstract class World implements IBlockAccess {
          for (int i = 0; i < this.players.size(); ++i) {
              EntityHuman entityhuman1 = (EntityHuman) this.players.get(i);
              // CraftBukkit start - Fixed an NPE
