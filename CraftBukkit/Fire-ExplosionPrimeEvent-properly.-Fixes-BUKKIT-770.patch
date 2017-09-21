@@ -1,4 +1,4 @@
-From 0bb52edc0eba088babc5611956ce4979a08fab9e Mon Sep 17 00:00:00 2001
+From 6771b2f2c53e8333199cc267f12642ba15a39eea Mon Sep 17 00:00:00 2001
 From: Chad Waters <authorblues@gmail.com>
 Date: Thu, 2 Aug 2012 16:47:02 -0700
 Subject: [PATCH] Fire ExplosionPrimeEvent properly. Fixes BUKKIT-770

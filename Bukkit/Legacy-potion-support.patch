@@ -1,4 +1,4 @@
-From 59e76cc85c95b19ebc99dedfdcf6cbc222331921 Mon Sep 17 00:00:00 2001
+From bcdde14f93c630db5d619bf53e2960ddc6b2b0b6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 19 Mar 2016 00:45:13 -0400
 Subject: [PATCH] Legacy potion support

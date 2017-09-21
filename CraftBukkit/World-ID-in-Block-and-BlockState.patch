@@ -1,11 +1,11 @@
-From b8b3343cbe56511ebd3315fcbf279cafebc4506e Mon Sep 17 00:00:00 2001
+From 2a89f1be63edd1a168b290d91e9d881838866968 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 04:15:18 -0500
 Subject: [PATCH] World ID in Block and BlockState
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 2f5fc26b..4b326a44 100644
+index 2f5fc26b..a706bbd4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -5,9 +5,11 @@ import java.util.Collection;
@@ -41,7 +41,7 @@ index 2f5fc26b..4b326a44 100644
      }
  
      public CraftBlock(CraftChunk chunk, Vec3 position) {
-+        this.worldId = getWorld().getUID();
++        this.worldId = chunk.getWorldId();
          this.position = BlockPosition.copyOf(position);
 -        this.chunk = chunk;
      }

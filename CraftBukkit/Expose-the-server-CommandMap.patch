@@ -1,4 +1,4 @@
-From c8c3694fa9882254ac27c217182d50162b59e996 Mon Sep 17 00:00:00 2001
+From 4e01f06c05067e86a763665787cc93bfaf88bb63 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 29 Oct 2014 19:09:49 -0400
 Subject: [PATCH] Expose the server CommandMap

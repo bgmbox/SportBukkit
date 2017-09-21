@@ -1,4 +1,4 @@
-From eccdc6505e70b538a3baead265244c0cf87cb994 Mon Sep 17 00:00:00 2001
+From b45c1f22c176d50512b2dc4b50147095f6f0f2a9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 28 Apr 2012 01:39:04 -0400
 Subject: [PATCH] Entity collision API

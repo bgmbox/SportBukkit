@@ -1,4 +1,4 @@
-From 4d6a0548fb4ade7901919b4ad186531c082f6f36 Mon Sep 17 00:00:00 2001
+From d76442d3225e7157a64ad116d1a0d052ac9bdccb Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 10 Jul 2015 23:33:46 -0400
 Subject: [PATCH] Fix TNT damage being cancelled by friendly-fire rules

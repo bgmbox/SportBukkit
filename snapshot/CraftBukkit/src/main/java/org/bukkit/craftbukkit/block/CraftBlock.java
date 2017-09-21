@@ -41,7 +41,7 @@ public class CraftBlock implements Block {
     }
 
     public CraftBlock(CraftChunk chunk, Vec3 position) {
-        this.worldId = getWorld().getUID();
+        this.worldId = chunk.getWorldId();
         this.position = BlockPosition.copyOf(position);
     }
 
