@@ -1,4 +1,4 @@
-From 42fc07544d53904af5b23cfbd8ab89bddb07b519 Mon Sep 17 00:00:00 2001
+From bed65603cfa677bd5f621204ca337c5fa2c73f2a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 26 Jun 2016 01:57:17 -0400
 Subject: [PATCH] Item cooldown API

@@ -1,4 +1,4 @@
-From decd50ae3b83b65ec0424b21a0422238ac04993e Mon Sep 17 00:00:00 2001
+From 50f8b9e1356b7480cc6e724a4eaf38aeebf0f0ed Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Mar 2016 16:00:16 -0400
 Subject: [PATCH] Fix cooked fish legacy import

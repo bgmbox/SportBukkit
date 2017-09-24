@@ -1,4 +1,4 @@
-From dc06465306c82e6f3262e4c0b2e0a6564e023c2d Mon Sep 17 00:00:00 2001
+From 775ce45160ae942f169897f76e10f250cda86fb8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 22:09:17 -0400
 Subject: [PATCH] Velocity API
@@ -415,7 +415,7 @@ index 98c2bdcf..a0eabda9 100644
                              EntityHuman entityhuman = (EntityHuman) entity;
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index d69bfa0d..fce9ee5e 100644
+index d69bfa0d..cf016cfe 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -58,6 +58,7 @@ import org.bukkit.inventory.CraftingInventory;
@@ -480,7 +480,13 @@ index d69bfa0d..fce9ee5e 100644
                  if (this.teleportPos != null) {
                      if (this.e - this.A > 20) {
                          this.A = this.e;
-@@ -2217,6 +2258,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2212,11 +2253,12 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+             this.player.ping = (this.player.ping * 3 + i) / 4;
+             this.g = false;
+         } else if (!this.player.getName().equals(this.minecraftServer.Q())) {
+-            this.disconnect(new ChatMessage("disconnect.timeout", new Object[0]));
++            //this.disconnect(new ChatMessage("disconnect.timeout", new Object[0]));
+         }
  
      }
  

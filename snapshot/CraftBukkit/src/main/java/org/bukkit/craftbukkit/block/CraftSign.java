@@ -10,17 +10,20 @@ import org.bukkit.craftbukkit.util.BungeeChatUtils;
 
 public class CraftSign extends CraftBlockEntityState<TileEntitySign> implements Sign {
 
-    private final BaseComponent[] lines = new BaseComponent[4];
+    private BaseComponent[] lines = new BaseComponent[4];
 
     public CraftSign(final Block block) {
         super(block, TileEntitySign.class);
+        importFromNms();
     }
 
     public CraftSign(final Material material, final TileEntitySign te) {
         super(material, te);
+        importFromNms();
     }
 
     private void importFromNms() {
+        lines = new BaseComponent[4];
         for(int i = 0; i < lines.length; i++) {
             lines[i] = getTileEntity().lines.length > i ? BungeeChatUtils.toBungee(getTileEntity().lines[i])
                     : new TextComponent();

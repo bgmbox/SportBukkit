@@ -1,11 +1,11 @@
-From fd52d17e42e0ac18c317a9fb0a2d2c9c288ed927 Mon Sep 17 00:00:00 2001
+From fe6300a2d0fea199a97a5592e4f1257da3d4cc00 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:17 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 8c8e7aca..05fea2b2 100644
+index e86c98a0..6c07058e 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -12,6 +12,8 @@ import java.util.Arrays;
@@ -48,10 +48,10 @@ index 8c8e7aca..05fea2b2 100644
               }
              // CraftBukkit end
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java b/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java
-index 7a8d4452..965f1679 100644
+index 7a8d4452..4938e2e4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftSign.java
-@@ -1,16 +1,16 @@
+@@ -1,79 +1,70 @@
  package org.bukkit.craftbukkit.block;
  
 -import net.minecraft.server.ChatComponentText;
@@ -68,21 +68,26 @@ index 7a8d4452..965f1679 100644
  public class CraftSign extends CraftBlockEntityState<TileEntitySign> implements Sign {
  
 -    private String[] lines;
-+    private final BaseComponent[] lines = new BaseComponent[4];
++    private BaseComponent[] lines = new BaseComponent[4];
  
      public CraftSign(final Block block) {
          super(block, TileEntitySign.class);
-@@ -20,60 +20,48 @@ public class CraftSign extends CraftBlockEntityState<TileEntitySign> implements
-         super(material, te);
++        importFromNms();
      }
  
+     public CraftSign(final Material material, final TileEntitySign te) {
+         super(material, te);
++        importFromNms();
++    }
++
 +    private void importFromNms() {
++        lines = new BaseComponent[4];
 +        for(int i = 0; i < lines.length; i++) {
 +            lines[i] = getTileEntity().lines.length > i ? BungeeChatUtils.toBungee(getTileEntity().lines[i])
 +                    : new TextComponent();
 +        }
-+    }
-+
+     }
+ 
      @Override
      public void load(TileEntitySign sign) {
          super.load(sign);

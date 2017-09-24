@@ -1766,7 +1766,7 @@
  
              tileentitysign.update();
              worldserver.notify(blockposition, iblockdata, iblockdata, 3);
-@@ -999,6 +2283,7 @@
+@@ -999,28 +2283,47 @@
      }
  
      public void a(PacketPlayInKeepAlive packetplayinkeepalive) {
@@ -1774,7 +1774,12 @@
          if (this.g && packetplayinkeepalive.a() == this.h) {
              int i = (int) (this.d() - this.f);
  
-@@ -1010,17 +2295,35 @@
+             this.player.ping = (this.player.ping * 3 + i) / 4;
+             this.g = false;
+         } else if (!this.player.getName().equals(this.minecraftServer.Q())) {
+-            this.disconnect(new ChatMessage("disconnect.timeout", new Object[0]));
++            //this.disconnect(new ChatMessage("disconnect.timeout", new Object[0]));
+         }
  
      }
  

@@ -1,4 +1,4 @@
-From 50e269b76eca16f1de3cff4e8764a6d3d59b2c68 Mon Sep 17 00:00:00 2001
+From 3bf754a3d15b6ad942b4ba739ac1deb413057c75 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 5 Aug 2016 10:46:15 -0400
 Subject: [PATCH] Mojang task queue access
@@ -175,7 +175,7 @@ index dc36ce84..94732a26 100644
          return 256;
      }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index abdfd16e..0b1cd3ab 100644
+index 0e5281c7..82661656 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1358,7 +1358,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {

@@ -1,4 +1,4 @@
-From 20a958b4a68884c4a747cfc0891a1bf94c491b52 Mon Sep 17 00:00:00 2001
+From 456a1ff34b5e6c210e2d0d9fb5feb1dff49dab7a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 9 May 2015 14:30:04 -0400
 Subject: [PATCH] Block digging API

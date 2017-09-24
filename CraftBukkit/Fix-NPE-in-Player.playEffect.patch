@@ -1,4 +1,4 @@
-From 73fae21a80276d27c5cd24f4b65658ecfa8c3ee1 Mon Sep 17 00:00:00 2001
+From 1d23d0aebc96736e550c06fb9e3fb4677c28669c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 22 Sep 2014 05:35:35 -0400
 Subject: [PATCH] Fix NPE in Player.playEffect

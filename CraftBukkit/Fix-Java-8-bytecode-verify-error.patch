@@ -1,4 +1,4 @@
-From 04a8012ef4c47562700f8766720f653b6eec353b Mon Sep 17 00:00:00 2001
+From d5e1c4b2ecf118e260aa87b240bd5d2def19089f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 13 Oct 2016 16:12:27 -0400
 Subject: [PATCH] Fix Java 8 bytecode verify error
