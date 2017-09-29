@@ -1,4 +1,4 @@
-From 71f686551d5883b4c4aa122cde8412a047723e49 Mon Sep 17 00:00:00 2001
+From 8e8531fa999d1fff8f19617df08b94c4f8ec1630 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 4 Apr 2015 22:59:54 -0400
 Subject: [PATCH] Complete resource pack API

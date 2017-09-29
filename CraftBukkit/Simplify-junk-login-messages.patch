@@ -1,4 +1,4 @@
-From 9d220cab8e8c8d5cbb9911efae2e40c0d8a1ac23 Mon Sep 17 00:00:00 2001
+From b38312ae004de6dea0b918d92c58e4fc18010841 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Fri, 1 Aug 2014 12:51:06 -0500
 Subject: [PATCH] Simplify junk login messages

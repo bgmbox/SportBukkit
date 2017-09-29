@@ -1,4 +1,4 @@
-From b26eb4b4a6b95214d015203805bebcc17d7fa2f6 Mon Sep 17 00:00:00 2001
+From 28ea711cc3dba73d6e67171719e8e7f12eb2173b Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Fri, 2 May 2014 20:48:11 -0500
 Subject: [PATCH] Cache object to string translations in JsonList

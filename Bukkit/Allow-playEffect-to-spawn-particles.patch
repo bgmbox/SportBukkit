@@ -1,4 +1,4 @@
-From 86b1a53a3e29541ba305984a6f23bb31cd2bf33f Mon Sep 17 00:00:00 2001
+From 596f7182084668f71b259075cdd85a8782ac2acd Mon Sep 17 00:00:00 2001
 From: Thinkofdeath <purgames@gmail.com>
 Date: Sun, 17 Mar 2013 22:56:14 +0000
 Subject: [PATCH] Allow playEffect to spawn particles

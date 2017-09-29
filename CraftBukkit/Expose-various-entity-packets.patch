@@ -1,4 +1,4 @@
-From b3b4c772c06d3e54a6a6c329203311aba57ffdca Mon Sep 17 00:00:00 2001
+From 041739844694e5aa16be6b35a9da984c29c63a45 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 05:56:05 -0500
 Subject: [PATCH] Expose various entity packets
