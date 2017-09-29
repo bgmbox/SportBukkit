@@ -1,4 +1,4 @@
-From a1c6aab13f6a422ab40945f95cbe9e6251c3d68d Mon Sep 17 00:00:00 2001
+From f1637a1a67d4c7d3f908599e710bb72e720b11b9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 28 May 2015 04:31:39 -0400
 Subject: [PATCH] Improve Permissible interface
@@ -163,7 +163,7 @@ index 8f875ca0..716f7c8a 100644
          return false;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index bc5598af..e7242099 100644
+index cb99ad70..67ca9591 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -3,6 +3,8 @@ package org.bukkit.craftbukkit.entity;

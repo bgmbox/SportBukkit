@@ -1,4 +1,4 @@
-From 15e72f7abb863001cd8603e83951b25c253f0565 Mon Sep 17 00:00:00 2001
+From 454ecf078bf1a0863955b50d2f714619923cc4dd Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 20 Jun 2015 12:27:57 -0400
 Subject: [PATCH] Call onDisable before disabling the plugin

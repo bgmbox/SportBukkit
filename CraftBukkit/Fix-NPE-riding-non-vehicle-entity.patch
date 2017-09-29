@@ -1,4 +1,4 @@
-From 775f09622de5a0637848dd65a643c4469d7e3b97 Mon Sep 17 00:00:00 2001
+From c9c598baa1be836217d86afb184d429775fc4bef Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 23 Dec 2016 13:36:50 -0500
 Subject: [PATCH] Fix NPE riding non-vehicle entity

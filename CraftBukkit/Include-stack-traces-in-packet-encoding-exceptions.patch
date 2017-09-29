@@ -1,4 +1,4 @@
-From 3555b8eeda39416837a9a2ca69f75218a6927dad Mon Sep 17 00:00:00 2001
+From 351da2c8a5b75f9ee992660fb9be44f80ded24f2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 18 Feb 2015 06:36:47 -0500
 Subject: [PATCH] Include stack traces in packet encoding exceptions

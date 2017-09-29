@@ -1,4 +1,4 @@
-From e69363a148f3eddcbacd0522008070feaf4fa64d Mon Sep 17 00:00:00 2001
+From 1a8a56898739ffe9bb9ca48b3435d9b0bbaed3a3 Mon Sep 17 00:00:00 2001
 From: YukonAppleGeek <yukonvinecki@gmail.com>
 Date: Fri, 12 Apr 2013 21:34:01 -0700
 Subject: [PATCH] Add BlockDispenseEntityEvent
@@ -245,7 +245,7 @@ index ac807ced..8ea9fc3d 100644
              if (itemstack.hasName()) {
                  entityminecartabstract.setCustomName(itemstack.getName());
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 9ef7686b..8775c28b 100644
+index 36571353..fea2a2c8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -267,6 +267,13 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {

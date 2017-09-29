@@ -1,4 +1,4 @@
-From 6b0da26bc826ab30a310217f513eac228441757e Mon Sep 17 00:00:00 2001
+From c77b81423dede0bf61cc30cdf53d04cbd6be464e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 22 May 2015 00:45:13 -0400
 Subject: [PATCH] Add CanDestroy and CanPlaceOn to ItemMeta

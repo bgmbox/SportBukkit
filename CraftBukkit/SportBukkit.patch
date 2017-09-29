@@ -1,4 +1,4 @@
-From 3f57bd3b2176d8586972076a3156f9f5c082e1ca Mon Sep 17 00:00:00 2001
+From 5f0933ec7173c8c7d9c2da8cbdeb7ca1e7026355 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:14 -0500
 Subject: [PATCH] SportBukkit
@@ -750,7 +750,7 @@ index 00000000..c529dba1
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 90d4eb72..4d27481b 100644
+index d94eec5f..2d79416c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -22,6 +22,9 @@ import org.bukkit.scheduler.BukkitRunnable;

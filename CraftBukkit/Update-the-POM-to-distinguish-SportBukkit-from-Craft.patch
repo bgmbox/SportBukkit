@@ -1,4 +1,4 @@
-From 4298040bdad63e71b22aa7907040a548dffae91f Mon Sep 17 00:00:00 2001
+From 192ddccf743b7c14d107d0764b56f4087add046f Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Thu, 2 Aug 2012 17:00:13 -0700
 Subject: [PATCH] Update the POM to distinguish SportBukkit from CraftBukkit.

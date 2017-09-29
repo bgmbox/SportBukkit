@@ -1,11 +1,11 @@
-From 69a1673d9a9e78b44fa59dbb0152b99f88809341 Mon Sep 17 00:00:00 2001
+From ef93ba48d2b4574d9cd7795660f17f4bdc56d82d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:12:39 -0400
 Subject: [PATCH] Entity bounding box API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 31288347..8f00c844 100644
+index 32db9d06..39e8cbe3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -32,6 +32,8 @@ import org.bukkit.permissions.PermissionAttachment;

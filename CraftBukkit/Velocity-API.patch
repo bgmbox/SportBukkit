@@ -1,4 +1,4 @@
-From e4605160beaf92f4be43cfd0de69862e90028f97 Mon Sep 17 00:00:00 2001
+From b60120435057e99f024b3044c19d788a90044fd9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 22:09:17 -0400
 Subject: [PATCH] Velocity API
@@ -527,7 +527,7 @@ index 450c7b7b..4b0d8143 100644
          return this.configuration.getInt("ticks-per.animal-spawns");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 229a1b1b..86203f70 100644
+index 4ce36f97..edbc8733 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -37,6 +37,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {

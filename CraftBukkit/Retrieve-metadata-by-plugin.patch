@@ -1,4 +1,4 @@
-From 5ae0efbd0f6735fa99afa020722a4cae4a54eb54 Mon Sep 17 00:00:00 2001
+From bc00917542935302a1941448ee3bb780be25b60e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 19 Jun 2015 15:02:55 -0400
 Subject: [PATCH] Retrieve metadata by plugin
@@ -54,7 +54,7 @@ index 08634fad..7d082117 100644
          requirePlaced();
          return chunk.getCraftWorld().getBlockMetadata().getMetadata(getBlock(), metadataKey);
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index e7242099..cbd92147 100644
+index 67ca9591..3f5248e0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -482,6 +482,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {

@@ -1,4 +1,4 @@
-From 662998ee5e127927d9fa1d703aef51e5584e680b Mon Sep 17 00:00:00 2001
+From 1b9a105ac530e7cffef0f2e56d5b3630a0ff6716 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 3 Jun 2014 08:02:58 -0400
 Subject: [PATCH] Fix head rotation packet spam

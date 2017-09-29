@@ -1,4 +1,4 @@
-From ec34b82ad15b391b39d3fa7307ee56749ba33e90 Mon Sep 17 00:00:00 2001
+From aad914c39b738e378997a48327ecd1636cf477c6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
@@ -192,7 +192,7 @@ index a24e652f..afdb5ab8 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 8f00c844..a27077c7 100644
+index 39e8cbe3..82494687 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
@@ -217,7 +217,7 @@ index 8f00c844..a27077c7 100644
      }
  
      public Location getLocation() {
--        return new Location(getWorld(), entity.locX, entity.locY, entity.locZ, entity.yaw, entity.pitch);
+-        return new Location(getWorld(), entity.locX, entity.locY, entity.locZ, entity instanceof EntityLiving ? entity.getHeadRotation() : entity.yaw, entity.pitch);
 +        return getEntityLocation();
 +    }
 +
@@ -229,7 +229,7 @@ index 8f00c844..a27077c7 100644
      public Location getLocation(Location loc) {
 @@ -238,11 +246,26 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
              loc.setZ(entity.locZ);
-             loc.setYaw(entity.yaw);
+             loc.setYaw(entity instanceof EntityLiving ? entity.getHeadRotation() : entity.yaw);
              loc.setPitch(entity.pitch);
 +
 +            if(loc instanceof EntityLocation) {

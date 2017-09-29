@@ -1,4 +1,4 @@
-From d9918877dd04ac782b6aa0943eebe2b463966a5d Mon Sep 17 00:00:00 2001
+From ba8a38e9b4ec7984961d6bc450849c160955d809 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 11 Feb 2014 22:12:50 -0600
 Subject: [PATCH] Fake name and skin API
@@ -380,7 +380,7 @@ index 1314c744..8f875ca0 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 8775c28b..bc5598af 100644
+index fea2a2c8..cb99ad70 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -14,6 +14,7 @@ import org.bukkit.Location;

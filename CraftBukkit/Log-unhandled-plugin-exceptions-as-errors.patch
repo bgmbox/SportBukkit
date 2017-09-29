@@ -1,4 +1,4 @@
-From 125cca95bb95e241f2a53886d48f490e4ae6c6b0 Mon Sep 17 00:00:00 2001
+From d8656e933dfa277f18185c0a11ae2a754a557237 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 9 Dec 2014 02:54:19 -0500
 Subject: [PATCH] Log unhandled plugin exceptions as errors
@@ -31,7 +31,7 @@ index 33e8ea02..9dc1218b 100644
              Thread.currentThread().interrupt();
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 5294954c..685dd39e 100644
+index a413eab5..50b3a7c5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -352,7 +352,7 @@ public class CraftScheduler implements BukkitScheduler {

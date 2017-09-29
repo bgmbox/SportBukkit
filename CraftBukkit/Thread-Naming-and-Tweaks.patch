@@ -1,4 +1,4 @@
-From 1d81c896fef299f58df5c7f4c138d2eae2b692c0 Mon Sep 17 00:00:00 2001
+From 7123b8d903e70ac26b6ce245240d9c8d078512e6 Mon Sep 17 00:00:00 2001
 From: md_5 <md_5@live.com.au>
 Date: Tue, 23 Apr 2013 11:50:27 +1000
 Subject: [PATCH] Thread Naming and Tweaks
@@ -6,7 +6,7 @@ Subject: [PATCH] Thread Naming and Tweaks
 Removes the sleep forever thread and adds useful names for debugging to all staged thread files.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index edd7c74d..5294954c 100644
+index c5d751e9..a413eab5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -75,7 +75,7 @@ public class CraftScheduler implements BukkitScheduler {

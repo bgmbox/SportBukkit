@@ -1,4 +1,4 @@
-From 2b89e506e36a5a8077487019d4599eef0b62687f Mon Sep 17 00:00:00 2001
+From 8ec444e36b11f0a32805fc73a45b0b1dbacd936b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 01:42:17 -0400
 Subject: [PATCH] Multi-passenger API
@@ -25,7 +25,7 @@ index b2a1806e..21f7643c 100644
          return (List) (this.passengers.isEmpty() ? Collections.emptyList() : Lists.newArrayList(this.passengers));
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 86203f70..31288347 100644
+index edbc8733..32db9d06 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -2,9 +2,12 @@ package org.bukkit.craftbukkit.entity;

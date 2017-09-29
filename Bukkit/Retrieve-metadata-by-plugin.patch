@@ -1,4 +1,4 @@
-From 9f679fa70db72df56cb17b95a7b3f79ecfc3a841 Mon Sep 17 00:00:00 2001
+From 4f4b34349f7ed73b392248eca8128be75c39d1c0 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 19 Jun 2015 14:50:13 -0400
 Subject: [PATCH] Retrieve metadata by plugin
