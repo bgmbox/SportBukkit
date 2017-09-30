@@ -1,4 +1,4 @@
-From 00eef9faa4256be362ed02c3681413a250faa1d5 Mon Sep 17 00:00:00 2001
+From 668ea4463fc22b0e0b103f1cf8ec9f38fe359278 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 18 Feb 2015 05:18:37 -0500
 Subject: [PATCH] Cancel piston retraction without creating client ghost blocks

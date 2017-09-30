@@ -1,4 +1,4 @@
-From b856a2e352fa4adf0a87486d0e4d16d38ec08ce9 Mon Sep 17 00:00:00 2001
+From db52883b8dc3d22b2da17113006c84d27b07a851 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 04:38:06 -0500
 Subject: [PATCH] Fix no knockback from zero-damage projectiles

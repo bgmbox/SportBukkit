@@ -1766,11 +1766,12 @@
  
              tileentitysign.update();
              worldserver.notify(blockposition, iblockdata, iblockdata, 3);
-@@ -999,28 +2283,47 @@
+@@ -999,28 +2283,48 @@
      }
  
      public void a(PacketPlayInKeepAlive packetplayinkeepalive) {
 +        PlayerConnectionUtils.ensureMainThread(packetplayinkeepalive, this, this.player.x()); // CraftBukkit
++        this.player.handleKeepAlive(packetplayinkeepalive.a());
          if (this.g && packetplayinkeepalive.a() == this.h) {
              int i = (int) (this.d() - this.f);
  
@@ -1816,7 +1817,7 @@
          ArrayList arraylist = Lists.newArrayList();
          Iterator iterator = this.minecraftServer.tabCompleteCommand(this.player, packetplayintabcomplete.a(), packetplayintabcomplete.b(), packetplayintabcomplete.c()).iterator();
  
-@@ -1046,6 +2349,13 @@
+@@ -1046,6 +2350,13 @@
          ItemStack itemstack1;
  
          if ("MC|BEdit".equals(s)) {
@@ -1830,7 +1831,7 @@
              packetdataserializer = packetplayincustompayload.b();
  
              try {
-@@ -1064,15 +2374,25 @@
+@@ -1064,15 +2375,25 @@
                  }
  
                  if (itemstack.getItem() == Items.WRITABLE_BOOK && itemstack.getItem() == itemstack1.getItem()) {
@@ -1856,7 +1857,7 @@
                  packetdataserializer = packetplayincustompayload.b();
  
                  try {
-@@ -1106,10 +2426,11 @@
+@@ -1106,10 +2427,11 @@
                          }
  
                          itemstack2.a("pages", (NBTBase) nbttaglist);
@@ -1869,7 +1870,7 @@
                  }
              } else if ("MC|TrSel".equals(s)) {
                  try {
-@@ -1121,6 +2442,7 @@
+@@ -1121,6 +2443,7 @@
                      }
                  } catch (Exception exception2) {
                      PlayerConnection.LOGGER.error("Couldn\'t select trade", exception2);
@@ -1877,7 +1878,7 @@
                  }
              } else {
                  TileEntity tileentity;
-@@ -1170,6 +2492,7 @@
+@@ -1170,6 +2493,7 @@
                          }
                      } catch (Exception exception3) {
                          PlayerConnection.LOGGER.error("Couldn\'t set command block", exception3);
@@ -1885,7 +1886,7 @@
                      }
                  } else if ("MC|AutoCmd".equals(s)) {
                      if (!this.minecraftServer.getEnableCommandBlock()) {
-@@ -1237,6 +2560,7 @@
+@@ -1237,6 +2561,7 @@
                          }
                      } catch (Exception exception4) {
                          PlayerConnection.LOGGER.error("Couldn\'t set command block", exception4);
@@ -1893,7 +1894,7 @@
                      }
                  } else {
                      int k;
-@@ -1260,6 +2584,7 @@
+@@ -1260,6 +2585,7 @@
                                  }
                              } catch (Exception exception5) {
                                  PlayerConnection.LOGGER.error("Couldn\'t set beacon", exception5);
@@ -1901,7 +1902,7 @@
                              }
                          }
                      } else if ("MC|ItemName".equals(s)) {
-@@ -1346,6 +2671,7 @@
+@@ -1346,6 +2672,7 @@
                              }
                          } catch (Exception exception6) {
                              PlayerConnection.LOGGER.error("Couldn\'t set structure block", exception6);
@@ -1909,7 +1910,7 @@
                          }
                      } else if ("MC|PickItem".equals(s)) {
                          packetdataserializer = packetplayincustompayload.b();
-@@ -1358,11 +2684,49 @@
+@@ -1358,11 +2685,49 @@
                              this.player.playerConnection.sendPacket(new PacketPlayOutHeldItemSlot(this.player.inventory.itemInHandIndex));
                          } catch (Exception exception7) {
                              PlayerConnection.LOGGER.error("Couldn\'t pick item", exception7);

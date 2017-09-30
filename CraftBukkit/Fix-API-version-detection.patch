@@ -1,4 +1,4 @@
-From 0991a2f61601d7d5ca9b14f1a079677402f032cd Mon Sep 17 00:00:00 2001
+From 72bc321e4ef392762b3eb9564308741ee55fb7ba Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Wed, 3 Jul 2013 13:27:38 -0500
 Subject: [PATCH] Fix API version detection

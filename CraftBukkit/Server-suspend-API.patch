@@ -1,4 +1,4 @@
-From 81c9599e33d1d36ce33e784efe22d1096bb29b10 Mon Sep 17 00:00:00 2001
+From 30575b523b724e4e2316e5db14513c2a27cbbbb7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API

@@ -1,4 +1,4 @@
-From 87375a0dcd64eb4d83c3e8aa6e31ec401640e166 Mon Sep 17 00:00:00 2001
+From a74438d2f40de7b8036fbe1d23c842f3279da096 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 26 May 2015 04:01:46 -0400
 Subject: [PATCH] Accurate block hit checking

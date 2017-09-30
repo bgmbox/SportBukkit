@@ -1,4 +1,4 @@
-From 9804f23d849e0be2433433c8a5ed8436e6bfbede Mon Sep 17 00:00:00 2001
+From 076bdf1eec3ba98e4eb7fd5a043bc59c0f608cd7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 9 Aug 2016 14:48:53 -0400
 Subject: [PATCH] Fix inverted team visibility

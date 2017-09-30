@@ -1,4 +1,4 @@
-From aad914c39b738e378997a48327ecd1636cf477c6 Mon Sep 17 00:00:00 2001
+From 648bbaa726fae201570364ca14692da820384cf6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
@@ -79,7 +79,7 @@ index 3726d8fe..ebfdc98f 100644
          // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 6c07058e..0e5281c7 100644
+index a4618559..dbf07e38 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -22,7 +22,9 @@ import org.apache.logging.log4j.Logger;
@@ -155,7 +155,7 @@ index 6c07058e..0e5281c7 100644
  
                  if (e2.isCancelled()) {
                      return;
-@@ -2298,6 +2306,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2299,6 +2307,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
          if (this.player.abilities.canFly && this.player.abilities.isFlying != packetplayinabilities.isFlying()) {
              PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this.server.getPlayer(this.player), packetplayinabilities.isFlying());
              this.server.getPluginManager().callEvent(event);

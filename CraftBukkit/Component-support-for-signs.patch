@@ -1,11 +1,11 @@
-From c779df72225dba6699d0fa1902c9596f3a736e83 Mon Sep 17 00:00:00 2001
+From 3a6ce334af16c5af683dff7e84a6080a601af92f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:17 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index e86c98a0..6c07058e 100644
+index 267e1b32..a4618559 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -12,6 +12,8 @@ import java.util.Arrays;

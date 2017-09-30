@@ -1,4 +1,4 @@
-From b60120435057e99f024b3044c19d788a90044fd9 Mon Sep 17 00:00:00 2001
+From a181952d17ffe22ce3ab0e4983400952c464f5c3 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 22:09:17 -0400
 Subject: [PATCH] Velocity API
@@ -179,7 +179,7 @@ index f4d4e15d..b2ca4350 100644
      public float getHeadRotation() {
          return this.aP;
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 8cce6ffb..a5c90bfd 100644
+index 8cce6ffb..c04ef977 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -5,8 +5,10 @@ import com.mojang.authlib.GameProfile;
@@ -324,7 +324,7 @@ index 8cce6ffb..a5c90bfd 100644
 +        return getUnackedImpulse().add(clientVelocity);
 +    }
 +
-+    public void handleKeepAlive(int timestamp) {
++    public void handleKeepAlive(long timestamp) {
 +        if(clientVelocityTimestamp == timestamp) {
 +            velocityUnacked = false;
 +        }
@@ -415,7 +415,7 @@ index 98c2bdcf..a0eabda9 100644
                              EntityHuman entityhuman = (EntityHuman) entity;
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index d69bfa0d..cf016cfe 100644
+index d69bfa0d..741f2d51 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -58,6 +58,7 @@ import org.bukkit.inventory.CraftingInventory;
@@ -480,7 +480,14 @@ index d69bfa0d..cf016cfe 100644
                  if (this.teleportPos != null) {
                      if (this.e - this.A > 20) {
                          this.A = this.e;
-@@ -2212,11 +2253,12 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2206,17 +2247,19 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+ 
+     public void a(PacketPlayInKeepAlive packetplayinkeepalive) {
+         PlayerConnectionUtils.ensureMainThread(packetplayinkeepalive, this, this.player.x()); // CraftBukkit
++        this.player.handleKeepAlive(packetplayinkeepalive.a());
+         if (this.g && packetplayinkeepalive.a() == this.h) {
+             int i = (int) (this.d() - this.f);
+ 
              this.player.ping = (this.player.ping * 3 + i) / 4;
              this.g = false;
          } else if (!this.player.getName().equals(this.minecraftServer.Q())) {

@@ -1,4 +1,4 @@
-From 7b159dc69ae728504eba2e770af60eb9bbdfabec Mon Sep 17 00:00:00 2001
+From 97f45179d560962d9ca2fb2bb79d379d7d980af6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 7 Sep 2014 21:17:24 -0400
 Subject: [PATCH] Keep players in the player list while respawning

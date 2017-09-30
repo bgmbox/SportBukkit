@@ -177,7 +177,7 @@
 +        return getUnackedImpulse().add(clientVelocity);
 +    }
 +
-+    public void handleKeepAlive(int timestamp) {
++    public void handleKeepAlive(long timestamp) {
 +        if(clientVelocityTimestamp == timestamp) {
 +            velocityUnacked = false;
 +        }

@@ -1,4 +1,4 @@
-From 8c8291b962a144a265c3a86fb889625da3f68275 Mon Sep 17 00:00:00 2001
+From f027f3efd2a555acab381f84408fe0bb330424b6 Mon Sep 17 00:00:00 2001
 From: Antony Riley <antony@cyberiantiger.org>
 Date: Wed, 27 Mar 2013 01:41:54 +0200
 Subject: [PATCH] Close Unloaded Save Files

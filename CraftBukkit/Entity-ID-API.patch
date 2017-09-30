@@ -1,4 +1,4 @@
-From dfe18d296d6a287c04c7a4654a168fc3e5737857 Mon Sep 17 00:00:00 2001
+From 24f0ab334b5a6527f89bdfde39edd096dd3bdf82 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 16 Jun 2013 17:03:07 -0500
 Subject: [PATCH] Entity ID API

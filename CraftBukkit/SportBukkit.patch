@@ -1,4 +1,4 @@
-From 5f0933ec7173c8c7d9c2da8cbdeb7ca1e7026355 Mon Sep 17 00:00:00 2001
+From 66c80e7029c8f318dc9956214f3405c6a1697a0a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:14 -0500
 Subject: [PATCH] SportBukkit
@@ -59,7 +59,7 @@ index 65ede80c..45690080 100644
  
      public String f_() {
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 573f153c..cec36a8a 100644
+index 48f74bae..6ce05ae6 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
