@@ -1,4 +1,4 @@
-From 8a50a4d73b7bf7f97a21d7645f9213d667f7fb3e Mon Sep 17 00:00:00 2001
+From dba5d1cf1675dd53b017549793abdad7ac80f7a5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 05:28:58 -0500
 Subject: [PATCH] Expose sound effect classes

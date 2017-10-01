@@ -1770,9 +1770,10 @@
      }
  
      public void a(PacketPlayInKeepAlive packetplayinkeepalive) {
+-        if (this.g && packetplayinkeepalive.a() == this.h) {
 +        PlayerConnectionUtils.ensureMainThread(packetplayinkeepalive, this, this.player.x()); // CraftBukkit
 +        this.player.handleKeepAlive(packetplayinkeepalive.a());
-         if (this.g && packetplayinkeepalive.a() == this.h) {
++        if (this.g) {
              int i = (int) (this.d() - this.f);
  
              this.player.ping = (this.player.ping * 3 + i) / 4;

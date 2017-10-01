@@ -1,4 +1,4 @@
-From a181952d17ffe22ce3ab0e4983400952c464f5c3 Mon Sep 17 00:00:00 2001
+From c3acbd42da71bb7c00d9d76de87332da17955e0d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 22:09:17 -0400
 Subject: [PATCH] Velocity API
@@ -415,7 +415,7 @@ index 98c2bdcf..a0eabda9 100644
                              EntityHuman entityhuman = (EntityHuman) entity;
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index d69bfa0d..741f2d51 100644
+index d69bfa0d..800032c9 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -58,6 +58,7 @@ import org.bukkit.inventory.CraftingInventory;
@@ -484,8 +484,9 @@ index d69bfa0d..741f2d51 100644
  
      public void a(PacketPlayInKeepAlive packetplayinkeepalive) {
          PlayerConnectionUtils.ensureMainThread(packetplayinkeepalive, this, this.player.x()); // CraftBukkit
+-        if (this.g && packetplayinkeepalive.a() == this.h) {
 +        this.player.handleKeepAlive(packetplayinkeepalive.a());
-         if (this.g && packetplayinkeepalive.a() == this.h) {
++        if (this.g) {
              int i = (int) (this.d() - this.f);
  
              this.player.ping = (this.player.ping * 3 + i) / 4;

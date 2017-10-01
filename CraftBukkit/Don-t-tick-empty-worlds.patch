@@ -1,4 +1,4 @@
-From 83462a854fd24ca1fb65ae462090d0de87b909e7 Mon Sep 17 00:00:00 2001
+From 2a68cd76c290c91c68cebcce2b32f82c090b8d9c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 29 Dec 2016 23:23:45 -0500
 Subject: [PATCH] Don't tick empty worlds

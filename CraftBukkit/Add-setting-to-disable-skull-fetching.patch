@@ -1,4 +1,4 @@
-From fcbb75339b5286b8f91d20beaf86e28760f3ec8d Mon Sep 17 00:00:00 2001
+From d3947b8347b170c533f2c67ba679b4f17733f38b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Feb 2015 03:39:46 -0500
 Subject: [PATCH] Add setting to disable skull fetching
