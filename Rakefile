@@ -114,6 +114,10 @@ def modular_tasks(id:, name:, artifact:, work: nil)
         desc "Apply patches to #{name}"
         task :apply => [work, build] do
             Dir.chdir build do
+                if ENV["SPORTBUKKIT_CLOUD"] != nil
+                    sh "git config --global user.email $HOSTNAME@tc.oc"
+                    sh "git config --global user.name sportbukkit"
+                end
                 Git.remote_add remote: "upstream", url: work_abs
                 Git.assert_clean_work_tree
                 Git.reset remote: "upstream", branch: "upstream"
