@@ -24,7 +24,7 @@ index 93a7fb99..e5348318 100644
 +            NetworkManager.g.debug("Uncaught Exception", throwable);
          } else {
              chatmessage = new ChatMessage("disconnect.genericReason", new Object[] { "Internal Exception: " + throwable});
-+            NetworkManager.g.fatal("Uncaught Exception", throwable);
++            NetworkManager.g.debug("Uncaught Exception", throwable);
          }
  
 -        NetworkManager.g.debug(chatmessage.toPlainText(), throwable);
