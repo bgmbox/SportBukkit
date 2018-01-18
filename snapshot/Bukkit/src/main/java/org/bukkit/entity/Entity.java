@@ -60,7 +60,7 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable 
     /**
      * Gets this entity's current velocity
      *
-     * @return Current travelling velocity of this entity
+     * @return Current traveling velocity of this entity
      */
     public Vector getVelocity();
 
@@ -383,6 +383,8 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable 
      * Performs the specified {@link EntityEffect} for this entity.
      * <p>
      * This will be viewable to all players near the entity.
+     * <p>
+     * If the effect is not applicable to this class of entity, it will not play.
      *
      * @param type Effect to play.
      */

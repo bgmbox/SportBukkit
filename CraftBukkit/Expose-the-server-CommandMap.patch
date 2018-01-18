@@ -1,14 +1,14 @@
-From b4053ca499d081be7a51a23fdd3f625f55fca5bf Mon Sep 17 00:00:00 2001
+From b80fa63cf16bba8f83df7675e9c896bc2cb23747 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 29 Oct 2014 19:09:49 -0400
 Subject: [PATCH] Expose the server CommandMap
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index cbcdd2c8..b918b738 100644
+index f7a5742a..b32d45d5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1534,6 +1534,7 @@ public final class CraftServer implements Server {
+@@ -1527,6 +1527,7 @@ public final class CraftServer implements Server {
          return helpMap;
      }
  

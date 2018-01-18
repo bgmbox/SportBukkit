@@ -1,4 +1,4 @@
-From 6164daac37d94aab00c31dcc00ef843d7efd11e8 Mon Sep 17 00:00:00 2001
+From aafe326c07c2f751b4bce4b7ee792d7fb9bcdd20 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 12 Jul 2015 09:58:54 -0400
 Subject: [PATCH] Localize inventory titles
@@ -133,7 +133,7 @@ index bac683b1..7166baa5 100644
  import org.bukkit.Location;
  import org.bukkit.Material;
  import org.bukkit.Physical;
-@@ -49,13 +50,25 @@ public interface Inventory extends Iterable<ItemStack>, Physical {
+@@ -49,12 +50,24 @@ public interface Inventory extends Iterable<ItemStack>, Physical {
      public void setMaxStackSize(int size);
  
      /**
@@ -145,7 +145,7 @@ index bac683b1..7166baa5 100644
       */
      public String getName();
  
-     /**
++    /**
 +     * @return true if this inventory has been given a custom name
 +     *         false if it is using the default (localized) name
 +     */
@@ -156,10 +156,9 @@ index bac683b1..7166baa5 100644
 +     */
 +    BaseComponent getLocalizedName();
 +
-+    /**
+     /**
       * Returns the ItemStack found in the slot at the given index
       *
-      * @param index The index of the Slot's ItemStack to return
 @@ -377,9 +390,10 @@ public interface Inventory extends Iterable<ItemStack>, Physical {
      public List<HumanEntity> getViewers();
  

@@ -1,4 +1,4 @@
-From 256ec6ecaaafeee21ec61e2e0462091f7b433662 Mon Sep 17 00:00:00 2001
+From 31f837c9d90eaf28e87712cf2f3847aebb2f0327 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 1 Mar 2016 05:48:53 -0500
 Subject: [PATCH] Fix decompilation errors
@@ -223,10 +223,10 @@ index 3926495e..8245cb53 100644
  
      public PacketStatusOutServerInfo() {}
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index f47e1f16..5819ab4c 100644
+index 204ada0a..b4d2f43b 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
-@@ -758,7 +758,7 @@ public abstract class PlayerList {
+@@ -760,7 +760,7 @@ public abstract class PlayerList {
  
      public void f(EntityPlayer entityplayer) {
          GameProfile gameprofile = entityplayer.getProfile();

@@ -1,11 +1,11 @@
-From 7530917d9a2dd0b3e273d6ae0dd8e7b3337642b9 Mon Sep 17 00:00:00 2001
+From fc622b70a108c41679ccbcbb231bd3d1b563cce1 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 10 Dec 2013 23:16:10 -0600
 Subject: [PATCH] Update the POM to distinguish SportBukkit from Bukkit
 
 
 diff --git a/pom.xml b/pom.xml
-index 0937b73c..d1b27ab7 100644
+index a04ca875..81c2b691 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,39 +3,48 @@
@@ -26,8 +26,8 @@ index 0937b73c..d1b27ab7 100644
 +    <url>https://oc.tc</url>
  
      <properties>
--        <maven.compiler.source>1.6</maven.compiler.source>
--        <maven.compiler.target>1.6</maven.compiler.target>
+-        <maven.compiler.source>1.7</maven.compiler.source>
+-        <maven.compiler.target>1.7</maven.compiler.target>
 +        <maven.compiler.source>1.8</maven.compiler.source>
 +        <maven.compiler.target>1.8</maven.compiler.target>
          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -75,7 +75,7 @@ index 0937b73c..d1b27ab7 100644
      <pluginRepositories>
          <pluginRepository>
              <id>spigotmc-public</id>
-@@ -60,22 +69,34 @@
+@@ -60,14 +69,20 @@
          <dependency>
              <groupId>com.google.guava</groupId>
              <artifactId>guava</artifactId>
@@ -98,10 +98,8 @@ index 0937b73c..d1b27ab7 100644
              <scope>compile</scope>
          </dependency>
          <dependency>
-             <groupId>org.yaml</groupId>
-             <artifactId>snakeyaml</artifactId>
--            <version>1.18</version>
-+            <version>1.17</version>
+@@ -76,6 +91,12 @@
+             <version>1.19</version>
              <scope>compile</scope>
          </dependency>
 +        <dependency>
@@ -126,14 +124,30 @@ index 0937b73c..d1b27ab7 100644
      </dependencies>
  
      <build>
-@@ -125,8 +152,8 @@
-                 <configuration>
-                     <signature>
-                         <groupId>org.codehaus.mojo.signature</groupId>
--                        <artifactId>java16</artifactId>
--                        <version>1.1</version>
+@@ -110,6 +137,26 @@
+                     </dependency>
+                 </dependencies>
+             </plugin>
++            <plugin>
++                <groupId>org.codehaus.mojo</groupId>
++                <artifactId>animal-sniffer-maven-plugin</artifactId>
++                <version>1.16</version>
++                <executions>
++                    <execution>
++                        <phase>process-classes</phase>
++                        <goals>
++                            <goal>check</goal>
++                        </goals>
++                    </execution>
++                </executions>
++                <configuration>
++                    <signature>
++                        <groupId>org.codehaus.mojo.signature</groupId>
 +                        <artifactId>java18</artifactId>
 +                        <version>1.0</version>
-                     </signature>
-                 </configuration>
-             </plugin>
++                    </signature>
++                </configuration>
++            </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-shade-plugin</artifactId>

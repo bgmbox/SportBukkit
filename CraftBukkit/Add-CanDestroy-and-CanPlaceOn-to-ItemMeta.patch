@@ -1,4 +1,4 @@
-From 06341be457ea3eb5acdce316ac433f20f9de28a2 Mon Sep 17 00:00:00 2001
+From 0195f1d84bbcd0fb2d443133876107413e559a4b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 22 May 2015 00:46:32 -0400
 Subject: [PATCH] Add CanDestroy and CanPlaceOn to ItemMeta
@@ -141,10 +141,11 @@ index 8adb7627..af9ab5c4 100644
      }
  
      public String getDisplayName() {
-@@ -753,6 +803,36 @@ class CraftMetaItem implements ItemMeta, Repairable {
+@@ -752,6 +802,36 @@ class CraftMetaItem implements ItemMeta, Repairable {
+         this.unbreakable = unbreakable;
      }
  
-     @Override
++    @Override
 +    public ImmutableMaterialSet getCanDestroy() {
 +        return canDestroy;
 +    }
@@ -174,10 +175,9 @@ index 8adb7627..af9ab5c4 100644
 +        canPlaceOn = ImmutableMaterialSet.of(materials);
 +    }
 +
-+    @Override
+     @Override
      public final boolean equals(Object object) {
          if (object == null) {
-             return false;
 @@ -779,6 +859,8 @@ class CraftMetaItem implements ItemMeta, Repairable {
                  && (this.hasAttributeModifiers() ? that.hasAttributeModifiers() && this.attributeModifiers.equals(that.attributeModifiers) : !that.hasAttributeModifiers())
                  && (this.hasLore() ? that.hasLore() && this.lore.equals(that.lore) : !that.hasLore())

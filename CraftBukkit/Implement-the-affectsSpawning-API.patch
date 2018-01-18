@@ -1,11 +1,11 @@
-From 16426cd4f1dadf110ad35c0b7cc68fc9b18a789c Mon Sep 17 00:00:00 2001
+From 057191b16a1db34a9beb9e1d8e9a585ccac297ee Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:27:40 -0700
 Subject: [PATCH] Implement the affectsSpawning API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 78b57910..831681ae 100644
+index 3608e25d..388a3000 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -65,6 +65,19 @@ public abstract class EntityHuman extends EntityLiving {
@@ -103,10 +103,10 @@ index cec211ab..4cba6d69 100644
                                                          biomebase_biomemeta = worldserver.a(enumcreaturetype, (BlockPosition) blockposition_mutableblockposition);
                                                          if (biomebase_biomemeta == null) {
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 28039f45..89349a3f 100644
+index f83771ab..a2ca2c81 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -2618,6 +2618,16 @@ public abstract class World implements IBlockAccess {
+@@ -2615,6 +2615,16 @@ public abstract class World implements IBlockAccess {
          return this.a(d0, d1, d2, d3, predicate);
      }
  
@@ -123,7 +123,7 @@ index 28039f45..89349a3f 100644
      @Nullable
      public EntityHuman a(double d0, double d1, double d2, double d3, Predicate<Entity> predicate) {
          double d4 = -1.0D;
-@@ -2645,9 +2655,17 @@ public abstract class World implements IBlockAccess {
+@@ -2642,9 +2652,17 @@ public abstract class World implements IBlockAccess {
      }
  
      public boolean isPlayerNearby(double d0, double d1, double d2, double d3) {
@@ -142,10 +142,10 @@ index 28039f45..89349a3f 100644
                  double d4 = entityhuman.d(d0, d1, d2);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 7a5892ba..ed294a3b 100644
+index 74902302..2548d102 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-@@ -496,6 +496,16 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
+@@ -499,6 +499,16 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
          return getHandle().isHandRaised();
      }
  

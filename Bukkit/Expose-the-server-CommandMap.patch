@@ -1,4 +1,4 @@
-From 9a88800ccfe8884c8f622fcc57ab7ca211027dbd Mon Sep 17 00:00:00 2001
+From a1e6f50dc96daa79db61eff39a00eddccad4a0f1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 29 Oct 2014 19:08:55 -0400
 Subject: [PATCH] Expose the server CommandMap
@@ -16,20 +16,20 @@ index bc6f0250..2a56468e 100644
  import org.bukkit.command.CommandSender;
  import org.bukkit.command.ConsoleCommandSender;
  import org.bukkit.command.PluginCommand;
-@@ -927,6 +928,13 @@ public final class Bukkit {
+@@ -926,6 +927,13 @@ public final class Bukkit {
+         return server.createMerchant(title);
      }
  
-     /**
++    /**
 +     * @see Server#getCommandMap()
 +     */
 +    public static CommandMap getCommandMap() {
 +        return server.getCommandMap();
 +    }
 +
-+    /**
+     /**
       * Gets user-specified limit for number of monsters that can spawn in a
       * chunk.
-      *
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
 index 13c028a6..1829b47e 100644
 --- a/src/main/java/org/bukkit/Server.java
@@ -42,15 +42,15 @@ index 13c028a6..1829b47e 100644
  import org.bukkit.command.CommandSender;
  import org.bukkit.command.ConsoleCommandSender;
  import org.bukkit.command.PluginCommand;
-@@ -699,6 +700,11 @@ public interface Server extends PluginMessageRecipient {
+@@ -698,6 +699,11 @@ public interface Server extends PluginMessageRecipient {
+      */
      public HelpMap getHelpMap();
  
-     /**
++    /**
 +     * Gets the {@link CommandMap} containing all registered commands on this server.
 +     */
 +    public CommandMap getCommandMap();
 +
-+    /**
+     /**
       * Creates an empty inventory of the specified type. If the type is {@link
       * InventoryType#CHEST}, the new inventory has a size of 27; otherwise the
-      * new inventory has the normal size for its type.

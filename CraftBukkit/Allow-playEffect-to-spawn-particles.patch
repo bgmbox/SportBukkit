@@ -1,4 +1,4 @@
-From b3108b3d76fe0cb648a141580371dbef7dfecef0 Mon Sep 17 00:00:00 2001
+From 06655e24d13a4ecae7a8ed0467dd4d2d9df4c778 Mon Sep 17 00:00:00 2001
 From: thinkofdeath <purggames@gmail.com>
 Date: Fri, 12 Apr 2013 18:19:11 +0100
 Subject: [PATCH] Allow playEffect to spawn particles
@@ -18,10 +18,10 @@ index 16721835..582d7bfb 100644
              datavalue = 0;
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index b3276695..f187d4a8 100644
+index 8f6653f7..11f17e23 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -815,6 +815,10 @@ public class CraftWorld implements World {
+@@ -822,6 +822,10 @@ public class CraftWorld implements World {
          playEffect(player.getLocation(), effect, data, 0);
      }
  
@@ -32,7 +32,7 @@ index b3276695..f187d4a8 100644
      public void playEffect(Location location, Effect effect, int data) {
          playEffect(location, effect, data, 64);
      }
-@@ -830,16 +834,44 @@ public class CraftWorld implements World {
+@@ -837,16 +841,44 @@ public class CraftWorld implements World {
              Validate.isTrue(effect.getData() == null, "Wrong kind of data for this effect!");
          }
  
@@ -82,21 +82,22 @@ index b3276695..f187d4a8 100644
          radius *= radius;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index b400b535..0ae82ff7 100644
+index 9405e6b4..adc551e0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -62,6 +62,7 @@ import org.bukkit.event.player.PlayerUnregisterChannelEvent;
+@@ -65,6 +65,7 @@ import org.bukkit.event.player.PlayerUnregisterChannelEvent;
  import org.bukkit.inventory.InventoryView.Property;
  import org.bukkit.map.MapCursor;
  import org.bukkit.map.MapView;
 +import org.bukkit.material.MaterialData;
  import org.bukkit.metadata.MetadataValue;
+ import org.bukkit.plugin.IllegalPluginAccessException;
  import org.bukkit.plugin.Plugin;
- import org.bukkit.plugin.messaging.StandardMessenger;
-@@ -379,15 +380,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -385,15 +386,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|StopSound", packetdataserializer));
      }
  
-     @Override
+-    @Override
 -    public void playEffect(Location loc, Effect effect, int data) {
 -        if (getHandle().playerConnection == null) return;
 -
@@ -105,11 +106,10 @@ index b400b535..0ae82ff7 100644
 -        getHandle().playerConnection.sendPacket(packet);
 -    }
 -
--    @Override
+     @Override
      public <T> void playEffect(Location loc, Effect effect, T data) {
          if (data != null) {
-             Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
-@@ -395,8 +387,50 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -402,8 +394,50 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
              Validate.isTrue(effect.getData() == null, "Wrong kind of data for this effect!");
          }
  

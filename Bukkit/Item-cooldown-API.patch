@@ -1,14 +1,14 @@
-From 1e8e3bb7b542f814ca61b697c43167cf89c5a331 Mon Sep 17 00:00:00 2001
+From 96371231b29577c7b7716c2127df0fa78d1fccbc Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 26 Jun 2016 01:57:07 -0400
 Subject: [PATCH] Item cooldown API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 809489c5..fc01663a 100644
+index 0f47486c..f17fa7ce 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1724,4 +1724,30 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1747,4 +1747,30 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
      Vector getUnackedImpulse();
  
      boolean hasUnackedVelocity();

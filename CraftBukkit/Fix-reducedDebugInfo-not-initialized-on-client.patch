@@ -1,11 +1,11 @@
-From e3b00c5a098959cfd91bb4edca9e357e54b00089 Mon Sep 17 00:00:00 2001
+From 4f1feb16ab4839dcdb5e3df85259589d930390d1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 2 Apr 2016 20:37:03 -0400
 Subject: [PATCH] Fix reducedDebugInfo not initialized on client
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 33eb721a..6ea3561c 100644
+index dbe3acb4..52635aca 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -146,6 +146,7 @@ public abstract class PlayerList {

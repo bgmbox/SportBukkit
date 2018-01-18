@@ -1,4 +1,4 @@
-From f7b5ae2ae1b31c933537fbd54d301cff31bf528a Mon Sep 17 00:00:00 2001
+From 03d4f14c955e3ebeb460a89cee4bf5d95a9fca51 Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Sat, 13 Apr 2013 10:50:21 -0700
 Subject: [PATCH] BungeeCord Support
@@ -95,11 +95,11 @@ index 1cb9d60d..295f43da 100644
          this.d = EnumProtocol.a(packetdataserializer.g());
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index be27f5ef..88588dde 100644
+index 30967c01..03576ab8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -174,6 +174,8 @@ public final class CraftServer implements Server {
-     private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8));
+@@ -172,6 +172,8 @@ public final class CraftServer implements Server {
+     private boolean unrestrictedAdvancements;
      private final List<CraftPlayer> playerView;
      public int reloadCount;
 +    public boolean bungee = false;
@@ -107,7 +107,7 @@ index be27f5ef..88588dde 100644
  
      private final class BooleanWrapper {
          private boolean value = true;
-@@ -247,6 +249,7 @@ public final class CraftServer implements Server {
+@@ -245,6 +247,7 @@ public final class CraftServer implements Server {
          }
  
          saveCommandsConfig();

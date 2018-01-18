@@ -1,11 +1,11 @@
-From 68e7aa73b84543fed669f03c66a34a9566dff462 Mon Sep 17 00:00:00 2001
+From bd9ec8b4a259cfe5217574030cd4ddc14e84580f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 03:39:45 -0400
 Subject: [PATCH] Action event interfaces
 
 
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index 2f67d701..a8897e5b 100644
+index 519b5677..5af6f6f2 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -13,6 +13,7 @@ import org.bukkit.block.Block;
@@ -249,18 +249,18 @@ index 4d28dc79..da5221fd 100644
      private static final HandlerList handlers = new HandlerList();
      private final Player player;
  
-@@ -30,6 +31,11 @@ public class BlockUndamageEvent extends BlockEvent {
+@@ -29,6 +30,11 @@ public class BlockUndamageEvent extends BlockEvent {
+         return player;
      }
  
-     @Override
++    @Override
 +    public Player getActor() {
 +        return getPlayer();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/block/EntityBlockFormEvent.java b/src/main/java/org/bukkit/event/block/EntityBlockFormEvent.java
 index 4ce034fe..5ae084c5 100644
 --- a/src/main/java/org/bukkit/event/block/EntityBlockFormEvent.java
@@ -571,18 +571,18 @@ index f105817a..4115e073 100644
      private static final HandlerList handlers = new HandlerList();
      private boolean cancelled;
      private final AnimalTamer owner;
-@@ -41,6 +43,11 @@ public class EntityTameEvent extends EntityEvent implements Cancellable {
+@@ -40,6 +42,11 @@ public class EntityTameEvent extends EntityEvent implements Cancellable {
+         return owner;
      }
  
-     @Override
++    @Override
 +    public Player getActor() {
 +        return getEntity().getServer().getPlayer(getOwner().getUniqueId());
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/entity/EntityTargetEvent.java b/src/main/java/org/bukkit/event/entity/EntityTargetEvent.java
 index dd26e746..12850b0a 100644
 --- a/src/main/java/org/bukkit/event/entity/EntityTargetEvent.java
@@ -721,18 +721,18 @@ index abe2bb81..7392cf5d 100644
      private static final HandlerList handlers = new HandlerList();
      private final Entity leashHolder;
      private final Entity entity;
-@@ -52,6 +53,11 @@ public class PlayerLeashEntityEvent extends Event implements Cancellable, Physic
+@@ -51,6 +52,11 @@ public class PlayerLeashEntityEvent extends Event implements Cancellable, Physic
+         return player;
      }
  
-     @Override
++    @Override
 +    public Player getActor() {
 +        return getPlayer();
 +    }
 +
-+    @Override
+     @Override
      public World getWorld() {
          return getEntity().getWorld();
-     }
 @@ -70,6 +76,6 @@ public class PlayerLeashEntityEvent extends Event implements Cancellable, Physic
      }
  
@@ -754,18 +754,18 @@ index 35f4148b..50b53ad9 100644
      private static final HandlerList handlers = new HandlerList();
      private final Entity hitEntity;
      private final Block hitBlock;
-@@ -55,6 +55,11 @@ public class ProjectileHitEvent extends EntityEvent {
+@@ -54,6 +54,11 @@ public class ProjectileHitEvent extends EntityEvent {
+         return hitEntity;
      }
  
-     @Override
++    @Override
 +    public Projectile getActor() {
 +        return getEntity();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/entity/ProjectileLaunchEvent.java b/src/main/java/org/bukkit/event/entity/ProjectileLaunchEvent.java
 index 0c9190ca..0e633d9b 100644
 --- a/src/main/java/org/bukkit/event/entity/ProjectileLaunchEvent.java
@@ -786,19 +786,19 @@ index 0c9190ca..0e633d9b 100644
      private static final HandlerList handlers = new HandlerList();
      private boolean cancelled;
  
-@@ -30,6 +32,12 @@ public class ProjectileLaunchEvent extends EntityEvent implements Cancellable {
+@@ -29,6 +31,12 @@ public class ProjectileLaunchEvent extends EntityEvent implements Cancellable {
+         return (Projectile) entity;
      }
  
-     @Override
++    @Override
 +    public Entity getActor() {
 +        ProjectileSource source = getEntity().getShooter();
 +        return source instanceof Entity ? (Entity) source : null;
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/hanging/HangingBreakByEntityEvent.java b/src/main/java/org/bukkit/event/hanging/HangingBreakByEntityEvent.java
 index d3711687..e1b5098e 100644
 --- a/src/main/java/org/bukkit/event/hanging/HangingBreakByEntityEvent.java
@@ -912,18 +912,18 @@ index e84debce..27d12b29 100644
      private static final HandlerList handlers = new HandlerList();
      protected InventoryView transaction;
  
-@@ -56,6 +58,11 @@ public class InventoryEvent extends Event implements Physical {
+@@ -55,6 +57,11 @@ public class InventoryEvent extends Event implements Physical {
+         return getInventory().getWorld();
      }
  
-     @Override
++    @Override
 +    public Player getActor() {
 +        return (Player) getView().getPlayer();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
 index e751fbfd..05451978 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
@@ -951,19 +951,19 @@ index e751fbfd..05451978 100644
      private static final HandlerList handlers = new HandlerList();
      private boolean cancelled;
      private final Inventory sourceInventory;
-@@ -92,6 +95,12 @@ public class InventoryMoveItemEvent extends Event implements Cancellable, Physic
+@@ -91,6 +94,12 @@ public class InventoryMoveItemEvent extends Event implements Cancellable, Physic
+         return didSourceInitiate ? sourceInventory : destinationInventory;
      }
  
-     @Override
++    @Override
 +    public Entity getActor() {
 +        InventoryHolder holder = getInitiator().getHolder();
 +        return holder instanceof Entity ? (Entity) holder : null;
 +    }
 +
-+    @Override
+     @Override
      public World getWorld() {
          return getInitiator().getWorld();
-     }
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java
 index 1eb684d7..235657f4 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryPickupItemEvent.java
@@ -1081,7 +1081,7 @@ index 628ab0b0..933b5e22 100644
      private final Block bed;
  
 diff --git a/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java b/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java
-index e18feff2..811185da 100644
+index 56584687..261681a5 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerBucketEvent.java
 @@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
@@ -1532,18 +1532,18 @@ index 66fd7636..00b51270 100644
      private static final HandlerList handlers = new HandlerList();
      private boolean canceled;
      private final LightningStrike bolt;
-@@ -36,6 +37,11 @@ public class LightningStrikeEvent extends WeatherEvent implements Cancellable {
+@@ -35,6 +36,11 @@ public class LightningStrikeEvent extends WeatherEvent implements Cancellable {
+         return bolt;
      }
  
-     @Override
++    @Override
 +    public LightningStrike getActor() {
 +        return getLightning();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/world/StructureGrowEvent.java b/src/main/java/org/bukkit/event/world/StructureGrowEvent.java
 index 62d300d7..5c1f51fa 100644
 --- a/src/main/java/org/bukkit/event/world/StructureGrowEvent.java

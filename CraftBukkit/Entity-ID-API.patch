@@ -1,11 +1,11 @@
-From 5ee7d99e159965ad9f6021c862670cb919bcdef7 Mon Sep 17 00:00:00 2001
+From e59eb7bee8eb2a760f1412d137893f9d20a538e3 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 16 Jun 2013 17:03:07 -0500
 Subject: [PATCH] Entity ID API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 96bc931a..0f08f24d 100644
+index 0c20b450..c3c6e924 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -62,7 +62,7 @@ public abstract class Entity implements ICommandListener {
@@ -18,18 +18,18 @@ index 96bc931a..0f08f24d 100644
      public boolean i;
      public final List<Entity> passengers;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 88588dde..c5b6b36d 100644
+index 03576ab8..3a53da67 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1614,6 +1614,11 @@ public final class CraftServer implements Server {
+@@ -1606,6 +1606,11 @@ public final class CraftServer implements Server {
+         getLogger().log(Level.WARNING, "A manual (plugin-induced) save has been detected while server is configured to auto-save. This may affect performance.", warningState == WarningState.ON ? new Throwable() : null);
      }
  
-     @Override
++    @Override
 +    public int allocateEntityId() {
 +        return net.minecraft.server.Entity.entityCount++;
 +    }
 +
-+    @Override
+     @Override
      public CraftIconCache getServerIcon() {
          return icon;
-     }

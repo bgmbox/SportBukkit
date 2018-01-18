@@ -1,11 +1,11 @@
-From 3de0c3ad862714d0094dba864a2a3a531f786fc9 Mon Sep 17 00:00:00 2001
+From 1a25b70f88aedee1fc844a6ae9b19526f240e4d0 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 29 Jun 2015 04:47:28 -0400
 Subject: [PATCH] Potion effect events
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 708a7581..d44a2f9a 100644
+index 1b559ecb..126f079e 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -22,13 +22,11 @@ import org.bukkit.craftbukkit.attribute.CraftAttributeMap;
@@ -24,7 +24,7 @@ index 708a7581..d44a2f9a 100644
  import org.bukkit.event.player.PlayerItemConsumeEvent;
  // CraftBukkit end
  
-@@ -526,43 +524,35 @@ public abstract class EntityLiving extends Entity {
+@@ -531,43 +529,35 @@ public abstract class EntityLiving extends Entity {
  
      }
  
@@ -92,7 +92,7 @@ index 708a7581..d44a2f9a 100644
  
          if (this.updateEffects) {
              if (!this.world.isClientSide) {
-@@ -642,11 +632,14 @@ public abstract class EntityLiving extends Entity {
+@@ -647,11 +637,14 @@ public abstract class EntityLiving extends Entity {
  
      public void removeAllEffects() {
          if (!this.world.isClientSide) {
@@ -110,7 +110,7 @@ index 708a7581..d44a2f9a 100644
              }
  
          }
-@@ -670,19 +663,26 @@ public abstract class EntityLiving extends Entity {
+@@ -675,19 +668,26 @@ public abstract class EntityLiving extends Entity {
      }
  
      public void addEffect(MobEffect mobeffect) {
@@ -143,7 +143,7 @@ index 708a7581..d44a2f9a 100644
                  mobeffect1.a(mobeffect);
                  this.a(mobeffect1, true);
              }
-@@ -708,12 +708,6 @@ public abstract class EntityLiving extends Entity {
+@@ -713,12 +713,6 @@ public abstract class EntityLiving extends Entity {
  
      @Nullable
      public MobEffect c(@Nullable MobEffectList mobeffectlist) {
@@ -156,7 +156,7 @@ index 708a7581..d44a2f9a 100644
          return (MobEffect) this.effects.remove(mobeffectlist);
      }
  
-@@ -721,6 +715,16 @@ public abstract class EntityLiving extends Entity {
+@@ -726,6 +720,16 @@ public abstract class EntityLiving extends Entity {
          MobEffect mobeffect = this.c(mobeffectlist);
  
          if (mobeffect != null) {

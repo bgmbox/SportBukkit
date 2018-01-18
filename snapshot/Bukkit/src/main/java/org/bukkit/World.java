@@ -420,7 +420,9 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      * @param delegate A class to call for each block changed as a result of
      *     this method
      * @return true if the tree was created successfully, otherwise false
+     * @deprecated rarely used API that was largely for implementation purposes
      */
+    @Deprecated
     public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate);
 
     /**
@@ -540,6 +542,16 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      * @return The spawn location of this world
      */
     public Location getSpawnLocation();
+
+    /**
+     * Sets the spawn location of the world.
+     * <br>
+     * The location provided must be equal to this world.
+     *
+     * @param location The {@link Location} to set the spawn for this world at.
+     * @return True if it was successfully set.
+     */
+    public boolean setSpawnLocation(Location location);
 
     /**
      * Sets the spawn location of the world

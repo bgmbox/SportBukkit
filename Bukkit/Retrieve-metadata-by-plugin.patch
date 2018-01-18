@@ -1,4 +1,4 @@
-From 0ee5c4bd1030a84b7bdcb4b5f2d45cddefa4779e Mon Sep 17 00:00:00 2001
+From fcd8031e14e76863be593f1c1cefe258bfa5418d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 19 Jun 2015 14:50:13 -0400
 Subject: [PATCH] Retrieve metadata by plugin
@@ -8,10 +8,11 @@ diff --git a/src/main/java/org/bukkit/metadata/MetadataStore.java b/src/main/jav
 index 700d0bfb..1be17ad4 100644
 --- a/src/main/java/org/bukkit/metadata/MetadataStore.java
 +++ b/src/main/java/org/bukkit/metadata/MetadataStore.java
-@@ -17,6 +17,16 @@ public interface MetadataStore<T> {
+@@ -16,6 +16,16 @@ public interface MetadataStore<T> {
+      */
      public void setMetadata(T subject, String metadataKey, MetadataValue newMetadataValue);
  
-     /**
++    /**
 +     * Returns the metadata value attached to an object and belonging to the given plugin.
 +     *
 +     * @param subject the object being interrogated.
@@ -21,10 +22,9 @@ index 700d0bfb..1be17ad4 100644
 +     */
 +    public MetadataValue getMetadata(T subject, String metadataKey, Plugin owningPlugin);
 +
-+    /**
+     /**
       * Returns all metadata values attached to an object. If multiple plugins
       * have attached metadata, each will value will be included.
-      *
 diff --git a/src/main/java/org/bukkit/metadata/MetadataStoreBase.java b/src/main/java/org/bukkit/metadata/MetadataStoreBase.java
 index 093c1445..6db06169 100644
 --- a/src/main/java/org/bukkit/metadata/MetadataStoreBase.java
@@ -46,10 +46,11 @@ diff --git a/src/main/java/org/bukkit/metadata/Metadatable.java b/src/main/java/
 index b47cf2b0..b1df863a 100644
 --- a/src/main/java/org/bukkit/metadata/Metadatable.java
 +++ b/src/main/java/org/bukkit/metadata/Metadatable.java
-@@ -20,6 +20,16 @@ public interface Metadatable {
+@@ -19,6 +19,16 @@ public interface Metadatable {
+      */
      public void setMetadata(String metadataKey, MetadataValue newMetadataValue);
  
-     /**
++    /**
 +     * Returns a metadata value set by a specific plugin from the implementing
 +     * object's metadata store.
 +     *
@@ -59,7 +60,6 @@ index b47cf2b0..b1df863a 100644
 +     */
 +    public MetadataValue getMetadata(String metadataKey, Plugin owningPlugin);
 +
-+    /**
+     /**
       * Returns a list of previously set metadata values from the implementing
       * object's metadata store.
-      *

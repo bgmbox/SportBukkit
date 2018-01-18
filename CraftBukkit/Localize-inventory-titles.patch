@@ -1,11 +1,11 @@
-From 331898fb3bffb6645a2673bfb9cf357c8ea9fe84 Mon Sep 17 00:00:00 2001
+From b89fd1b0f6ab972d138d3e62d09bf904efbee820 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 12 Jul 2015 09:59:02 -0400
 Subject: [PATCH] Localize inventory titles
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 792d10ad..22af1877 100644
+index 38e7a34d..667aba92 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -338,7 +338,12 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {

@@ -1,4 +1,4 @@
-From 66b18cbab407bac4558dfb1a41a797d80c3b29a9 Mon Sep 17 00:00:00 2001
+From 692b8b0338742b7397b6bd731f4d806f1e02cce6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 9 Jul 2016 05:27:03 -0400
 Subject: [PATCH] New event API
@@ -160,32 +160,33 @@ index 02efb3cf..30e51979 100644
      /**
       * Get the maximum amount of players which can login to this server.
       *
-@@ -314,6 +327,13 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -313,6 +326,13 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+      */
      public int getTicksPerMonsterSpawns();
  
-     /**
++    /**
 +     * Time to wait before automatically suspending an empty server.
 +     *
 +     * @see #setSuspended(boolean)
 +     */
 +    @Nullable Duration getEmptyServerSuspendDelay();
 +
-+    /**
+     /**
       * Gets a player object by the given username.
       * <p>
-      * This method may not return objects for offline players.
-@@ -397,12 +417,21 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -396,6 +416,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+      */
      public ServicesManager getServicesManager();
  
-     /**
++    /**
 +     * Get the server event bus
 +     */
 +    EventBus eventBus();
 +
-+    /**
+     /**
       * Gets a list of all worlds on this server.
       *
-      * @return a list of worlds
+@@ -403,6 +428,10 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
       */
      public List<World> getWorlds();
  
@@ -432,7 +433,7 @@ index 00000000..009faf3c
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
-index 9969185c..31876020 100644
+index f81ae85d..07721d8c 100644
 --- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
 +++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
 @@ -32,6 +32,7 @@ public class SimpleCommandMap implements CommandMap {
@@ -1958,7 +1959,7 @@ index 00000000..5b03f176
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/plugin/Plugin.java b/src/main/java/org/bukkit/plugin/Plugin.java
-index dcea4a3b..ca8ff28a 100644
+index 1d0d2f1e..2dbcf530 100644
 --- a/src/main/java/org/bukkit/plugin/Plugin.java
 +++ b/src/main/java/org/bukkit/plugin/Plugin.java
 @@ -7,6 +7,7 @@ import java.util.logging.Logger;
@@ -1969,18 +1970,18 @@ index dcea4a3b..ca8ff28a 100644
  import org.bukkit.generator.ChunkGenerator;
  
  /**
-@@ -91,6 +92,11 @@ public interface Plugin extends TabExecutor, tc.oc.minecraft.api.plugin.Plugin,
+@@ -90,6 +91,11 @@ public interface Plugin extends TabExecutor, tc.oc.minecraft.api.plugin.Plugin,
+      */
      public PluginLoader getPluginLoader();
  
-     /**
++    /**
 +     * @return The {@link EventRegistry} belonging to this plugin.
 +     */
 +    EventRegistry eventRegistry();
 +
-+    /**
+     /**
       * Returns the Server instance currently running this plugin
       *
-      * @return Server running this plugin
 diff --git a/src/main/java/org/bukkit/plugin/PluginBase.java b/src/main/java/org/bukkit/plugin/PluginBase.java
 index 6031af11..1d7980e5 100644
 --- a/src/main/java/org/bukkit/plugin/PluginBase.java
@@ -2398,7 +2399,7 @@ index 944f9088..89a50a1b 100644
 +    public boolean isIgnoringCancelled() { return meta().ignoreCancelled(); }
  }
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 1079c1c2..545d2d8e 100644
+index 37696aa7..72797b2c 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -22,12 +22,10 @@ import org.apache.commons.lang.Validate;
@@ -2433,7 +2434,7 @@ index 1079c1c2..545d2d8e 100644
              }
  
              Collection<String> softDependencySet = description.getSoftDepend();
-@@ -461,7 +458,7 @@ public final class SimplePluginManager implements PluginManager {
+@@ -462,7 +459,7 @@ public final class SimplePluginManager implements PluginManager {
              try {
                  server.getMessenger().unregisterIncomingPluginChannel(plugin);
                  server.getMessenger().unregisterOutgoingPluginChannel(plugin);
@@ -2442,7 +2443,7 @@ index 1079c1c2..545d2d8e 100644
                  server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering plugin channels for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
  
-@@ -470,6 +467,13 @@ public final class SimplePluginManager implements PluginManager {
+@@ -471,6 +468,13 @@ public final class SimplePluginManager implements PluginManager {
              } catch (Throwable ex) {
                  server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering serializables " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
@@ -2456,7 +2457,7 @@ index 1079c1c2..545d2d8e 100644
          }
      }
  
-@@ -486,83 +490,12 @@ public final class SimplePluginManager implements PluginManager {
+@@ -487,83 +491,12 @@ public final class SimplePluginManager implements PluginManager {
          }
      }
  
@@ -2542,7 +2543,7 @@ index 1079c1c2..545d2d8e 100644
      }
  
      public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority, EventExecutor executor, Plugin plugin) {
-@@ -582,45 +515,7 @@ public final class SimplePluginManager implements PluginManager {
+@@ -583,45 +516,7 @@ public final class SimplePluginManager implements PluginManager {
       *     cancelled
       */
      public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority, EventExecutor executor, Plugin plugin, boolean ignoreCancelled) {
@@ -2589,7 +2590,7 @@ index 1079c1c2..545d2d8e 100644
      }
  
      public Permission getPermission(String name) {
-@@ -767,15 +662,6 @@ public final class SimplePluginManager implements PluginManager {
+@@ -768,15 +663,6 @@ public final class SimplePluginManager implements PluginManager {
      }
  
      public boolean useTimings() {
@@ -2842,10 +2843,10 @@ index 00000000..98941dff
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index c651c429..e1795a7b 100644
+index 765d6ce8..119895aa 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-@@ -207,4 +207,4 @@ final class PluginClassLoader extends URLClassLoader {
+@@ -205,4 +205,4 @@ final class PluginClassLoader extends URLClassLoader {
  
          javaPlugin.init(pluginLoader, pluginLoader.server, description, dataFolder, file, this);
      }
@@ -2918,10 +2919,11 @@ index 2d840320..c8a9d17f 100644
  import org.bukkit.plugin.PluginManager;
  import org.bukkit.plugin.SimplePluginManager;
  
-@@ -39,6 +41,14 @@ public class TestServer implements InvocationHandler {
+@@ -38,6 +40,14 @@ public class TestServer implements InvocationHandler {
+                         }
                      }
                  );
-             methodMap.put(
++            methodMap.put(
 +                    Server.class.getMethod("eventBus"),
 +                    new MethodHandler() {
 +                        public Object handle(TestServer server, Object[] args) {
@@ -2929,10 +2931,9 @@ index 2d840320..c8a9d17f 100644
 +                        }
 +                    }
 +            );
-+            methodMap.put(
+             methodMap.put(
                      Server.class.getMethod("getLogger"),
                      new MethodHandler() {
-                         final Logger logger = Logger.getLogger(TestServer.class.getCanonicalName());
 @@ -46,7 +56,7 @@ public class TestServer implements InvocationHandler {
                              return logger;
                          }

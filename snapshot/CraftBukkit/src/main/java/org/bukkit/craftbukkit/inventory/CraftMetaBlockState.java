@@ -214,6 +214,15 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
     }
 
     @Override
+    public CraftMetaBlockState clone() {
+        CraftMetaBlockState meta = (CraftMetaBlockState) super.clone();
+        if (blockEntityTag != null) {
+            meta.blockEntityTag = blockEntityTag.g();
+        }
+        return meta;
+    }
+
+    @Override
     public boolean hasBlockState() {
         return blockEntityTag != null;
     }
@@ -494,14 +503,5 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
         Validate.isTrue(valid, "Invalid blockState for " + material);
 
         blockEntityTag = ((CraftBlockEntityState) blockState).getSnapshotNBT();
-    }
-
-    @Override
-    public CraftMetaBlockState clone() {
-        final CraftMetaBlockState that = (CraftMetaBlockState) super.clone();
-        if(this.blockEntityTag != null) {
-            that.blockEntityTag = (NBTTagCompound) this.blockEntityTag.clone();
-        }
-        return that;
     }
 }

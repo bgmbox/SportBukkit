@@ -1,14 +1,14 @@
-From 2b3c0b9e1f1012ef7662ca1ae6e8ae4c82125025 Mon Sep 17 00:00:00 2001
+From 121df54c66580728a928e68291872eb440a4a3a4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 9 May 2015 14:30:04 -0400
 Subject: [PATCH] Block digging API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 80e5ab54..adbba6c6 100644
+index 88ee571e..f7ae8295 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1656,4 +1656,15 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1679,4 +1679,15 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       */
      public boolean teleportRelative(org.bukkit.util.Vector deltaPos, float deltaYaw, float deltaPitch, org.bukkit.event.player.PlayerTeleportEvent.TeleportCause cause);
      public boolean teleportRelative(org.bukkit.util.Vector deltaPos, float deltaYaw, float deltaPitch);

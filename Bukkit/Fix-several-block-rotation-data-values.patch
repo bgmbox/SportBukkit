@@ -1,4 +1,4 @@
-From 50df4703cc63262177892c92f53eeef3f1de73cb Mon Sep 17 00:00:00 2001
+From c2036d1764cccdc05fe7c9d42482f3c2a19b80de Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 9 Oct 2016 08:04:12 -0400
 Subject: [PATCH] Fix several block rotation data values
@@ -203,7 +203,7 @@ index c6d3882c..3b76ed07 100644
      public Lever() {
          super(Material.LEVER);
      }
-@@ -101,56 +102,62 @@ public class Lever extends SimpleAttachableMaterialData implements Redstone {
+@@ -101,55 +102,61 @@ public class Lever extends SimpleAttachableMaterialData implements Redstone {
       * Sets the direction this lever is pointing in
       */
      public void setFacingDirection(BlockFace face) {
@@ -289,7 +289,7 @@ index c6d3882c..3b76ed07 100644
          setData(data);
      }
  
-     @Override
++    @Override
 +    public Axis getAxis() {
 +        final byte data = (byte) (getData() & 0x7);
 +        switch(data) {
@@ -306,10 +306,9 @@ index c6d3882c..3b76ed07 100644
 +        }
 +    }
 +
-+    @Override
+     @Override
      public String toString() {
          return super.toString() + " facing " + getFacing() + " " + (isPowered() ? "" : "NOT ") + "POWERED";
-     }
 diff --git a/src/main/java/org/bukkit/material/Sign.java b/src/main/java/org/bukkit/material/Sign.java
 index 0accdbce..5781240a 100644
 --- a/src/main/java/org/bukkit/material/Sign.java

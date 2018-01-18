@@ -163,6 +163,13 @@ public class CraftWorld implements World {
         return new Location(this, spawn.getX(), spawn.getY(), spawn.getZ());
     }
 
+    @Override
+    public boolean setSpawnLocation(Location location) {
+        Preconditions.checkArgument(location != null, "location");
+
+        return equals(location.getWorld()) ? setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ()) : false;
+    }
+
     public boolean setSpawnLocation(int x, int y, int z) {
         try {
             Location previousLocation = getSpawnLocation();
@@ -1226,6 +1233,7 @@ public class CraftWorld implements World {
 
             if (entity != null) {
                 entity.setLocation(x, y, z, yaw, pitch);
+                entity.setHeadRotation(yaw); // SPIGOT-3587
             }
         } else if (Hanging.class.isAssignableFrom(clazz)) {
             org.bukkit.block.Block block = getBlockAt(location);

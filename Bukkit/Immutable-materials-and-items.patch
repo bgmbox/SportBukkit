@@ -1,4 +1,4 @@
-From c301310b3e96993bfac5e5cc12bc422d1b1af021 Mon Sep 17 00:00:00 2001
+From e10df0985dc15c096843d6e095344f55402dd1de Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 14:01:56 -0500
 Subject: [PATCH] Immutable materials and items
@@ -105,7 +105,7 @@ index 00000000..17feb009
 +    @Override public boolean setItemMeta(ItemMeta itemMeta) { throw ex(); }
 +}
 diff --git a/src/main/java/org/bukkit/inventory/ItemStack.java b/src/main/java/org/bukkit/inventory/ItemStack.java
-index 188ae6d7..64017cc8 100644
+index cd5a91f9..f8a7b2cf 100644
 --- a/src/main/java/org/bukkit/inventory/ItemStack.java
 +++ b/src/main/java/org/bukkit/inventory/ItemStack.java
 @@ -3,6 +3,8 @@ package org.bukkit.inventory;

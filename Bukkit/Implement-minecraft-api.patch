@@ -1,4 +1,4 @@
-From 760b4e26cc780734f4163cc3910751d3e3f8479d Mon Sep 17 00:00:00 2001
+From d02a635db89fb2f92b3df7768a9db43b4c947898 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 4 Feb 2016 04:59:45 -0500
 Subject: [PATCH] Implement minecraft-api
@@ -155,10 +155,10 @@ index 6e5ba586..8b1dccd1 100644
          Object val = get(path, null);
          if (val != null) {
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 3c2c2bab..f9d76e25 100644
+index 8a168da5..c059b15f 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -17,7 +17,7 @@ import org.bukkit.util.RayBlockIntersection;
+@@ -18,7 +18,7 @@ import org.bukkit.util.RayBlockIntersection;
  /**
   * Represents a player, connected or not
   */
@@ -191,7 +191,7 @@ index a7c0ef58..bebbcb76 100644
      /**
       * Checks if this object contains an override for the specified
 diff --git a/src/main/java/org/bukkit/plugin/Plugin.java b/src/main/java/org/bukkit/plugin/Plugin.java
-index c4e22c62..dcea4a3b 100644
+index 55debf5d..1d0d2f1e 100644
 --- a/src/main/java/org/bukkit/plugin/Plugin.java
 +++ b/src/main/java/org/bukkit/plugin/Plugin.java
 @@ -14,7 +14,7 @@ import org.bukkit.generator.ChunkGenerator;
@@ -249,11 +249,11 @@ index e5638d56..15f62186 100644
      /**
       * Registers the specified plugin loader
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 8f87bd61..1079c1c2 100644
+index 3049d046..37696aa7 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -362,6 +362,11 @@ public final class SimplePluginManager implements PluginManager {
-         return plugins.toArray(new Plugin[0]);
+@@ -363,6 +363,11 @@ public final class SimplePluginManager implements PluginManager {
+         return plugins.toArray(new Plugin[plugins.size()]);
      }
  
 +    @Override
@@ -264,7 +264,7 @@ index 8f87bd61..1079c1c2 100644
      /**
       * Checks if the given plugin is enabled or not
       * <p>
-@@ -534,6 +539,21 @@ public final class SimplePluginManager implements PluginManager {
+@@ -535,6 +540,21 @@ public final class SimplePluginManager implements PluginManager {
          }
      }
  

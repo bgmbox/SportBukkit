@@ -1,14 +1,14 @@
-From 5560b2f41beca8182012d952d75a909b47f46c51 Mon Sep 17 00:00:00 2001
+From 9408928232c9fb278faf685a4f880886f4ca628e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Feb 2015 08:28:39 -0500
 Subject: [PATCH] Fix TNT physics
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index ee547583..88bb9707 100644
+index be3560ef..4cd596e2 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
-@@ -1097,7 +1097,7 @@ public abstract class Entity implements ICommandListener {
+@@ -1103,7 +1103,7 @@ public abstract class Entity implements ICommandListener {
          return this.world.a(this.getBoundingBox().grow(0.0D, -20.0D, 0.0D).shrink(0.001D), Material.WATER, this);
      }
  
@@ -75,18 +75,18 @@ index 6c3d0192..89b9f0ba 100644
  
      public void setFuseTicks(int i) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d8021334..b986c5c8 100644
+index acc9a958..cdcef0ff 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -615,6 +615,11 @@ public final class CraftServer implements Server {
+@@ -612,6 +612,11 @@ public final class CraftServer implements Server {
+         return this.configuration.getBoolean("settings.fetch-skulls", true);
      }
  
-     @Override
++    @Override
 +    public boolean getWaterPushesTNT() {
 +        return this.configuration.getBoolean("settings.water-pushes-tnt", true);
 +    }
 +
-+    @Override
+     @Override
      public int getTicksPerAnimalSpawns() {
          return this.configuration.getInt("ticks-per.animal-spawns");
-     }

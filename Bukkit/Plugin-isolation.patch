@@ -1,11 +1,11 @@
-From 2065938fed8b3f8738223c306ba55a048afee0c9 Mon Sep 17 00:00:00 2001
+From 6f342635488d7ddbe6f84458668433aae7cd38f8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 29 May 2015 01:08:37 -0400
 Subject: [PATCH] Plugin isolation
 
 
 diff --git a/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java b/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java
-index e5ddef25..9cd15f43 100644
+index f5441bfd..f051b7f8 100644
 --- a/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java
 +++ b/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java
 @@ -5,10 +5,13 @@ import java.lang.reflect.InvocationTargetException;
@@ -22,7 +22,7 @@ index e5ddef25..9cd15f43 100644
  import org.apache.commons.lang.Validate;
  import org.bukkit.Color;
  import org.bukkit.FireworkEffect;
-@@ -16,6 +19,8 @@ import org.bukkit.Location;
+@@ -17,6 +20,8 @@ import org.bukkit.attribute.AttributeModifier;
  import org.bukkit.block.banner.Pattern;
  import org.bukkit.configuration.Configuration;
  import org.bukkit.inventory.ItemStack;
@@ -31,7 +31,7 @@ index e5ddef25..9cd15f43 100644
  import org.bukkit.potion.PotionEffect;
  import org.bukkit.util.BlockVector;
  import org.bukkit.util.Vector;
-@@ -26,7 +31,9 @@ import org.bukkit.util.Vector;
+@@ -27,7 +32,9 @@ import org.bukkit.util.Vector;
  public class ConfigurationSerialization {
      public static final String SERIALIZED_TYPE_KEY = "==";
      private final Class<? extends ConfigurationSerializable> clazz;
@@ -42,7 +42,7 @@ index e5ddef25..9cd15f43 100644
  
      static {
          registerClass(Vector.class);
-@@ -205,8 +212,10 @@ public class ConfigurationSerialization {
+@@ -207,8 +214,10 @@ public class ConfigurationSerialization {
          DelegateDeserialization delegate = clazz.getAnnotation(DelegateDeserialization.class);
  
          if (delegate == null) {
@@ -55,7 +55,7 @@ index e5ddef25..9cd15f43 100644
          }
      }
  
-@@ -219,7 +228,27 @@ public class ConfigurationSerialization {
+@@ -221,7 +230,27 @@ public class ConfigurationSerialization {
       * @see SerializableAs
       */
      public static void registerClass(Class<? extends ConfigurationSerializable> clazz, String alias) {
@@ -84,7 +84,7 @@ index e5ddef25..9cd15f43 100644
      }
  
      /**
-@@ -228,7 +257,11 @@ public class ConfigurationSerialization {
+@@ -230,7 +259,11 @@ public class ConfigurationSerialization {
       * @param alias Alias to unregister
       */
      public static void unregisterClass(String alias) {
@@ -97,7 +97,7 @@ index e5ddef25..9cd15f43 100644
      }
  
      /**
-@@ -238,8 +271,24 @@ public class ConfigurationSerialization {
+@@ -240,8 +273,24 @@ public class ConfigurationSerialization {
       * @param clazz Class to unregister
       */
      public static void unregisterClass(Class<? extends ConfigurationSerializable> clazz) {
@@ -124,7 +124,7 @@ index e5ddef25..9cd15f43 100644
          }
      }
  
-@@ -251,7 +300,9 @@ public class ConfigurationSerialization {
+@@ -253,7 +302,9 @@ public class ConfigurationSerialization {
       * @return Registered class, or null if not found
       */
      public static Class<? extends ConfigurationSerializable> getClassByAlias(String alias) {
@@ -171,7 +171,7 @@ index 4cdaac45..09198aec 100644
  
      private static List<String> makePluginNameList(final Map<?, ?> map, final String key) throws InvalidDescriptionException {
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 0b3cc9e6..8f87bd61 100644
+index ecbc931c..3049d046 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -23,6 +23,7 @@ import org.bukkit.Server;
@@ -182,7 +182,7 @@ index 0b3cc9e6..8f87bd61 100644
  import org.bukkit.event.Event;
  import org.bukkit.event.EventPriority;
  import org.bukkit.event.HandlerList;
-@@ -458,6 +459,12 @@ public final class SimplePluginManager implements PluginManager {
+@@ -459,6 +460,12 @@ public final class SimplePluginManager implements PluginManager {
              } catch (Throwable ex) {
                  server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering plugin channels for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
@@ -397,27 +397,37 @@ index 885f8ae8..5fbfc39b 100644
              }
          }
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index 13f86338..c651c429 100644
+index 7e41e79a..765d6ce8 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-@@ -5,9 +5,16 @@ import java.net.MalformedURLException;
+@@ -2,20 +2,17 @@ package org.bukkit.plugin.java;
+ 
+ import com.google.common.io.ByteStreams;
+ import java.io.File;
+-import java.io.IOException;
+-import java.io.InputStream;
+ import java.net.MalformedURLException;
  import java.net.URL;
  import java.net.URLClassLoader;
- import java.util.HashMap;
+-import java.security.CodeSigner;
+-import java.security.CodeSource;
+-import java.util.HashMap;
+-import java.util.Map;
 +import java.util.LinkedHashSet;
- import java.util.Map;
  import java.util.Set;
+-import java.util.jar.JarEntry;
+-import java.util.jar.JarFile;
+-import java.util.jar.Manifest;
 +import java.util.concurrent.locks.ReadWriteLock;
 +import java.util.concurrent.locks.ReentrantReadWriteLock;
  
 +import com.google.common.hash.Hashing;
 +import com.google.common.hash.HashingInputStream;
-+import com.google.common.io.ByteStreams;
 +import com.google.inject.Module;
  import org.apache.commons.lang.Validate;
  import org.bukkit.plugin.InvalidPluginException;
  import org.bukkit.plugin.PluginDescriptionFile;
-@@ -16,40 +23,54 @@ import org.bukkit.plugin.PluginDescriptionFile;
+@@ -24,46 +21,54 @@ import org.bukkit.plugin.PluginDescriptionFile;
   * A ClassLoader for plugins, to allow shared classes across multiple plugins
   */
  final class PluginClassLoader extends URLClassLoader {
@@ -430,14 +440,20 @@ index 13f86338..c651c429 100644
      private final PluginDescriptionFile description;
      private final File dataFolder;
      private final File file;
+-    private final JarFile jar;
+-    private final Manifest manifest;
+-    private final URL url;
 -    final JavaPlugin plugin;
 -    private JavaPlugin pluginInit;
 -    private IllegalStateException pluginState;
-+    JavaPlugin plugin;
- 
--    PluginClassLoader(final JavaPluginLoader loader, final ClassLoader parent, final PluginDescriptionFile description, final File dataFolder, final File file) throws InvalidPluginException, MalformedURLException {
+-
+-    PluginClassLoader(final JavaPluginLoader loader, final ClassLoader parent, final PluginDescriptionFile description, final File dataFolder, final File file) throws IOException, InvalidPluginException, MalformedURLException {
 -        super(new URL[] {file.toURI().toURL()}, parent);
 -        Validate.notNull(loader, "Loader cannot be null");
+-
+-        this.loader = loader;
++    JavaPlugin plugin;
++
 +    static {
 +        registerAsParallelCapable();
 +    }
@@ -446,12 +462,14 @@ index 13f86338..c651c429 100644
 +        super(new URL[]{file.toURI().toURL()}, parent);
 +        Validate.notNull(pluginLoader, "Loader cannot be null");
 +        Validate.notNull(parent, "Parent loader cannot be null");
- 
--        this.loader = loader;
++
 +        this.pluginLoader = pluginLoader;
          this.description = description;
          this.dataFolder = dataFolder;
          this.file = file;
+-        this.jar = new JarFile(file);
+-        this.manifest = jar.getManifest();
+-        this.url = file.toURI().toURL();
  
 +        this.dependencies = dependencies;
 +        linearizeDependencies();
@@ -488,7 +506,7 @@ index 13f86338..c651c429 100644
          } catch (IllegalAccessException ex) {
              throw new InvalidPluginException("No public constructor", ex);
          } catch (InstantiationException ex) {
-@@ -57,50 +78,133 @@ final class PluginClassLoader extends URLClassLoader {
+@@ -71,97 +76,133 @@ final class PluginClassLoader extends URLClassLoader {
          }
      }
  
@@ -556,14 +574,48 @@ index 13f86338..c651c429 100644
 +        } finally {
 +            dependencyLock.readLock().unlock();
 +        }
- 
--            if (result == null) {
--                result = super.findClass(name);
 +        throw new ClassNotFoundException(name);
 +    }
  
--                if (result != null) {
--                    loader.setClass(name, result);
+-            if (result == null) {
+-                String path = name.replace('.', '/').concat(".class");
+-                JarEntry entry = jar.getJarEntry(path);
+-
+-                if (entry != null) {
+-                    byte[] classBytes;
+-
+-                    try (InputStream is = jar.getInputStream(entry)) {
+-                        classBytes = ByteStreams.toByteArray(is);
+-                    } catch (IOException ex) {
+-                        throw new ClassNotFoundException(name, ex);
+-                    }
+-
+-                    int dot = name.lastIndexOf('.');
+-                    if (dot != -1) {
+-                        String pkgName = name.substring(0, dot);
+-                        if (getPackage(pkgName) == null) {
+-                            try {
+-                                if (manifest != null) {
+-                                    definePackage(pkgName, manifest, url);
+-                                } else {
+-                                    definePackage(pkgName, null, null, null, null, null, null, null);
+-                                }
+-                            } catch (IllegalArgumentException ex) {
+-                                if (getPackage(pkgName) == null) {
+-                                    throw new IllegalStateException("Cannot find package " + pkgName);
+-                                }
+-                            }
+-                        }
+-                    }
+-
+-                    CodeSigner[] signers = entry.getCodeSigners();
+-                    CodeSource source = new CodeSource(url, signers);
+-
+-                    result = defineClass(name, classBytes, 0, classBytes.length, source);
+-                }
+ 
+-                if (result == null) {
+-                    result = super.findClass(name);
 +    /**
 +     * Load a class from this plugin
 +     */
@@ -574,7 +626,10 @@ index 13f86338..c651c429 100644
 +                final URL url = findResource(name.replace('.', '/').concat(".class"));
 +                if(url == null) {
 +                    throw new ClassNotFoundException(name);
-+                }
+                 }
+-
+-                if (result != null) {
+-                    loader.setClass(name, result);
 +                try(HashingInputStream istream = new HashingInputStream(Hashing.sha256(), url.openStream())) {
 +                    ByteStreams.copy(istream, ByteStreams.nullOutputStream());
 +                    cls = pluginLoader.classes.get(istream.hash(), () -> findClass(name));
@@ -589,15 +644,19 @@ index 13f86338..c651c429 100644
 +            }
 +            return cls;
          }
-+    }
- 
+-
 -        return result;
+     }
+ 
+-    @Override
+-    public void close() throws IOException {
 +    /**
 +     * Load a class from the first non-isolated plugin that provides it (including this plugin), in loading order.
 +     */
 +    Class<?> loadPluginClass(String name, boolean resolve) throws ClassNotFoundException {
 +        pluginLoader.loaderLock.readLock().lock();
-+        try {
+         try {
+-            super.close();
 +            for(PluginClassLoader loader : pluginLoader.loaders.values()) {
 +                if(!loader.description.isIsolated()) {
 +                    try {
@@ -605,21 +664,22 @@ index 13f86338..c651c429 100644
 +                    } catch(ClassNotFoundException ignored) {}
 +                }
 +            }
-+        } finally {
+         } finally {
+-            jar.close();
 +            pluginLoader.loaderLock.readLock().unlock();
-+        }
+         }
 +
 +        throw new ClassNotFoundException(name);
-     }
- 
--    Set<String> getClasses() {
--        return classes.keySet();
++    }
++
 +    Class<?> loadBukkitClass(String name, boolean resolve) throws ClassNotFoundException {
 +        Class<?> cls = getParent().loadClass(name);
 +        if(resolve) resolveClass(cls);
 +        return cls;
-+    }
-+
+     }
+ 
+-    Set<String> getClasses() {
+-        return classes.keySet();
 +    void removeDependency(PluginClassLoader dependency) {
 +        dependencyLock.writeLock().lock();
 +        try {

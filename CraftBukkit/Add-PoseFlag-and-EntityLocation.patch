@@ -1,11 +1,11 @@
-From 34c500f3574f036797755dfed5a849af61496e75 Mon Sep 17 00:00:00 2001
+From 7c93327d48624df3b700f66422652cad682f5ab1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 2f1a0eda..d5bda027 100644
+index 6464858d..2a24eeae 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -18,12 +18,15 @@ import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ index 2f1a0eda..d5bda027 100644
  import org.bukkit.entity.Vehicle;
  import org.bukkit.event.entity.*;
  import org.bukkit.event.hanging.HangingBreakByEntityEvent;
-@@ -1901,6 +1904,12 @@ public abstract class Entity implements ICommandListener {
+@@ -1907,6 +1910,12 @@ public abstract class Entity implements ICommandListener {
                          getBukkitEntity()
                  );
                  Bukkit.getPluginManager().callEvent(event);
@@ -37,7 +37,7 @@ index 2f1a0eda..d5bda027 100644
                  CraftEntity craftn = (CraftEntity) getBukkitEntity().getVehicle();
                  Entity n = craftn == null ? null : craftn.getHandle();
                  if (event.isCancelled() || n != orig) {
-@@ -1941,6 +1950,9 @@ public abstract class Entity implements ICommandListener {
+@@ -1947,6 +1956,9 @@ public abstract class Entity implements ICommandListener {
                          (LivingEntity) getBukkitEntity()
                  );
                  Bukkit.getPluginManager().callEvent(event);
@@ -48,7 +48,7 @@ index 2f1a0eda..d5bda027 100644
                  Entity n = craftn == null ? null : craftn.getHandle();
                  if (event.isCancelled() || n != orig) {
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 3726d8fe..ebfdc98f 100644
+index 38dc34a9..8bc82c02 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -10,8 +10,10 @@ import java.util.UUID;
@@ -79,7 +79,7 @@ index 3726d8fe..ebfdc98f 100644
          // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 26cae7b9..506137da 100644
+index 6745c8c7..cb28ee26 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -22,7 +22,9 @@ import org.apache.logging.log4j.Logger;
@@ -139,7 +139,7 @@ index 26cae7b9..506137da 100644
  
                                  // Skip the first time we do this
                                  if (from.getX() != Double.MAX_VALUE) {
-@@ -1569,6 +1575,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1574,6 +1580,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              case STOP_SNEAKING:
                  PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this.getPlayer(), packetplayinentityaction.b() == PacketPlayInEntityAction.EnumPlayerAction.START_SNEAKING);
                  this.server.getPluginManager().callEvent(event);
@@ -147,7 +147,7 @@ index 26cae7b9..506137da 100644
  
                  if (event.isCancelled()) {
                      return;
-@@ -1578,6 +1585,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1583,6 +1590,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              case STOP_SPRINTING:
                  PlayerToggleSprintEvent e2 = new PlayerToggleSprintEvent(this.getPlayer(), packetplayinentityaction.b() == PacketPlayInEntityAction.EnumPlayerAction.START_SPRINTING);
                  this.server.getPluginManager().callEvent(e2);
@@ -155,7 +155,7 @@ index 26cae7b9..506137da 100644
  
                  if (e2.isCancelled()) {
                      return;
-@@ -2299,6 +2307,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2304,6 +2312,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
          if (this.player.abilities.canFly && this.player.abilities.isFlying != packetplayinabilities.isFlying()) {
              PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this.server.getPlayer(this.player), packetplayinabilities.isFlying());
              this.server.getPluginManager().callEvent(event);
@@ -164,7 +164,7 @@ index 26cae7b9..506137da 100644
                  this.player.abilities.isFlying = packetplayinabilities.isFlying(); // Actually set the player's flying status
              } else {
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index a24e652f..afdb5ab8 100644
+index 7b17e4eb..98b11758 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -23,6 +23,7 @@ import org.apache.logging.log4j.Logger;
@@ -183,7 +183,7 @@ index a24e652f..afdb5ab8 100644
  import org.bukkit.craftbukkit.util.CraftChatMessage;
  import org.bukkit.entity.Player;
  import org.bukkit.event.player.PlayerChangedWorldEvent;
-@@ -737,6 +739,7 @@ public abstract class PlayerList {
+@@ -739,6 +741,7 @@ public abstract class PlayerList {
              this.savePlayerFile(entityplayer);
          }
          // CraftBukkit end
@@ -192,7 +192,7 @@ index a24e652f..afdb5ab8 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 39e8cbe3..82494687 100644
+index 129db6f7..356a39f2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
@@ -217,7 +217,7 @@ index 39e8cbe3..82494687 100644
      }
  
      public Location getLocation() {
--        return new Location(getWorld(), entity.locX, entity.locY, entity.locZ, entity instanceof EntityLiving ? entity.getHeadRotation() : entity.yaw, entity.pitch);
+-        return new Location(getWorld(), entity.locX, entity.locY, entity.locZ, entity.getBukkitYaw(), entity.pitch);
 +        return getEntityLocation();
 +    }
 +
@@ -229,7 +229,7 @@ index 39e8cbe3..82494687 100644
      public Location getLocation(Location loc) {
 @@ -238,11 +246,26 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
              loc.setZ(entity.locZ);
-             loc.setYaw(entity instanceof EntityLiving ? entity.getHeadRotation() : entity.yaw);
+             loc.setYaw(entity.getBukkitYaw());
              loc.setPitch(entity.pitch);
 +
 +            if(loc instanceof EntityLocation) {
@@ -255,7 +255,7 @@ index 39e8cbe3..82494687 100644
          return new Vector(entity.motX, entity.motY, entity.motZ);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index cce1fea1..75996e2a 100644
+index 945f18e4..09104733 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -3,12 +3,14 @@ package org.bukkit.craftbukkit.entity;
@@ -273,7 +273,7 @@ index cce1fea1..75996e2a 100644
  import org.bukkit.inventory.MainHand;
  import org.bukkit.inventory.Merchant;
  import org.bukkit.Material;
-@@ -528,11 +530,19 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
+@@ -531,10 +533,18 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
  
      @Override
      public float getAttackCooldownCoefficient() {
@@ -282,7 +282,7 @@ index cce1fea1..75996e2a 100644
          return 0.2f + f * f * 0.8f;
      }
  
-     @Override
++    @Override
 +    public EnumSet<PoseFlag> getPoseFlags() {
 +        final EnumSet<PoseFlag> flags = super.getPoseFlags();
 +        if(isSleeping()) flags.add(PoseFlag.SLEEPING);
@@ -290,12 +290,11 @@ index cce1fea1..75996e2a 100644
 +        return flags;
 +    }
 +
-+    @Override
+     @Override
      public int getCooldown(Material material) {
          Preconditions.checkArgument(material != null, "material");
- 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index a7e1d3a7..7b84b91a 100644
+index e6b78db4..257de343 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -2,6 +2,7 @@ package org.bukkit.craftbukkit.entity;
@@ -303,10 +302,10 @@ index a7e1d3a7..7b84b91a 100644
  import java.util.ArrayList;
  import java.util.Collection;
 +import java.util.EnumSet;
- import java.util.HashSet;
  import java.util.Iterator;
  import java.util.List;
-@@ -39,6 +40,7 @@ import net.minecraft.server.MobEffectList;
+ import java.util.Set;
+@@ -36,6 +37,7 @@ import net.minecraft.server.MobEffectList;
  import org.apache.commons.lang.Validate;
  import org.bukkit.Location;
  import org.bukkit.Material;
@@ -314,7 +313,7 @@ index a7e1d3a7..7b84b91a 100644
  import org.bukkit.attribute.Attribute;
  import org.bukkit.attribute.AttributeInstance;
  import org.bukkit.block.Block;
-@@ -574,4 +576,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -531,4 +533,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
      public void setArrowsStuck(int arrows) {
          getHandle().setArrowCount(arrows);
      }
@@ -328,7 +327,7 @@ index a7e1d3a7..7b84b91a 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 1276f15f..0814232e 100644
+index 08871ebf..bfd70534 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -14,7 +14,9 @@ import com.google.common.base.Functions;
@@ -341,7 +340,7 @@ index 1276f15f..0814232e 100644
  import org.bukkit.Server;
  import org.bukkit.Statistic.Type;
  import org.bukkit.block.Block;
-@@ -270,6 +272,8 @@ public class CraftEventFactory {
+@@ -271,6 +273,8 @@ public class CraftEventFactory {
          BlockDamageEvent event = new BlockDamageEvent(player, blockClicked, itemInHand, instaBreak);
          craftServer.getPluginManager().callEvent(event);
  
@@ -350,7 +349,7 @@ index 1276f15f..0814232e 100644
          return event;
      }
  
-@@ -278,6 +282,8 @@ public class CraftEventFactory {
+@@ -279,6 +283,8 @@ public class CraftEventFactory {
          BlockUndamageEvent event = new BlockUndamageEvent(player, player.getWorld().getBlockAt(x, y, z));
          player.getServer().getPluginManager().callEvent(event);
  
@@ -359,7 +358,7 @@ index 1276f15f..0814232e 100644
          return event;
      }
  
-@@ -420,6 +426,8 @@ public class CraftEventFactory {
+@@ -421,6 +427,8 @@ public class CraftEventFactory {
          org.bukkit.World world = entity.getWorld();
          Bukkit.getServer().getPluginManager().callEvent(event);
  
@@ -368,7 +367,7 @@ index 1276f15f..0814232e 100644
          victim.keepLevel = event.getKeepLevel();
          victim.newLevel = event.getNewLevel();
          victim.newTotalExp = event.getNewTotalExp();
-@@ -952,12 +960,18 @@ public class CraftEventFactory {
+@@ -961,12 +969,18 @@ public class CraftEventFactory {
      public static PlayerUnleashEntityEvent callPlayerUnleashEntityEvent(EntityInsentient entity, EntityHuman player) {
          PlayerUnleashEntityEvent event = new PlayerUnleashEntityEvent(entity.getBukkitEntity(), (Player) player.getBukkitEntity());
          entity.world.getServer().getPluginManager().callEvent(event);
@@ -387,7 +386,7 @@ index 1276f15f..0814232e 100644
          return event;
      }
  
-@@ -1027,6 +1041,9 @@ public class CraftEventFactory {
+@@ -1036,6 +1050,9 @@ public class CraftEventFactory {
      public static EntityToggleGlideEvent callToggleGlideEvent(EntityLiving entity, boolean gliding) {
          EntityToggleGlideEvent event = new EntityToggleGlideEvent((LivingEntity) entity.getBukkitEntity(), gliding);
          entity.world.getServer().getPluginManager().callEvent(event);
@@ -397,7 +396,7 @@ index 1276f15f..0814232e 100644
          return event;
      }
  
-@@ -1135,4 +1152,33 @@ public class CraftEventFactory {
+@@ -1144,4 +1161,33 @@ public class CraftEventFactory {
          world.getServer().getPluginManager().callEvent(event);
          return event;
      }

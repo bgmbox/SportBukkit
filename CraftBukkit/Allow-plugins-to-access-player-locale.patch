@@ -1,11 +1,11 @@
-From b9d0405ab84a6783200384e1bd88028a9e385aaf Mon Sep 17 00:00:00 2001
+From 53e19bcf201d4186c6912788b49911ba5b49938b Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Sun, 5 Jan 2014 20:35:57 -0600
 Subject: [PATCH] Allow plugins to access player locale
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 11c7bcaa..c3312439 100644
+index be32b107..bc9b51bf 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -31,7 +31,7 @@ import org.bukkit.inventory.MainHand;
@@ -39,18 +39,19 @@ index 11c7bcaa..c3312439 100644
          this.cm = packetplayinsettings.d();
          this.getDataWatcher().set(EntityPlayer.br, Byte.valueOf((byte) packetplayinsettings.e()));
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 465bc608..b8a28026 100644
+index f3dba24b..90e1152d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -1511,12 +1511,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1564,13 +1564,19 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         return new CraftAdvancementProgress(craft, data, progress);
      }
  
-     @Override
++    @Override
 +    public String getHostname() {
 +        return getHandle().hostname;
 +    }
 +
-+    @Override
+     @Override
      public String getLocale() {
 -        return getHandle().locale;
 +        final String locale = getHandle().locale;
@@ -65,19 +66,10 @@ index 465bc608..b8a28026 100644
      }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 61d28a27..ac8480d8 100644
+index b157fea6..f7bed197 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -659,7 +659,7 @@ public class CraftEventFactory {
-         if (!event.isCancelled()) {
-             state.update(true);
-         }
--        
-+
-         return !event.isCancelled();
-     }
- 
-@@ -1064,4 +1064,11 @@ public class CraftEventFactory {
+@@ -1073,4 +1073,11 @@ public class CraftEventFactory {
  
          return !event.isCancelled();
      }

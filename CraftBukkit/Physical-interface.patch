@@ -1,11 +1,11 @@
-From 065a2676fcbe8fafd0d39058abe958e2e3386627 Mon Sep 17 00:00:00 2001
+From 3751f6efa83ebc0163b5eaf9d8c43e4e9fbe7fe9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 01:08:46 -0400
 Subject: [PATCH] Physical interface
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index e218353f..b4bfe45c 100644
+index f732b8b2..0a1b97df 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -92,6 +92,11 @@ public class CraftWorld implements World {
@@ -56,15 +56,15 @@ index 744da023..42823da5 100644
  import org.bukkit.block.Block;
  import org.bukkit.craftbukkit.inventory.CraftItemStack;
  import org.bukkit.craftbukkit.potion.CraftPotionUtil;
-@@ -60,6 +61,11 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
+@@ -59,6 +60,11 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
+         return dispenserBlock.getWorld().getWorld().getBlockAt(dispenserBlock.getPosition().getX(), dispenserBlock.getPosition().getY(), dispenserBlock.getPosition().getZ());
      }
  
-     @Override
++    @Override
 +    public World getWorld() {
 +        return getBlock().getWorld();
 +    }
 +
-+    @Override
+     @Override
      public <T extends Projectile> T launchProjectile(Class<? extends T> projectile) {
          return launchProjectile(projectile, null);
-     }

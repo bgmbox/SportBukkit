@@ -1,4 +1,4 @@
-From d1e8a8db5a1219bf85081d67c558b178afde37e5 Mon Sep 17 00:00:00 2001
+From 538238131e6fa03c2aea9dc9675c5d5f95676f5e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 25 Apr 2016 20:47:00 -0400
 Subject: [PATCH] Add Player.willBeOnline method
@@ -17,10 +17,11 @@ index 3ab2e4c7..3a481844 100644
  import org.bukkit.permissions.ServerOperator;
  
  public interface OfflinePlayer extends ServerOperator, AnimalTamer, ConfigurationSerializable {
-@@ -18,6 +20,14 @@ public interface OfflinePlayer extends ServerOperator, AnimalTamer, Configuratio
+@@ -17,6 +19,14 @@ public interface OfflinePlayer extends ServerOperator, AnimalTamer, Configuratio
+      */
      public boolean isOnline();
  
-     /**
++    /**
 +     * Will this player be online after the current event is finished?
 +     *
 +     * Unlike {@link #isOnline()}, this returns true from within {@link PlayerLoginEvent},
@@ -28,7 +29,6 @@ index 3ab2e4c7..3a481844 100644
 +     */
 +    boolean willBeOnline();
 +
-+    /**
+     /**
       * Returns the name of this player
       * <p>
-      * Names are no longer unique past a single game session. For persistent storage

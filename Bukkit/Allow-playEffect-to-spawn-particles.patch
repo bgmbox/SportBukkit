@@ -1,4 +1,4 @@
-From 5bca11bcc6ab2b9ac1f921adb8b5211b5ed7220a Mon Sep 17 00:00:00 2001
+From ef4d29ac64d6ddd4c54fc16e5ee7492b65528026 Mon Sep 17 00:00:00 2001
 From: Thinkofdeath <purgames@gmail.com>
 Date: Sun, 17 Mar 2013 22:56:14 +0000
 Subject: [PATCH] Allow playEffect to spawn particles
@@ -245,10 +245,10 @@ index 21f7db58..d9cb0ca7 100644
 +    public enum Type {SOUND, VISUAL, PARTICLE}
  }
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index f34b3a93..753703d3 100644
+index c8344c6d..19fc9f78 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
-@@ -775,6 +775,16 @@ public interface World extends PluginMessageRecipient, Metadatable {
+@@ -787,6 +787,16 @@ public interface World extends PluginMessageRecipient, Metadatable {
       * Plays an effect to all players within a default radius around a given
       * location.
       *
@@ -265,10 +265,11 @@ index f34b3a93..753703d3 100644
       * @param location the {@link Location} around which players must be to
       *     hear the sound
       * @param effect the {@link Effect}
-@@ -818,6 +828,27 @@ public interface World extends PluginMessageRecipient, Metadatable {
+@@ -829,6 +839,27 @@ public interface World extends PluginMessageRecipient, Metadatable {
+      */
      public <T> void playEffect(Location location, Effect effect, T data, int radius);
  
-     /**
++    /**
 +     * Plays an effect to all players within a default radius around a given location.
 +     * The effect will use the provided material (and material data if required). The particle's
 +     * position on the client will be the given location, adjusted on each axis by a normal
@@ -289,15 +290,14 @@ index f34b3a93..753703d3 100644
 +     */
 +    public void playEffect(Location location, Effect effect, int id, int data, float offsetX, float offsetY, float offsetZ, float speed, int particleCount, int radius);
 +
-+    /**
+     /**
       * Get empty chunk snapshot (equivalent to all air blocks), optionally
       * including valid biome data. Used for representing an ungenerated chunk,
-      * or for fetching only biome data without loading a chunk.
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 33f6e6dc..653b4b56 100644
+index 082302d1..f5ec669c 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -324,6 +324,8 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -325,6 +325,8 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       */
      public <T> void playEffect(Location loc, Effect effect, T data);
  

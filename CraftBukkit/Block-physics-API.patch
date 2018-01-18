@@ -1,11 +1,11 @@
-From 1d8f295a13188db30deaf941e1b0a601094e837f Mon Sep 17 00:00:00 2001
+From 02fbc401a22bf9617baa10feb3e1181fce8bc52a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 18 Jun 2016 08:18:33 -0400
 Subject: [PATCH] Block physics API
 
 
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 89349a3f..229b6932 100644
+index a2ca2c81..ada67517 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -396,6 +396,15 @@ public abstract class World implements IBlockAccess {
@@ -32,7 +32,7 @@ index 89349a3f..229b6932 100644
      public void a(BlockPosition blockposition, final Block block, BlockPosition blockposition1) {
          if (!this.isClientSide) {
              IBlockData iblockdata = this.getType(blockposition);
-@@ -2983,7 +2993,14 @@ public abstract class World implements IBlockAccess {
+@@ -2980,7 +2990,14 @@ public abstract class World implements IBlockAccess {
          while (iterator.hasNext()) {
              EnumDirection enumdirection = (EnumDirection) iterator.next();
              BlockPosition blockposition1 = blockposition.shift(enumdirection);
@@ -48,7 +48,7 @@ index 89349a3f..229b6932 100644
                  IBlockData iblockdata = this.getType(blockposition1);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index bc010e67..c5ee75e2 100644
+index b4756fc7..456fd209 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -20,6 +20,7 @@ import org.bukkit.craftbukkit.CraftChunk;

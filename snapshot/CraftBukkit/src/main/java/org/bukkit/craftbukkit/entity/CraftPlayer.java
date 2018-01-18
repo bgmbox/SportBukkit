@@ -9,11 +9,13 @@ import io.netty.buffer.Unpooled;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -72,11 +74,14 @@ import org.bukkit.map.MapCursor;
 import org.bukkit.map.MapView;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.RayBlockIntersection;
 import org.bukkit.util.Vector;
+
+import javax.annotation.Nullable;
 
 @DelegateDeserialization(CraftOfflinePlayer.class)
 public class CraftPlayer extends CraftHumanEntity implements Player {
@@ -85,7 +90,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
     private boolean hasPlayedBefore = false;
     private final ConversationTracker conversationTracker = new ConversationTracker();
     private final Set<String> channels = new HashSet<String>();
-    private final Set<UUID> hiddenPlayers = new HashSet<UUID>();
+    private final Map<UUID, Set<WeakReference<Plugin>>> hiddenPlayers = new HashMap<>();
+    private static final WeakHashMap<Plugin, WeakReference<Plugin>> pluginWeakReferences = new WeakHashMap<>();
     private int hash = 0;
     private double health = 20;
     private boolean scaledHealth = false;
@@ -563,7 +569,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         }
 
         float f = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
-        getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(CraftSound.getSoundEffect("block.note." + instrumentName), net.minecraft.server.SoundCategory.MUSIC, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 3.0f, f));
+        getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(CraftSound.getSoundEffect("block.note." + instrumentName), net.minecraft.server.SoundCategory.RECORDS, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 3.0f, f));
     }
 
     @Override
@@ -604,7 +610,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
                 break;
         }
         float f = (float) Math.pow(2.0D, (note.getId() - 12.0D) / 12.0D);
-        getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(CraftSound.getSoundEffect("block.note." + instrumentName), net.minecraft.server.SoundCategory.MUSIC, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 3.0f, f));
+        getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(CraftSound.getSoundEffect("block.note." + instrumentName), net.minecraft.server.SoundCategory.RECORDS, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 3.0f, f));
     }
 
     @Override
@@ -1254,18 +1260,45 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         }
     }
 
+    @Nullable
+    private static WeakReference<Plugin> getPluginWeakReference(@Nullable Plugin plugin) {
+        return (plugin == null) ? null : pluginWeakReferences.computeIfAbsent(plugin, WeakReference::new);
+    }
+
     @Override
+    @Deprecated
     public void hidePlayer(Player player) {
+        hidePlayer0(null, player);
+    }
+
+    @Override
+    public void hidePlayer(Plugin plugin, Player player) {
+        Validate.notNull(plugin, "Plugin cannot be null");
+        Validate.isTrue(plugin.isEnabled(), "Plugin attempted to hide player while disabled");
+
+        hidePlayer0(plugin, player);
+    }
+
+    private void hidePlayer0(@Nullable Plugin plugin, Player player) {
         Validate.notNull(player, "hidden player cannot be null");
         if (getHandle().playerConnection == null) return;
         if (equals(player)) return;
-        if (hiddenPlayers.contains(player.getUniqueId())) return;
-        hiddenPlayers.add(player.getUniqueId());
+
+        Set<WeakReference<Plugin>> hidingPlugins = hiddenPlayers.get(player.getUniqueId());
+        if (hidingPlugins != null) {
+            // Some plugins are already hiding the player. Just mark that this
+            // plugin wants the player hidden too and end.
+            hidingPlugins.add(getPluginWeakReference(plugin));
+            return;
+        }
+        hidingPlugins = new HashSet<>();
+        hidingPlugins.add(getPluginWeakReference(plugin));
+        hiddenPlayers.put(player.getUniqueId(), hidingPlugins);
 
         // Remove this player from the hidden player's EntityTrackerEntry
         EntityTracker tracker = ((WorldServer) entity.world).tracker;
         EntityPlayer other = ((CraftPlayer) player).getHandle();
-        EntityTrackerEntry entry = (EntityTrackerEntry) tracker.trackedEntities.get(other.getId());
+        EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
         if (entry != null) {
             entry.clear(getHandle());
         }
@@ -1277,11 +1310,32 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
     }
 
     @Override
+    @Deprecated
     public void showPlayer(Player player) {
+        showPlayer0(null, player);
+    }
+
+    @Override
+    public void showPlayer(Plugin plugin, Player player) {
+        Validate.notNull(plugin, "Plugin cannot be null");
+        // Don't require that plugin be enabled. A plugin must be allowed to call
+        // showPlayer during its onDisable() method.
+        showPlayer0(plugin, player);
+    }
+
+    private void showPlayer0(@Nullable Plugin plugin, Player player) {
         Validate.notNull(player, "shown player cannot be null");
         if (getHandle().playerConnection == null) return;
         if (equals(player)) return;
-        if (!hiddenPlayers.contains(player.getUniqueId())) return;
+
+        Set<WeakReference<Plugin>> hidingPlugins = hiddenPlayers.get(player.getUniqueId());
+        if (hidingPlugins == null) {
+            return; // Player isn't hidden
+        }
+        hidingPlugins.remove(getPluginWeakReference(plugin));
+        if (!hidingPlugins.isEmpty()) {
+            return; // Some other plugins still want the player hidden
+        }
         hiddenPlayers.remove(player.getUniqueId());
 
         EntityTracker tracker = ((WorldServer) entity.world).tracker;
@@ -1289,7 +1343,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
         getHandle().playerConnection.sendPacket(other.getBukkitEntity().makePlayerListAddPacket(this));
 
-        EntityTrackerEntry entry = (EntityTrackerEntry) tracker.trackedEntities.get(other.getId());
+        EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
         if (entry != null && !entry.trackedPlayers.contains(getHandle())) {
             entry.updatePlayer(getHandle());
         }
@@ -1301,7 +1355,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
     @Override
     public boolean canSee(Player player) {
-        return !hiddenPlayers.contains(player.getUniqueId());
+        return !hiddenPlayers.containsKey(player.getUniqueId());
     }
 
     @Override
@@ -1735,7 +1789,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
     public void updateScaledHealth() {
         AttributeMapServer attributemapserver = (AttributeMapServer) getHandle().getAttributeMap();
-        Collection set = attributemapserver.c(); // PAIL: Rename
+        Collection<AttributeInstance> set = attributemapserver.c(); // PAIL: Rename
 
         injectScaledMaxHealth(set, true);
 
@@ -1750,13 +1804,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         getHandle().playerConnection.sendPacket(new PacketPlayOutUpdateHealth(getScaledHealth(), getHandle().getFoodData().getFoodLevel(), getHandle().getFoodData().getSaturationLevel()));
     }
 
-    public void injectScaledMaxHealth(Collection collection, boolean force) {
+    public void injectScaledMaxHealth(Collection<AttributeInstance> collection, boolean force) {
         if (!scaledHealth && !force) {
             return;
         }
-        for (Object genericInstance : collection) {
-            IAttribute attribute = ((AttributeInstance) genericInstance).getAttribute();
-            if (attribute.getName().equals("generic.maxHealth")) {
+        for (AttributeInstance genericInstance : collection) {
+            if (genericInstance.getAttribute().getName().equals("generic.maxHealth")) {
                 collection.remove(genericInstance);
                 break;
             }
@@ -1783,6 +1836,9 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
     @Override
     public void sendTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut) {
+        PacketPlayOutTitle times = new PacketPlayOutTitle(fadeIn, stay, fadeOut);
+        getHandle().playerConnection.sendPacket(times);
+
         if (title != null) {
             PacketPlayOutTitle packetTitle = new PacketPlayOutTitle(EnumTitleAction.TITLE, CraftChatMessage.fromString(title)[0]);
             getHandle().playerConnection.sendPacket(packetTitle);
@@ -1792,9 +1848,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
             PacketPlayOutTitle packetSubtitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, CraftChatMessage.fromString(subtitle)[0]);
             getHandle().playerConnection.sendPacket(packetSubtitle);
         }
-
-        PacketPlayOutTitle times = new PacketPlayOutTitle(fadeIn, stay, fadeOut);
-        getHandle().playerConnection.sendPacket(times);
     }
 
     @Override

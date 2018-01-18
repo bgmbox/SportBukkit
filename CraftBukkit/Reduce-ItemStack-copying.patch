@@ -1,4 +1,4 @@
-From 0a03a6bc4acef89424312eef6745e2fc435e6490 Mon Sep 17 00:00:00 2001
+From 1822d27aa14689da511789565cd9a62575d4f0d4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 00:30:44 -0500
 Subject: [PATCH] Reduce ItemStack copying
@@ -92,15 +92,16 @@ index 6af26928..26ebeaac 100644
      }
  
      public IInventory getInventory() {
-@@ -82,31 +93,25 @@ public class CraftInventory implements Inventory {
+@@ -81,32 +92,26 @@ public class CraftInventory implements Inventory {
+         return items;
      }
  
-     @Override
+-    @Override
 -    public ItemStack[] getStorageContents() {
 -        return getContents();
 -    }
 -
--    @Override
+     @Override
      public void setStorageContents(ItemStack[] items) throws IllegalArgumentException {
          setContents(items);
      }
@@ -488,15 +489,16 @@ index c19b354b..fe76e6f1 100644
      }
  
      @Override
-@@ -24,8 +39,18 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
+@@ -23,9 +38,19 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
+         return (PlayerInventory) inventory;
      }
  
-     @Override
++    @Override
 +    public List<ItemStack> contents() {
 +        return contents;
 +    }
 +
-+    @Override
+     @Override
      public ItemStack[] getStorageContents() {
 -        return asCraftMirror(getInventory().items);
 +        return Inventory.itemListToArray(storage());

@@ -6,6 +6,7 @@ import java.util.UUID;
 import net.minecraft.server.GameProfileSerializer;
 import net.minecraft.server.NBTBase;
 import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.TileEntitySkull;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -78,6 +79,9 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
         super.applyToItem(tag);
 
         if (profile != null) {
+            // Fill in textures
+            profile = TileEntitySkull.b(profile);
+
             NBTTagCompound owner = new NBTTagCompound();
             GameProfileSerializer.serialize(owner, profile);
             tag.set(SKULL_OWNER.NBT, owner);

@@ -1,4 +1,4 @@
-From 334da71cc0efeeaaaf9f1f7f9037cd90748d31b1 Mon Sep 17 00:00:00 2001
+From 239e55a9dd215cad9e4c6e02cf87762641837893 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:36:30 -0500
 Subject: [PATCH] Arrow damage API
@@ -8,10 +8,11 @@ diff --git a/src/main/java/org/bukkit/entity/Arrow.java b/src/main/java/org/bukk
 index 795e40de..bc1bb9cc 100644
 --- a/src/main/java/org/bukkit/entity/Arrow.java
 +++ b/src/main/java/org/bukkit/entity/Arrow.java
-@@ -6,6 +6,27 @@ package org.bukkit.entity;
+@@ -5,6 +5,27 @@ package org.bukkit.entity;
+  */
  public interface Arrow extends Projectile {
  
-     /**
++    /**
 +     * Get the base damage value for this arrow. This value is affected
 +     * by the power enchantment of the bow that fired the arrow. Normal
 +     * arrows fired by a player from an unenchanted bow have a damage
@@ -32,7 +33,6 @@ index 795e40de..bc1bb9cc 100644
 +     */
 +    void setDamage(double damage);
 +
-+    /**
+     /**
       * Gets the knockback strength for an arrow, which is the
       * {@link org.bukkit.enchantments.Enchantment#KNOCKBACK KnockBack} level
-      * of the bow that shot it.

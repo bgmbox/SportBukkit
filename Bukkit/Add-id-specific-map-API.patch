@@ -1,4 +1,4 @@
-From 130a0520664962dc2ff894d10969b6f78f29f88d Mon Sep 17 00:00:00 2001
+From 87cdf7ee3b90aaece2181615faf07397a5863109 Mon Sep 17 00:00:00 2001
 From: Pablete1234 <pabloherrerapalacio@gmail.com>
 Date: Mon, 9 Jan 2017 21:50:17 +0100
 Subject: [PATCH] Add id specific map API
@@ -8,10 +8,11 @@ diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Ser
 index 2a09d829..fcfb1299 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -526,6 +526,16 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -525,6 +525,16 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+      */
      public MapView createMap(World world);
  
-     /**
++    /**
 +     * Create a new map not following the internal per-world counter nms uses.
 +     * Be careful when using this method, as it may create map collisions, only use this for disposable worlds.
 +     * If a map collision occurs, the old map will be replaced with the new one.
@@ -21,7 +22,6 @@ index 2a09d829..fcfb1299 100644
 +     */
 +    public MapView createMap(World world, int id);
 +
-+    /**
+     /**
       * Reloads the server, refreshing settings and plugin information.
       */
-     public void reload();

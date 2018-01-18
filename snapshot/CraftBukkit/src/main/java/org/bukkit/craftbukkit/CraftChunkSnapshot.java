@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit;
 import java.util.Arrays;
 
 import org.bukkit.ChunkSnapshot;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.block.CraftBlock;
@@ -55,6 +56,11 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
 
     public String getWorldName() {
         return worldname;
+    }
+
+    @Override
+    public Material getBlockType(int x, int y, int z) {
+        return Material.getMaterial(getBlockTypeId(x, y, z));
     }
 
     public final int getBlockTypeId(int x, int y, int z) {

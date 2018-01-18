@@ -1,4 +1,4 @@
-From 1e5f34ef76cf9ca5b1a9af22aa5f6d13b63ed960 Mon Sep 17 00:00:00 2001
+From a2323736d9f04efa86a04af8a40a98d64417e96a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 10 Oct 2016 04:53:27 -0400
 Subject: [PATCH] Block images
@@ -25,36 +25,36 @@ index f8487998..4afc3622 100644
      private final CraftVectorFactory vectorFactory = new CraftVectorFactory();
  
      private final PotionBrewRegistry potionBrewRegistry = new CraftPotionBrewRegistry();
-@@ -46,6 +49,11 @@ public class CraftBukkitRuntime implements BukkitRuntime {
+@@ -45,6 +48,11 @@ public class CraftBukkitRuntime implements BukkitRuntime {
+         return CraftKey.get(key);
      }
  
-     @Override
++    @Override
 +    public BlockFactory blocks() {
 +        return blockFactory;
 +    }
 +
-+    @Override
+     @Override
      public VectorFactory vectors() {
          return vectorFactory;
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 4bf8e953..4fdd56ca 100644
+index 1777cfb6..a4362797 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1696,11 +1696,6 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1688,11 +1688,6 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+         return completions;
      }
  
-     @Override
+-    @Override
 -    public CraftItemFactory getItemFactory() {
 -        return CraftItemFactory.instance();
 -    }
 -
--    @Override
+     @Override
      public CraftScoreboardManager getScoreboardManager() {
          return scoreboardManager;
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index b4bfe45c..2171c57a 100644
+index 0a1b97df..f02a5d78 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -11,6 +11,7 @@ import java.util.Iterator;
@@ -118,7 +118,7 @@ index b4bfe45c..2171c57a 100644
      public int getBlockTypeIdAt(int x, int y, int z) {
          return CraftMagicNumbers.getId(world.getType(new BlockPosition(x, y, z)).getBlock());
      }
-@@ -137,7 +148,7 @@ public class CraftWorld implements World {
+@@ -144,7 +155,7 @@ public class CraftWorld implements World {
          return this.world.getChunkProviderServer().getChunkAt(x, z).bukkitChunk;
      }
  
@@ -127,7 +127,7 @@ index b4bfe45c..2171c57a 100644
          return getChunkAt(block.getX() >> 4, block.getZ() >> 4);
      }
  
-@@ -560,7 +571,7 @@ public class CraftWorld implements World {
+@@ -567,7 +578,7 @@ public class CraftWorld implements World {
          }
      }
  
@@ -136,7 +136,7 @@ index b4bfe45c..2171c57a 100644
          return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
      }
  
-@@ -584,11 +595,11 @@ public class CraftWorld implements World {
+@@ -591,11 +602,11 @@ public class CraftWorld implements World {
          return populators;
      }
  
@@ -150,8 +150,8 @@ index b4bfe45c..2171c57a 100644
          return getHighestBlockAt(location.getBlockX(), location.getBlockZ());
      }
  
-@@ -1171,7 +1182,7 @@ public class CraftWorld implements World {
-                 entity.setLocation(x, y, z, yaw, pitch);
+@@ -1179,7 +1190,7 @@ public class CraftWorld implements World {
+                 entity.setHeadRotation(yaw); // SPIGOT-3587
              }
          } else if (Hanging.class.isAssignableFrom(clazz)) {
 -            Block block = getBlockAt(location);
@@ -159,7 +159,7 @@ index b4bfe45c..2171c57a 100644
              BlockFace face = BlockFace.SELF;
  
              int width = 16; // 1 full block, also painting smallest size.
-@@ -1622,4 +1633,48 @@ public class CraftWorld implements World {
+@@ -1630,4 +1641,48 @@ public class CraftWorld implements World {
              cps.unload(chunk);
          }
      }
@@ -209,7 +209,7 @@ index b4bfe45c..2171c57a 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index c5ee75e2..2f5fc26b 100644
+index 456fd209..9b134994 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -4,6 +4,7 @@ import java.util.ArrayList;
@@ -993,18 +993,18 @@ index 7d082117..54506b5c 100644
          hash = 73 * hash + this.type;
          hash = 73 * hash + (this.data != null ? this.data.hashCode() : 0);
          return hash;
-@@ -293,6 +291,11 @@ public class CraftBlockState implements BlockState {
+@@ -292,6 +290,11 @@ public class CraftBlockState implements BlockState {
+         chunk.getCraftWorld().getBlockMetadata().removeMetadata(getBlock(), metadataKey, owningPlugin);
      }
  
-     @Override
++    @Override
 +    public boolean hasPosition() {
 +        return position != null;
 +    }
 +
-+    @Override
+     @Override
      public boolean isPlaced() {
          return world != null;
-     }
 @@ -302,4 +305,24 @@ public class CraftBlockState implements BlockState {
              throw new IllegalStateException("The blockState must be placed to call this method");
          }

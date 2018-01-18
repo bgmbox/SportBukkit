@@ -1,4 +1,4 @@
-From 28fee411c25c6d96da9e2bb6832451979a379ad8 Mon Sep 17 00:00:00 2001
+From a6963d39af455da437bdc9abb1fc15a938fd2aa8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:08:23 -0500
 Subject: [PATCH] Modernize potion API
@@ -474,10 +474,11 @@ index 356a866f..02ea7a18 100644
      }
  
      @Override
-@@ -13,6 +18,16 @@ public class PotionEffectTypeWrapper extends PotionEffectType {
+@@ -12,6 +17,16 @@ public class PotionEffectTypeWrapper extends PotionEffectType {
+         return getType().getDurationModifier();
      }
  
-     @Override
++    @Override
 +    public Key key() {
 +        return Bukkit.key(id);
 +    }
@@ -487,10 +488,9 @@ index 356a866f..02ea7a18 100644
 +        return getType().getId();
 +    }
 +
-+    @Override
+     @Override
      public String getName() {
          return getType().getName();
-     }
 @@ -23,7 +38,7 @@ public class PotionEffectTypeWrapper extends PotionEffectType {
       * @return The potion effect type
       */

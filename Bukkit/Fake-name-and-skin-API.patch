@@ -1,4 +1,4 @@
-From 183d524133eebb50c51d1ac6a223d095c0b47b33 Mon Sep 17 00:00:00 2001
+From a7d3fefd113f9fbbc5739ec4f27370f488c188d1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 23 Jan 2014 00:17:31 -0500
 Subject: [PATCH] Fake name and skin API
@@ -8,10 +8,11 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
 index 2610b308..448354cf 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -422,6 +422,27 @@ public final class Bukkit {
+@@ -421,6 +421,27 @@ public final class Bukkit {
+         return server.getPlayer(id);
      }
  
-     /**
++    /**
 +     * @see Server#getPlayer(String, CommandSender)
 +     */
 +    public static Player getPlayer(String name, CommandSender viewer) {
@@ -32,18 +33,18 @@ index 2610b308..448354cf 100644
 +        return server.matchPlayer(name, viewer);
 +    }
 +
-+    /**
+     /**
       * Gets the plugin manager for interfacing with plugins.
       *
-      * @return a plugin manager for this Server instance
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
 index 35501556..a816b91c 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -350,6 +350,21 @@ public interface Server extends PluginMessageRecipient {
+@@ -349,6 +349,21 @@ public interface Server extends PluginMessageRecipient {
+      */
      public Player getPlayer(UUID id);
  
-     /**
++    /**
 +     * Fake name aware version of {@link #getPlayer(String)}
 +     */
 +    public Player getPlayer(String name, CommandSender viewer);
@@ -58,10 +59,9 @@ index 35501556..a816b91c 100644
 +     */
 +    public List<Player> matchPlayer(String name, CommandSender viewer);
 +
-+    /**
+     /**
       * Gets the plugin manager for interfacing with plugins.
       *
-      * @return a plugin manager for this Server instance
 diff --git a/src/main/java/org/bukkit/Skin.java b/src/main/java/org/bukkit/Skin.java
 new file mode 100644
 index 00000000..c5d17040
@@ -146,7 +146,7 @@ index 00000000..c5d17040
 +}
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/command/Command.java b/src/main/java/org/bukkit/command/Command.java
-index 7adc6ee9..322c063e 100644
+index d00bad28..e8c3d42f 100644
 --- a/src/main/java/org/bukkit/command/Command.java
 +++ b/src/main/java/org/bukkit/command/Command.java
 @@ -103,7 +103,7 @@ public abstract class Command {
@@ -408,7 +408,7 @@ index 00000000..9105712b
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 54b06bbe..f467cc04 100644
+index 1dd6de7b..5dbcdbbe 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1,21 +1,9 @@
@@ -436,9 +436,10 @@ index 54b06bbe..f467cc04 100644
  import org.bukkit.advancement.AdvancementProgress;
  import org.bukkit.command.CommandSender;
 @@ -31,6 +19,60 @@ import org.bukkit.scoreboard.Scoreboard;
+  */
  public interface Player extends HumanEntity, Conversable, CommandSender, OfflinePlayer, PluginMessageRecipient {
  
-     /**
++    /**
 +     * Set a fake name for this player when viewed by the given player.
 +     * If the name is null then the fake name is cleared.
 +     */
@@ -492,14 +493,14 @@ index 54b06bbe..f467cc04 100644
 +     */
 +    public String getDisplayName(CommandSender viewer);
 +
-+    /**
+     /**
       * Gets the "friendly" name to display of this player. This may include
       * color.
-      * <p>
 @@ -83,6 +125,74 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+      */
      public void setPlayerListName(String name);
  
-     /**
++    /**
 +     * Test if this Player has a fake skin set for the given viewer
 +     */
 +    public boolean hasFakeSkin(CommandSender viewer);
@@ -567,10 +568,9 @@ index 54b06bbe..f467cc04 100644
 +     */
 +    public void clearFakeNamesAndSkins();
 +
-+    /**
+     /**
       * Set the target of the player's compass.
       *
-      * @param loc Location to point to
 diff --git a/src/main/java/org/bukkit/event/player/PlayerSkinPartsChangeEvent.java b/src/main/java/org/bukkit/event/player/PlayerSkinPartsChangeEvent.java
 new file mode 100644
 index 00000000..a222f21e

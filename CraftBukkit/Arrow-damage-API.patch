@@ -1,4 +1,4 @@
-From 6f26505e590f733290cf882ff58f59b7168cb72a Mon Sep 17 00:00:00 2001
+From ab7344dff46d09be787ddbf3af242d70b97efd12 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:36:20 -0500
 Subject: [PATCH] Arrow damage API
@@ -22,7 +22,7 @@ index 2463a90c..8452f8cd 100644
          return this.damage;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java
-index dd292da9..89bed85b 100644
+index b6afd468..edb3ef59 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java
 @@ -16,6 +16,16 @@ public class CraftArrow extends AbstractProjectile implements Arrow {

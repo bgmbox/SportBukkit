@@ -1,4 +1,4 @@
-From 90f56b4e881382b628ccc7f3700ca86b0f5a4d80 Mon Sep 17 00:00:00 2001
+From 50b9a2620090379b13e20f1c72750de57f432681 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:10:18 -0500
 Subject: [PATCH] Modernize potion API
@@ -283,10 +283,11 @@ index b06fddf7..72e1de4b 100644
          this.handle = handle;
      }
  
-@@ -23,6 +24,16 @@ public class CraftPotionEffectType extends PotionEffectType {
+@@ -22,6 +23,16 @@ public class CraftPotionEffectType extends PotionEffectType {
+         return handle;
      }
  
-     @Override
++    @Override
 +    public Key key() {
 +        return CraftKey.get(MobEffectList.REGISTRY.b(handle));
 +    }
@@ -296,10 +297,9 @@ index b06fddf7..72e1de4b 100644
 +        return MobEffectList.getId(handle);
 +    }
 +
-+    @Override
+     @Override
      public String getName() {
          switch (getId()) {
-         case 1:
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java
 index 8483cd85..042fcf42 100644
 --- a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java

@@ -245,7 +245,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
             loc.setX(entity.locX);
             loc.setY(entity.locY);
             loc.setZ(entity.locZ);
-            loc.setYaw(entity instanceof EntityLiving ? entity.getHeadRotation() : entity.yaw);
+            loc.setYaw(entity.getBukkitYaw());
             loc.setPitch(entity.pitch);
 
             if(loc instanceof EntityLocation) {
@@ -528,8 +528,13 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         return entity;
     }
 
+    @Override
     public void playEffect(EntityEffect type) {
-        this.getHandle().world.broadcastEntityEffect(getHandle(), type.getData());
+        Preconditions.checkArgument(type != null, "type");
+
+        if (type.getApplicable().isInstance(this)) {
+            this.getHandle().world.broadcastEntityEffect(getHandle(), type.getData());
+        }
     }
 
     public void setHandle(final Entity entity) {

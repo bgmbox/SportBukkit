@@ -1,4 +1,4 @@
-From c8832a06e64557732f0434c0e81f516be2e3d07f Mon Sep 17 00:00:00 2001
+From 24feb5389f007847a3133d43c780f9ce12939539 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 6 Aug 2015 22:18:43 -0400
 Subject: [PATCH] Skull skin API
@@ -20,10 +20,11 @@ index f69f9477..3499a8f6 100644
  /**
   * Represents a captured state of a skull block.
   */
-@@ -54,6 +57,21 @@ public interface Skull extends BlockState {
+@@ -53,6 +56,21 @@ public interface Skull extends BlockState {
+      */
      public void setOwningPlayer(OfflinePlayer player);
  
-     /**
++    /**
 +     * Set the owner and appearance of this skull. A skull with this data set
 +     * does not need to fetch anything remotely.
 +     *
@@ -38,10 +39,9 @@ index f69f9477..3499a8f6 100644
 +     */
 +    void clearOwner();
 +
-+    /**
+     /**
       * Gets the rotation of the skull in the world
       *
-      * @return the rotation of the skull
 diff --git a/src/main/java/org/bukkit/inventory/meta/SkullMeta.java b/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
 index c60860e1..661bcd39 100644
 --- a/src/main/java/org/bukkit/inventory/meta/SkullMeta.java

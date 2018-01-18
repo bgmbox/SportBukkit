@@ -1,19 +1,17 @@
 package org.bukkit.plugin.java;
 
+import com.google.common.io.ByteStreams;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingInputStream;
-import com.google.common.io.ByteStreams;
 import com.google.inject.Module;
 import org.apache.commons.lang.Validate;
 import org.bukkit.plugin.InvalidPluginException;
@@ -132,9 +130,9 @@ final class PluginClassLoader extends URLClassLoader {
         } finally {
             dependencyLock.readLock().unlock();
         }
-
         throw new ClassNotFoundException(name);
     }
+
 
     /**
      * Load a class from this plugin

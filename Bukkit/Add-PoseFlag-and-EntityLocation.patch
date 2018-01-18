@@ -1,4 +1,4 @@
-From 1d4c241d8eeea61cc992ea113cd90e385dc7f293 Mon Sep 17 00:00:00 2001
+From 2776d7dc1cef56099f540a5d1f0fae2189cd9faf Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:15 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
@@ -162,7 +162,7 @@ index 00000000..4d8fbeed
 +    RIDING;
 +}
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index 07a66a0d..e7d1e263 100644
+index b367baae..62642922 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -1,9 +1,11 @@
@@ -186,18 +186,18 @@ index 07a66a0d..e7d1e263 100644
      /**
       * Stores the entity's current position in the provided Location object.
       * <p>
-@@ -42,6 +46,11 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
+@@ -41,6 +45,11 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
+      */
      public Location getLocation(Location loc);
  
-     /**
++    /**
 +     * The set of {@link PoseFlag}s describing this entity's current state
 +     */
 +    Set<PoseFlag> getPoseFlags();
 +
-+    /**
+     /**
       * Sets this entity's velocity
       *
-      * @param velocity New velocity to travel with
 diff --git a/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java b/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java
 index 7687667a..60160a3c 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java

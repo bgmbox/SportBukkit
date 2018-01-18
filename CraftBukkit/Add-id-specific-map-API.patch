@@ -1,4 +1,4 @@
-From 9473bedb38d34c1442677f158f979260bee89c22 Mon Sep 17 00:00:00 2001
+From 041f2beb77e47ca7b0e35be69667f87517067048 Mon Sep 17 00:00:00 2001
 From: Pablete1234 <pabloherrerapalacio@gmail.com>
 Date: Mon, 9 Jan 2017 20:51:49 +0100
 Subject: [PATCH] Add id specific map API
@@ -30,20 +30,20 @@ index db44c1c9..ae59dfe7 100644
              worldmap.scale = 3;
              worldmap.a((double) world.getWorldData().b(), (double) world.getWorldData().d(), worldmap.scale);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e5c256b3..46edafdb 100644
+index 743d3015..69c880ef 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1379,6 +1379,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1376,6 +1376,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+         return worldmap.mapView;
      }
  
-     @Override
++    @Override
 +    public CraftMapView createMap(World world, int id) {
 +        Validate.notNull(world, "World cannot be null");
 +
 +        return Items.FILLED_MAP.getNewMap(((CraftWorld) world).getHandle(), id).mapView;
 +    }
 +
-+    @Override
+     @Override
      public void shutdown() {
          console.safeShutdown();
-     }

@@ -1,4 +1,4 @@
-From 282ca1a088c93d27daa5eaa4b7947ff86a09c933 Mon Sep 17 00:00:00 2001
+From 01b9ca9386ad809c92b6cd020d36cb634d44c70f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 18 Nov 2016 04:34:11 -0500
 Subject: [PATCH] Geometry API
@@ -433,7 +433,7 @@ index 3896c63e..9ac548da 100644
      }
  
      /**
-@@ -472,72 +534,59 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
+@@ -472,12 +534,30 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
       * @return the same location
       */
      public Location multiply(double m) {
@@ -454,7 +454,7 @@ index 3896c63e..9ac548da 100644
          return this;
      }
  
-     /**
++    /**
 +     * Copy position and angles from the given {@link Location} to this one.
 +     * @return this object
 +     */
@@ -464,10 +464,10 @@ index 3896c63e..9ac548da 100644
 +    }
 +
 +
-+    /**
+     /**
       * Zero this location's components. Not world-aware.
       *
-      * @see Vector
+@@ -485,59 +565,28 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
       * @return the same location
       */
      public Location zero() {
@@ -5945,7 +5945,7 @@ index 00000000..ef3b6256
 +    @Override public Vector set(double x, double y, double z) { throw ex(); }
 +}
 diff --git a/src/main/java/org/bukkit/util/NumberConversions.java b/src/main/java/org/bukkit/util/NumberConversions.java
-index e6af9ec7..ff04e6ad 100644
+index 440d2798..d57ca7fd 100644
 --- a/src/main/java/org/bukkit/util/NumberConversions.java
 +++ b/src/main/java/org/bukkit/util/NumberConversions.java
 @@ -121,4 +121,45 @@ public final class NumberConversions {

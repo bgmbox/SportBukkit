@@ -1,4 +1,4 @@
-From b6c0b0488013f9e3078f5f810edf2645b056acd7 Mon Sep 17 00:00:00 2001
+From ae8eba970a19d1a43ef2f200cf65f26ae0d16bd2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 5 Aug 2016 10:46:15 -0400
 Subject: [PATCH] Mojang task queue access
@@ -175,10 +175,10 @@ index dc36ce84..94732a26 100644
          return 256;
      }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 506137da..9421a2ff 100644
+index cb28ee26..97b0ac76 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -1358,7 +1358,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1363,7 +1363,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                              }
                          };
  
@@ -187,7 +187,7 @@ index 506137da..9421a2ff 100644
  
                          try {
                              waitable.get();
-@@ -1413,7 +1413,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1418,7 +1418,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                          }
                      };
  
@@ -196,7 +196,7 @@ index 506137da..9421a2ff 100644
  
                      try {
                          waitable.get();
-@@ -1473,7 +1473,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1478,7 +1478,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                          return null;
                      }};
                  if (async) {
@@ -226,7 +226,7 @@ index c91627dc..fd4b0bc8 100644
              if(futures.isEmpty()) break;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 4b0d8143..4bf8e953 100644
+index 39bb5cf3..1777cfb6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -91,12 +91,7 @@ import org.bukkit.inventory.ShapedRecipe;
@@ -243,7 +243,7 @@ index 4b0d8143..4bf8e953 100644
  import org.bukkit.plugin.java.JavaPluginLoader;
  import org.bukkit.plugin.messaging.Messenger;
  import org.bukkit.potion.Potion;
-@@ -1834,4 +1829,44 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1827,4 +1822,44 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
              335, 338, 340       // 1.12
          );
      }

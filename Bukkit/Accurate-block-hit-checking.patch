@@ -1,11 +1,11 @@
-From ffbf3b53dab15f3ed94c9d0194d365154fde8cbe Mon Sep 17 00:00:00 2001
+From 3d792ba71be3b8cc0d37deb7b0a329db56a9f353 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 26 May 2015 04:00:58 -0400
 Subject: [PATCH] Accurate block hit checking
 
 
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index 753703d3..8a46f37f 100644
+index 19fc9f78..e5f7fcd7 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -17,6 +17,7 @@ import org.bukkit.material.MaterialData;
@@ -16,10 +16,11 @@ index 753703d3..8a46f37f 100644
  import org.bukkit.util.Vector;
  
  /**
-@@ -112,6 +113,26 @@ public interface World extends PluginMessageRecipient, Metadatable {
+@@ -111,6 +112,26 @@ public interface World extends PluginMessageRecipient, Metadatable {
+      */
      public Block getHighestBlockAt(Location location);
  
-     /**
++    /**
 +     * Find the first block intersecting the given ray
 +     * @param start             Origin AND direction of the ray
 +     * @param distance          Length of the ray (so it's not strictly a ray, but whatever)
@@ -39,10 +40,9 @@ index 753703d3..8a46f37f 100644
 +     */
 +    RayBlockIntersection rayTraceBlock(Vector start, Vector end, boolean nonSolids, boolean liquids);
 +
-+    /**
+     /**
       * Gets the {@link Chunk} at the given coordinates
       *
-      * @param x X-coordinate of the chunk
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
 index 235c15bd..fe325374 100644
 --- a/src/main/java/org/bukkit/block/Block.java
@@ -77,18 +77,18 @@ index 235c15bd..fe325374 100644
 +    RayBlockIntersection rayTrace(Location start, double distance);
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index adbba6c6..3c2c2bab 100644
+index f7ae8295..8a168da5 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerResourcePackStatusEvent;
- import org.bukkit.map.MapView;
+@@ -13,6 +13,7 @@ import org.bukkit.map.MapView;
+ import org.bukkit.plugin.Plugin;
  import org.bukkit.plugin.messaging.PluginMessageRecipient;
  import org.bukkit.scoreboard.Scoreboard;
 +import org.bukkit.util.RayBlockIntersection;
  
  /**
   * Represents a player, connected or not
-@@ -1667,4 +1668,29 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1690,4 +1691,29 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       * or null if they are not digging any block.
       */
      public org.bukkit.block.Block getDiggingBlock();

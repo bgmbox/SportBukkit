@@ -1,11 +1,11 @@
-From 6af185dcecfb2c8bdc1bff459d7ce7a33b134fd4 Mon Sep 17 00:00:00 2001
+From f863ae36f0485a54be29fb91b560d31fb54dd4bd Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:13:07 -0400
 Subject: [PATCH] Attack cooldown info API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 85b07e56..3726d8fe 100644
+index d3dceb21..38dc34a9 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -971,7 +971,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -18,7 +18,7 @@ index 85b07e56..3726d8fe 100644
                      boolean flag = f2 > 0.9F;
                      boolean flag1 = false;
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index f5ad9a1a..207679b0 100644
+index 49cf148e..0df31400 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -55,7 +55,7 @@ public abstract class EntityLiving extends Entity {
@@ -31,13 +31,14 @@ index f5ad9a1a..207679b0 100644
      public float aG;
      public float aH;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index ed294a3b..cce1fea1 100644
+index 2548d102..945f18e4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-@@ -522,6 +522,17 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
+@@ -524,6 +524,17 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
+         return getHandle().getCooldownTracker().a(CraftMagicNumbers.getItem(material));
      }
  
-     @Override
++    @Override
 +    public int getAttackCooldownTicks() {
 +        return Math.max(getHandle().ticksSinceLastAttack(), getHandle().clientTicksSinceLastAttack);
 +    }
@@ -48,7 +49,6 @@ index ed294a3b..cce1fea1 100644
 +        return 0.2f + f * f * 0.8f;
 +    }
 +
-+    @Override
+     @Override
      public int getCooldown(Material material) {
          Preconditions.checkArgument(material != null, "material");
- 

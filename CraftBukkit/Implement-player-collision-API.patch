@@ -1,11 +1,11 @@
-From 0c40d74597f980e2dcd9052ac1aeff4b2c7e488d Mon Sep 17 00:00:00 2001
+From c2e7e0f35496dfa4c4c1c330dfc4fbb5263e0387 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:54:44 -0700
 Subject: [PATCH] Implement player collision API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 88bb9707..388f354d 100644
+index 4cd596e2..75dcda44 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -61,7 +61,7 @@ public abstract class Entity implements ICommandListener {
@@ -17,7 +17,7 @@ index 88bb9707..388f354d 100644
      public final List<Entity> passengers;
      protected int j;
      private Entity au;
-@@ -1327,6 +1327,7 @@ public abstract class Entity implements ICommandListener {
+@@ -1333,6 +1333,7 @@ public abstract class Entity implements ICommandListener {
      public void d(EntityHuman entityhuman) {}
  
      public void collide(Entity entity) {
@@ -26,7 +26,7 @@ index 88bb9707..388f354d 100644
              if (!entity.noclip && !this.noclip) {
                  double d0 = entity.locX - this.locX;
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 831681ae..d1ad7797 100644
+index 388a3000..8a089472 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -399,7 +399,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -39,10 +39,10 @@ index 831681ae..d1ad7797 100644
  
                  if (!entity.dead) {
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index d44a2f9a..f4d4e15d 100644
+index 126f079e..bb9d314f 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
-@@ -2145,7 +2145,7 @@ public abstract class EntityLiving extends Entity {
+@@ -2150,7 +2150,7 @@ public abstract class EntityLiving extends Entity {
      protected void cB() {
          List list = this.world.getEntities(this, this.getBoundingBox(), IEntitySelector.a(this));
  
@@ -52,7 +52,7 @@ index d44a2f9a..f4d4e15d 100644
              int j;
  
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index c32524fa..8cce6ffb 100644
+index 1f42dc90..9f714452 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -74,6 +74,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -84,10 +84,10 @@ index c32524fa..8cce6ffb 100644
          CriterionTriggers.d.a(this, iblockdata);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index dbf950ef..68c284cd 100644
+index eec7bbe8..29c07aa3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -1545,6 +1545,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1599,6 +1599,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          getHandle().updateAbilities();
      }
  

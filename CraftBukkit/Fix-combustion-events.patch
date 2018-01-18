@@ -1,11 +1,11 @@
-From 3ffb0ece254b984498484e04f28de66153f54912 Mon Sep 17 00:00:00 2001
+From 576b99071e4ace617b55f9d1fd2a2ee9e3101633 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 30 Oct 2014 00:40:07 -0400
 Subject: [PATCH] Fix combustion events
 
 
 diff --git a/src/main/java/net/minecraft/server/DispenserRegistry.java b/src/main/java/net/minecraft/server/DispenserRegistry.java
-index 21431516..bfaa464d 100644
+index 5c6b2594..2fc5b08c 100644
 --- a/src/main/java/net/minecraft/server/DispenserRegistry.java
 +++ b/src/main/java/net/minecraft/server/DispenserRegistry.java
 @@ -237,6 +237,7 @@ public class DispenserRegistry {
@@ -25,7 +25,7 @@ index 21431516..bfaa464d 100644
                  ((Fireball) fireball.getBukkitEntity()).setDirection(event.getVelocity()); // don't call the NMS version because it randomizes the value
  
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 515d6127..2b3c6b0a 100644
+index 161c2c6d..fbed2c29 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -106,6 +106,7 @@ public abstract class Entity implements ICommandListener {
@@ -36,7 +36,7 @@ index 515d6127..2b3c6b0a 100644
      public boolean inWater;
      public int noDamageTicks;
      protected boolean justCreated;
-@@ -420,8 +421,11 @@ public abstract class Entity implements ICommandListener {
+@@ -426,8 +427,11 @@ public abstract class Entity implements ICommandListener {
              }
          }
  
@@ -50,7 +50,7 @@ index 515d6127..2b3c6b0a 100644
              this.fallDistance *= 0.5F;
          }
  
-@@ -448,26 +452,26 @@ public abstract class Entity implements ICommandListener {
+@@ -454,26 +458,26 @@ public abstract class Entity implements ICommandListener {
          return 1;
      }
  
@@ -94,7 +94,7 @@ index 515d6127..2b3c6b0a 100644
                  }
                  return;
              }
-@@ -878,19 +882,33 @@ public abstract class Entity implements ICommandListener {
+@@ -884,19 +888,33 @@ public abstract class Entity implements ICommandListener {
  
              boolean flag1 = this.an();
  
@@ -138,7 +138,7 @@ index 515d6127..2b3c6b0a 100644
                      }
                  }
              } else if (this.fireTicks <= 0) {
-@@ -902,6 +920,15 @@ public abstract class Entity implements ICommandListener {
+@@ -908,6 +926,15 @@ public abstract class Entity implements ICommandListener {
                  this.fireTicks = -this.getMaxFireTicks();
              }
  
@@ -154,7 +154,7 @@ index 515d6127..2b3c6b0a 100644
              this.world.methodProfiler.b();
          }
      }
-@@ -1162,6 +1189,12 @@ public abstract class Entity implements ICommandListener {
+@@ -1168,6 +1195,12 @@ public abstract class Entity implements ICommandListener {
          return this.world.a(this.getBoundingBox().grow(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), Material.LAVA);
      }
  
@@ -168,10 +168,10 @@ index 515d6127..2b3c6b0a 100644
          float f4 = f * f + f1 * f1 + f2 * f2;
  
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 68d33b8a..33c90d30 100644
+index d27c4fcc..32061b73 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -1743,6 +1743,41 @@ public abstract class World implements IBlockAccess {
+@@ -1741,6 +1741,41 @@ public abstract class World implements IBlockAccess {
          return false;
      }
  
@@ -214,10 +214,10 @@ index 68d33b8a..33c90d30 100644
          return this.createExplosion(entity, d0, d1, d2, f, false, flag);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index ac8480d8..33803a53 100644
+index f7bed197..40f70805 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -486,18 +486,16 @@ public class CraftEventFactory {
+@@ -487,18 +487,16 @@ public class CraftEventFactory {
                  event.getEntity().setLastDamageCause(event);
              }
              return event;
@@ -240,7 +240,7 @@ index ac8480d8..33803a53 100644
              } else if (source == DamageSource.HOT_FLOOR) {
                  cause = DamageCause.HOT_FLOOR;
              } else {
-@@ -535,6 +533,8 @@ public class CraftEventFactory {
+@@ -536,6 +534,8 @@ public class CraftEventFactory {
          DamageCause cause = null;
          if (source == DamageSource.FIRE) {
              cause = DamageCause.FIRE;

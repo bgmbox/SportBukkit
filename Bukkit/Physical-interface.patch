@@ -1,11 +1,11 @@
-From 85b9722804c73f6fa57767eb2fdb160fbbbb1b17 Mon Sep 17 00:00:00 2001
+From b5dccde81de890f60f64260511df9951cbcedcb6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jul 2015 01:08:40 -0400
 Subject: [PATCH] Physical interface
 
 
 diff --git a/src/main/java/org/bukkit/Chunk.java b/src/main/java/org/bukkit/Chunk.java
-index 8014d832..5e62e887 100644
+index 5c4318bb..972e154e 100644
 --- a/src/main/java/org/bukkit/Chunk.java
 +++ b/src/main/java/org/bukkit/Chunk.java
 @@ -10,7 +10,7 @@ import java.util.Set;
@@ -103,7 +103,7 @@ index 00000000..e2bc7661
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index 8a46f37f..2f67d701 100644
+index e5f7fcd7..519b5677 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -13,7 +13,6 @@ import org.bukkit.block.Block;
@@ -186,7 +186,7 @@ index 663fcbbd..1b0d1eac 100644
  
      public DoubleChest(DoubleChestInventory chest) {
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index 84ae807c..9b7b828a 100644
+index 9d96976d..17bc8918 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -1,5 +1,6 @@
@@ -287,18 +287,18 @@ index 74d458a8..abe2bb81 100644
      private static final HandlerList handlers = new HandlerList();
      private final Entity leashHolder;
      private final Entity entity;
-@@ -50,6 +52,11 @@ public class PlayerLeashEntityEvent extends Event implements Cancellable {
+@@ -49,6 +51,11 @@ public class PlayerLeashEntityEvent extends Event implements Cancellable {
+         return player;
      }
  
-     @Override
++    @Override
 +    public World getWorld() {
 +        return getEntity().getWorld();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/hanging/HangingEvent.java b/src/main/java/org/bukkit/event/hanging/HangingEvent.java
 index b370afe7..a680c804 100644
 --- a/src/main/java/org/bukkit/event/hanging/HangingEvent.java
@@ -344,18 +344,18 @@ index 973c392e..e84debce 100644
      private static final HandlerList handlers = new HandlerList();
      protected InventoryView transaction;
  
-@@ -49,6 +51,11 @@ public class InventoryEvent extends Event {
+@@ -48,6 +50,11 @@ public class InventoryEvent extends Event {
+         return transaction;
      }
  
-     @Override
++    @Override
 +    public World getWorld() {
 +        return getInventory().getWorld();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
 index 06ec99ae..e751fbfd 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryMoveItemEvent.java
@@ -473,18 +473,18 @@ index 8834489b..62e757a0 100644
      private static final HandlerList handlers = new HandlerList();
      private final MapView mapView;
  
-@@ -24,6 +26,11 @@ public class MapInitializeEvent extends ServerEvent {
+@@ -23,6 +25,11 @@ public class MapInitializeEvent extends ServerEvent {
+         return mapView;
      }
  
-     @Override
++    @Override
 +    public World getWorld() {
 +        return getMap().getWorld();
 +    }
 +
-+    @Override
+     @Override
      public HandlerList getHandlers() {
          return handlers;
-     }
 diff --git a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java b/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
 index b8255c01..56f5c2d8 100644
 --- a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java

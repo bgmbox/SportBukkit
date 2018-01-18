@@ -1,11 +1,11 @@
-From c2ccaa9868672cc8ba24e251c9790ebc66a6e189 Mon Sep 17 00:00:00 2001
+From fbc4f46be10b0e4a4feac1f2e45bd73307f23977 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:17 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 3a6ae399..26cae7b9 100644
+index eb326b88..6745c8c7 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -12,6 +12,8 @@ import java.util.Arrays;
@@ -25,7 +25,7 @@ index 3a6ae399..26cae7b9 100644
  import org.bukkit.craftbukkit.util.CraftChatMessage;
  import org.bukkit.craftbukkit.util.LazyPlayerSet;
  import org.bukkit.craftbukkit.util.Waitable;
-@@ -2249,16 +2252,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -2254,16 +2257,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
              int x = packetplayinupdatesign.a().getX();
              int y = packetplayinupdatesign.a().getY();
              int z = packetplayinupdatesign.a().getZ();
@@ -158,10 +158,10 @@ index 7a8d4452..4938e2e4 100644
 -    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 03892586..ce56237d 100644
+index a147ff0a..41537b25 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -60,6 +60,7 @@ import org.bukkit.craftbukkit.advancement.CraftAdvancementProgress;
+@@ -62,6 +62,7 @@ import org.bukkit.craftbukkit.advancement.CraftAdvancementProgress;
  import org.bukkit.craftbukkit.map.CraftMapView;
  import org.bukkit.craftbukkit.map.RenderData;
  import org.bukkit.craftbukkit.scoreboard.CraftScoreboard;
@@ -169,7 +169,7 @@ index 03892586..ce56237d 100644
  import org.bukkit.craftbukkit.util.CraftChatMessage;
  import org.bukkit.craftbukkit.util.CraftMagicNumbers;
  import org.bukkit.craftbukkit.util.Skins;
-@@ -728,23 +729,39 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -734,23 +735,39 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
  
      @Override
      public void sendSignChange(Location loc, String[] lines) {

@@ -1,4 +1,4 @@
-From 493a869e411e58eb2896f6e4f6045fb1c10f9e79 Mon Sep 17 00:00:00 2001
+From e939117c94e964c2579e107aeb4a839c0268c0d7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:20:38 -0400
 Subject: [PATCH] Block images
@@ -46,7 +46,7 @@ index 9e083daa..493fc98b 100644
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index a8897e5b..e60e082d 100644
+index 5af6f6f2..6f8631cb 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -1,21 +1,24 @@
@@ -88,10 +88,11 @@ index a8897e5b..e60e082d 100644
      /**
       * Gets the {@link Block} at the given {@link Location}
       *
-@@ -74,6 +79,30 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -73,6 +78,30 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+     @Deprecated
      public int getBlockTypeIdAt(Location location);
  
-     /**
++    /**
 +     * Test if the block at the given position in this world is made of the given material.
 +     */
 +    boolean hasMaterialAt(MaterialData material, Vec3 position);
@@ -115,10 +116,9 @@ index a8897e5b..e60e082d 100644
 +     */
 +    Predicate<Vec3> hasMaterialAt(Set<MaterialData> materials);
 +
-+    /**
+     /**
       * Gets the y coordinate of the lowest block at this position such that the
       * block and all blocks above it are transparent for lighting purposes.
-      *
 @@ -141,6 +170,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public Chunk getChunkAt(int x, int z);
@@ -152,7 +152,7 @@ index a8897e5b..e60e082d 100644
      /**
       * Drops an item at the specified {@link Location}
       *
-@@ -488,6 +529,11 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -490,6 +531,11 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public UUID getUID();
  
@@ -164,7 +164,7 @@ index a8897e5b..e60e082d 100644
      /**
       * Gets the default spawn {@link Location} of this world
       *
-@@ -755,7 +801,25 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -767,7 +813,25 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       * @throws IllegalArgumentException if {@link Location} or {@link
       *     MaterialData} are null or {@link Material} of the {@link MaterialData} is not a block
       */
@@ -191,7 +191,7 @@ index a8897e5b..e60e082d 100644
  
      /**
       * Spawn a {@link FallingBlock} entity at the given {@link Location} of
-@@ -774,7 +838,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -786,7 +850,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       * @deprecated Magic value
       */
      @Deprecated
@@ -205,7 +205,7 @@ index a8897e5b..e60e082d 100644
  
      /**
       * Spawn a {@link FallingBlock} entity at the given {@link Location} of
-@@ -790,7 +859,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -802,7 +871,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       * @deprecated Magic value
       */
      @Deprecated
@@ -219,7 +219,7 @@ index a8897e5b..e60e082d 100644
  
      /**
       * Plays an effect to all players within a default radius around a given
-@@ -917,6 +991,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -929,6 +1003,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      Biome getBiome(int x, int z);
  
@@ -230,7 +230,7 @@ index a8897e5b..e60e082d 100644
      /**
       * Sets the biome for the given block coordinates
       *
-@@ -926,6 +1004,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -938,6 +1016,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      void setBiome(int x, int z, Biome bio);
  
@@ -241,7 +241,7 @@ index a8897e5b..e60e082d 100644
      /**
       * Gets the temperature for the given block coordinates.
       * <p>
-@@ -938,6 +1020,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -950,6 +1032,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public double getTemperature(int x, int z);
  
@@ -252,7 +252,7 @@ index a8897e5b..e60e082d 100644
      /**
       * Gets the humidity for the given block coordinates.
       * <p>
-@@ -950,6 +1036,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -962,6 +1048,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public double getHumidity(int x, int z);
  
@@ -263,7 +263,7 @@ index a8897e5b..e60e082d 100644
      /**
       * Gets the maximum height of this world.
       * <p>
-@@ -1510,6 +1600,37 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -1522,6 +1612,37 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
  

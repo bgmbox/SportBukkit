@@ -146,7 +146,7 @@ public class CraftBossBar implements BossBar {
 
     @Override
     public void addFlag(BarFlag flag) {
-        if(flags.remove(flag)) {
+        if(flags.add(flag)) {
             updateFlags();
             markDirty(PacketPlayOutBoss.Action.UPDATE_PROPERTIES);
         }
@@ -154,7 +154,7 @@ public class CraftBossBar implements BossBar {
 
     @Override
     public void removeFlag(BarFlag flag) {
-        if(flags.add(flag)) {
+        if(flags.remove(flag)) {
             updateFlags();
             markDirty(PacketPlayOutBoss.Action.UPDATE_PROPERTIES);
         }

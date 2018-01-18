@@ -1,4 +1,4 @@
-From c325e7b056478991381d1f674f44a3f4ceb83a59 Mon Sep 17 00:00:00 2001
+From 22c93ee75133e13e634a9e9679fa486e059db5a1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 02:26:14 -0500
 Subject: [PATCH] Recover from crash exceptions
@@ -38,7 +38,7 @@ index 436bbc0f..97dbf244 100644
          return this.d;
      }
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index fcfb21be..c6b28eb0 100644
+index d9ce37ba..c4aeccba 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
@@ -75,7 +75,7 @@ index 296a0295..1e5e1115 100644
          this.d = true;
      }
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 229b6932..654f1e7e 100644
+index ada67517..77d109d7 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -18,6 +18,7 @@ import javax.annotation.Nullable;
@@ -86,7 +86,7 @@ index 229b6932..654f1e7e 100644
  import org.bukkit.block.BlockState;
  import org.bukkit.craftbukkit.CraftServer;
  import org.bukkit.craftbukkit.CraftWorld;
-@@ -1315,7 +1316,11 @@ public abstract class World implements IBlockAccess {
+@@ -1312,7 +1313,11 @@ public abstract class World implements IBlockAccess {
                      entity.appendEntityCrashDetails(crashreportsystemdetails);
                  }
  
@@ -99,7 +99,7 @@ index 229b6932..654f1e7e 100644
              }
  
              if (entity.dead) {
-@@ -1371,7 +1376,11 @@ public abstract class World implements IBlockAccess {
+@@ -1368,7 +1373,11 @@ public abstract class World implements IBlockAccess {
                      crashreport1 = CrashReport.a(throwable1, "Ticking entity");
                      crashreportsystemdetails1 = crashreport1.a("Entity being ticked");
                      entity.appendEntityCrashDetails(crashreportsystemdetails1);
@@ -112,7 +112,7 @@ index 229b6932..654f1e7e 100644
                  }
              }
  
-@@ -1419,7 +1428,11 @@ public abstract class World implements IBlockAccess {
+@@ -1416,7 +1425,11 @@ public abstract class World implements IBlockAccess {
                          crashreport1 = CrashReport.a(throwable2, "Ticking block entity");
                          crashreportsystemdetails1 = crashreport1.a("Block entity being ticked");
                          tileentity.a(crashreportsystemdetails1);

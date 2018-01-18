@@ -1,4 +1,4 @@
-From d1b52b8ca84d3b2049343afbfb3a3d7fbfc859d1 Mon Sep 17 00:00:00 2001
+From 97713be7d276e2ba6f5b04123eb8e8fe3ea22cd5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 18 Feb 2015 05:18:37 -0500
 Subject: [PATCH] Cancel piston retraction without creating client ghost blocks
@@ -50,7 +50,7 @@ index 0f90172f..596d5f3f 100644
              int k;
              BlockPosition blockposition2;
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 33803a53..51888e0b 100644
+index 40f70805..4b977097 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -1,6 +1,7 @@
@@ -61,7 +61,7 @@ index 33803a53..51888e0b 100644
  import java.util.ArrayList;
  import java.util.EnumMap;
  import java.util.List;
-@@ -1071,4 +1072,59 @@ public class CraftEventFactory {
+@@ -1080,4 +1081,59 @@ public class CraftEventFactory {
          Bukkit.getPluginManager().callEvent(event);
          return event;
      }

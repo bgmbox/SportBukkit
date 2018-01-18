@@ -203,8 +203,8 @@ public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
 
     @Override
     public CraftMetaBanner clone() {
-        final CraftMetaBanner that = (CraftMetaBanner) super.clone();
-        that.patterns = new ArrayList<>(this.patterns);
-        return that;
+        CraftMetaBanner meta = (CraftMetaBanner) super.clone();
+        meta.patterns = new ArrayList<>(patterns);
+        return meta;
     }
 }

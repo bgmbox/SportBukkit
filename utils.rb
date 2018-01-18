@@ -169,7 +169,7 @@ module Git
         dir = relative_path(dir)
         sh "git", "format-patch", "--no-stat", "--no-signature", "-N", "-o", dir, from
         File.open(list, 'w') do |listfile|
-            Dir[File.join(dir, "*.patch")].each do |patch|
+            Dir[File.join(dir, "*.patch")].sort.each do |patch|
                 patch_dir = File.dirname(patch)
                 patch_base = File.basename(patch)
                 if patch_base =~ /^\d\d\d\d-(.+)\.patch$/

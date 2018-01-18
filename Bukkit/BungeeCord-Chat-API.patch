@@ -1,4 +1,4 @@
-From d26513dd2c57922617f2feab1c44f5e7b67e67c9 Mon Sep 17 00:00:00 2001
+From c7bb02142bcf2594888968beac48fe7eb58ed2a5 Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 13 Dec 2014 12:59:14 +1100
 Subject: [PATCH] BungeeCord Chat API
@@ -55,10 +55,10 @@ index a816b91c..e7121742 100644
 +    public void broadcast(net.md_5.bungee.api.chat.BaseComponent... components);
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index f467cc04..848af21a 100644
+index 5dbcdbbe..d86fc6b3 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1544,4 +1544,18 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1567,4 +1567,18 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       * @return The hostname and port
       */
      public String getHostname();

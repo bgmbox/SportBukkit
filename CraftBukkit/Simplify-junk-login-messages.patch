@@ -1,11 +1,11 @@
-From 1ea4089fbf37bba9121f6c953e484edcac5ab102 Mon Sep 17 00:00:00 2001
+From 719250d70e5ecae57351bd3cd5e92c924c51600d Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Fri, 1 Aug 2014 12:51:06 -0500
 Subject: [PATCH] Simplify junk login messages
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 13eacc91..4193782c 100644
+index 4fc58198..890a275f 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -219,7 +219,7 @@ public abstract class PlayerList {

@@ -1,4 +1,4 @@
-From 594bb6a4bf98303a55f42c3cea517d1b7df33435 Mon Sep 17 00:00:00 2001
+From fc6c948abb09f2ebef6cb768b1a1baea03bd3135 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API
@@ -237,7 +237,7 @@ index dd18b4e0..a3481c0f 100644
              long j = MinecraftServer.aw();
              long k = j - i;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 82c34514..c2a9040c 100644
+index fc93bafa..85f97e11 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -6,6 +6,8 @@ import java.io.FileInputStream;
@@ -265,7 +265,7 @@ index 82c34514..c2a9040c 100644
  import tc.oc.minecraft.api.plugin.PluginFinder;
  
  public final class CraftServer extends CraftBukkitRuntime implements Server {
-@@ -175,6 +179,8 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -173,6 +177,8 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      public boolean bungee = false;
      public static final com.google.gson.Gson gson = new com.google.gson.Gson();
  
@@ -274,7 +274,7 @@ index 82c34514..c2a9040c 100644
      private final class BooleanWrapper {
          private boolean value = true;
      }
-@@ -186,7 +192,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -184,7 +190,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
      public CraftServer(MinecraftServer console, PlayerList playerList) {
          this.console = console;
@@ -289,10 +289,11 @@ index 82c34514..c2a9040c 100644
          this.playerList = (DedicatedPlayerList) playerList;
          this.playerView = Collections.unmodifiableList(Lists.transform(playerList.players, EntityPlayer::getBukkitEntity));
          this.playersById = Collections.unmodifiableMap(Maps.transformValues(playerList.playersById(), EntityPlayer::getBukkitEntity));
-@@ -634,6 +646,17 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -631,6 +643,17 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+         return this.configuration.getInt("ticks-per.monster-spawns");
      }
  
-     @Override
++    @Override
 +    public @Nullable
 +    Duration getEmptyServerSuspendDelay() {
 +        try {
@@ -303,11 +304,10 @@ index 82c34514..c2a9040c 100644
 +        }
 +    }
 +
-+    @Override
+     @Override
      public PluginManager getPluginManager() {
          return pluginManager;
-     }
-@@ -1904,4 +1927,53 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1897,4 +1920,53 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
          return task instanceof Wrapped ? task : new Wrapped();
      }

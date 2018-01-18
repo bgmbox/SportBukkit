@@ -1,4 +1,4 @@
-From a21127b2b7012fd562ab547cb1ac35884ee4b446 Mon Sep 17 00:00:00 2001
+From dff251b37928c5a44e832fa9f39057f6cd65e8d8 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Mon, 12 Nov 2012 20:31:30 -0600
 Subject: [PATCH] Add InventoryClickedEvent, an informative event fired after

@@ -1,4 +1,4 @@
-From 28223a57efb2ea4aa4895d0db3979a40939d12bb Mon Sep 17 00:00:00 2001
+From e31086dd9d913325d68ba253fef7b6252397888c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:24:15 -0400
 Subject: [PATCH] Velocity API
@@ -8,44 +8,45 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
 index b4aca63a..47a5ea72 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -351,6 +351,13 @@ public final class Bukkit {
+@@ -350,6 +350,13 @@ public final class Bukkit {
+         return server.getWaterPushesTNT();
      }
  
-     /**
++    /**
 +     * @see Server#getLegacyKnockback()
 +     */
 +    public static boolean getLegacyKnockback() {
 +        return server.getLegacyKnockback();
 +    }
 +
-+    /**
+     /**
       * Gets default ticks per animal spawns value.
       * <p>
-      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
 index e443dddb..ffc84c54 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -266,6 +266,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -265,6 +265,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+      */
      public boolean getWaterPushesTNT();
  
-     /**
++    /**
 +     * Recreate knockback mechanics from Minecraft 1.8
 +     */
 +    public boolean getLegacyKnockback();
 +
-+    /**
+     /**
       * Gets default ticks per animal spawns value.
       * <p>
-      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index 9b7b828a..cdd832c7 100644
+index 17bc8918..c932c60b 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
-@@ -55,6 +55,48 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
+@@ -54,6 +54,48 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
+      */
      public Vector getVelocity();
  
-     /**
++    /**
 +     * Apply an impulse to this entity, i.e. a relative change in velocity.
 +     *
 +     * The given vector is added to the current velocity, and the entity's new
@@ -87,15 +88,14 @@ index 9b7b828a..cdd832c7 100644
 +     */
 +    Vector getPredictedVelocity();
 +
-+    /**
+     /**
       * Gets the entity's height
       *
-      * @return height of entity
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 50c498b2..7fc6494f 100644
+index 0bf0a2b5..a8ca35e1 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -13,6 +13,7 @@ import org.bukkit.map.MapView;
+@@ -14,6 +14,7 @@ import org.bukkit.plugin.Plugin;
  import org.bukkit.plugin.messaging.PluginMessageRecipient;
  import org.bukkit.scoreboard.Scoreboard;
  import org.bukkit.util.RayBlockIntersection;
@@ -103,7 +103,7 @@ index 50c498b2..7fc6494f 100644
  
  /**
   * Represents a player, connected or not
-@@ -1705,4 +1706,10 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1728,4 +1729,10 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       * @return Information about the targeted block, or null if no blocks were found
       */
      RayBlockIntersection getTargetedBlock(boolean nonSolids, boolean liquids);

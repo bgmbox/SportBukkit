@@ -1,4 +1,4 @@
-From 8c4cbb015d560795b1eee3b45a1ac13d90b4dad4 Mon Sep 17 00:00:00 2001
+From 0dfc25b2bee919d6156e8050f08a5212b29a049c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 07:50:16 -0400
 Subject: [PATCH] Fix item pickup in off-hand
@@ -43,10 +43,11 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer
 index 06d9abad..c19b354b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
-@@ -229,6 +229,15 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
+@@ -228,6 +228,15 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
+         return count;
      }
  
-     @Override
++    @Override
 +    protected int firstPartial(ItemStack item) {
 +        final ItemStack heldItem = getItemInOffHand();
 +        if(heldItem != null && heldItem.getAmount() < heldItem.getMaxStackSize() && heldItem.isSimilar(CraftItemStack.asCraftCopy(item))) {
@@ -55,7 +56,6 @@ index 06d9abad..c19b354b 100644
 +        return super.firstPartial(item);
 +    }
 +
-+    @Override
+     @Override
      public HumanEntity getHolder() {
          return (HumanEntity) inventory.getOwner();
-     }

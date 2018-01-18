@@ -30,7 +30,7 @@
 +            NetworkManager.g.debug("Uncaught Exception", throwable);
          } else {
              chatmessage = new ChatMessage("disconnect.genericReason", new Object[] { "Internal Exception: " + throwable});
-+            NetworkManager.g.fatal("Uncaught Exception", throwable);
++            NetworkManager.g.debug("Uncaught Exception", throwable);
          }
  
 -        NetworkManager.g.debug(chatmessage.toPlainText(), throwable);

@@ -137,7 +137,7 @@
 +                if (flag1 && (cur == null || cur.getAmount() == 0)) {
 +                    // The complete stack was dropped
 +                    player.getInventory().setItemInHand(drop.getItemStack());
-+                } else if (flag1 && cur.isSimilar(drop.getItemStack()) && drop.getItemStack().getAmount() == 1) {
++                } else if (flag1 && cur.isSimilar(drop.getItemStack()) && cur.getAmount() < cur.getMaxStackSize() && drop.getItemStack().getAmount() == 1) {
 +                    // Only one item is dropped
 +                    cur.setAmount(cur.getAmount() + 1);
 +                    player.getInventory().setItemInHand(cur);
@@ -212,7 +212,8 @@
 +        // To summarize this method's logic, it's "Can parameter hurt this"
 +
 +        if(this == entityhuman) return true; // SportBukkit - self-damage is always allowed
-+
+ 
+-        return scoreboardteambase == null ? true : (!scoreboardteambase.isAlly(scoreboardteambase1) ? true : scoreboardteambase.allowFriendlyFire());
 +        org.bukkit.scoreboard.Team team;
 +        if (entityhuman instanceof EntityPlayer) {
 +            EntityPlayer thatPlayer = (EntityPlayer) entityhuman;
@@ -228,8 +229,7 @@
 +                return true;
 +            }
 +        }
- 
--        return scoreboardteambase == null ? true : (!scoreboardteambase.isAlly(scoreboardteambase1) ? true : scoreboardteambase.allowFriendlyFire());
++
 +        if (this instanceof EntityPlayer) {
 +            return !team.hasPlayer(((EntityPlayer) this).getBukkitEntity());
 +        }
@@ -434,7 +434,20 @@
          }
  
      }
-@@ -1540,13 +1733,17 @@
+@@ -1256,7 +1449,11 @@
+             this.motY = d3 * 0.6D;
+             this.aR = f3;
+             this.fallDistance = 0.0F;
+-            this.setFlag(7, false);
++            // CraftBukkit start
++            if (getFlag(7) && !org.bukkit.craftbukkit.event.CraftEventFactory.callToggleGlideEvent(this, false).isCancelled()) {
++                this.setFlag(7, false);
++            }
++            // CraftBukkit end
+         } else {
+             super.a(f, f1, f2);
+         }
+@@ -1540,13 +1737,17 @@
      }
  
      protected void releaseShoulderEntities() {
@@ -457,7 +470,7 @@
          if (!this.world.isClientSide && !nbttagcompound.isEmpty()) {
              Entity entity = EntityTypes.a(nbttagcompound, this.world);
  
-@@ -1555,9 +1752,10 @@
+@@ -1555,9 +1756,10 @@
              }
  
              entity.setPosition(this.locX, this.locY + 0.699999988079071D, this.locZ);
@@ -469,7 +482,7 @@
      }
  
      public abstract boolean isSpectator();
-@@ -1624,7 +1822,7 @@
+@@ -1624,7 +1826,7 @@
      }
  
      public static UUID d(String s) {
@@ -478,7 +491,7 @@
      }
  
      public boolean a(ChestLock chestlock) {
-@@ -1721,11 +1919,12 @@
+@@ -1721,11 +1923,12 @@
      }
  
      public float n(float f) {
@@ -492,7 +505,7 @@
      }
  
      public ItemCooldown getCooldownTracker() {
-@@ -1759,7 +1958,7 @@
+@@ -1759,7 +1962,7 @@
              return entitymonster.c(this.a);
          }
  

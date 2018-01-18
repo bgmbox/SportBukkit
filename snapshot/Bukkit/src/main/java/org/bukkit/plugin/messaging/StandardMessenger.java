@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -68,7 +69,7 @@ public class StandardMessenger implements Messenger {
             Set<String> channels = outgoingByPlugin.get(plugin);
 
             if (channels != null) {
-                String[] toRemove = channels.toArray(new String[0]);
+                String[] toRemove = channels.toArray(new String[channels.size()]);
 
                 outgoingByPlugin.remove(plugin);
 
@@ -138,7 +139,7 @@ public class StandardMessenger implements Messenger {
             Set<PluginMessageListenerRegistration> registrations = incomingByPlugin.get(plugin);
 
             if (registrations != null) {
-                PluginMessageListenerRegistration[] toRemove = registrations.toArray(new PluginMessageListenerRegistration[0]);
+                PluginMessageListenerRegistration[] toRemove = registrations.toArray(new PluginMessageListenerRegistration[registrations.size()]);
 
                 for (PluginMessageListenerRegistration registration : toRemove) {
                     if (registration.getChannel().equals(channel)) {
@@ -154,7 +155,7 @@ public class StandardMessenger implements Messenger {
             Set<PluginMessageListenerRegistration> registrations = incomingByPlugin.get(plugin);
 
             if (registrations != null) {
-                PluginMessageListenerRegistration[] toRemove = registrations.toArray(new PluginMessageListenerRegistration[0]);
+                PluginMessageListenerRegistration[] toRemove = registrations.toArray(new PluginMessageListenerRegistration[registrations.size()]);
 
                 incomingByPlugin.remove(plugin);
 
@@ -421,7 +422,14 @@ public class StandardMessenger implements Messenger {
         Set<PluginMessageListenerRegistration> registrations = getIncomingChannelRegistrations(channel);
 
         for (PluginMessageListenerRegistration registration : registrations) {
-            registration.getListener().onPluginMessageReceived(channel, source, message);
+            try {
+                registration.getListener().onPluginMessageReceived(channel, source, message);
+            } catch (Throwable t) {
+                registration.getPlugin().getLogger().log(Level.WARNING,
+                    String.format("Plugin %s generated an exception whilst handling plugin message",
+                        registration.getPlugin().getDescription().getFullName()
+                    ), t);
+            }
         }
     }
 
