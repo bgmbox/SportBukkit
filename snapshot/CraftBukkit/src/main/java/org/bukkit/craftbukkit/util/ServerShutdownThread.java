@@ -12,6 +12,7 @@ public class ServerShutdownThread extends Thread {
 
     @Override
     public void run() {
+        org.bukkit.craftbukkit.AsyncCatcher.enabled = false; // Spigot
         try {
             server.stop();
         } catch (ExceptionWorldConflict ex) {

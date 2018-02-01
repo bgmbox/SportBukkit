@@ -17,7 +17,23 @@
      @Deprecated
      public Material q(IBlockData iblockdata) {
          return this.material;
-@@ -343,7 +344,8 @@
+@@ -315,9 +316,13 @@
+         return 10;
+     }
+ 
+-    public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {}
++    public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "block onPlace"); // Spigot
++    }
+ 
+-    public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {}
++    public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "block remove"); // Spigot
++    }
+ 
+     public int a(Random random) {
+         return 1;
+@@ -343,7 +348,8 @@
              int j = this.getDropCount(i, world.random);
  
              for (int k = 0; k < j; ++k) {
@@ -27,7 +43,7 @@
                      Item item = this.getDropType(iblockdata, world.random, i);
  
                      if (item != Items.a) {
-@@ -364,7 +366,13 @@
+@@ -364,7 +370,13 @@
              EntityItem entityitem = new EntityItem(world, (double) blockposition.getX() + d0, (double) blockposition.getY() + d1, (double) blockposition.getZ() + d2, itemstack);
  
              entityitem.q();
@@ -42,7 +58,7 @@
          }
      }
  
-@@ -931,7 +939,7 @@
+@@ -931,7 +943,7 @@
  
              if (hashset.contains(block16)) {
                  for (int i = 0; i < 15; ++i) {
@@ -51,7 +67,7 @@
  
                      Block.REGISTRY_ID.a(block16.fromLegacyData(i), j);
                  }
-@@ -940,7 +948,7 @@
+@@ -940,7 +952,7 @@
  
                  while (unmodifiableiterator.hasNext()) {
                      IBlockData iblockdata = (IBlockData) unmodifiableiterator.next();
@@ -60,7 +76,7 @@
  
                      Block.REGISTRY_ID.a(iblockdata, k);
                  }
-@@ -949,6 +957,12 @@
+@@ -949,6 +961,12 @@
  
      }
  
