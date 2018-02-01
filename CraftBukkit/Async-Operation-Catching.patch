@@ -1,10 +1,9 @@
-From 2f05c1719d223eaca400c7e8f07df7627d54b09b Mon Sep 17 00:00:00 2001
+From 1ef2f4e55c264f59b78830cd2ed9aa771ed94dfb Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Tue, 25 Mar 2014 16:10:01 +1100
 Subject: [PATCH] Async Operation Catching
 
 Catch and throw an exception when a potentially unsafe operation occurs on a thread other than the main server thread.
-
 
 diff --git a/src/main/java/net/minecraft/server/Block.java b/src/main/java/net/minecraft/server/Block.java
 index 071a3d58..4c08ef23 100644

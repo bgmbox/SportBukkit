@@ -1,4 +1,4 @@
-From afaa34195bd5bd7a7c07508494cc23a5e22d8226 Mon Sep 17 00:00:00 2001
+From 2de0dd5219f80698a84d527bc07ce8a8001cff9d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:14 -0500
 Subject: [PATCH] SportBukkit
@@ -365,7 +365,7 @@ index 00000000..2394dc92
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 69c880ef..e275a000 100644
+index c63fa44a..a7ba7027 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -3,6 +3,9 @@ package org.bukkit.craftbukkit;
@@ -506,7 +506,7 @@ index 69c880ef..e275a000 100644
      @Override
      public String getUpdateFolder() {
          return this.configuration.getString("settings.update-folder", "update");
-@@ -676,7 +712,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -681,7 +717,7 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
      @Override
      public CraftScheduler getScheduler() {
@@ -515,7 +515,7 @@ index 69c880ef..e275a000 100644
      }
  
      @Override
-@@ -1388,6 +1424,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1393,6 +1429,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
          console.safeShutdown();
      }
  
@@ -527,7 +527,7 @@ index 69c880ef..e275a000 100644
      @Override
      public int broadcast(String message, String permission) {
          Set<CommandSender> recipients = new HashSet<>();
-@@ -1416,48 +1457,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1421,48 +1462,16 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      @Override
      @Deprecated
      public OfflinePlayer getOfflinePlayer(String name) {
@@ -579,7 +579,7 @@ index 69c880ef..e275a000 100644
      }
  
      @Override
-@@ -1584,13 +1593,9 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1589,13 +1598,9 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
          return container;
      }
  
@@ -596,7 +596,7 @@ index 69c880ef..e275a000 100644
              try {
                  players.add(getOfflinePlayer(UUID.fromString(file.substring(0, file.length() - 4))));
              } catch (IllegalArgumentException ex) {
-@@ -1599,7 +1604,12 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1604,7 +1609,12 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
          }
  
          players.addAll(getOnlinePlayers());
@@ -609,7 +609,7 @@ index 69c880ef..e275a000 100644
          return players.toArray(new OfflinePlayer[players.size()]);
      }
  
-@@ -1898,6 +1908,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -1903,6 +1913,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
          );
      }
  

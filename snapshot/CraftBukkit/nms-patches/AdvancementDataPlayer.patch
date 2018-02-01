@@ -40,7 +40,15 @@
                      } else {
                          this.a(advancement, (AdvancementProgress) entry.getValue());
                      }
-@@ -195,6 +199,7 @@
+@@ -161,6 +165,7 @@
+     }
+ 
+     public void c() {
++        if (!org.bukkit.Bukkit.getAdvancementsEnabled()) return;
+         HashMap hashmap = Maps.newHashMap();
+         Iterator iterator = this.data.entrySet().iterator();
+ 
+@@ -195,6 +200,7 @@
              this.i.add(advancement);
              flag = true;
              if (!flag1 && advancementprogress.isDone()) {

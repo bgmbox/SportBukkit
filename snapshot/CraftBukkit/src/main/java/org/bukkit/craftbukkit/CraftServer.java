@@ -680,6 +680,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
     }
 
     @Override
+    public boolean getAdvancementsEnabled() {
+        return this.configuration.getBoolean("settings.advancements-enabled", true);
+    }
+
+    @Override
     public int getTicksPerAnimalSpawns() {
         return this.configuration.getInt("ticks-per.animal-spawns");
     }

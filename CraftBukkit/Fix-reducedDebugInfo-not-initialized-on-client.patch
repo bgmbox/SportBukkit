@@ -1,4 +1,4 @@
-From 636bf8fd265e4eda033d243b21b780fe47dc8436 Mon Sep 17 00:00:00 2001
+From 9a4a8083b10a8d2fd6f779b3b095c876ee305e89 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 2 Apr 2016 20:37:03 -0400
 Subject: [PATCH] Fix reducedDebugInfo not initialized on client

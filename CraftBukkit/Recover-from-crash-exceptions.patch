@@ -1,4 +1,4 @@
-From 408f3dca6317c18069cf737dc3c3147aa6c7d762 Mon Sep 17 00:00:00 2001
+From 286e3b5737ae291118c49196f20f65592fb99fca Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 02:26:14 -0500
 Subject: [PATCH] Recover from crash exceptions

@@ -361,6 +361,13 @@ public final class Bukkit {
     }
 
     /**
+     * @see Server#getAdvancementsEnabled()
+     */
+    public static boolean getAdvancementsEnabled() {
+        return server.getAdvancementsEnabled();
+    }
+
+    /**
      * Gets default ticks per animal spawns value.
      * <p>
      * <b>Example Usage:</b>

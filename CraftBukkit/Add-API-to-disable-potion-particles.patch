@@ -1,4 +1,4 @@
-From 17f76119baa5909e0f78f540fdb5b4b16e0dae64 Mon Sep 17 00:00:00 2001
+From ab2a2271d8819e94066f2a5c4c85e097e1e9f406 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 9 May 2014 23:48:01 -0400
 Subject: [PATCH] Add API to disable potion particles

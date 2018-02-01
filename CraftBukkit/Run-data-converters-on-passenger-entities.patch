@@ -1,4 +1,4 @@
-From 52e30770ef078428d3275d960b1da6896858b2f3 Mon Sep 17 00:00:00 2001
+From dac6c3540dd8ddb79149918e9ad2c5f81a13d381 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Mar 2016 19:53:00 -0400
 Subject: [PATCH] Run data converters on passenger entities

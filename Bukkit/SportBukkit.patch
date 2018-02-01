@@ -1,4 +1,4 @@
-From e73c1308a69a6351734331ca1914e6286ffb86c8 Mon Sep 17 00:00:00 2001
+From 812e9cbfb6b539999bf89439b8af4ae4ce760da6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:05 -0500
 Subject: [PATCH] SportBukkit
@@ -30,10 +30,10 @@ index 3a481844..4038513e 100644
      /**
       * Checks if this player is currently online
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index fcfb1299..8222720a 100644
+index 874a92c4..e86d0c9b 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -660,6 +660,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -665,6 +665,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
       */
      public void shutdown();
  

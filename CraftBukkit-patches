@@ -167,4 +167,5 @@ Change-large-getCubes-error-to-warning
 Fix-respawning
 Add-async-chunk-load-API
 Async-Operation-Catching
+Add-setting-to-disable-advancements
 SportBukkit

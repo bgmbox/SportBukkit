@@ -289,6 +289,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
     public boolean getLegacyKnockback();
 
     /**
+     * Should we announce advancements?
+     */
+    public boolean getAdvancementsEnabled();
+
+    /**
      * Gets default ticks per animal spawns value.
      * <p>
      * <b>Example Usage:</b>

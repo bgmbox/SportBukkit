@@ -1,4 +1,4 @@
-From b186f91ce0297e6884efcf589dbefbbbfaed1480 Mon Sep 17 00:00:00 2001
+From f0230b47f2a9b62d0b56c69043f0aaec8b6fedba Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 12 Jul 2015 09:59:02 -0400
 Subject: [PATCH] Localize inventory titles

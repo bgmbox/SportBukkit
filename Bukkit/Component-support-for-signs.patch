@@ -1,4 +1,4 @@
-From fe270c72ecccdedad529dfb32408e641395945be Mon Sep 17 00:00:00 2001
+From bdd94f8074796a3ace0fdbd0e3b5007038fd0730 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:23 -0400
 Subject: [PATCH] Component support for signs
