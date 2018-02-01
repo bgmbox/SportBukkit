@@ -1,4 +1,4 @@
-From d02a635db89fb2f92b3df7768a9db43b4c947898 Mon Sep 17 00:00:00 2001
+From 54fddbec36d93fdce42762101d21d19dca1f6951 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 4 Feb 2016 04:59:45 -0500
 Subject: [PATCH] Implement minecraft-api

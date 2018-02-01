@@ -1,4 +1,4 @@
-From 239e3a30839c9e1ae03dbfcb8e52964c92039125 Mon Sep 17 00:00:00 2001
+From e5137699e14791be4f7f2dadc214334c371a5b1f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 06:45:01 -0400
 Subject: [PATCH] Access items by EquipmentSlot

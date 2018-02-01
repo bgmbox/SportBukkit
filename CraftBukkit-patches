@@ -165,4 +165,5 @@ Add-id-specific-map-API
 Fix-player-leak-through-map-items
 Change-large-getCubes-error-to-warning
 Fix-respawning
+Add-async-chunk-load-API
 SportBukkit

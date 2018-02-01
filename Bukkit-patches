@@ -89,4 +89,5 @@ Unregister-plugin-commands
 Immutable-materials-and-items
 Reduce-ItemStack-copying
 Add-id-specific-map-API
+Add-async-chunk-load-API
 SportBukkit

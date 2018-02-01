@@ -1,4 +1,4 @@
-From 6f342635488d7ddbe6f84458668433aae7cd38f8 Mon Sep 17 00:00:00 2001
+From f0b1c1c2e68e26cc7ec210acdba86dfac48a3963 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 29 May 2015 01:08:37 -0400
 Subject: [PATCH] Plugin isolation

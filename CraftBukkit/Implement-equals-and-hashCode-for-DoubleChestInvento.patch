@@ -1,4 +1,4 @@
-From 740bcca2ffd1a293ced3fc14819378b833024e59 Mon Sep 17 00:00:00 2001
+From 00dc88c002c89b64b685f60d037a85dd0225f72b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 25 Sep 2014 20:42:35 -0400
 Subject: [PATCH] Implement equals() and hashCode() for DoubleChestInventory

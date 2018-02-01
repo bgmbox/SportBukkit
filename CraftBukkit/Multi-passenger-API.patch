@@ -1,4 +1,4 @@
-From 7647bc3d6c19e7abd51766abafa93cbe0cfa6287 Mon Sep 17 00:00:00 2001
+From e85418548caa8912b08c74aba423792d29046c28 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 01:42:17 -0400
 Subject: [PATCH] Multi-passenger API
