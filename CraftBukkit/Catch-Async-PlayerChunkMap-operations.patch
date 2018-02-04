@@ -1,0 +1,23 @@
+From 3aeb6bc4d4b1c5be0065e5ad45800c0354b62979 Mon Sep 17 00:00:00 2001
+From: cswhite2000 <18whitechristop@gmail.com>
+Date: Thu, 1 Feb 2018 10:50:40 -0800
+Subject: [PATCH] Catch Async PlayerChunkMap operations
+
+
+diff --git a/src/main/java/net/minecraft/server/PlayerChunkMap.java b/src/main/java/net/minecraft/server/PlayerChunkMap.java
+index 35b15a7b..558bfde8 100644
+--- a/src/main/java/net/minecraft/server/PlayerChunkMap.java
++++ b/src/main/java/net/minecraft/server/PlayerChunkMap.java
+@@ -421,10 +421,12 @@ public class PlayerChunkMap {
+     }
+ 
+     public void a(PlayerChunk playerchunk) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp("Async Player Chunk Add"); // Paper
+         this.f.add(playerchunk);
+     }
+ 
+     public void b(PlayerChunk playerchunk) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp("Async Player Chunk Remove"); // Paper
+         ChunkCoordIntPair chunkcoordintpair = playerchunk.a();
+         long i = d(chunkcoordintpair.x, chunkcoordintpair.z);
+ 

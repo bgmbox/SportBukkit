@@ -168,4 +168,7 @@ Fix-respawning
 Add-async-chunk-load-API
 Async-Operation-Catching
 Add-setting-to-disable-advancements
+MC-Utils
+Ensure-Chunks-never-ever-load-async
+Catch-Async-PlayerChunkMap-operations
 SportBukkit

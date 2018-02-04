@@ -1,4 +1,4 @@
-From 286e3b5737ae291118c49196f20f65592fb99fca Mon Sep 17 00:00:00 2001
+From 1910970fe481bc740374dee698189bcaffdfb823 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 02:26:14 -0500
 Subject: [PATCH] Recover from crash exceptions
@@ -63,7 +63,7 @@ index d9ce37ba..c4aeccba 100644
      }
  
 diff --git a/src/main/java/net/minecraft/server/TileEntity.java b/src/main/java/net/minecraft/server/TileEntity.java
-index 296a0295..1e5e1115 100644
+index 296a0295..3a6b069f 100644
 --- a/src/main/java/net/minecraft/server/TileEntity.java
 +++ b/src/main/java/net/minecraft/server/TileEntity.java
 @@ -144,6 +144,7 @@ public abstract class TileEntity {
@@ -74,6 +74,20 @@ index 296a0295..1e5e1115 100644
      public void z() {
          this.d = true;
      }
+@@ -172,7 +173,12 @@ public abstract class TileEntity {
+             }
+         });
+         if (this.world != null) {
+-            CrashReportSystemDetails.a(crashreportsystemdetails, this.position, this.getBlock(), this.v());
++            // Paper start - Prevent TileEntity and Entity crashes
++            Block block = this.getBlock();
++            if (block != null) {
++                CrashReportSystemDetails.a(crashreportsystemdetails, this.position, this.getBlock(), this.v());
++            }
++            // Paper end
+             crashreportsystemdetails.a("Actual block type", new CrashReportCallable() {
+                 public String a() throws Exception {
+                     int i = Block.getId(TileEntity.this.world.getType(TileEntity.this.position).getBlock());
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
 index ada67517..77d109d7 100644
 --- a/src/main/java/net/minecraft/server/World.java

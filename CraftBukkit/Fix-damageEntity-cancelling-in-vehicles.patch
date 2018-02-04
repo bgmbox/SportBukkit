@@ -1,4 +1,4 @@
-From 82b3066c01b51b6620f9f59da49fe3017cf1c30f Mon Sep 17 00:00:00 2001
+From 9c8cb2581a7bc66b4de1d4acc812bb07444cb9cd Mon Sep 17 00:00:00 2001
 From: ShinyDialga45 <shinydialga45@gmail.com>
 Date: Sat, 25 Oct 2014 16:04:15 -0500
 Subject: [PATCH] Fix damageEntity cancelling in vehicles

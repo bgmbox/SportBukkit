@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/Chunk.java
 +++ b/net/minecraft/server/Chunk.java
-@@ -14,6 +14,9 @@
+@@ -14,10 +14,13 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  
@@ -10,6 +10,11 @@
  public class Chunk {
  
      private static final Logger e = LogManager.getLogger();
+-    public static final ChunkSection a = null;
++    public static final ChunkSection a = null; public static final ChunkSection EMPTY_CHUNK_SECTION = Chunk.a; // Paper - OBFHELPER
+     private final ChunkSection[] sections;
+     private final byte[] g;
+     private final int[] h;
 @@ -42,6 +45,35 @@
      private final ConcurrentLinkedQueue<BlockPosition> y;
      public boolean d;
@@ -72,8 +77,11 @@
                      block.onPlace(this.world, blockposition, iblockdata);
                  }
  
-@@ -604,7 +644,15 @@
+@@ -602,9 +642,18 @@
+         return !block.isTileEntity() ? null : ((ITileEntity) block).a(this.world, iblockdata.getBlock().toLegacyData(iblockdata));
+     }
  
++    @Nullable public final TileEntity getTileEntityImmediately(BlockPosition pos) { return this.a(pos, EnumTileEntityState.IMMEDIATE); } // Paper - OBFHELPER
      @Nullable
      public TileEntity a(BlockPosition blockposition, Chunk.EnumTileEntityState chunk_enumtileentitystate) {
 -        TileEntity tileentity = (TileEntity) this.tileEntities.get(blockposition);
@@ -89,7 +97,7 @@
  
          if (tileentity == null) {
              if (chunk_enumtileentitystate == Chunk.EnumTileEntityState.IMMEDIATE) {
-@@ -639,9 +687,17 @@
+@@ -639,9 +688,17 @@
  
              tileentity.A();
              this.tileEntities.put(blockposition, tileentity);
@@ -107,7 +115,7 @@
      public void d(BlockPosition blockposition) {
          if (this.j) {
              TileEntity tileentity = (TileEntity) this.tileEntities.remove(blockposition);
-@@ -681,9 +737,21 @@
+@@ -681,9 +738,21 @@
          int i = aentityslice.length;
  
          for (int j = 0; j < i; ++j) {
@@ -131,7 +139,7 @@
          }
  
      }
-@@ -745,8 +813,8 @@
+@@ -745,8 +814,8 @@
              while (iterator.hasNext()) {
                  Entity entity = (Entity) iterator.next();
  
@@ -142,7 +150,7 @@
                  }
              }
          }
-@@ -773,7 +841,34 @@
+@@ -773,7 +842,34 @@
          return false;
      }
  
@@ -178,7 +186,7 @@
          Chunk chunk = ichunkprovider.getLoadedChunkAt(this.locX, this.locZ - 1);
          Chunk chunk1 = ichunkprovider.getLoadedChunkAt(this.locX + 1, this.locZ);
          Chunk chunk2 = ichunkprovider.getLoadedChunkAt(this.locX, this.locZ + 1);
-@@ -809,6 +904,29 @@
+@@ -809,6 +905,29 @@
          } else {
              this.o();
              chunkgenerator.recreateStructures(this.locX, this.locZ);

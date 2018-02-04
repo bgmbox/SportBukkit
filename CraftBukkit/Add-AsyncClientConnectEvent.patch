@@ -1,4 +1,4 @@
-From b87c593c22e69b2f16ecfd3f83c1b87cc9b80c6e Mon Sep 17 00:00:00 2001
+From 96faec58ba185fe1aa546d3984d9a4bf057993a8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 14 Dec 2016 23:33:02 -0500
 Subject: [PATCH] Add AsyncClientConnectEvent
