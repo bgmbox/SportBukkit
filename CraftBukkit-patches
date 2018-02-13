@@ -171,4 +171,5 @@ Add-setting-to-disable-advancements
 MC-Utils
 Ensure-Chunks-never-ever-load-async
 Catch-Async-PlayerChunkMap-operations
+Add-setting-to-disable-shield-knockback
 SportBukkit

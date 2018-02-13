@@ -1,4 +1,4 @@
-From 93260d4b5d0fcb4376d296cd491e1a2de0a4cb1f Mon Sep 17 00:00:00 2001
+From db45fc41d379ad65ba646f4e46f30e6fc0c00e91 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 24 Dec 2016 19:58:54 -0500
 Subject: [PATCH] Chest lid API

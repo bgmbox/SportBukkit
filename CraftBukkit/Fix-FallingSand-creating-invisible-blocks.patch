@@ -1,11 +1,11 @@
-From 2781c8277b57b3621217cff2f1832a75c39e5820 Mon Sep 17 00:00:00 2001
+From 06114fad782da3a74fc3f0b7f1473c750f0f813d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Feb 2015 01:54:36 -0500
 Subject: [PATCH] Fix FallingSand creating invisible blocks
 
 
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 32061b73..0c22641c 100644
+index 32061b73a..0c22641c7 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -973,6 +973,17 @@ public abstract class World implements IBlockAccess {

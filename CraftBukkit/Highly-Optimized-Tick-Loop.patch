@@ -1,11 +1,11 @@
-From 85ad369292e46001e5c372b12f1d56897f952c04 Mon Sep 17 00:00:00 2001
+From 7d31c01c1b1b40ab888cae57c5fefa7f0bb81902 Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 25 Jan 2014 14:08:35 +1100
 Subject: [PATCH] Highly Optimized Tick Loop
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 52b55d19..0e2a902f 100644
+index 52b55d197..0e2a902f7 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -103,6 +103,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs

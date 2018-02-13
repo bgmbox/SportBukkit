@@ -1,11 +1,11 @@
-From ad9aa59067b5810f6edb703dbb1cc91a4851cda2 Mon Sep 17 00:00:00 2001
+From 854108884033e98ffd623abc6c1b016f642a59da Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 3 Dec 2016 23:46:01 -0500
 Subject: [PATCH] Pause entity API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index ece56fb8..bfbb710b 100644
+index ece56fb8d..bfbb710b0 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -542,6 +542,7 @@ public abstract class EntityLiving extends Entity {
@@ -25,7 +25,7 @@ index ece56fb8..bfbb710b 100644
          if (this.updateEffects) {
              if (!this.world.isClientSide) {
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index c4aeccba..3d045857 100644
+index c4aeccba7..3d045857d 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -1289,6 +1289,19 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -49,7 +49,7 @@ index c4aeccba..3d045857 100644
          this.playerConnection.a(d0, d1, d2, this.yaw, this.pitch);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 356a39f2..540ab31d 100644
+index 356a39f25..540ab31d2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -46,6 +46,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {

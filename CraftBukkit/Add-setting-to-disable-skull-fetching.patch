@@ -1,11 +1,11 @@
-From f72a9256b5f68273d382ce4c2d06a14bfe6c5532 Mon Sep 17 00:00:00 2001
+From 768c0b64c53eaf977e12ae38b558b0ccab2ddfa3 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Feb 2015 03:39:46 -0500
 Subject: [PATCH] Add setting to disable skull fetching
 
 
 diff --git a/src/main/java/net/minecraft/server/TileEntitySkull.java b/src/main/java/net/minecraft/server/TileEntitySkull.java
-index 223e2ed2..c87d9461 100644
+index 223e2ed2d..c87d94613 100644
 --- a/src/main/java/net/minecraft/server/TileEntitySkull.java
 +++ b/src/main/java/net/minecraft/server/TileEntitySkull.java
 @@ -106,6 +106,9 @@ public class TileEntitySkull extends TileEntity implements ITickable {
@@ -19,7 +19,7 @@ index 223e2ed2..c87d9461 100644
                  GameProfile gameprofile1 = TileEntitySkull.j.getProfile(gameprofile.getName());
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 50346016..e3f4f0a3 100644
+index 50346016d..e3f4f0a39 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -584,6 +584,11 @@ public final class CraftServer implements Server {
@@ -35,7 +35,7 @@ index 50346016..e3f4f0a3 100644
      public int getTicksPerAnimalSpawns() {
          return this.configuration.getInt("ticks-per.animal-spawns");
 diff --git a/src/main/resources/configurations/bukkit.yml b/src/main/resources/configurations/bukkit.yml
-index 5230fd4d..051c3977 100644
+index 5230fd4dd..051c39773 100644
 --- a/src/main/resources/configurations/bukkit.yml
 +++ b/src/main/resources/configurations/bukkit.yml
 @@ -24,6 +24,7 @@ settings:

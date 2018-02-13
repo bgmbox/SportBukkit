@@ -1,11 +1,11 @@
-From fe9ae1d2e797a8e0f40d16f170e1d530769e9d7c Mon Sep 17 00:00:00 2001
+From e1e2f30235ff4060a09e5b6705d66c5565327a1d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 28 Nov 2016 21:05:51 -0500
 Subject: [PATCH] Disable old build delay
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 14275ec9..bb9673c5 100644
+index 14275ec9f..bb9673c52 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -177,8 +177,8 @@ public class Main {

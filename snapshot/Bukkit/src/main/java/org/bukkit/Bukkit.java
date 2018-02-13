@@ -368,6 +368,13 @@ public final class Bukkit {
     }
 
     /**
+     * @see Server#getDisableShieldKnockback()
+     */
+    public static boolean getDisableShieldKnockback() {
+        return server.getDisableShieldKnockback();
+    }
+
+    /**
      * Gets default ticks per animal spawns value.
      * <p>
      * <b>Example Usage:</b>

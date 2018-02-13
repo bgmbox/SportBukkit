@@ -1,11 +1,11 @@
-From 0c8ac37658c07f0cd996d0961f8b6eb0d787da6b Mon Sep 17 00:00:00 2001
+From 6c8c6ad98baae5bd852c7f65e593c321e8d056ca Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 14 Feb 2015 08:18:51 -0500
 Subject: [PATCH] Add invis override API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index fbed2c29..be3560ef 100644
+index fbed2c293..be3560ef6 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -112,7 +112,7 @@ public abstract class Entity implements ICommandListener {
@@ -18,7 +18,7 @@ index fbed2c29..be3560ef 100644
      private static final DataWatcherObject<String> aB = DataWatcher.a(Entity.class, DataWatcherRegistry.d);
      private static final DataWatcherObject<Boolean> aC = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java b/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
-index fdf19d1f..872bdd8b 100644
+index fdf19d1f4..872bdd8b2 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
 @@ -5,8 +5,10 @@ import java.util.List;
@@ -35,7 +35,7 @@ index fdf19d1f..872bdd8b 100644
      public PacketPlayOutEntityMetadata() {}
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 484d1a4c..1057fb7e 100644
+index 484d1a4c3..1057fb7ec 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1189,7 +1189,33 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -73,7 +73,7 @@ index 484d1a4c..1057fb7e 100644
  
          try {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 3564550a..85d8e49e 100644
+index 3564550a7..85d8e49ec 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -93,6 +93,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {

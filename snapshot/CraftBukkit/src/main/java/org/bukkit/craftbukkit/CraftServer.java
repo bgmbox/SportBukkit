@@ -685,6 +685,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
     }
 
     @Override
+    public boolean getDisableShieldKnockback() {
+        return this.configuration.getBoolean("settings.disable-shield-knockback", false);
+    }
+
+    @Override
     public int getTicksPerAnimalSpawns() {
         return this.configuration.getInt("ticks-per.animal-spawns");
     }

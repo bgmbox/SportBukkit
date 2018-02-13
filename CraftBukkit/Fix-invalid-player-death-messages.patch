@@ -1,4 +1,4 @@
-From 64cdbb9b62d4a8b510e3a4304f61587050505c20 Mon Sep 17 00:00:00 2001
+From c108a7a25ed5d6eb3c85a20ad7ec4887d64ca30e Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Thu, 4 Apr 2013 21:36:54 -0500
 Subject: [PATCH] Fix invalid player death messages
@@ -6,7 +6,7 @@ Subject: [PATCH] Fix invalid player death messages
 This bug affects the /kill command and any plugin that sets a player's health to zero
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 4e71963b..fd1ef243 100644
+index 4e71963bf..fd1ef2437 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -417,7 +417,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {

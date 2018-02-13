@@ -1,11 +1,11 @@
-From 4b70fc6ebc275662ff3e9194a6407a1ca89d9737 Mon Sep 17 00:00:00 2001
+From 538944c0d6b95026a6fcfa64c16b9011f275e3f9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 18 May 2016 03:31:16 -0400
 Subject: [PATCH] Enqueue play packets during login
 
 
 diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/java/net/minecraft/server/NetworkManager.java
-index 99d0da99..4ae52fdb 100644
+index 99d0da99f..4ae52fdbc 100644
 --- a/src/main/java/net/minecraft/server/NetworkManager.java
 +++ b/src/main/java/net/minecraft/server/NetworkManager.java
 @@ -266,6 +266,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
@@ -17,7 +17,7 @@ index 99d0da99..4ae52fdb 100644
          return this.m;
      }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 1da4e343..eb326b88 100644
+index 1da4e343e..eb326b88d 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -88,10 +88,30 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -67,7 +67,7 @@ index 1da4e343..eb326b88 100644
          if (packet instanceof PacketPlayOutChat) {
              PacketPlayOutChat packetplayoutchat = (PacketPlayOutChat) packet;
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 2e2a642a..7b17e4eb 100644
+index 2e2a642ab..7b17e4ebe 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -138,7 +138,14 @@ public abstract class PlayerList {

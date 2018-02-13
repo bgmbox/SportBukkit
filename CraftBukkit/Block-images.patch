@@ -1,11 +1,11 @@
-From 8cd197a974c4aa340609c0aaa1fee2e33b843773 Mon Sep 17 00:00:00 2001
+From 287e6c097f5c6844bbccc0d406e3ea966e2fd799 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 10 Oct 2016 04:53:27 -0400
 Subject: [PATCH] Block images
 
 
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
-index f8487998..4afc3622 100644
+index f8487998c..4afc36227 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -2,6 +2,8 @@ package org.bukkit;
@@ -38,7 +38,7 @@ index f8487998..4afc3622 100644
      public VectorFactory vectors() {
          return vectorFactory;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1777cfb6..a4362797 100644
+index 1777cfb67..a4362797c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1688,11 +1688,6 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
@@ -54,7 +54,7 @@ index 1777cfb6..a4362797 100644
      public CraftScoreboardManager getScoreboardManager() {
          return scoreboardManager;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 0a1b97df..f02a5d78 100644
+index 0a1b97df5..f02a5d78b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -11,6 +11,7 @@ import java.util.Iterator;
@@ -209,7 +209,7 @@ index 0a1b97df..f02a5d78 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 456fd209..9b134994 100644
+index 456fd209c..9b1349949 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -4,6 +4,7 @@ import java.util.ArrayList;
@@ -479,7 +479,7 @@ index 456fd209..9b134994 100644
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockFactory.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockFactory.java
 new file mode 100644
-index 00000000..88101d0d
+index 000000000..88101d0db
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockFactory.java
 @@ -0,0 +1,91 @@
@@ -576,7 +576,7 @@ index 00000000..88101d0d
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockImage.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockImage.java
 new file mode 100644
-index 00000000..1f60a747
+index 000000000..1f60a7476
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockImage.java
 @@ -0,0 +1,225 @@
@@ -806,7 +806,7 @@ index 00000000..1f60a747
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-index 7d082117..54506b5c 100644
+index 7d082117b..54506b5cc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 @@ -1,6 +1,7 @@
@@ -1034,7 +1034,7 @@ index 7d082117..54506b5c 100644
 +}
 diff --git a/src/test/java/org/bukkit/block/BlockFactoryTest.java b/src/test/java/org/bukkit/block/BlockFactoryTest.java
 new file mode 100644
-index 00000000..e720c7ba
+index 000000000..e720c7baa
 --- /dev/null
 +++ b/src/test/java/org/bukkit/block/BlockFactoryTest.java
 @@ -0,0 +1,58 @@

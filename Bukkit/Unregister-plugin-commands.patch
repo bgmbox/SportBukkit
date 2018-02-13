@@ -1,4 +1,4 @@
-From 813516d8af930dddb0ebc7cdf007c283b062947d Mon Sep 17 00:00:00 2001
+From 404eb7d191228b15ec0cd707754d233559980a5f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 17:23:54 -0500
 Subject: [PATCH] Unregister plugin commands

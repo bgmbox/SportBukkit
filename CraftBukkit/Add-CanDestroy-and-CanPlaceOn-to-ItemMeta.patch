@@ -1,11 +1,11 @@
-From b1074053ffe01b6fc493944ff45079034e4db73d Mon Sep 17 00:00:00 2001
+From 5d12ba49f390637307e0cc7c1f06b8a59baf052f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 22 May 2015 00:46:32 -0400
 Subject: [PATCH] Add CanDestroy and CanPlaceOn to ItemMeta
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
-index 8adb7627..af9ab5c4 100644
+index 8adb76278..af9ab5c40 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 @@ -9,10 +9,7 @@ import java.lang.reflect.InvocationTargetException;

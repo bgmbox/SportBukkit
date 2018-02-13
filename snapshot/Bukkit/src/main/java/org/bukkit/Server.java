@@ -294,6 +294,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
     public boolean getAdvancementsEnabled();
 
     /**
+     * Make shields less effective
+     */
+    public boolean getDisableShieldKnockback();
+
+    /**
      * Gets default ticks per animal spawns value.
      * <p>
      * <b>Example Usage:</b>

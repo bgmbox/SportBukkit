@@ -1,11 +1,11 @@
-From 0f38386eddc314bd8bb5813ba2e673d2065fd3b7 Mon Sep 17 00:00:00 2001
+From c56e5c10a8059cddc64ae99dc597b64d8a81570c Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Sun, 28 Jul 2013 21:57:34 +0200
 Subject: [PATCH] Add getHostname to Player
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index fd1ef243..be32b107 100644
+index fd1ef2437..be32b1074 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -78,6 +78,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -17,7 +17,7 @@ index fd1ef243..be32b107 100644
  
      public EntityPlayer(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index a21d2b20..4fc58198 100644
+index a21d2b209..4fc58198c 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -489,6 +489,8 @@ public abstract class PlayerList {
@@ -30,7 +30,7 @@ index a21d2b20..4fc58198 100644
          PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress());
          String s;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index adc551e0..f3dba24b 100644
+index adc551e0d..f3dba24bb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1568,4 +1568,9 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
