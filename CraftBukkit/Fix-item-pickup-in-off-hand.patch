@@ -1,11 +1,11 @@
-From de37650785f1eda49061be8af028b2ecef96487f Mon Sep 17 00:00:00 2001
+From 5eacc816be522cdf1d11db0424599dd33aadd624 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 07:50:16 -0400
 Subject: [PATCH] Fix item pickup in off-hand
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerInventory.java b/src/main/java/net/minecraft/server/PlayerInventory.java
-index 84f59b750..0c82dfd0a 100644
+index 84f59b75..0c82dfd0 100644
 --- a/src/main/java/net/minecraft/server/PlayerInventory.java
 +++ b/src/main/java/net/minecraft/server/PlayerInventory.java
 @@ -106,7 +106,16 @@ public class PlayerInventory implements IInventory {
@@ -27,7 +27,7 @@ index 84f59b750..0c82dfd0a 100644
      // CraftBukkit end
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
-index f76a092e7..6af269288 100644
+index f76a092e..6af26928 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 @@ -282,7 +282,7 @@ public class CraftInventory implements Inventory {
@@ -40,7 +40,7 @@ index f76a092e7..6af269288 100644
          ItemStack filteredItem = CraftItemStack.asCraftCopy(item);
          if (item == null) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
-index 06d9abadb..c19b354b1 100644
+index 06d9abad..c19b354b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 @@ -228,6 +228,15 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i

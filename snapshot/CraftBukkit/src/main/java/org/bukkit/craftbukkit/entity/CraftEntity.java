@@ -610,7 +610,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
             return null;
         }
 
-        return getHandle().getVehicle().getBukkitEntity();
+        return getHandle().bJ().getBukkitEntity(); // PAIL: rename getVehicle() -> getRootVehicle(), bJ() -> getVehicle()
     }
 
     @Override

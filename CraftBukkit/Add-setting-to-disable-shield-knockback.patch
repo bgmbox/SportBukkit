@@ -1,11 +1,11 @@
-From 336491e0b1b03d2d66cf5f8fd798ec9d4133182a Mon Sep 17 00:00:00 2001
+From 778460014dc53c9e6419b7c4ba9b3b88e490a06f Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Mon, 12 Feb 2018 17:26:03 -0800
 Subject: [PATCH] Add setting to disable shield knockback
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index f2272d614..d484fae33 100644
+index 74d57607..ce1583f7 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
@@ -16,7 +16,7 @@ index f2272d614..d484fae33 100644
  import org.bukkit.Location;
  import org.bukkit.attribute.Attribute;
  import org.bukkit.craftbukkit.attribute.CraftAttributeMap;
-@@ -1385,7 +1386,7 @@ public abstract class EntityLiving extends Entity {
+@@ -1387,7 +1388,7 @@ public abstract class EntityLiving extends Entity {
                  this.damageShield((float) -event.getDamage(DamageModifier.BLOCKING));
                  Entity entity = damagesource.i();
  
@@ -26,7 +26,7 @@ index f2272d614..d484fae33 100644
                  }
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c63fa44ae..0c0bc5075 100644
+index c63fa44a..0c0bc507 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -648,6 +648,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {

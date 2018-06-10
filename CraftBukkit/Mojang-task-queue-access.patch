@@ -1,11 +1,11 @@
-From f57da4b99ca496abd2f8323ffe401ac8f42a34b3 Mon Sep 17 00:00:00 2001
+From 8e407a7538ef423865857ea0f105100847f45599 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 5 Aug 2016 10:46:15 -0400
 Subject: [PATCH] Mojang task queue access
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 3f7cac093..2bc022008 100644
+index 3f7cac09..2bc02200 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -369,7 +369,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -44,7 +44,7 @@ index 3f7cac093..2bc022008 100644
              return waitable.get();
          } catch (java.util.concurrent.ExecutionException e) {
 diff --git a/src/main/java/net/minecraft/server/LoginListener.java b/src/main/java/net/minecraft/server/LoginListener.java
-index c96eae858..37de4cf4b 100644
+index c96eae85..37de4cf4 100644
 --- a/src/main/java/net/minecraft/server/LoginListener.java
 +++ b/src/main/java/net/minecraft/server/LoginListener.java
 @@ -256,7 +256,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
@@ -65,7 +65,7 @@ index c96eae858..37de4cf4b 100644
      }
      public GameProfile completeOfflineProfile(GameProfile profile) {
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index dc36ce849..94732a267 100644
+index dc36ce84..94732a26 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -49,6 +49,11 @@ import org.bukkit.craftbukkit.CraftServer;
@@ -175,7 +175,7 @@ index dc36ce849..94732a267 100644
          return 256;
      }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index cb28ee26d..97b0ac76c 100644
+index cb28ee26..97b0ac76 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1363,7 +1363,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -206,7 +206,7 @@ index cb28ee26d..97b0ac76c 100644
                      waitable.run();
                  }
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index c91627dcc..fd4b0bc84 100644
+index c91627dc..fd4b0bc8 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -119,13 +119,8 @@ public class ServerConnection {
@@ -226,7 +226,7 @@ index c91627dcc..fd4b0bc84 100644
              if(futures.isEmpty()) break;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 39bb5cf3a..1777cfb67 100644
+index 39bb5cf3..1777cfb6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -91,12 +91,7 @@ import org.bukkit.inventory.ShapedRecipe;
@@ -289,7 +289,7 @@ index 39bb5cf3a..1777cfb67 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java b/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java
-index 9dc1218bb..3a67414ff 100644
+index 9dc1218b..3a67414f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java
 @@ -30,7 +30,7 @@ public class ConsoleCommandCompleter implements Completer {

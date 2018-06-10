@@ -1,11 +1,11 @@
-From 732f7857f2b7c12a70e59388ddba053d77bf2375 Mon Sep 17 00:00:00 2001
+From 73333df876a557e33c3d4a611dfa739fd7f4280f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 7 Dec 2016 04:29:32 -0500
 Subject: [PATCH] FallingBlock form block flag
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityFallingBlock.java b/src/main/java/net/minecraft/server/EntityFallingBlock.java
-index 579e51a0a..608d4bc47 100644
+index 579e51a0..608d4bc4 100644
 --- a/src/main/java/net/minecraft/server/EntityFallingBlock.java
 +++ b/src/main/java/net/minecraft/server/EntityFallingBlock.java
 @@ -19,6 +19,8 @@ public class EntityFallingBlock extends Entity {
@@ -26,7 +26,7 @@ index 579e51a0a..608d4bc47 100644
                              if (this.world.a(block, blockposition, true, EnumDirection.UP, (Entity) null) && (flag1 || !BlockFalling.x(this.world.getType(blockposition.down())))) {
                                  if (CraftEventFactory.callEntityChangeBlockEvent(this, blockposition, this.block.getBlock(), this.block.getBlock().toLegacyData(this.block)).isCancelled()) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftFallingBlock.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftFallingBlock.java
-index b0a7f6392..b06970d90 100644
+index b0a7f639..b06970d9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftFallingBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftFallingBlock.java
 @@ -65,4 +65,14 @@ public class CraftFallingBlock extends CraftEntity implements FallingBlock {

@@ -1,11 +1,11 @@
-From 0fbd7ee62254114038327ec60ae21370af48b470 Mon Sep 17 00:00:00 2001
+From 835cef67e72f7c0c77e6a2ca81b18ccfd4251f01 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 05:57:57 -0500
 Subject: [PATCH] Absorption API
 
 
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
-index 089c5d3d..98096ab9 100644
+index b339f45f..fe08ce44 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
 @@ -160,6 +160,16 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti

@@ -1,11 +1,11 @@
-From 7e9012988a5a4338131ac573ed964babbebf775b Mon Sep 17 00:00:00 2001
+From 708774f07e0484369d5f67eac70202801491b01e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 28 May 2015 04:31:39 -0400
 Subject: [PATCH] Improve Permissible interface
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
-index 12fb6156f..be7f7d8e4 100644
+index 12fb6156..be7f7d8e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 @@ -1,6 +1,7 @@
@@ -84,7 +84,7 @@ index 12fb6156f..be7f7d8e4 100644
      public boolean isOp() {
          return getCaller().isOp();
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
-index 8f875ca0b..716f7c8a1 100644
+index 8f875ca0..716f7c8a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 @@ -9,6 +9,7 @@ import org.bukkit.permissions.PermissionAttachment;
@@ -163,7 +163,7 @@ index 8f875ca0b..716f7c8a1 100644
          return false;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index f99d57a08..33edb82d3 100644
+index 1ce0dac8..edea21f8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -3,6 +3,8 @@ package org.bukkit.craftbukkit.entity;
@@ -243,7 +243,7 @@ index f99d57a08..33edb82d3 100644
      public boolean isOp() {
          return getPermissibleBase().isOp();
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index a54548f02..38e7a34d8 100644
+index a54548f0..38e7a34d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -1,6 +1,8 @@
@@ -323,7 +323,7 @@ index a54548f02..38e7a34d8 100644
          return mode;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
-index 75c428b47..77835cb67 100644
+index 75c428b4..77835cb6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
 @@ -1,5 +1,6 @@

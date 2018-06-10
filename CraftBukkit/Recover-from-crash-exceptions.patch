@@ -1,11 +1,11 @@
-From c755de24be3e9a000a9ba8e0296cc26583beaa79 Mon Sep 17 00:00:00 2001
+From e5252ff03e6fe0f8067011a38b6cbe9f975f2607 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 02:26:14 -0500
 Subject: [PATCH] Recover from crash exceptions
 
 
 diff --git a/src/main/java/net/minecraft/server/CrashReport.java b/src/main/java/net/minecraft/server/CrashReport.java
-index 436bbc0ff..97dbf2440 100644
+index 436bbc0f..97dbf244 100644
 --- a/src/main/java/net/minecraft/server/CrashReport.java
 +++ b/src/main/java/net/minecraft/server/CrashReport.java
 @@ -24,6 +24,7 @@ public class CrashReport {
@@ -38,7 +38,7 @@ index 436bbc0ff..97dbf2440 100644
          return this.d;
      }
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index d9ce37bab..c4aeccba7 100644
+index a529d2ea..74f8b220 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
@@ -49,7 +49,7 @@ index d9ce37bab..c4aeccba7 100644
  import org.bukkit.GameMode;
  import org.bukkit.WeatherType;
  import org.bukkit.craftbukkit.CraftWorld;
-@@ -553,7 +554,11 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -562,7 +563,11 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
              CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Player being ticked");
  
              this.appendEntityCrashDetails(crashreportsystemdetails);
@@ -63,7 +63,7 @@ index d9ce37bab..c4aeccba7 100644
      }
  
 diff --git a/src/main/java/net/minecraft/server/TileEntity.java b/src/main/java/net/minecraft/server/TileEntity.java
-index 296a02950..3a6b069f9 100644
+index 296a0295..3a6b069f 100644
 --- a/src/main/java/net/minecraft/server/TileEntity.java
 +++ b/src/main/java/net/minecraft/server/TileEntity.java
 @@ -144,6 +144,7 @@ public abstract class TileEntity {
@@ -89,7 +89,7 @@ index 296a02950..3a6b069f9 100644
                  public String a() throws Exception {
                      int i = Block.getId(TileEntity.this.world.getType(TileEntity.this.position).getBlock());
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index ada675178..77d109d76 100644
+index ada67517..77d109d7 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -18,6 +18,7 @@ import javax.annotation.Nullable;
@@ -141,7 +141,7 @@ index ada675178..77d109d76 100644
              }
 diff --git a/src/main/java/org/bukkit/CraftLogging.java b/src/main/java/org/bukkit/CraftLogging.java
 new file mode 100644
-index 000000000..8d039557a
+index 00000000..8d039557
 --- /dev/null
 +++ b/src/main/java/org/bukkit/CraftLogging.java
 @@ -0,0 +1,23 @@

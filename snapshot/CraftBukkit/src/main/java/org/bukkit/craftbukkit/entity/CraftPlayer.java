@@ -159,20 +159,11 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
     }
 
     @Override
-    public double getEyeHeight() {
-        return getEyeHeight(false);
-    }
-
-    @Override
-    public double getEyeHeight(boolean ignoreSneaking) {
-        if (ignoreSneaking) {
+    public double getEyeHeight(boolean ignorePose) {
+        if (ignorePose) {
             return 1.62D;
         } else {
-            if (isSneaking()) {
-                return 1.54D;
-            } else {
-                return 1.62D;
-            }
+            return getEyeHeight();
         }
     }
 
@@ -1794,9 +1785,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
         injectScaledMaxHealth(set, true);
 
+        // SPIGOT-3813: Attributes before health
+        if (getHandle().playerConnection != null) {
+            getHandle().playerConnection.sendPacket(new PacketPlayOutUpdateAttributes(getHandle().getId(), set));
+            sendHealthUpdate();
+        }
         getHandle().getDataWatcher().set(EntityLiving.HEALTH, (float) getScaledHealth());
-        sendHealthUpdate();
-        getHandle().playerConnection.sendPacket(new PacketPlayOutUpdateAttributes(getHandle().getId(), set));
 
         getHandle().maxHealthCache = getMaxHealth();
     }

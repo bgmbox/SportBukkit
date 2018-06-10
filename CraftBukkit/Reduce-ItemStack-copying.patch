@@ -1,11 +1,11 @@
-From 2b4f8099219c47006ab93bc5a31be8c9c38714a1 Mon Sep 17 00:00:00 2001
+From 889e6d50d55e540d3b49fe1f91b6945084814e07 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 00:30:44 -0500
 Subject: [PATCH] Reduce ItemStack copying
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityMinecartContainer.java b/src/main/java/net/minecraft/server/EntityMinecartContainer.java
-index d6afa4aa6..557381db4 100644
+index d6afa4aa..557381db 100644
 --- a/src/main/java/net/minecraft/server/EntityMinecartContainer.java
 +++ b/src/main/java/net/minecraft/server/EntityMinecartContainer.java
 @@ -13,7 +13,7 @@ import org.bukkit.inventory.InventoryHolder;
@@ -27,7 +27,7 @@ index d6afa4aa6..557381db4 100644
              this.c = new MinecraftKey(nbttagcompound.getString("LootTable"));
              this.d = nbttagcompound.getLong("LootTableSeed");
 diff --git a/src/main/java/net/minecraft/server/ItemStack.java b/src/main/java/net/minecraft/server/ItemStack.java
-index 589dcd901..d09102e84 100644
+index 666a0ca1..e4909345 100644
 --- a/src/main/java/net/minecraft/server/ItemStack.java
 +++ b/src/main/java/net/minecraft/server/ItemStack.java
 @@ -14,6 +14,7 @@ import org.bukkit.Location;
@@ -57,7 +57,7 @@ index 589dcd901..d09102e84 100644
          this(block, 1);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
-index 6af269288..26ebeaacc 100644
+index 6af26928..26ebeaac 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 @@ -3,7 +3,10 @@ package org.bukkit.craftbukkit.inventory;
@@ -337,7 +337,7 @@ index 6af269288..26ebeaacc 100644
  
      public void clear(int index) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCrafting.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCrafting.java
-index 0f0dd1997..7add24f82 100644
+index 0f0dd199..7add24f8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCrafting.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCrafting.java
 @@ -1,6 +1,6 @@
@@ -414,7 +414,7 @@ index 0f0dd1997..7add24f82 100644
                  getMatrixInventory().setItem(i, net.minecraft.server.ItemStack.a);
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java
-index 44e490c07..b032c2217 100644
+index 44e490c0..b032c221 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java
 @@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
@@ -452,7 +452,7 @@ index 44e490c07..b032c2217 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
-index c19b354b1..fe76e6f18 100644
+index c19b354b..fe76e6f1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 @@ -1,6 +1,7 @@
@@ -551,7 +551,7 @@ index c19b354b1..fe76e6f18 100644
              if (id > -1 && item.getTypeId() != id) continue;
              if (data > -1 && item.getData().getData() != data) continue;
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
-index bca6dfe52..6f0e07dd0 100644
+index bca6dfe5..6f0e07dd 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
 @@ -72,7 +72,7 @@ public final class CraftItemStack extends ItemStack {
@@ -573,7 +573,7 @@ index bca6dfe52..6f0e07dd0 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/InventoryWrapper.java b/src/main/java/org/bukkit/craftbukkit/inventory/InventoryWrapper.java
-index 6cbcc9d30..e520915a4 100644
+index 6cbcc9d3..e520915a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/InventoryWrapper.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/InventoryWrapper.java
 @@ -4,6 +4,8 @@ import com.google.common.base.Predicates;

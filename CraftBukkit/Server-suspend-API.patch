@@ -1,11 +1,11 @@
-From 4e1bbacfbd949b7bb68525f782bc94b07563de6c Mon Sep 17 00:00:00 2001
+From 795f1bcbec72b42536d6a5b403e90a03220efecc Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 2bc022008..65ede80c7 100644
+index 2bc02200..65ede80c 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -285,6 +285,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -25,7 +25,7 @@ index 2bc022008..65ede80c7 100644
  
      // SportBukkit start
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 94732a267..3ba6d2b6f 100644
+index 94732a26..3ba6d2b6 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -35,6 +35,7 @@ import java.util.UUID;
@@ -200,7 +200,7 @@ index 94732a267..3ba6d2b6f 100644
  
      public void addMainThreadTask(Runnable task) {
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index fd4b0bc84..a27ee39b9 100644
+index fd4b0bc8..a27ee39b 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -186,4 +186,10 @@ public class ServerConnection {
@@ -215,7 +215,7 @@ index fd4b0bc84..a27ee39b9 100644
 +    // SportBukkit end
  }
 diff --git a/src/main/java/net/minecraft/server/ThreadWatchdog.java b/src/main/java/net/minecraft/server/ThreadWatchdog.java
-index dd18b4e0a..a3481c0fa 100644
+index dd18b4e0..a3481c0f 100644
 --- a/src/main/java/net/minecraft/server/ThreadWatchdog.java
 +++ b/src/main/java/net/minecraft/server/ThreadWatchdog.java
 @@ -22,8 +22,17 @@ public class ThreadWatchdog implements Runnable {
@@ -237,7 +237,7 @@ index dd18b4e0a..a3481c0fa 100644
              long j = MinecraftServer.aw();
              long k = j - i;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index fc93bafaa..85f97e116 100644
+index fc93bafa..85f97e11 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -6,6 +6,8 @@ import java.io.FileInputStream;

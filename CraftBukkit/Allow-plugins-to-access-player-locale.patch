@@ -1,11 +1,11 @@
-From 3537a0e4fe210306584372b779828b86f3639cb3 Mon Sep 17 00:00:00 2001
+From d9fcb0d168305de8fc06150665556ed47e5667f9 Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Sun, 5 Jan 2014 20:35:57 -0600
 Subject: [PATCH] Allow plugins to access player locale
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index be32b1074..bc9b51bf0 100644
+index 4adca88f..38f67fae 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -31,7 +31,7 @@ import org.bukkit.inventory.MainHand;
@@ -17,7 +17,7 @@ index be32b1074..bc9b51bf0 100644
      public PlayerConnection playerConnection;
      public final MinecraftServer server;
      public final PlayerInteractManager playerInteractManager;
-@@ -1214,12 +1214,16 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -1223,12 +1223,16 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
              PlayerChangedMainHandEvent event = new PlayerChangedMainHandEvent(getBukkitEntity(), getMainHand() == EnumMainHand.LEFT ? MainHand.LEFT : MainHand.RIGHT);
              this.server.server.getPluginManager().callEvent(event);
          }
@@ -39,10 +39,10 @@ index be32b1074..bc9b51bf0 100644
          this.cm = packetplayinsettings.d();
          this.getDataWatcher().set(EntityPlayer.br, Byte.valueOf((byte) packetplayinsettings.e()));
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index f3dba24bb..90e1152dd 100644
+index 0cf5df86..0cd49d32 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -1564,13 +1564,19 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1558,13 +1558,19 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          return new CraftAdvancementProgress(craft, data, progress);
      }
  
@@ -66,7 +66,7 @@ index f3dba24bb..90e1152dd 100644
      }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index b157fea66..f7bed197e 100644
+index b157fea6..f7bed197 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -1073,4 +1073,11 @@ public class CraftEventFactory {

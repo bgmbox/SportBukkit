@@ -1,4 +1,4 @@
-From 92ab069081bfe8f0401fae57625c1d7830b090ef Mon Sep 17 00:00:00 2001
+From fa9d21138fbfe956614413e7e4c267bdf70a25ec Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 21 Jun 2015 15:05:21 -0400
 Subject: [PATCH] Custom replacement for eaten items

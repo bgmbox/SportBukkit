@@ -1,11 +1,11 @@
-From 6c8c6ad98baae5bd852c7f65e593c321e8d056ca Mon Sep 17 00:00:00 2001
+From a3c9b63a74a1a60a39a446187fa5c52330e4de02 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 14 Feb 2015 08:18:51 -0500
 Subject: [PATCH] Add invis override API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index fbed2c293..be3560ef6 100644
+index 1557a077..7cb81022 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -112,7 +112,7 @@ public abstract class Entity implements ICommandListener {
@@ -18,7 +18,7 @@ index fbed2c293..be3560ef6 100644
      private static final DataWatcherObject<String> aB = DataWatcher.a(Entity.class, DataWatcherRegistry.d);
      private static final DataWatcherObject<Boolean> aC = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java b/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
-index fdf19d1f4..872bdd8b2 100644
+index fdf19d1f..872bdd8b 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
 @@ -5,8 +5,10 @@ import java.util.List;
@@ -35,7 +35,7 @@ index fdf19d1f4..872bdd8b2 100644
      public PacketPlayOutEntityMetadata() {}
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 484d1a4c3..1057fb7ec 100644
+index 484d1a4c..1057fb7e 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1189,7 +1189,33 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -73,7 +73,7 @@ index 484d1a4c3..1057fb7ec 100644
  
          try {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 3564550a7..85d8e49ec 100644
+index 4171ca29..9d0d4cf0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -93,6 +93,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
@@ -85,7 +85,7 @@ index 3564550a7..85d8e49ec 100644
      private final Map<CommandSender, String> fakeNames = new WeakHashMap<CommandSender, String>();
      private final Map<CommandSender, String> fakeDisplayNames = new WeakHashMap<CommandSender, String>();
      private final Map<CommandSender, Skin> fakeSkins = new WeakHashMap<CommandSender, Skin>();
-@@ -1305,6 +1307,27 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1296,6 +1298,27 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          return !hiddenPlayers.containsKey(player.getUniqueId());
      }
  

@@ -1,14 +1,14 @@
-From ce9dfea7b369227127112194613da3ebdb103272 Mon Sep 17 00:00:00 2001
+From 2c161022931d2caa06e16108c04a18e16d411150 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 23 Dec 2016 14:02:20 -0500
 Subject: [PATCH] Do things inside events
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 40c676f08..18c6141e2 100644
+index 86a4f4c2..1b4c8b75 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
-@@ -420,7 +420,7 @@ public abstract class PlayerList {
+@@ -424,7 +424,7 @@ public abstract class PlayerList {
          org.bukkit.craftbukkit.event.CraftEventFactory.handleInventoryCloseEvent(entityplayer);
  
          PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(cserver.getPlayer(entityplayer), "\u00A7e" + entityplayer.getName() + " left the game");
@@ -17,7 +17,7 @@ index 40c676f08..18c6141e2 100644
          entityplayer.getBukkitEntity().disconnect(playerQuitEvent.getQuitMessage());
  
          entityplayer.playerTick();// SPIGOT-924
-@@ -478,7 +478,7 @@ public abstract class PlayerList {
+@@ -482,7 +482,7 @@ public abstract class PlayerList {
          // CraftBukkit end
  
          ChunkIOExecutor.adjustPoolSize(this.getPlayerCount()); // CraftBukkit

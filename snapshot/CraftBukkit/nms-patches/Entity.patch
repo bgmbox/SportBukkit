@@ -536,7 +536,7 @@
  
              this.locX = nbttaglist.f(0);
              this.locY = nbttaglist.f(1);
-@@ -1397,6 +1684,58 @@
+@@ -1397,6 +1684,57 @@
                  this.setPosition(this.locX, this.locY, this.locZ);
              }
  
@@ -552,19 +552,18 @@
 +            }
 +            // CraftBukkit end
 +
-+            // CraftBukkit start - Exempt Vehicles from notch's sanity check
-+            if (!(getBukkitEntity() instanceof Vehicle)) {
-+                if (Math.abs(this.motX) > 10.0D) {
-+                    this.motX = 0.0D;
-+                }
++            // CraftBukkit start
++            double limit = getBukkitEntity() instanceof Vehicle ? 100.0D : 10.0D;
++            if (Math.abs(this.motX) > limit) {
++                this.motX = 0.0D;
++            }
 +
-+                if (Math.abs(this.motY) > 10.0D) {
-+                    this.motY = 0.0D;
-+                }
++            if (Math.abs(this.motY) > limit) {
++                this.motY = 0.0D;
++            }
 +
-+                if (Math.abs(this.motZ) > 10.0D) {
-+                    this.motZ = 0.0D;
-+                }
++            if (Math.abs(this.motZ) > limit) {
++                this.motZ = 0.0D;
 +            }
 +            // CraftBukkit end
 +
@@ -595,7 +594,7 @@
          } catch (Throwable throwable) {
              CrashReport crashreport = CrashReport.a(throwable, "Loading entity NBT");
              CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Entity being loaded");
-@@ -1464,6 +1803,12 @@
+@@ -1464,6 +1802,12 @@
          if (itemstack.isEmpty()) {
              return null;
          } else {
@@ -608,7 +607,7 @@
              EntityItem entityitem = new EntityItem(this.world, this.locX, this.locY + (double) f, this.locZ, itemstack);
  
              entityitem.q();
-@@ -1554,6 +1899,30 @@
+@@ -1554,6 +1898,30 @@
          if (!flag && (!this.n(entity) || !entity.q(this))) {
              return false;
          } else {
@@ -639,7 +638,7 @@
              if (this.isPassenger()) {
                  this.stopRiding();
              }
-@@ -1568,6 +1937,7 @@
+@@ -1568,6 +1936,7 @@
          return this.j <= 0;
      }
  
@@ -647,7 +646,7 @@
      public void ejectPassengers() {
          for (int i = this.passengers.size() - 1; i >= 0; --i) {
              ((Entity) this.passengers.get(i)).stopRiding();
-@@ -1577,6 +1947,25 @@
+@@ -1577,6 +1946,25 @@
  
      public void stopRiding() {
          if (this.au != null) {
@@ -673,7 +672,7 @@
              Entity entity = this.au;
  
              this.au = null;
-@@ -1741,14 +2130,49 @@
+@@ -1741,14 +2129,49 @@
      }
  
      public void setAirTicks(int i) {
@@ -726,7 +725,7 @@
          }
  
      }
-@@ -1893,19 +2317,76 @@
+@@ -1893,19 +2316,76 @@
          if (!this.world.isClientSide && !this.dead) {
              this.world.methodProfiler.a("changeDimension");
              MinecraftServer minecraftserver = this.C_();
@@ -806,7 +805,7 @@
              BlockPosition blockposition;
  
              if (i == 1) {
-@@ -1934,12 +2415,18 @@
+@@ -1934,12 +2414,18 @@
                  blockposition = new BlockPosition(this);
              }
  
@@ -826,7 +825,7 @@
                  if (j == 1 && i == 1) {
                      BlockPosition blockposition1 = worldserver1.q(worldserver1.getSpawn());
  
-@@ -1947,6 +2434,7 @@
+@@ -1947,6 +2433,7 @@
                  } else {
                      entity.setPositionRotation(blockposition, entity.yaw, entity.pitch);
                  }
@@ -834,7 +833,7 @@
  
                  boolean flag = entity.attachedToPlayer;
  
-@@ -1954,13 +2442,21 @@
+@@ -1954,13 +2441,21 @@
                  worldserver1.addEntity(entity);
                  entity.attachedToPlayer = flag;
                  worldserver1.entityJoinedWorld(entity, false);
@@ -857,7 +856,7 @@
              return entity;
          } else {
              return null;
-@@ -2064,6 +2560,11 @@
+@@ -2064,6 +2559,11 @@
      }
  
      public void setCustomName(String s) {
@@ -869,7 +868,7 @@
          this.datawatcher.set(Entity.aB, s);
      }
  
-@@ -2121,7 +2622,26 @@
+@@ -2121,7 +2621,26 @@
      }
  
      public void a(AxisAlignedBB axisalignedbb) {
@@ -897,7 +896,7 @@
      }
  
      public float getHeadHeight() {
-@@ -2252,9 +2772,13 @@
+@@ -2252,9 +2771,13 @@
  
      @Nullable
      public Entity bE() {
@@ -912,7 +911,7 @@
      public List<Entity> bF() {
          return (List) (this.passengers.isEmpty() ? Collections.emptyList() : Lists.newArrayList(this.passengers));
      }
-@@ -2295,7 +2819,7 @@
+@@ -2295,7 +2818,7 @@
          for (Iterator iterator = this.bF().iterator(); iterator.hasNext(); entity.a(oclass, set)) {
              entity = (Entity) iterator.next();
              if (oclass.isAssignableFrom(entity.getClass())) {
@@ -921,7 +920,7 @@
              }
          }
  
-@@ -2341,6 +2865,8 @@
+@@ -2341,6 +2864,8 @@
      }
  
      @Nullable

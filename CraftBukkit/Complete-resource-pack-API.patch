@@ -1,11 +1,11 @@
-From c87990f43ecae6b1e27cf8105ae5d9e03e017053 Mon Sep 17 00:00:00 2001
+From d77899bccc3ce4987cbb87b2826fa94cff7df989 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 4 Apr 2015 23:17:52 -0400
 Subject: [PATCH] Complete resource pack API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 211c4a5b0..25a7fdc67 100644
+index 211c4a5b..25a7fdc6 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1079,7 +1079,9 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -20,7 +20,7 @@ index 211c4a5b0..25a7fdc67 100644
      // CraftBukkit end
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index d03a89712..4e1d08aa4 100644
+index be2d25d1..5293a9b3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -63,10 +63,7 @@ import org.bukkit.craftbukkit.util.CraftMagicNumbers;
@@ -43,7 +43,7 @@ index d03a89712..4e1d08aa4 100644
  
      private final Map<CommandSender, String> fakeNames = new WeakHashMap<CommandSender, String>();
      private final Map<CommandSender, String> fakeDisplayNames = new WeakHashMap<CommandSender, String>();
-@@ -1464,9 +1462,16 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1455,9 +1453,16 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
  
      @Override
      public void setResourcePack(String url) {
@@ -61,7 +61,7 @@ index d03a89712..4e1d08aa4 100644
      }
  
      @Override
-@@ -1478,6 +1483,20 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1469,6 +1474,20 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          getHandle().setResourcePack(url, BaseEncoding.base16().lowerCase().encode(hash));
      }
  

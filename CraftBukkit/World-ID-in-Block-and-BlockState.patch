@@ -1,11 +1,11 @@
-From d29f5fd77e08536734751de5ed7401b919e51ed3 Mon Sep 17 00:00:00 2001
+From 6d12243f28f8706f9470de52ddab305f6f6df22c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 04:15:18 -0500
 Subject: [PATCH] World ID in Block and BlockState
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 9b1349949..99831e0ef 100644
+index 9b134994..99831e0e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -5,9 +5,11 @@ import java.util.Collection;
@@ -292,7 +292,7 @@ index 9b1349949..99831e0ef 100644
  
      public BlockPosition nmsPosition() {
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-index 54506b5cc..2c37d0f9c 100644
+index 54506b5c..2c37d0f9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 @@ -23,22 +23,23 @@ import org.bukkit.plugin.Plugin;

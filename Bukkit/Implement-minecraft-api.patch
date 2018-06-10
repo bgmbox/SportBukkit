@@ -1,4 +1,4 @@
-From dd89564674e28f3135f38b21d2017b767818ea89 Mon Sep 17 00:00:00 2001
+From ba970134cf97f063ca7015f6af4ab2c656591b96 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 4 Feb 2016 04:59:45 -0500
 Subject: [PATCH] Implement minecraft-api
@@ -65,10 +65,10 @@ index 52e3ac42..5d9636d7 100644
       * Sets the default value of the given path as provided.
       * <p>
 diff --git a/src/main/java/org/bukkit/configuration/ConfigurationSection.java b/src/main/java/org/bukkit/configuration/ConfigurationSection.java
-index 166f2a65..40fcb0f2 100644
+index d8575d1b..970926ad 100644
 --- a/src/main/java/org/bukkit/configuration/ConfigurationSection.java
 +++ b/src/main/java/org/bukkit/configuration/ConfigurationSection.java
-@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
+@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
  /**
   * Represents a section of a {@link Configuration}
   */
@@ -77,7 +77,7 @@ index 166f2a65..40fcb0f2 100644
      /**
       * Gets a set containing all keys in this section.
       * <p>
-@@ -767,6 +767,8 @@ public interface ConfigurationSection {
+@@ -800,6 +800,8 @@ public interface ConfigurationSection {
       */
      public boolean isColor(String path);
  
@@ -86,7 +86,7 @@ index 166f2a65..40fcb0f2 100644
      /**
       * Gets the requested ConfigurationSection by path.
       * <p>
-@@ -825,4 +827,6 @@ public interface ConfigurationSection {
+@@ -858,4 +860,6 @@ public interface ConfigurationSection {
       * @throws IllegalArgumentException Thrown if path is null.
       */
      public void addDefault(String path, Object value);
@@ -107,11 +107,11 @@ index d23480e5..89449001 100644
      /**
       * Creates a new instance of InvalidConfigurationException without a
 diff --git a/src/main/java/org/bukkit/configuration/MemorySection.java b/src/main/java/org/bukkit/configuration/MemorySection.java
-index 6e5ba586..8b1dccd1 100644
+index fe7762b9..6d5b91f8 100644
 --- a/src/main/java/org/bukkit/configuration/MemorySection.java
 +++ b/src/main/java/org/bukkit/configuration/MemorySection.java
-@@ -14,11 +14,12 @@ import org.bukkit.Color;
- import org.bukkit.OfflinePlayer;
+@@ -15,11 +15,12 @@ import org.bukkit.OfflinePlayer;
+ import org.bukkit.configuration.serialization.ConfigurationSerializable;
  import org.bukkit.inventory.ItemStack;
  import org.bukkit.util.Vector;
 +import tc.oc.minecraft.api.configuration.AbstractConfigurationSection;
@@ -124,7 +124,7 @@ index 6e5ba586..8b1dccd1 100644
      protected final Map<String, Object> map = new LinkedHashMap<String, Object>();
      private final Configuration root;
      private final ConfigurationSection parent;
-@@ -68,6 +69,11 @@ public class MemorySection implements ConfigurationSection {
+@@ -69,6 +70,11 @@ public class MemorySection implements ConfigurationSection {
          this.fullPath = createPath(parent, path);
      }
  
@@ -136,8 +136,8 @@ index 6e5ba586..8b1dccd1 100644
      public Set<String> getKeys(boolean deep) {
          Set<String> result = new LinkedHashSet<String>();
  
-@@ -683,6 +689,17 @@ public class MemorySection implements ConfigurationSection {
-         return val instanceof Color;
+@@ -686,6 +692,17 @@ public class MemorySection implements ConfigurationSection {
+         return getSerializable(path, Color.class) != null;
      }
  
 +    @Override

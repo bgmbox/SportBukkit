@@ -1,4 +1,4 @@
-From 84dc5f5f43eebbc0ec075a7a7e45e785fa86b976 Mon Sep 17 00:00:00 2001
+From a229534f7d2826a0a5c25b3ed2949bbae8e78ac9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:00:35 -0400
 Subject: [PATCH] Entity bounding box API
@@ -110,7 +110,7 @@ index 7742e5e9..b367baae 100644
       * Returns the reaction of the entity when moved by a piston.
       *
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
-index 98096ab9..576105ae 100644
+index fe08ce44..e7408724 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
 @@ -9,6 +9,7 @@ import org.bukkit.Location;

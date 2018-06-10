@@ -1,11 +1,11 @@
-From 626f759ce85be622741f2901d7e726e58de4c676 Mon Sep 17 00:00:00 2001
+From 2e933d3e23ce36fcab900e09c3496c23003ad01b Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Thu, 1 Feb 2018 10:40:14 -0800
 Subject: [PATCH] MC Utils
 
 
 diff --git a/src/main/java/net/minecraft/server/Chunk.java b/src/main/java/net/minecraft/server/Chunk.java
-index d8a93d438..9a50dfd6e 100644
+index d8a93d43..9a50dfd6 100644
 --- a/src/main/java/net/minecraft/server/Chunk.java
 +++ b/src/main/java/net/minecraft/server/Chunk.java
 @@ -20,7 +20,7 @@ import org.bukkit.Server; // CraftBukkit
@@ -27,7 +27,7 @@ index d8a93d438..9a50dfd6e 100644
          // CraftBukkit start
 diff --git a/src/main/java/net/minecraft/server/MCUtil.java b/src/main/java/net/minecraft/server/MCUtil.java
 new file mode 100644
-index 000000000..c1cd35a24
+index 00000000..c1cd35a2
 --- /dev/null
 +++ b/src/main/java/net/minecraft/server/MCUtil.java
 @@ -0,0 +1,200 @@

@@ -1,11 +1,11 @@
-From d709c0b62bcd1797cc5e07b0a8735d1addc142cd Mon Sep 17 00:00:00 2001
+From b70d45999a8301a6e03b630920562a0cc5a3fd76 Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Wed, 25 Dec 2013 20:11:34 -0600
 Subject: [PATCH] Add EntityDespawnInVoidEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index c3c6e924f..161c2c6df 100644
+index 88f324af..531985d8 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -25,7 +25,7 @@ import org.bukkit.block.BlockFace;

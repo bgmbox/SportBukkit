@@ -1,4 +1,4 @@
-From c108a7a25ed5d6eb3c85a20ad7ec4887d64ca30e Mon Sep 17 00:00:00 2001
+From 40f52dc12f394b864e14dfd1c5d6f7052b967102 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Thu, 4 Apr 2013 21:36:54 -0500
 Subject: [PATCH] Fix invalid player death messages
@@ -6,10 +6,10 @@ Subject: [PATCH] Fix invalid player death messages
 This bug affects the /kill command and any plugin that sets a player's health to zero
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 4e71963bf..fd1ef2437 100644
+index 730acd97..62e6a9c5 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
-@@ -417,7 +417,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -426,7 +426,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
              }
          }
  
@@ -18,7 +18,7 @@ index 4e71963bf..fd1ef2437 100644
  
          String deathmessage = chatmessage.toPlainText();
          org.bukkit.event.entity.PlayerDeathEvent event = CraftEventFactory.callPlayerDeathEvent(this, loot, deathmessage, keepInventory);
-@@ -464,7 +464,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -473,7 +473,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
  
          EntityLiving entityliving = this.ci();
  

@@ -1,11 +1,11 @@
-From cd05979653b8f8fa736968d217dd550b14703d4b Mon Sep 17 00:00:00 2001
+From e0eab7f4c59edfa4cfc0a15e9671ae55343cce31 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:12:39 -0400
 Subject: [PATCH] Entity bounding box API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 1b663b86f..129db6f78 100644
+index 084b814b..9fa3b228 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -32,6 +32,8 @@ import org.bukkit.permissions.PermissionAttachment;
@@ -30,7 +30,7 @@ index 1b663b86f..129db6f78 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 29e1fe79b..e6b78db48 100644
+index ed2ad306..6b8c9d82 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -74,6 +74,8 @@ import org.bukkit.potion.PotionEffect;

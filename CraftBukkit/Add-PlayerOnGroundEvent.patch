@@ -1,11 +1,11 @@
-From 3c4a370d8f55266ab69e29e89934acc2c40be3b2 Mon Sep 17 00:00:00 2001
+From 3585be07559ad01a5151982c7d6ed2ec029d988e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Jan 2013 14:12:03 -0500
 Subject: [PATCH] Add PlayerOnGroundEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index dedfedba9..c69d4d7d0 100644
+index dedfedba..c69d4d7d 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -98,6 +98,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {

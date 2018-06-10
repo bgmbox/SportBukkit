@@ -1,11 +1,11 @@
-From eab6803542f3eae128e38422d5079f5edf93d350 Mon Sep 17 00:00:00 2001
+From a2bef9689e9c77953381aa56dd2a1f169c3d6116 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sat, 7 Dec 2013 17:53:32 -0600
 Subject: [PATCH] Make scoreboard classes public
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftCriteria.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftCriteria.java
-index 7dedd0222..5a7c60c2d 100644
+index 7dedd022..5a7c60c2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftCriteria.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftCriteria.java
 @@ -7,7 +7,7 @@ import net.minecraft.server.ScoreboardObjective;
@@ -18,7 +18,7 @@ index 7dedd0222..5a7c60c2d 100644
      static final CraftCriteria DUMMY;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftObjective.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftObjective.java
-index 239ceca0e..27641d851 100644
+index 239ceca0..27641d85 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftObjective.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftObjective.java
 @@ -9,7 +9,7 @@ import org.bukkit.scoreboard.DisplaySlot;
@@ -40,7 +40,7 @@ index 239ceca0e..27641d851 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScore.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScore.java
-index f378113ce..c8856a917 100644
+index f378113c..c8856a91 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScore.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScore.java
 @@ -17,7 +17,7 @@ import org.bukkit.scoreboard.Score;
@@ -53,7 +53,7 @@ index f378113ce..c8856a917 100644
      private final CraftObjective objective;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardComponent.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardComponent.java
-index d26d09d41..43b72ecf6 100644
+index d26d09d4..43b72ecf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardComponent.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardComponent.java
 @@ -1,6 +1,6 @@
@@ -65,7 +65,7 @@ index d26d09d41..43b72ecf6 100644
  
      CraftScoreboardComponent(CraftScoreboard scoreboard) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardTranslations.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardTranslations.java
-index d08e5a281..4a305bb16 100644
+index d08e5a28..4a305bb1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardTranslations.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardTranslations.java
 @@ -6,7 +6,7 @@ import org.bukkit.scoreboard.DisplaySlot;
@@ -78,7 +78,7 @@ index d08e5a281..4a305bb16 100644
      static ImmutableBiMap<DisplaySlot, String> SLOTS = ImmutableBiMap.of(
              DisplaySlot.BELOW_NAME, "belowName",
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java
-index 18616fc8d..b2a3df47f 100644
+index 18616fc8..b2a3df47 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java
 @@ -16,7 +16,7 @@ import net.minecraft.server.ScoreboardTeamBase;

@@ -1,11 +1,11 @@
-From 6f2bfd120a1edc520db019092d2c906c5627ee6f Mon Sep 17 00:00:00 2001
+From ad6455bf8e3e1cf0d0db2a006e4e65e8b5542b92 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:27:40 -0700
 Subject: [PATCH] Implement the affectsSpawning API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 3608e25dc..388a30004 100644
+index 3608e25d..388a3000 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -65,6 +65,19 @@ public abstract class EntityHuman extends EntityLiving {
@@ -29,7 +29,7 @@ index 3608e25dc..388a30004 100644
      public boolean fauxSleeping;
      public String spawnWorld = "";
 diff --git a/src/main/java/net/minecraft/server/EntityInsentient.java b/src/main/java/net/minecraft/server/EntityInsentient.java
-index d5face7ca..2afdd36ce 100644
+index d5face7c..2afdd36c 100644
 --- a/src/main/java/net/minecraft/server/EntityInsentient.java
 +++ b/src/main/java/net/minecraft/server/EntityInsentient.java
 @@ -621,7 +621,7 @@ public abstract class EntityInsentient extends EntityLiving {
@@ -42,7 +42,7 @@ index d5face7ca..2afdd36ce 100644
              if (entityhuman != null) {
                  double d0 = entityhuman.locX - this.locX;
 diff --git a/src/main/java/net/minecraft/server/EntitySilverfish.java b/src/main/java/net/minecraft/server/EntitySilverfish.java
-index 50bca48bf..6fb2d97d2 100644
+index 50bca48b..6fb2d97d 100644
 --- a/src/main/java/net/minecraft/server/EntitySilverfish.java
 +++ b/src/main/java/net/minecraft/server/EntitySilverfish.java
 @@ -98,7 +98,7 @@ public class EntitySilverfish extends EntityMonster {
@@ -55,7 +55,7 @@ index 50bca48bf..6fb2d97d2 100644
              return entityhuman == null;
          } else {
 diff --git a/src/main/java/net/minecraft/server/EntityZombie.java b/src/main/java/net/minecraft/server/EntityZombie.java
-index 650ad2c50..667de724f 100644
+index 650ad2c5..667de724 100644
 --- a/src/main/java/net/minecraft/server/EntityZombie.java
 +++ b/src/main/java/net/minecraft/server/EntityZombie.java
 @@ -180,7 +180,7 @@ public class EntityZombie extends EntityMonster {
@@ -68,7 +68,7 @@ index 650ad2c50..667de724f 100644
                              entityzombie.setGoalTarget(entityliving, EntityTargetEvent.TargetReason.REINFORCEMENT_TARGET, true);
                              entityzombie.prepare(this.world.D(new BlockPosition(entityzombie)), (GroupDataEntity) null);
 diff --git a/src/main/java/net/minecraft/server/MobSpawnerAbstract.java b/src/main/java/net/minecraft/server/MobSpawnerAbstract.java
-index 36d589f73..2da9ca8cb 100644
+index c42b930c..58a0a183 100644
 --- a/src/main/java/net/minecraft/server/MobSpawnerAbstract.java
 +++ b/src/main/java/net/minecraft/server/MobSpawnerAbstract.java
 @@ -40,7 +40,7 @@ public abstract class MobSpawnerAbstract {
@@ -81,7 +81,7 @@ index 36d589f73..2da9ca8cb 100644
  
      public void c() {
 diff --git a/src/main/java/net/minecraft/server/SpawnerCreature.java b/src/main/java/net/minecraft/server/SpawnerCreature.java
-index cec211ab4..4cba6d696 100644
+index cec211ab..4cba6d69 100644
 --- a/src/main/java/net/minecraft/server/SpawnerCreature.java
 +++ b/src/main/java/net/minecraft/server/SpawnerCreature.java
 @@ -33,6 +33,8 @@ public final class SpawnerCreature {
@@ -103,7 +103,7 @@ index cec211ab4..4cba6d696 100644
                                                          biomebase_biomemeta = worldserver.a(enumcreaturetype, (BlockPosition) blockposition_mutableblockposition);
                                                          if (biomebase_biomemeta == null) {
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index f83771ab1..a2ca2c81b 100644
+index f83771ab..a2ca2c81 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -2615,6 +2615,16 @@ public abstract class World implements IBlockAccess {
@@ -142,7 +142,7 @@ index f83771ab1..a2ca2c81b 100644
                  double d4 = entityhuman.d(d0, d1, d2);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 749023021..2548d1028 100644
+index 74902302..2548d102 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -499,6 +499,16 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {

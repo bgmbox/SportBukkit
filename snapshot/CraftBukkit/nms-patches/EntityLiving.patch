@@ -185,14 +185,14 @@
  
      protected void tickPotionEffects() {
 -        Iterator iterator = this.effects.keySet().iterator();
-+        if(!getBukkitEntity().isPaused()) { // SportBukkit - don't tick effects while paused
-+        Iterator<MobEffectList> iterator = com.google.common.collect.ImmutableSet.copyOf(this.effects.keySet()).iterator(); // SportBukkit - copy to allow concurrent modification
- 
+-
 -        try {
 -            while (iterator.hasNext()) {
 -                MobEffectList mobeffectlist = (MobEffectList) iterator.next();
 -                MobEffect mobeffect = (MobEffect) this.effects.get(mobeffectlist);
--
++        if(!getBukkitEntity().isPaused()) { // SportBukkit - don't tick effects while paused
++        Iterator<MobEffectList> iterator = com.google.common.collect.ImmutableSet.copyOf(this.effects.keySet()).iterator(); // SportBukkit - copy to allow concurrent modification
+ 
 -                if (!mobeffect.tick(this)) {
 -                    if (!this.world.isClientSide) {
 -                        iterator.remove();
@@ -370,7 +370,7 @@
 +                player.setRealHealth(f);
 +            }
 +
-+            this.datawatcher.set(EntityLiving.HEALTH, Float.valueOf(player.getScaledHealth()));
++            player.updateScaledHealth();
 +            return;
 +        }
 +        // CraftBukkit end
@@ -456,7 +456,7 @@
                      } else {
                          this.aA = (float) ((int) (Math.random() * 2.0D) * 180);
                      }
-@@ -833,18 +1009,26 @@
+@@ -833,19 +1009,29 @@
              EnumHand[] aenumhand = EnumHand.values();
              int i = aenumhand.length;
  
@@ -476,17 +476,21 @@
              }
  
 -            if (itemstack != null) {
+-                if (this instanceof EntityPlayer) {
 +            EntityResurrectEvent event = new EntityResurrectEvent((LivingEntity) this.getBukkitEntity());
 +            event.setCancelled(itemstack == null);
 +            this.world.getServer().getPluginManager().callEvent(event);
 +
 +            if (!event.isCancelled()) {
-+                itemstack1.subtract(1);
-+                // CraftBukkit end
-                 if (this instanceof EntityPlayer) {
++                if (!itemstack1.isEmpty()) {
++                    itemstack1.subtract(1);
++                }
++                if (itemstack != null && this instanceof EntityPlayer) {
++                    // CraftBukkit end
                      EntityPlayer entityplayer = (EntityPlayer) this;
  
-@@ -859,7 +1043,7 @@
+                     entityplayer.b(StatisticList.b(Items.cY));
+@@ -859,7 +1045,7 @@
                  this.world.broadcastEntityEffect(this, (byte) 35);
              }
  
@@ -495,7 +499,7 @@
          }
      }
  
-@@ -944,6 +1128,12 @@
+@@ -944,6 +1130,12 @@
                      boolean flag = this.lastDamageByPlayerTime > 0;
  
                      this.a(flag, i, damagesource);
@@ -508,7 +512,7 @@
                  }
              }
  
-@@ -958,26 +1148,30 @@
+@@ -958,26 +1150,30 @@
  
      protected void dropEquipment(boolean flag, int i) {}
  
@@ -556,7 +560,7 @@
      @Nullable
      protected SoundEffect d(DamageSource damagesource) {
          return SoundEffects.bX;
-@@ -1033,8 +1227,13 @@
+@@ -1033,8 +1229,13 @@
          int i = MathHelper.f((f - 3.0F - f2) * f1);
  
          if (i > 0) {
@@ -571,7 +575,7 @@
              int j = MathHelper.floor(this.locX);
              int k = MathHelper.floor(this.locY - 0.20000000298023224D);
              int l = MathHelper.floor(this.locZ);
-@@ -1061,7 +1260,7 @@
+@@ -1061,7 +1262,7 @@
  
      protected float applyArmorModifier(DamageSource damagesource, float f) {
          if (!damagesource.ignoresArmor()) {
@@ -580,7 +584,7 @@
              f = CombatMath.a(f, (float) this.getArmorStrength(), (float) this.getAttributeInstance(GenericAttributes.i).getValue());
          }
  
-@@ -1074,7 +1273,8 @@
+@@ -1074,7 +1275,8 @@
          } else {
              int i;
  
@@ -590,7 +594,7 @@
                  i = (this.getEffect(MobEffects.RESISTANCE).getAmplifier() + 1) * 5;
                  int j = 25 - i;
                  float f1 = f * (float) j;
-@@ -1095,22 +1295,142 @@
+@@ -1095,22 +1297,142 @@
          }
      }
  
@@ -743,7 +747,7 @@
      }
  
      public CombatTracker getCombatTracker() {
-@@ -1177,6 +1497,7 @@
+@@ -1177,6 +1499,7 @@
      public AttributeMapBase getAttributeMap() {
          if (this.attributeMap == null) {
              this.attributeMap = new AttributeMapServer();
@@ -751,7 +755,7 @@
          }
  
          return this.attributeMap;
-@@ -1469,6 +1790,7 @@
+@@ -1469,6 +1792,7 @@
                  }
  
                  if (this.onGround && !this.world.isClientSide) {
@@ -759,7 +763,7 @@
                      this.setFlag(7, false);
                  }
              } else {
-@@ -1838,6 +2160,7 @@
+@@ -1838,6 +2162,7 @@
          }
  
          if (!this.world.isClientSide) {
@@ -767,7 +771,7 @@
              this.setFlag(7, flag);
          }
  
-@@ -1848,7 +2171,7 @@
+@@ -1848,7 +2173,7 @@
      protected void cB() {
          List list = this.world.getEntities(this, this.getBoundingBox(), IEntitySelector.a(this));
  
@@ -776,7 +780,7 @@
              int i = this.world.getGameRules().c("maxEntityCramming");
              int j;
  
-@@ -1931,16 +2254,18 @@
+@@ -1931,16 +2256,18 @@
      }
  
      public boolean isInteractable() {
@@ -797,7 +801,7 @@
  
      public float getHeadRotation() {
          return this.aP;
-@@ -2072,8 +2397,45 @@
+@@ -2072,8 +2399,45 @@
      protected void v() {
          if (!this.activeItem.isEmpty() && this.isHandRaised()) {
              this.b(this.activeItem, 16);
@@ -844,7 +848,7 @@
          }
  
      }
-@@ -2151,10 +2513,18 @@
+@@ -2151,10 +2515,18 @@
              }
  
              if (flag1) {

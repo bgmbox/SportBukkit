@@ -1,14 +1,14 @@
-From 5d9763a673153b1cc8bc1d0b319e2d080549e4f7 Mon Sep 17 00:00:00 2001
+From 174a134e441906a3cf94d0e975761b481f4b0971 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 02:50:33 -0400
 Subject: [PATCH] Fix desync from cancelled vehicle event
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 77205defd..6464858dc 100644
+index d806373a..bf1b8cba 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
-@@ -1896,6 +1896,24 @@ public abstract class Entity implements ICommandListener {
+@@ -1895,6 +1895,24 @@ public abstract class Entity implements ICommandListener {
          if (!flag && (!this.n(entity) || !entity.q(this))) {
              return false;
          } else {
@@ -33,7 +33,7 @@ index 77205defd..6464858dc 100644
              if (this.isPassenger()) {
                  this.stopRiding();
              }
-@@ -1920,6 +1938,22 @@ public abstract class Entity implements ICommandListener {
+@@ -1919,6 +1937,22 @@ public abstract class Entity implements ICommandListener {
  
      public void stopRiding() {
          if (this.au != null) {
@@ -56,7 +56,7 @@ index 77205defd..6464858dc 100644
              Entity entity = this.au;
  
              this.au = null;
-@@ -1932,24 +1966,6 @@ public abstract class Entity implements ICommandListener {
+@@ -1931,24 +1965,6 @@ public abstract class Entity implements ICommandListener {
          if (entity.bJ() != this) {
              throw new IllegalStateException("Use x.startRiding(y), not y.addPassenger(x)");
          } else {
@@ -81,7 +81,7 @@ index 77205defd..6464858dc 100644
              if (!this.world.isClientSide && entity instanceof EntityHuman && !(this.bE() instanceof EntityHuman)) {
                  this.passengers.add(0, entity);
              } else {
-@@ -1963,22 +1979,6 @@ public abstract class Entity implements ICommandListener {
+@@ -1962,22 +1978,6 @@ public abstract class Entity implements ICommandListener {
          if (entity.bJ() == this) {
              throw new IllegalStateException("Use x.stopRiding(y), not y.removePassenger(x)");
          } else {
@@ -104,7 +104,7 @@ index 77205defd..6464858dc 100644
              this.passengers.remove(entity);
              entity.j = 60;
          }
-@@ -2849,6 +2849,8 @@ public abstract class Entity implements ICommandListener {
+@@ -2848,6 +2848,8 @@ public abstract class Entity implements ICommandListener {
          return entity instanceof EntityHuman ? ((EntityHuman) entity).cZ() : !this.world.isClientSide;
      }
  

@@ -1,11 +1,11 @@
-From e02e80186739cba0654b423a03d6bb8094cd8406 Mon Sep 17 00:00:00 2001
+From 5c7841af78e3d6dd995b071d75339a192d1b224b Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 13 Dec 2014 13:06:05 +1100
 Subject: [PATCH] BungeeCord Chat API
 
 
 diff --git a/src/main/java/net/minecraft/server/ChatModifier.java b/src/main/java/net/minecraft/server/ChatModifier.java
-index 7ebe188e5..29d740893 100644
+index 7ebe188e..29d74089 100644
 --- a/src/main/java/net/minecraft/server/ChatModifier.java
 +++ b/src/main/java/net/minecraft/server/ChatModifier.java
 @@ -115,6 +115,18 @@ public class ChatModifier {
@@ -28,7 +28,7 @@ index 7ebe188e5..29d740893 100644
      public EnumChatFormat getColor() {
          return this.b == null ? this.o().getColor() : this.b;
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutChat.java b/src/main/java/net/minecraft/server/PacketPlayOutChat.java
-index b1fddee73..b1dbe0a7d 100644
+index b1fddee7..b1dbe0a7 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutChat.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutChat.java
 @@ -5,6 +5,7 @@ import java.io.IOException;
@@ -58,7 +58,7 @@ index b1fddee73..b1dbe0a7d 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a59f3b9e9..acc9a9584 100644
+index a59f3b9e..acc9a958 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -23,6 +23,7 @@ import java.util.regex.Pattern;
@@ -89,7 +89,7 @@ index a59f3b9e9..acc9a9584 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index ebe3fbf92..676322bb2 100644
+index 04d04c63..b8fa1f8a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -26,6 +26,7 @@ import java.util.WeakHashMap;
@@ -100,7 +100,7 @@ index ebe3fbf92..676322bb2 100644
  import net.minecraft.server.*;
  import net.minecraft.server.PacketPlayOutTitle.EnumTitleAction;
  
-@@ -1840,4 +1841,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1834,4 +1835,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
      public void setLocale(String locale) {
          getHandle().locale = locale;
      }
@@ -121,7 +121,7 @@ index ebe3fbf92..676322bb2 100644
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java b/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java
 new file mode 100644
-index 000000000..a09dbf9df
+index 00000000..a09dbf9d
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java
 @@ -0,0 +1,173 @@

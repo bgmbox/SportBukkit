@@ -112,9 +112,9 @@
 -                this.item.a(nbttagcompound);
 +                this.item.a(this.tag);
 +                // CraftBukkit end
-             }
-         }
- 
++            }
++        }
++
 +        // SportBukkit start - convert legacy potions
 +        if(this.item == Items.POTION && this.damage != 0 && (tag == null || !tag.hasKey("Potion"))) {
 +            // Calculate a Potion from the damage value, and then set it to 0
@@ -139,11 +139,11 @@
 +                    key = type.baseKey();
 +                }
 +                tag.setString("Potion", key.toString());
-+            }
-+        }
+             }
+         }
 +        // SportBukkit end
 +    }
-+
+ 
 +    public ItemStack(NBTTagCompound nbttagcompound) {
 +        this.load(nbttagcompound);
 +        // CraftBukkit end
@@ -353,7 +353,22 @@
  
          itemstack.d(this.D());
          if (this.tag != null) {
-@@ -513,6 +762,12 @@
+@@ -464,6 +713,14 @@
+     }
+ 
+     public void setRepairCost(int i) {
++        // CraftBukkit start - remove RepairCost tag when 0 (SPIGOT-3945)
++        if (i == 0) {
++            if (this.hasTag()) {
++                this.tag.remove("RepairCost");
++            }
++            return;
++        }
++        // CraftBukkit end
+         if (!this.hasTag()) {
+             this.tag = new NBTTagCompound();
+         }
+@@ -513,6 +770,12 @@
          nbttaglist.add(nbttagcompound);
      }
  

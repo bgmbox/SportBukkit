@@ -1,4 +1,4 @@
-From 8649cd3b482eb2f10be647ad46cc52653eb5d17f Mon Sep 17 00:00:00 2001
+From 6a52b75cbef119f69d9735934c417b630c6af5ea Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 28 Jun 2015 03:37:39 -0400
 Subject: [PATCH] Override creation settings of existing world

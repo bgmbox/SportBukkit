@@ -1,11 +1,11 @@
-From f09eb23030841b7be66009a0b5faa701e95487ec Mon Sep 17 00:00:00 2001
+From a8b1abbba362863fd75b0a1c7edbcd1179e3da66 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 12 Jul 2015 09:59:02 -0400
 Subject: [PATCH] Localize inventory titles
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 38e7a34d8..667aba92c 100644
+index 38e7a34d..667aba92 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -338,7 +338,12 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
@@ -32,7 +32,7 @@ index 38e7a34d8..667aba92c 100644
          getHandle().activeContainer.addSlotListener(player);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
-index e7ea1befe..f76a092e7 100644
+index e7ea1bef..f76a092e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventory.java
 @@ -4,11 +4,15 @@ import java.util.HashMap;
@@ -84,7 +84,7 @@ index e7ea1befe..f76a092e7 100644
  
      public InventoryType getType() {
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCustom.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCustom.java
-index a1a0ab7dc..0a2350875 100644
+index a1a0ab7d..0a235087 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCustom.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryCustom.java
 @@ -4,7 +4,7 @@ import java.util.ArrayList;

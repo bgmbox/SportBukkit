@@ -1,11 +1,11 @@
-From 511f2ffa17ed3d4565d00f949bb750cd33eda68b Mon Sep 17 00:00:00 2001
+From 7c041f82a46d2d172375ee6caa7e22a095b94b74 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 9 May 2014 23:44:41 -0400
 Subject: [PATCH] Add API to disable potion particles
 
 
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
-index 00d32357..089c5d3d 100644
+index dcd3cd33..b339f45f 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
 @@ -235,6 +235,13 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti

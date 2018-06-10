@@ -1,11 +1,11 @@
-From 05661df321bae092b584799a1f2b95a99403cb41 Mon Sep 17 00:00:00 2001
+From 2118ae40948abb1e9685be5ef49c65856a9fc430 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 16 Jun 2013 17:03:07 -0500
 Subject: [PATCH] Entity ID API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 0c20b4506..c3c6e924f 100644
+index 8d99f4d7..88f324af 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -62,7 +62,7 @@ public abstract class Entity implements ICommandListener {
@@ -18,7 +18,7 @@ index 0c20b4506..c3c6e924f 100644
      public boolean i;
      public final List<Entity> passengers;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 03576ab8c..3a53da673 100644
+index 03576ab8..3a53da67 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1606,6 +1606,11 @@ public final class CraftServer implements Server {

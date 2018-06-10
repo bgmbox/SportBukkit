@@ -1,11 +1,11 @@
-From 87e64342aa4cb5ba5c2acdc3a4080429142f4b30 Mon Sep 17 00:00:00 2001
+From 43d14e038a0144998f688f9f70b8b66ced108f16 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:13:07 -0400
 Subject: [PATCH] Attack cooldown info API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index d3dceb214..38dc34a95 100644
+index d3dceb21..38dc34a9 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -971,7 +971,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -18,7 +18,7 @@ index d3dceb214..38dc34a95 100644
                      boolean flag = f2 > 0.9F;
                      boolean flag1 = false;
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 49cf148e2..0df314001 100644
+index dd58eb20..cc6e01e1 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -55,7 +55,7 @@ public abstract class EntityLiving extends Entity {
@@ -31,7 +31,7 @@ index 49cf148e2..0df314001 100644
      public float aG;
      public float aH;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 2548d1028..945f18e41 100644
+index 2548d102..945f18e4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -524,6 +524,17 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {

@@ -1,11 +1,11 @@
-From 6802f793ddc2da74280d576aeaf383224eaf031a Mon Sep 17 00:00:00 2001
+From 22b19cbcedcd0ad77f0e824692712c9aedb8ddbd Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 13 Nov 2012 19:38:11 -0600
 Subject: [PATCH] Enable multiworld maps
 
 
 diff --git a/src/main/java/net/minecraft/server/ItemWorldMap.java b/src/main/java/net/minecraft/server/ItemWorldMap.java
-index e0799ff00..db44c1c9e 100644
+index e0799ff0..db44c1c9 100644
 --- a/src/main/java/net/minecraft/server/ItemWorldMap.java
 +++ b/src/main/java/net/minecraft/server/ItemWorldMap.java
 @@ -35,19 +35,18 @@ public class ItemWorldMap extends ItemWorldMapBase {

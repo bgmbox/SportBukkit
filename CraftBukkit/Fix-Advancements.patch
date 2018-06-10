@@ -1,11 +1,11 @@
-From 879740bcf957d75342ec0819741b0dc816874894 Mon Sep 17 00:00:00 2001
+From 51dc723ac6398f12e6d174f28f0c8b2698a6e5d8 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Thu, 3 Aug 2017 15:27:43 -0700
 Subject: [PATCH] Fix Advancements
 
 
 diff --git a/src/main/java/net/minecraft/server/Advancement.java b/src/main/java/net/minecraft/server/Advancement.java
-index 9d957f5ee..0c93453b5 100644
+index 9d957f5e..0c93453b 100644
 --- a/src/main/java/net/minecraft/server/Advancement.java
 +++ b/src/main/java/net/minecraft/server/Advancement.java
 @@ -1,5 +1,6 @@
@@ -24,7 +24,7 @@ index 9d957f5ee..0c93453b5 100644
  import org.apache.commons.lang3.ArrayUtils;
  
 diff --git a/src/main/java/net/minecraft/server/Advancements.java b/src/main/java/net/minecraft/server/Advancements.java
-index 79daad191..d8f4d2337 100644
+index 79daad19..d8f4d233 100644
 --- a/src/main/java/net/minecraft/server/Advancements.java
 +++ b/src/main/java/net/minecraft/server/Advancements.java
 @@ -37,7 +37,7 @@ public class Advancements {

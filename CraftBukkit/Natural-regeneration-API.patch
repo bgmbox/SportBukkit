@@ -1,11 +1,11 @@
-From bed97b07e2994af12a31ccaebbe066937561e5bf Mon Sep 17 00:00:00 2001
+From 78f4e3fab5e0b85ded35e377a1f35037d624e117 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 04:31:29 -0400
 Subject: [PATCH] Natural regeneration API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 8ae4cbf05..f35a9512e 100644
+index 8ae4cbf0..f35a9512 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -65,6 +65,11 @@ public abstract class EntityHuman extends EntityLiving {
@@ -21,7 +21,7 @@ index 8ae4cbf05..f35a9512e 100644
      public boolean affectsSpawning = true;
  
 diff --git a/src/main/java/net/minecraft/server/FoodMetaData.java b/src/main/java/net/minecraft/server/FoodMetaData.java
-index 33a2df5d3..7c54359e9 100644
+index 33a2df5d..7c54359e 100644
 --- a/src/main/java/net/minecraft/server/FoodMetaData.java
 +++ b/src/main/java/net/minecraft/server/FoodMetaData.java
 @@ -60,7 +60,7 @@ public class FoodMetaData {
@@ -43,7 +43,7 @@ index 33a2df5d3..7c54359e9 100644
              if (this.foodTickTimer >= 80) {
                  entityhuman.heal(1.0F, org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason.SATIATED); // CraftBukkit - added RegainReason
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index ed1e1f689..80355232c 100644
+index ae4bcced..28214cee 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -19,6 +19,7 @@ import java.util.HashMap;
@@ -54,7 +54,7 @@ index ed1e1f689..80355232c 100644
  import java.util.Map;
  import java.util.Set;
  import java.util.UUID;
-@@ -1183,6 +1184,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1174,6 +1175,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          getHandle().getFoodData().foodLevel = value;
      }
  

@@ -1,4 +1,4 @@
-From 7488ada7725b094214486e80c9d173759d1024b9 Mon Sep 17 00:00:00 2001
+From 5c5e6142e590afa440f356facc10f26cd95be641 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 00:25:37 -0500
 Subject: [PATCH] Reduce ItemStack copying

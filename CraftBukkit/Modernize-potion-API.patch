@@ -1,11 +1,11 @@
-From 47689c1b65fd145cd81816c1f03cc2b99eff6497 Mon Sep 17 00:00:00 2001
+From 577e2abd6f4c96f461e5cdd92f379e2501b7de5c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:10:18 -0500
 Subject: [PATCH] Modernize potion API
 
 
 diff --git a/src/main/java/net/minecraft/server/MobEffectList.java b/src/main/java/net/minecraft/server/MobEffectList.java
-index 461fad973..ab86f4401 100644
+index 461fad97..ab86f440 100644
 --- a/src/main/java/net/minecraft/server/MobEffectList.java
 +++ b/src/main/java/net/minecraft/server/MobEffectList.java
 @@ -224,10 +224,5 @@ public class MobEffectList {
@@ -20,7 +20,7 @@ index 461fad973..ab86f4401 100644
      }
  }
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
-index a9a30e820..11c733e28 100644
+index a9a30e82..11c733e2 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -2,7 +2,11 @@ package org.bukkit;
@@ -61,7 +61,7 @@ index a9a30e820..11c733e28 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
-index 4fec16768..7f4b0105a 100644
+index 4fec1676..7f4b0105 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
 @@ -10,15 +10,13 @@ import net.minecraft.server.NBTTagInt;
@@ -150,7 +150,7 @@ index 4fec16768..7f4b0105a 100644
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionBrew.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionBrew.java
 new file mode 100644
-index 000000000..a8a5c1eaa
+index 00000000..a8a5c1ea
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionBrew.java
 @@ -0,0 +1,36 @@
@@ -192,7 +192,7 @@ index 000000000..a8a5c1eaa
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionBrewRegistry.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionBrewRegistry.java
 new file mode 100644
-index 000000000..c9fbaf27f
+index 00000000..c9fbaf27
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionBrewRegistry.java
 @@ -0,0 +1,24 @@
@@ -222,7 +222,7 @@ index 000000000..c9fbaf27f
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectRegistry.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectRegistry.java
 new file mode 100644
-index 000000000..94e0a5f73
+index 00000000..94e0a5f7
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectRegistry.java
 @@ -0,0 +1,37 @@
@@ -264,7 +264,7 @@ index 000000000..94e0a5f73
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectType.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectType.java
-index b06fddf72..72e1de4b3 100644
+index b06fddf7..72e1de4b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectType.java
 +++ b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionEffectType.java
 @@ -3,13 +3,14 @@ package org.bukkit.craftbukkit.potion;
@@ -301,7 +301,7 @@ index b06fddf72..72e1de4b3 100644
      public String getName() {
          switch (getId()) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java
-index 8483cd85d..042fcf424 100644
+index 8483cd85..042fcf42 100644
 --- a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java
 +++ b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java
 @@ -7,92 +7,44 @@ import com.google.common.collect.ImmutableBiMap;

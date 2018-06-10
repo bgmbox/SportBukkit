@@ -1,11 +1,11 @@
-From 01324d9b83e88fe7251fb6a32b1e2927723badf1 Mon Sep 17 00:00:00 2001
+From 4863356e9f9ebd9b9c1a09c34b6c9b2e73b5825f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 20 Mar 2015 01:21:22 -0400
 Subject: [PATCH] Don't share mutable metadata across threads
 
 
 diff --git a/src/main/java/net/minecraft/server/DataWatcher.java b/src/main/java/net/minecraft/server/DataWatcher.java
-index a13e4ff28..f0fdb799d 100644
+index a13e4ff2..f0fdb799 100644
 --- a/src/main/java/net/minecraft/server/DataWatcher.java
 +++ b/src/main/java/net/minecraft/server/DataWatcher.java
 @@ -307,5 +307,30 @@ public class DataWatcher {
@@ -40,7 +40,7 @@ index a13e4ff28..f0fdb799d 100644
 +    // SportBukkit end
  }
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java b/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
-index 872bdd8b2..975badc63 100644
+index 872bdd8b..975badc6 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutEntityMetadata.java
 @@ -21,6 +21,7 @@ public class PacketPlayOutEntityMetadata implements Packet<PacketListenerPlayOut
@@ -52,7 +52,7 @@ index 872bdd8b2..975badc63 100644
  
      public void a(PacketDataSerializer packetdataserializer) throws IOException {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java b/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
-index 5b032dfd0..475d52ce6 100644
+index 5b032dfd..475d52ce 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutNamedEntitySpawn.java
 @@ -40,6 +40,11 @@ public class PacketPlayOutNamedEntitySpawn implements Packet<PacketListenerPlayO
@@ -81,7 +81,7 @@ index 5b032dfd0..475d52ce6 100644
  
      public void a(PacketListenerPlayOut packetlistenerplayout) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
-index 8a9bcae73..44f0d0076 100644
+index 8a9bcae7..44f0d007 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 @@ -84,6 +84,11 @@ public class PacketPlayOutSpawnEntityLiving implements Packet<PacketListenerPlay

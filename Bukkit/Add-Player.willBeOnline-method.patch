@@ -1,4 +1,4 @@
-From 5141f834416cf9c5da62484bcffd46a12232258c Mon Sep 17 00:00:00 2001
+From a1b9e5f59a1018084e86236518f9b48840bac3fa Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 25 Apr 2016 20:47:00 -0400
 Subject: [PATCH] Add Player.willBeOnline method
