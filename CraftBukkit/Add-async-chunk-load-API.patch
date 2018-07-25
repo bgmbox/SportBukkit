@@ -1,4 +1,4 @@
-From f21798742dd27f151c438a1522594e3bdbe4c3e6 Mon Sep 17 00:00:00 2001
+From 878c26a6cd822034d74c13a3cedf0904858f23c5 Mon Sep 17 00:00:00 2001
 From: Zach Brown <zach.brown@destroystokyo.com>
 Date: Tue, 1 Mar 2016 23:19:01 -0600
 Subject: [PATCH] Add async chunk load API

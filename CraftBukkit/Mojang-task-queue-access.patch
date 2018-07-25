@@ -1,4 +1,4 @@
-From 3dedb068e6f698c95c5f56c931fd513f7e713c70 Mon Sep 17 00:00:00 2001
+From d3490790fc040700009208aa2a8f0206f592c63e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 5 Aug 2016 10:46:15 -0400
 Subject: [PATCH] Mojang task queue access

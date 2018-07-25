@@ -1,4 +1,4 @@
-From 13f8f40a31c4b4c4a0edde5e683aea764d2c3823 Mon Sep 17 00:00:00 2001
+From 256b239d46983196c5f15edee1a80972b3131702 Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Thu, 5 Jun 2014 22:02:07 +0200
 Subject: [PATCH] Normalize offline player's name case before creating an UUID

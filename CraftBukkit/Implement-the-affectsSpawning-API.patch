@@ -1,4 +1,4 @@
-From 01487c436e2faac1169d82a27e98c1f5b78472c0 Mon Sep 17 00:00:00 2001
+From 444cd249b806c2e12689727af9df5ac61d7e6be1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 2 Aug 2012 17:27:40 -0700
 Subject: [PATCH] Implement the affectsSpawning API

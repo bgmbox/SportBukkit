@@ -1,0 +1,19 @@
+From 7869a1071e24e194e4a37ddf8002b53a6e96d339 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Wed, 25 Jul 2018 15:38:58 -0500
+Subject: [PATCH] Fix sprint disabling when engaging in combat
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index 8bc82c0..b6f7651 100644
+--- a/src/main/java/net/minecraft/server/EntityHuman.java
++++ b/src/main/java/net/minecraft/server/EntityHuman.java
+@@ -1039,7 +1039,7 @@ public abstract class EntityHuman extends EntityLiving {
+ 
+                             this.motX *= 0.6D;
+                             this.motZ *= 0.6D;
+-                            this.setSprinting(false);
++//                            this.setSprinting(false); //SportBukkit - fix sprinting bug
+                         }
+ 
+                         if (flag3) {

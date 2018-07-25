@@ -1,4 +1,4 @@
-From b5e88400d2f8aae47c0999595196763f6da8b5d7 Mon Sep 17 00:00:00 2001
+From e15301287fa9e48ce5d287df1b1f4bef4f35cf69 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 20 Feb 2015 15:23:57 -0500
 Subject: [PATCH] Fix playEffect params
