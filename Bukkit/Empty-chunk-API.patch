@@ -1,22 +1,22 @@
-From 3151bc978d66af51b36208b186b2b5cd39184ca6 Mon Sep 17 00:00:00 2001
+From 18cb53ba46d79c0ebb0049b69c7ad6bfa59bbec0 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 6 Mar 2016 03:43:13 -0500
 Subject: [PATCH] Empty chunk API
 
 
 diff --git a/src/main/java/org/bukkit/Chunk.java b/src/main/java/org/bukkit/Chunk.java
-index 972e154e..4c721011 100644
+index 972e154..4c72101 100644
 --- a/src/main/java/org/bukkit/Chunk.java
 +++ b/src/main/java/org/bukkit/Chunk.java
-@@ -51,6 +51,11 @@ public interface Chunk extends Physical {
-      */
+@@ -52,6 +52,11 @@ public interface Chunk extends Physical {
      Set<Block> getBlocks(Material material);
  
-+    /**
+     /**
 +     * Is this chunk entirely filled with air blocks?
 +     */
 +    boolean isEmpty();
 +
-     /**
++    /**
       * Capture thread-safe read-only snapshot of chunk data
       *
+      * @return ChunkSnapshot

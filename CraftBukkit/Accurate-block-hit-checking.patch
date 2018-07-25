@@ -1,11 +1,11 @@
-From cd9ce851160b3daf85c59fa1b4e607259e7a5de6 Mon Sep 17 00:00:00 2001
+From c29eba5e03574687808626111f1025a0beea507f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 26 May 2015 04:01:46 -0400
 Subject: [PATCH] Accurate block hit checking
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 350a576b..5675d652 100644
+index 350a576..5675d65 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -59,6 +59,7 @@ import org.bukkit.plugin.messaging.StandardMessenger;
@@ -47,7 +47,7 @@ index 350a576b..5675d652 100644
          return CraftBlock.biomeBaseToBiome(this.world.getBiome(new BlockPosition(x, 0, z)));
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 46670c34..1236f804 100644
+index 46670c3..1236f80 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -23,6 +23,8 @@ import org.bukkit.inventory.ItemStack;
@@ -90,7 +90,7 @@ index 46670c34..1236f804 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index c2ca5f77..25241a4d 100644
+index c2ca5f7..25241a4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -73,6 +73,7 @@ import org.bukkit.plugin.IllegalPluginAccessException;

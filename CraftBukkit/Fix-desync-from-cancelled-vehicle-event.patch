@@ -1,11 +1,11 @@
-From 174a134e441906a3cf94d0e975761b481f4b0971 Mon Sep 17 00:00:00 2001
+From ac225e76cff1d71dc5584d07e3766000754217e1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 02:50:33 -0400
 Subject: [PATCH] Fix desync from cancelled vehicle event
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index d806373a..bf1b8cba 100644
+index d806373..bf1b8cb 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1895,6 +1895,24 @@ public abstract class Entity implements ICommandListener {
@@ -104,12 +104,12 @@ index d806373a..bf1b8cba 100644
              this.passengers.remove(entity);
              entity.j = 60;
          }
-@@ -2848,6 +2848,8 @@ public abstract class Entity implements ICommandListener {
-         return entity instanceof EntityHuman ? ((EntityHuman) entity).cZ() : !this.world.isClientSide;
+@@ -2849,6 +2849,8 @@ public abstract class Entity implements ICommandListener {
      }
  
-+    @Nullable
-+    Entity getRiding() { return this.bJ(); } // SportBukkit - alias for following method
      @Nullable
++    Entity getRiding() { return this.bJ(); } // SportBukkit - alias for following method
++    @Nullable
      public Entity bJ() {
          return this.au;
+     }

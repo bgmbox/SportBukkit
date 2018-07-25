@@ -1,11 +1,11 @@
-From f01a3683cc2bcf2acd8d661ddb4e312bc5750ace Mon Sep 17 00:00:00 2001
+From 6f3ddbe93f1a1d3ebff190e9aa5cc9668236a3e2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 2 Dec 2016 01:48:56 -0500
 Subject: [PATCH] New event API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 8122bbd3..86a4f4c2 100644
+index 8122bbd..86a4f4c 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -55,7 +55,7 @@ public abstract class PlayerList {
@@ -27,7 +27,7 @@ index 8122bbd3..86a4f4c2 100644
          // CraftBukkit end
  
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
-index 4afc3622..8eec729c 100644
+index 4afc362..8eec729 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -1,5 +1,6 @@
@@ -55,11 +55,10 @@ index 4afc3622..8eec729c 100644
      private final CraftBlockFactory blockFactory = new CraftBlockFactory();
      private final CraftVectorFactory vectorFactory = new CraftVectorFactory();
  
-@@ -38,6 +43,14 @@ public class CraftBukkitRuntime implements BukkitRuntime {
-         DispenserRegistry.c();
+@@ -39,6 +44,14 @@ public class CraftBukkitRuntime implements BukkitRuntime {
      }
  
-+    @Override
+     @Override
 +    public Injector injector() {
 +        if(injector == null) {
 +            throw new IllegalStateException("Injector has not been created yet");
@@ -67,11 +66,12 @@ index 4afc3622..8eec729c 100644
 +        return injector;
 +    }
 +
-     @Override
++    @Override
      public Key key(String prefix, String id) {
          return CraftKey.get(prefix, id);
+     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a4362797..fc93bafa 100644
+index a436279..fc93baf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -24,6 +24,8 @@ import java.util.regex.Pattern;
@@ -164,28 +164,27 @@ index a4362797..fc93bafa 100644
          monsterSpawn = configuration.getInt("spawn-limits.monsters");
          animalSpawn = configuration.getInt("spawn-limits.animals");
          waterAnimalSpawn = configuration.getInt("spawn-limits.water-animals");
-@@ -391,6 +400,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-         return this.playerView;
+@@ -392,6 +401,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
-+    @Override
+     @Override
 +    public Map<UUID, Player> playersById() {
 +        return playersById;
 +    }
 +
-     @Override
++    @Override
      @Deprecated
      public Player getPlayer(final String name, final CommandSender viewer) {
-@@ -637,11 +651,27 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-         return servicesManager;
+         Validate.notNull(name, "Name cannot be null");
+@@ -638,10 +652,26 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
-+    @Override
+     @Override
 +    public EventBus eventBus() {
 +        return eventBus;
 +    }
 +
-     @Override
++    @Override
      public List<World> getWorlds() {
          return new ArrayList<World>(worlds.values());
      }
@@ -243,7 +242,7 @@ index a4362797..fc93bafa 100644
          if (!(sender instanceof EntityPlayer)) {
              return ImmutableList.of();
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index bb9673c5..738d58d9 100644
+index bb9673c..738d58d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -11,12 +11,17 @@ import java.util.TimeZone;
@@ -277,7 +276,7 @@ index bb9673c5..738d58d9 100644
          };
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java b/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java
-index 26a2fb89..799785d1 100644
+index 26a2fb8..799785d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ColouredConsoleSender.java
 @@ -17,7 +17,7 @@ public class ColouredConsoleSender extends CraftConsoleCommandSender {
@@ -303,7 +302,7 @@ index 26a2fb89..799785d1 100644
 -    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 77e866fa..b57432d7 100644
+index 77e866f..b57432d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -1,5 +1,6 @@
@@ -327,7 +326,7 @@ index 77e866fa..b57432d7 100644
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CaseInsensitiveNameMap.java b/src/main/java/org/bukkit/craftbukkit/util/CaseInsensitiveNameMap.java
 new file mode 100644
-index 00000000..2cca819f
+index 0000000..2cca819
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CaseInsensitiveNameMap.java
 @@ -0,0 +1,74 @@

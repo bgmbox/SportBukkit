@@ -1,0 +1,53 @@
+From 452e530256079e55e90e49ccbdc680e9073531b8 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Wed, 25 Jul 2018 03:06:42 -0500
+Subject: [PATCH] Rework knockback
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index ce1583f..7493223 100644
+--- a/src/main/java/net/minecraft/server/EntityLiving.java
++++ b/src/main/java/net/minecraft/server/EntityLiving.java
+@@ -1161,16 +1161,32 @@ public abstract class EntityLiving extends Entity {
+     }
+ 
+     public void a(Entity entity, float magnitude, double fromX, double fromZ) {
+-        final boolean vertical = onGround || getBukkitEntity().getServer().getLegacyKnockback();
+-        final double len = MathHelper.sqrt(fromX * fromX + fromZ * fromZ);
+-
+-        applyKnockback(
+-                entity,
+-                -motX / 2 - fromX * magnitude / len,
+-                (vertical ? Math.min(0.4, motY / 2 + magnitude) - motY : 0),
+-                -motZ / 2 - fromZ * magnitude / len,
+-                false
+-        );
++        if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
++            this.impulse = true;
++            float f1 = MathHelper.sqrt(fromX * fromX + fromZ * fromZ);
++            float f2 = 0.4F;
++
++            // CraftBukkit start
++//            double knockbackReduction = this.getBukkitEntity().getKnockbackReduction();
++//            double friction = 2.0d - knockbackReduction;
++            double friction = 1.775;
++//            f2 *= (1d - knockbackReduction);
++
++            this.motX /= friction;
++            this.motY /= friction;
++            this.motZ /= friction;
++            // CraftBukkit end
++
++            this.motX -= fromX / (double) f1 * (double) f2;
++            this.motY += (double) f2;
++            this.motZ -= fromZ / (double) f1 * (double) f2;
++//            if (this.motY > 0.4000000059604645D) {
++//                this.motY = 0.4000000059604645D;
++//            }
++            if (this.motY > 0.42) {
++                this.motY = 0.42;
++            }
++        }
+     }
+     // SportBukkit end
+ 

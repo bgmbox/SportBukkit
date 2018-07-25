@@ -1,11 +1,11 @@
-From fc52fd8911b436490335a36ef0f95c657b256b77 Mon Sep 17 00:00:00 2001
+From 0103916a0849af9ffbf80c64d11c0c2902800df7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 1 Jun 2015 06:29:07 -0400
 Subject: [PATCH] Improve BlockState API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-index 2a1b731c..08634fad 100644
+index 2a1b731..08634fa 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 @@ -82,19 +82,32 @@ public class CraftBlockState implements BlockState {

@@ -1,11 +1,11 @@
-From 6b864f10f9a79da320900295d9c618f5fa2f4d77 Mon Sep 17 00:00:00 2001
+From 634f81fd1f50e187a827a7c06658f2cb469c9647 Mon Sep 17 00:00:00 2001
 From: thinkofdeath <purggames@gmail.com>
 Date: Fri, 12 Apr 2013 18:19:11 +0100
 Subject: [PATCH] Allow playEffect to spawn particles
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java b/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
-index 16721835..582d7bfb 100644
+index 1672183..582d7bf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
 @@ -58,6 +58,8 @@ public class CraftEffect {
@@ -18,7 +18,7 @@ index 16721835..582d7bfb 100644
              datavalue = 0;
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 8f6653f7..11f17e23 100644
+index 8f6653f..11f17e2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -822,6 +822,10 @@ public class CraftWorld implements World {
@@ -82,7 +82,7 @@ index 8f6653f7..11f17e23 100644
          radius *= radius;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 1866d521..64902f37 100644
+index 1866d52..64902f3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -65,6 +65,7 @@ import org.bukkit.event.player.PlayerUnregisterChannelEvent;
@@ -93,11 +93,10 @@ index 1866d521..64902f37 100644
  import org.bukkit.metadata.MetadataValue;
  import org.bukkit.plugin.IllegalPluginAccessException;
  import org.bukkit.plugin.Plugin;
-@@ -376,15 +377,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
-         getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|StopSound", packetdataserializer));
+@@ -377,15 +378,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
      }
  
--    @Override
+     @Override
 -    public void playEffect(Location loc, Effect effect, int data) {
 -        if (getHandle().playerConnection == null) return;
 -
@@ -106,9 +105,10 @@ index 1866d521..64902f37 100644
 -        getHandle().playerConnection.sendPacket(packet);
 -    }
 -
-     @Override
+-    @Override
      public <T> void playEffect(Location loc, Effect effect, T data) {
          if (data != null) {
+             Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
 @@ -393,8 +385,50 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
              Validate.isTrue(effect.getData() == null, "Wrong kind of data for this effect!");
          }

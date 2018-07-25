@@ -1,11 +1,11 @@
-From d02a127d6529b8c07d6c20f17957c8c68357edf1 Mon Sep 17 00:00:00 2001
+From 6dd7425e79f2b8df3d88d28ced8ebdd2fb44d41b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 24 Dec 2016 19:58:54 -0500
 Subject: [PATCH] Chest lid API
 
 
 diff --git a/src/main/java/org/bukkit/block/Chest.java b/src/main/java/org/bukkit/block/Chest.java
-index 97dc7813..e68ab8ee 100644
+index 97dc781..e68ab8e 100644
 --- a/src/main/java/org/bukkit/block/Chest.java
 +++ b/src/main/java/org/bukkit/block/Chest.java
 @@ -23,4 +23,10 @@ public interface Chest extends Container, Nameable {

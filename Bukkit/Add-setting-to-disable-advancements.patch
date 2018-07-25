@@ -1,40 +1,40 @@
-From c0b8e6695803624a5100c2f8c0e3fd82a587e217 Mon Sep 17 00:00:00 2001
+From 609dc1ad84163759f798073524aac24e26afc55a Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Wed, 31 Jan 2018 23:31:40 -0800
 Subject: [PATCH] Add setting to disable advancements
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 67f4f735..791ed020 100644
+index 67f4f73..791ed02 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -360,6 +360,13 @@ public final class Bukkit {
-         return server.getLegacyKnockback();
+@@ -361,6 +361,13 @@ public final class Bukkit {
      }
  
-+    /**
+     /**
 +     * @see Server#getAdvancementsEnabled()
 +     */
 +    public static boolean getAdvancementsEnabled() {
 +        return server.getAdvancementsEnabled();
 +    }
 +
-     /**
++    /**
       * Gets default ticks per animal spawns value.
       * <p>
+      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index fcfb1299..874a92c4 100644
+index fcfb129..874a92c 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -288,6 +288,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
-      */
+@@ -289,6 +289,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
      public boolean getLegacyKnockback();
  
-+    /**
+     /**
 +     * Should we announce advancements?
 +     */
 +    public boolean getAdvancementsEnabled();
 +
-     /**
++    /**
       * Gets default ticks per animal spawns value.
       * <p>
+      * <b>Example Usage:</b>

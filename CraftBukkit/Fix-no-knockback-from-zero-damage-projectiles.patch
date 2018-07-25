@@ -1,11 +1,11 @@
-From e678d5b60c237bd39beeca7ef1b9a2fa43e92ef3 Mon Sep 17 00:00:00 2001
+From b2e45ec8cf2d42873ac829692b76971aaa7aad04 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 04:38:06 -0500
 Subject: [PATCH] Fix no knockback from zero-damage projectiles
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 03522077..89ed51c5 100644
+index 0352207..89ed51c 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -1423,7 +1423,7 @@ public abstract class EntityLiving extends Entity {

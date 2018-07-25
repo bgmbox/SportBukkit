@@ -1,11 +1,11 @@
-From b0ad23ef002b037d1b615bdbc4c130c752dc2d24 Mon Sep 17 00:00:00 2001
+From 44dca67453591158d172f7d16909e8539d75137f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 9 May 2014 22:38:54 -0400
 Subject: [PATCH] Fix wrong potion particles after respawn
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 86660df0..c37698ba 100644
+index 86660df..c37698b 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -633,6 +633,7 @@ public abstract class EntityLiving extends Entity {
@@ -17,7 +17,7 @@ index 86660df0..c37698ba 100644
          this.datawatcher.set(EntityLiving.h, Boolean.valueOf(false));
          this.datawatcher.set(EntityLiving.g, Integer.valueOf(0));
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 38f67fae..35d6f308 100644
+index 38f67fa..35d6f30 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -1484,6 +1484,14 @@ public class EntityPlayer extends EntityHuman implements ICrafting {

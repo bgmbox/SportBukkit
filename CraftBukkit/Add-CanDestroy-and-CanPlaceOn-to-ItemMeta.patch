@@ -1,11 +1,11 @@
-From 40b0ab9f85b72d68ea94b81cfc525b3a4a4da471 Mon Sep 17 00:00:00 2001
+From da49b0915d7e6bc731feeb7ed3135901b5e0c78b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 22 May 2015 00:46:32 -0400
 Subject: [PATCH] Add CanDestroy and CanPlaceOn to ItemMeta
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
-index 8adb7627..af9ab5c4 100644
+index 8adb762..af9ab5c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 @@ -9,10 +9,7 @@ import java.lang.reflect.InvocationTargetException;
@@ -141,11 +141,10 @@ index 8adb7627..af9ab5c4 100644
      }
  
      public String getDisplayName() {
-@@ -752,6 +802,36 @@ class CraftMetaItem implements ItemMeta, Repairable {
-         this.unbreakable = unbreakable;
+@@ -753,6 +803,36 @@ class CraftMetaItem implements ItemMeta, Repairable {
      }
  
-+    @Override
+     @Override
 +    public ImmutableMaterialSet getCanDestroy() {
 +        return canDestroy;
 +    }
@@ -175,9 +174,10 @@ index 8adb7627..af9ab5c4 100644
 +        canPlaceOn = ImmutableMaterialSet.of(materials);
 +    }
 +
-     @Override
++    @Override
      public final boolean equals(Object object) {
          if (object == null) {
+             return false;
 @@ -779,6 +859,8 @@ class CraftMetaItem implements ItemMeta, Repairable {
                  && (this.hasAttributeModifiers() ? that.hasAttributeModifiers() && this.attributeModifiers.equals(that.attributeModifiers) : !that.hasAttributeModifiers())
                  && (this.hasLore() ? that.hasLore() && this.lore.equals(that.lore) : !that.hasLore())

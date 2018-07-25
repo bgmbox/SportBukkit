@@ -1,40 +1,40 @@
-From f721bb0f14c0402b6a62cdac1d2549b106feef6d Mon Sep 17 00:00:00 2001
+From 134a800034421a30129cdc8c347c136272e6dc2d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Feb 2015 03:39:54 -0500
 Subject: [PATCH] Add setting to disable skull fetching
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 2a56468e..2610b308 100644
+index 2a56468..2610b30 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -313,6 +313,13 @@ public final class Bukkit {
-         return server.getConnectionThrottle();
+@@ -314,6 +314,13 @@ public final class Bukkit {
      }
  
-+    /**
+     /**
 +     * @see Server#getFetchSkulls()
 +     */
 +    public static boolean getFetchSkulls() {
 +        return server.getFetchSkulls();
 +    }
 +
-     /**
++    /**
       * Gets default ticks per animal spawns value.
       * <p>
+      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 1829b47e..35501556 100644
+index 1829b47..3550155 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -255,6 +255,11 @@ public interface Server extends PluginMessageRecipient {
-      */
+@@ -256,6 +256,11 @@ public interface Server extends PluginMessageRecipient {
      public long getConnectionThrottle();
  
-+    /**
+     /**
 +     * Should player skulls with missing skin data be fetched from Mojang?
 +     */
 +    public boolean getFetchSkulls();
 +
-     /**
++    /**
       * Gets default ticks per animal spawns value.
       * <p>
+      * <b>Example Usage:</b>

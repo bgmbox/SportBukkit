@@ -1,11 +1,11 @@
-From 38564e034d707ff5ff003d4153e94870aae37279 Mon Sep 17 00:00:00 2001
+From a5c7563e453fb5cf6bab1f518bd96b5b6d6c10c5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:20:38 -0400
 Subject: [PATCH] Block images
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index bf05a0d7..9bfa3096 100644
+index bf05a0d..9bfa309 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -13,6 +13,7 @@ import java.util.UUID;
@@ -26,7 +26,7 @@ index bf05a0d7..9bfa3096 100644
  
      public static PotionBrewRegistry potionRegistry() {
 diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/bukkit/BukkitRuntime.java
-index 9e083daa..493fc98b 100644
+index 9e083da..493fc98 100644
 --- a/src/main/java/org/bukkit/BukkitRuntime.java
 +++ b/src/main/java/org/bukkit/BukkitRuntime.java
 @@ -1,5 +1,6 @@
@@ -46,7 +46,7 @@ index 9e083daa..493fc98b 100644
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index 5af6f6f2..6f8631cb 100644
+index 5af6f6f..6f8631c 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -1,21 +1,24 @@
@@ -88,11 +88,10 @@ index 5af6f6f2..6f8631cb 100644
      /**
       * Gets the {@link Block} at the given {@link Location}
       *
-@@ -73,6 +78,30 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
-     @Deprecated
+@@ -74,6 +79,30 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      public int getBlockTypeIdAt(Location location);
  
-+    /**
+     /**
 +     * Test if the block at the given position in this world is made of the given material.
 +     */
 +    boolean hasMaterialAt(MaterialData material, Vec3 position);
@@ -116,9 +115,10 @@ index 5af6f6f2..6f8631cb 100644
 +     */
 +    Predicate<Vec3> hasMaterialAt(Set<MaterialData> materials);
 +
-     /**
++    /**
       * Gets the y coordinate of the lowest block at this position such that the
       * block and all blocks above it are transparent for lighting purposes.
+      *
 @@ -141,6 +170,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public Chunk getChunkAt(int x, int z);
@@ -302,7 +302,7 @@ index 5af6f6f2..6f8631cb 100644
      /**
       * Represents various map environment types that a world may be
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
-index ff597f1b..410277e9 100644
+index ff597f1..410277e 100644
 --- a/src/main/java/org/bukkit/block/Block.java
 +++ b/src/main/java/org/bukkit/block/Block.java
 @@ -7,6 +7,7 @@ import org.bukkit.Locatable;
@@ -324,7 +324,7 @@ index ff597f1b..410277e9 100644
       *
 diff --git a/src/main/java/org/bukkit/block/BlockFactory.java b/src/main/java/org/bukkit/block/BlockFactory.java
 new file mode 100644
-index 00000000..4968dd19
+index 0000000..4968dd1
 --- /dev/null
 +++ b/src/main/java/org/bukkit/block/BlockFactory.java
 @@ -0,0 +1,21 @@
@@ -351,7 +351,7 @@ index 00000000..4968dd19
 +}
 diff --git a/src/main/java/org/bukkit/block/BlockImage.java b/src/main/java/org/bukkit/block/BlockImage.java
 new file mode 100644
-index 00000000..defd64cf
+index 0000000..defd64c
 --- /dev/null
 +++ b/src/main/java/org/bukkit/block/BlockImage.java
 @@ -0,0 +1,65 @@
@@ -421,7 +421,7 @@ index 00000000..defd64cf
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
-index f081dd78..9aae2cc3 100644
+index f081dd7..9aae2cc 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
 @@ -5,6 +5,7 @@ import org.bukkit.Locatable;
@@ -467,7 +467,7 @@ index f081dd78..9aae2cc3 100644
  }
 diff --git a/src/main/java/org/bukkit/block/EmptyBlockImage.java b/src/main/java/org/bukkit/block/EmptyBlockImage.java
 new file mode 100644
-index 00000000..fc3f1666
+index 0000000..fc3f166
 --- /dev/null
 +++ b/src/main/java/org/bukkit/block/EmptyBlockImage.java
 @@ -0,0 +1,40 @@
@@ -513,7 +513,7 @@ index 00000000..fc3f1666
 +}
 diff --git a/src/main/java/org/bukkit/block/TransformedBlockImage.java b/src/main/java/org/bukkit/block/TransformedBlockImage.java
 new file mode 100644
-index 00000000..db43c72d
+index 0000000..db43c72
 --- /dev/null
 +++ b/src/main/java/org/bukkit/block/TransformedBlockImage.java
 @@ -0,0 +1,49 @@
@@ -567,7 +567,7 @@ index 00000000..db43c72d
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/material/Alignable.java b/src/main/java/org/bukkit/material/Alignable.java
-index c9ad81e1..5759f6cd 100644
+index c9ad81e..5759f6c 100644
 --- a/src/main/java/org/bukkit/material/Alignable.java
 +++ b/src/main/java/org/bukkit/material/Alignable.java
 @@ -1,6 +1,6 @@
@@ -579,7 +579,7 @@ index c9ad81e1..5759f6cd 100644
  public interface Alignable {
  
 diff --git a/src/main/java/org/bukkit/material/Lever.java b/src/main/java/org/bukkit/material/Lever.java
-index 3b76ed07..706b5142 100644
+index 3b76ed0..706b514 100644
 --- a/src/main/java/org/bukkit/material/Lever.java
 +++ b/src/main/java/org/bukkit/material/Lever.java
 @@ -2,7 +2,7 @@ package org.bukkit.material;

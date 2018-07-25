@@ -1,11 +1,11 @@
-From 03cd1af9e348014d3dbe9c8df9532e67b0bdcad7 Mon Sep 17 00:00:00 2001
+From 1ea84992082423a76e1ad2ef6283aa40df73fd99 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Mon, 21 Jan 2013 12:47:55 -0600
 Subject: [PATCH] This is SportBukkit!
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 0eaf9dab..30967c01 100644
+index 0eaf9da..30967c0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -134,7 +134,8 @@ import org.bukkit.craftbukkit.util.CraftNamespacedKey;

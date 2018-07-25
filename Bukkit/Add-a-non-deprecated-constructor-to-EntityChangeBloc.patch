@@ -1,11 +1,11 @@
-From aaaaa38a61d1a5468184dea9a1616c8d0b2e9091 Mon Sep 17 00:00:00 2001
+From f1025d462770172a808df8368a92390db1c89542 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 30 May 2015 06:53:57 -0400
 Subject: [PATCH] Add a non-deprecated constructor to EntityChangeBlockEvent
 
 
 diff --git a/src/main/java/org/bukkit/event/entity/EntityChangeBlockEvent.java b/src/main/java/org/bukkit/event/entity/EntityChangeBlockEvent.java
-index 9f69ded6..849e57d7 100644
+index 9f69ded..849e57d 100644
 --- a/src/main/java/org/bukkit/event/entity/EntityChangeBlockEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/EntityChangeBlockEvent.java
 @@ -5,6 +5,7 @@ import org.bukkit.block.Block;

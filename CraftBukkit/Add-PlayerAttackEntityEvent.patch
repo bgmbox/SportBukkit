@@ -1,11 +1,11 @@
-From 02e84ad20703b9aa8ec4ea935ecdd3d406ba0ae9 Mon Sep 17 00:00:00 2001
+From 3cb5bcf62558aa5a0823e5a2452653153098dc8e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 15 Nov 2014 16:17:49 -0500
 Subject: [PATCH] Add PlayerAttackEntityEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index ce68155a..024293a3 100644
+index ce68155..024293a 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -39,6 +39,7 @@ import org.bukkit.event.inventory.InventoryCreativeEvent;

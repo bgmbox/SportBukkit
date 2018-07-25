@@ -1,11 +1,11 @@
-From c10a23538e21d9268239fb7b7ee1fb673ec3447d Mon Sep 17 00:00:00 2001
+From c17c4b47ba4274cb6dc38b60ffce26b16af8ec22 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 29 Oct 2014 19:08:55 -0400
 Subject: [PATCH] Expose the server CommandMap
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index bc6f0250..2a56468e 100644
+index bc6f025..2a56468 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -18,6 +18,7 @@ import org.bukkit.boss.BarFlag;
@@ -16,22 +16,22 @@ index bc6f0250..2a56468e 100644
  import org.bukkit.command.CommandSender;
  import org.bukkit.command.ConsoleCommandSender;
  import org.bukkit.command.PluginCommand;
-@@ -926,6 +927,13 @@ public final class Bukkit {
-         return server.createMerchant(title);
+@@ -927,6 +928,13 @@ public final class Bukkit {
      }
  
-+    /**
+     /**
 +     * @see Server#getCommandMap()
 +     */
 +    public static CommandMap getCommandMap() {
 +        return server.getCommandMap();
 +    }
 +
-     /**
++    /**
       * Gets user-specified limit for number of monsters that can spawn in a
       * chunk.
+      *
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 13c028a6..1829b47e 100644
+index 13c028a..1829b47 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -18,6 +18,7 @@ import org.bukkit.boss.BarFlag;
@@ -42,15 +42,15 @@ index 13c028a6..1829b47e 100644
  import org.bukkit.command.CommandSender;
  import org.bukkit.command.ConsoleCommandSender;
  import org.bukkit.command.PluginCommand;
-@@ -698,6 +699,11 @@ public interface Server extends PluginMessageRecipient {
-      */
+@@ -699,6 +700,11 @@ public interface Server extends PluginMessageRecipient {
      public HelpMap getHelpMap();
  
-+    /**
+     /**
 +     * Gets the {@link CommandMap} containing all registered commands on this server.
 +     */
 +    public CommandMap getCommandMap();
 +
-     /**
++    /**
       * Creates an empty inventory of the specified type. If the type is {@link
       * InventoryType#CHEST}, the new inventory has a size of 27; otherwise the
+      * new inventory has the normal size for its type.

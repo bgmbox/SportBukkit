@@ -1,4 +1,4 @@
-From 8bb583294ea5b76eb2853333b962869224245272 Mon Sep 17 00:00:00 2001
+From e0d722ec5c347cb7b9850d1282f0fcf80ca2af4c Mon Sep 17 00:00:00 2001
 From: Steve Anton <anxuiz.nx@gmail.com>
 Date: Thu, 2 Aug 2012 18:25:44 -0700
 Subject: [PATCH] Add PlayerInitialSpawnEvent for changing a player's spawn
@@ -7,7 +7,7 @@ Subject: [PATCH] Add PlayerInitialSpawnEvent for changing a player's spawn
 
 diff --git a/src/main/java/org/bukkit/event/player/PlayerInitialSpawnEvent.java b/src/main/java/org/bukkit/event/player/PlayerInitialSpawnEvent.java
 new file mode 100644
-index 00000000..2a9e7768
+index 0000000..2a9e776
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/player/PlayerInitialSpawnEvent.java
 @@ -0,0 +1,43 @@

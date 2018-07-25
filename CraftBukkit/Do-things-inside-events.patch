@@ -1,11 +1,11 @@
-From 2c161022931d2caa06e16108c04a18e16d411150 Mon Sep 17 00:00:00 2001
+From f0efd9fe6d269a8721a84392ee8ebf1e6d15bf30 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 23 Dec 2016 14:02:20 -0500
 Subject: [PATCH] Do things inside events
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 86a4f4c2..1b4c8b75 100644
+index 86a4f4c..1b4c8b7 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -424,7 +424,7 @@ public abstract class PlayerList {

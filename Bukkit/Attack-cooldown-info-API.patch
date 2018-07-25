@@ -1,11 +1,11 @@
-From cf98d9b9b64a2d26411edd137bcb3fea7efa42f9 Mon Sep 17 00:00:00 2001
+From 598f34d76790b30057c0d0d79aa7eb19f1145f03 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:08:56 -0400
 Subject: [PATCH] Attack cooldown info API
 
 
 diff --git a/src/main/java/org/bukkit/entity/HumanEntity.java b/src/main/java/org/bukkit/entity/HumanEntity.java
-index b49053f9..c1938a63 100644
+index b49053f..c1938a6 100644
 --- a/src/main/java/org/bukkit/entity/HumanEntity.java
 +++ b/src/main/java/org/bukkit/entity/HumanEntity.java
 @@ -338,4 +338,21 @@ public interface HumanEntity extends LivingEntity, AnimalTamer, Permissible, Inv

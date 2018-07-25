@@ -1,11 +1,11 @@
-From b88d7f9e13033e848b422ad3ad24c59c362bf3a4 Mon Sep 17 00:00:00 2001
+From 798cc611baea5e0e1e8c8e4bd9c5426e6271f4fa Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 14 Dec 2016 23:33:02 -0500
 Subject: [PATCH] Add AsyncClientConnectEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index a27ee39b..79eeee38 100644
+index a27ee39..79eeee3 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -100,6 +100,7 @@ public class ServerConnection {
@@ -18,7 +18,7 @@ index a27ee39b..79eeee38 100644
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/AsyncClientConnectEvent.java b/src/main/java/org/bukkit/craftbukkit/event/AsyncClientConnectEvent.java
 new file mode 100644
-index 00000000..b6d8ba9c
+index 0000000..b6d8ba9
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/event/AsyncClientConnectEvent.java
 @@ -0,0 +1,34 @@

@@ -1,11 +1,11 @@
-From 4489c56cef44d326bc622ab6bf5032736bd0e95b Mon Sep 17 00:00:00 2001
+From 97e312c0b11f45b9173e48aa11e829e9630225ed Mon Sep 17 00:00:00 2001
 From: YukonAppleGeek <yukonvinecki@gmail.com>
 Date: Sun, 26 May 2013 18:43:56 -0700
 Subject: [PATCH] Add PlayerSpawnEntityEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/ItemMonsterEgg.java b/src/main/java/net/minecraft/server/ItemMonsterEgg.java
-index 4ce7ffee..4aa2b89a 100644
+index 4ce7ffe..4aa2b89 100644
 --- a/src/main/java/net/minecraft/server/ItemMonsterEgg.java
 +++ b/src/main/java/net/minecraft/server/ItemMonsterEgg.java
 @@ -5,6 +5,12 @@ import java.util.List;

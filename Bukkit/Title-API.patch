@@ -1,11 +1,11 @@
-From e1360c01684877fe35053757251114227f258c4c Mon Sep 17 00:00:00 2001
+From 4f003db9ac57a674dd5c34dd339a3c3d64d989b6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 28 Feb 2015 04:32:26 -0500
 Subject: [PATCH] Title API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 2df5e862..c7937198 100644
+index 2df5e86..c793719 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1601,4 +1601,57 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
