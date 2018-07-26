@@ -1,11 +1,11 @@
-From 920dacd84c108de85749de17832f7300791abe88 Mon Sep 17 00:00:00 2001
+From da994f46d9f8c2257898654c61299c74654f9edd Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 06:44:49 -0400
 Subject: [PATCH] Access items by EquipmentSlot
 
 
 diff --git a/src/main/java/org/bukkit/inventory/PlayerInventory.java b/src/main/java/org/bukkit/inventory/PlayerInventory.java
-index 557cc04..6ce8509 100644
+index 557cc04d..6ce8509d 100644
 --- a/src/main/java/org/bukkit/inventory/PlayerInventory.java
 +++ b/src/main/java/org/bukkit/inventory/PlayerInventory.java
 @@ -179,6 +179,10 @@ public interface PlayerInventory extends Inventory {

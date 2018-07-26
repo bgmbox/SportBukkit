@@ -1,11 +1,11 @@
-From b626397711cfee25c57254d8c0ff62460e402b88 Mon Sep 17 00:00:00 2001
+From 91883ffc3e3a9c7f68bc613d07b3150b97637ea3 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 03:45:49 -0500
 Subject: [PATCH] Fix invalid items in villager trades
 
 
 diff --git a/src/main/java/net/minecraft/server/MerchantRecipe.java b/src/main/java/net/minecraft/server/MerchantRecipe.java
-index 96f3e16..173c53c 100644
+index 96f3e16d..173c53cc 100644
 --- a/src/main/java/net/minecraft/server/MerchantRecipe.java
 +++ b/src/main/java/net/minecraft/server/MerchantRecipe.java
 @@ -101,6 +101,16 @@ public class MerchantRecipe {

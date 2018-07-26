@@ -1,11 +1,11 @@
-From 50100666ea4b4029559fde53f103d2945a8723a8 Mon Sep 17 00:00:00 2001
+From ad6e5a4d29573aee2120f09272fd6fd5283521ca Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Feb 2015 08:28:39 -0500
 Subject: [PATCH] Fix TNT physics
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 7cb8102..1b5b4fd 100644
+index 7cb81022..1b5b4fd6 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1103,7 +1103,7 @@ public abstract class Entity implements ICommandListener {
@@ -18,7 +18,7 @@ index 7cb8102..1b5b4fd 100644
              this.inWater = false;
          } else if (this.world.a(this.getBoundingBox().grow(0.0D, -0.4000000059604645D, 0.0D).shrink(0.001D), Material.WATER, this)) {
 diff --git a/src/main/java/net/minecraft/server/EntityTNTPrimed.java b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
-index 6c3d019..89b9f0b 100644
+index 6c3d0192..89b9f0ba 100644
 --- a/src/main/java/net/minecraft/server/EntityTNTPrimed.java
 +++ b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
 @@ -81,6 +81,43 @@ public class EntityTNTPrimed extends Entity {
@@ -75,18 +75,18 @@ index 6c3d019..89b9f0b 100644
  
      public void setFuseTicks(int i) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index acc9a95..cdcef0f 100644
+index acc9a958..cdcef0ff 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -613,6 +613,11 @@ public final class CraftServer implements Server {
+@@ -612,6 +612,11 @@ public final class CraftServer implements Server {
+         return this.configuration.getBoolean("settings.fetch-skulls", true);
      }
  
-     @Override
++    @Override
 +    public boolean getWaterPushesTNT() {
 +        return this.configuration.getBoolean("settings.water-pushes-tnt", true);
 +    }
 +
-+    @Override
+     @Override
      public int getTicksPerAnimalSpawns() {
          return this.configuration.getInt("ticks-per.animal-spawns");
-     }

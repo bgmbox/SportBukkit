@@ -1,11 +1,11 @@
-From 0b61d303798ad525e1dd4822c2dd376f4a39393c Mon Sep 17 00:00:00 2001
+From e8b2732dd99347f44e8cc3622668788237532c62 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 25 Sep 2014 18:42:47 -0400
 Subject: [PATCH] Fix deadlock during shutdown
 
 
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index b92d916..c91627d 100644
+index b92d916f..c91627dc 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -20,6 +20,7 @@ import io.netty.util.concurrent.Future;

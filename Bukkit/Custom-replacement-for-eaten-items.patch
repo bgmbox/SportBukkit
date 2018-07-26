@@ -1,11 +1,11 @@
-From f579db41dedb6f44fa55cc4a69f110d31e9e751f Mon Sep 17 00:00:00 2001
+From 08cd04f448f1731986fce5974d27185a36076396 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 21 Jun 2015 15:05:21 -0400
 Subject: [PATCH] Custom replacement for eaten items
 
 
 diff --git a/src/main/java/org/bukkit/event/player/PlayerItemConsumeEvent.java b/src/main/java/org/bukkit/event/player/PlayerItemConsumeEvent.java
-index 8ab76b1..a81b642 100644
+index 8ab76b1d..a81b6429 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerItemConsumeEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerItemConsumeEvent.java
 @@ -20,6 +20,7 @@ public class PlayerItemConsumeEvent extends PlayerEvent implements Cancellable {

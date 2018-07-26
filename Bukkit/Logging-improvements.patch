@@ -1,11 +1,11 @@
-From 36849624428748d33b4c2b3cf6902da64d08183e Mon Sep 17 00:00:00 2001
+From a66b425f871ce3c93fa15b41595fbf42fa0be9c6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 10 Jul 2015 23:07:53 -0400
 Subject: [PATCH] Logging improvements
 
 
 diff --git a/src/main/java/org/bukkit/plugin/PluginLogger.java b/src/main/java/org/bukkit/plugin/PluginLogger.java
-index f43c10b..f409a28 100644
+index f43c10b0..f409a285 100644
 --- a/src/main/java/org/bukkit/plugin/PluginLogger.java
 +++ b/src/main/java/org/bukkit/plugin/PluginLogger.java
 @@ -1,6 +1,7 @@
@@ -51,7 +51,7 @@ index f43c10b..f409a28 100644
  
      @Override
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
-index 744314a..8033385 100644
+index 744314a5..80333857 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 @@ -283,7 +283,7 @@ public abstract class JavaPlugin extends PluginBase {

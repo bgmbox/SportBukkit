@@ -1,11 +1,11 @@
-From c9b486f7ae6442fbb4054d0f666884088a6214de Mon Sep 17 00:00:00 2001
+From d054412db4e8ce8b9bcea0aedbeafc85e7e775fb Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 12 Aug 2016 20:49:50 -0400
 Subject: [PATCH] Remove armorToughness limit
 
 
 diff --git a/src/main/java/net/minecraft/server/GenericAttributes.java b/src/main/java/net/minecraft/server/GenericAttributes.java
-index d60cc23..ef139e7 100644
+index d60cc232..ef139e79 100644
 --- a/src/main/java/net/minecraft/server/GenericAttributes.java
 +++ b/src/main/java/net/minecraft/server/GenericAttributes.java
 @@ -18,7 +18,7 @@ public class GenericAttributes {

@@ -1,4 +1,4 @@
-From bb1a91b2976c4a056c5df50070a02d307a14d9f4 Mon Sep 17 00:00:00 2001
+From c258455c4fd91be26977d7fa0de5276011ddb560 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 14 Jun 2015 04:13:42 -0400
 Subject: [PATCH] Add ExplosionPrimeByEntityEvent
@@ -6,7 +6,7 @@ Subject: [PATCH] Add ExplosionPrimeByEntityEvent
 
 diff --git a/src/main/java/org/bukkit/event/entity/ExplosionPrimeByEntityEvent.java b/src/main/java/org/bukkit/event/entity/ExplosionPrimeByEntityEvent.java
 new file mode 100644
-index 0000000..6b7d13f
+index 00000000..6b7d13f6
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/entity/ExplosionPrimeByEntityEvent.java
 @@ -0,0 +1,34 @@

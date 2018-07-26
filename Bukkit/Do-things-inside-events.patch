@@ -1,11 +1,11 @@
-From aa9730a9b4f3fcf14130181936bad59ad1d042ce Mon Sep 17 00:00:00 2001
+From a139e309bc9d480986550dcb95ebab7464cbb9ef Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 23 Dec 2016 14:05:06 -0500
 Subject: [PATCH] Do things inside events
 
 
 diff --git a/src/main/java/org/bukkit/event/player/PlayerQuitEvent.java b/src/main/java/org/bukkit/event/player/PlayerQuitEvent.java
-index 5c8dc1b..e4f916a 100644
+index 5c8dc1b9..e4f916a9 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerQuitEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerQuitEvent.java
 @@ -5,6 +5,9 @@ import org.bukkit.event.HandlerList;

@@ -1,11 +1,11 @@
-From 758629fe3bc94f6dcd79aa220a24c1e750b04407 Mon Sep 17 00:00:00 2001
+From 70b779c926c5df873d1002e0b90e402e2b972309 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 7 Sep 2016 03:17:16 -0400
 Subject: [PATCH] Fix default effects on legacy custom potions
 
 
 diff --git a/src/main/java/net/minecraft/server/DataConverterPotionId.java b/src/main/java/net/minecraft/server/DataConverterPotionId.java
-index 201f560..f08203e 100644
+index 201f5609..f08203ef 100644
 --- a/src/main/java/net/minecraft/server/DataConverterPotionId.java
 +++ b/src/main/java/net/minecraft/server/DataConverterPotionId.java
 @@ -18,7 +18,9 @@ public class DataConverterPotionId implements IDataConverter {

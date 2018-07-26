@@ -1,11 +1,11 @@
-From 663229e9576d265c5ffe4a684d211a7c2b363010 Mon Sep 17 00:00:00 2001
+From 17dcf8c861ad5a95cefb7d29360ad945992c434b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 5 Aug 2016 09:52:58 -0400
 Subject: [PATCH] Mojang task queue access
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 47a5ea7..bf05a0d 100644
+index 47a5ea72..bf05a0d7 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -35,6 +35,7 @@ import org.bukkit.inventory.Merchant;
@@ -30,7 +30,7 @@ index 47a5ea7..bf05a0d 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index ffc84c5..02efb3c 100644
+index ffc84c54..02efb3cf 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -34,6 +34,7 @@ import org.bukkit.inventory.Merchant;

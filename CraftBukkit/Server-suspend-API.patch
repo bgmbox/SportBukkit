@@ -1,11 +1,11 @@
-From a5130e8c91047d992c4886628649fa8c36c1e12d Mon Sep 17 00:00:00 2001
+From fa0a549a601eb153651e38321a150a0f105fa4a6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:28:26 -0500
 Subject: [PATCH] Server suspend API
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 2bc0220..65ede80 100644
+index 2bc02200..65ede80c 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -285,6 +285,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
@@ -25,7 +25,7 @@ index 2bc0220..65ede80 100644
  
      // SportBukkit start
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 94732a2..3ba6d2b 100644
+index 94732a26..3ba6d2b6 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -35,6 +35,7 @@ import java.util.UUID;
@@ -200,7 +200,7 @@ index 94732a2..3ba6d2b 100644
  
      public void addMainThreadTask(Runnable task) {
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index fd4b0bc..a27ee39 100644
+index fd4b0bc8..a27ee39b 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -186,4 +186,10 @@ public class ServerConnection {
@@ -215,7 +215,7 @@ index fd4b0bc..a27ee39 100644
 +    // SportBukkit end
  }
 diff --git a/src/main/java/net/minecraft/server/ThreadWatchdog.java b/src/main/java/net/minecraft/server/ThreadWatchdog.java
-index dd18b4e..a3481c0 100644
+index dd18b4e0..a3481c0f 100644
 --- a/src/main/java/net/minecraft/server/ThreadWatchdog.java
 +++ b/src/main/java/net/minecraft/server/ThreadWatchdog.java
 @@ -22,8 +22,17 @@ public class ThreadWatchdog implements Runnable {
@@ -237,7 +237,7 @@ index dd18b4e..a3481c0 100644
              long j = MinecraftServer.aw();
              long k = j - i;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index fc93baf..85f97e1 100644
+index fc93bafa..85f97e11 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -6,6 +6,8 @@ import java.io.FileInputStream;
@@ -289,10 +289,11 @@ index fc93baf..85f97e1 100644
          this.playerList = (DedicatedPlayerList) playerList;
          this.playerView = Collections.unmodifiableList(Lists.transform(playerList.players, EntityPlayer::getBukkitEntity));
          this.playersById = Collections.unmodifiableMap(Maps.transformValues(playerList.playersById(), EntityPlayer::getBukkitEntity));
-@@ -632,6 +644,17 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -631,6 +643,17 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+         return this.configuration.getInt("ticks-per.monster-spawns");
      }
  
-     @Override
++    @Override
 +    public @Nullable
 +    Duration getEmptyServerSuspendDelay() {
 +        try {
@@ -303,10 +304,9 @@ index fc93baf..85f97e1 100644
 +        }
 +    }
 +
-+    @Override
+     @Override
      public PluginManager getPluginManager() {
          return pluginManager;
-     }
 @@ -1897,4 +1920,53 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
  
          return task instanceof Wrapped ? task : new Wrapped();

@@ -1,11 +1,11 @@
-From f5ed36e00e38077db356f2ab8135107942d3f7b5 Mon Sep 17 00:00:00 2001
+From 57955b0e36d7da04dfa158536f21266d9819cdcb Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 4 Apr 2015 22:59:54 -0400
 Subject: [PATCH] Complete resource pack API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index bae79b7..88ee571 100644
+index bae79b7b..88ee571e 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1180,10 +1180,15 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
@@ -24,10 +24,11 @@ index bae79b7..88ee571 100644
      public void setResourcePack(String url);
  
      /**
-@@ -1224,6 +1229,18 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1223,6 +1228,18 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+      */
      public void setResourcePack(String url, byte[] hash);
  
-     /**
++    /**
 +     * @return the most recent resource pack status received from the player,
 +     *         or null if no status has ever been received from this player.
 +     */
@@ -39,7 +40,6 @@ index bae79b7..88ee571 100644
 +     */
 +    public boolean hasResourcePack();
 +
-+    /**
+     /**
       * Gets the Scoreboard displayed to this player
       *
-      * @return The current scoreboard seen by this player

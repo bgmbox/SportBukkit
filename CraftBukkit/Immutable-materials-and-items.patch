@@ -1,11 +1,11 @@
-From aa2d3aba3623dcff9651dd536105bffb6801a2fb Mon Sep 17 00:00:00 2001
+From 963bd0ed0c793150561331d1b8502be37c8706c2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 13:57:10 -0500
 Subject: [PATCH] Immutable materials and items
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
-index f22d51e..bca6dfe 100644
+index f22d51e1..bca6dfe5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftItemStack.java
 @@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
@@ -16,10 +16,11 @@ index f22d51e..bca6dfe 100644
  
  @DelegateDeserialization(ItemStack.class)
  public final class CraftItemStack extends ItemStack {
-@@ -175,6 +176,20 @@ public final class CraftItemStack extends ItemStack {
+@@ -174,6 +175,20 @@ public final class CraftItemStack extends ItemStack {
+         }
      }
  
-     @Override
++    @Override
 +    public MaterialData getData() {
 +        if(handle == null) return Material.AIR.getNewData((byte) 0);
 +        return CraftMagicNumbers.getMaterial(handle.getItem())
@@ -33,12 +34,11 @@ index f22d51e..bca6dfe 100644
 +        }
 +    }
 +
-+    @Override
+     @Override
      public int getMaxStackSize() {
          return (handle == null) ? Material.AIR.getMaxStackSize() : handle.getItem().getMaxStackSize();
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
-index af9ab5c..b1e327b 100644
+index af9ab5c4..b1e327bc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
 @@ -61,7 +61,7 @@ import org.bukkit.util.ImmutableMaterialSet;
@@ -73,7 +73,7 @@ index af9ab5c..b1e327b 100644
          if (object == null) {
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/ImItemStackTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/ImItemStackTest.java
 new file mode 100644
-index 0000000..0dd64b3
+index 00000000..0dd64b3a
 --- /dev/null
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/ImItemStackTest.java
 @@ -0,0 +1,98 @@
@@ -176,7 +176,7 @@ index 0000000..0dd64b3
 +    }
 +}
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java
-index 6140ede..8935fcc 100644
+index 6140edee..8935fccf 100644
 --- a/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/ItemStackTest.java
 @@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.inventory;
@@ -253,7 +253,7 @@ index 6140ede..8935fcc 100644
 +    }
  }
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java
-index 1f5a6a3..44ac9db 100644
+index 1f5a6a32..44ac9db3 100644
 --- a/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/NMSCraftItemStackTest.java
 @@ -1,14 +1,20 @@

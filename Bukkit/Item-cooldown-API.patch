@@ -1,11 +1,11 @@
-From e3478dc744ea2233904b0f350e114ae75d1a4f86 Mon Sep 17 00:00:00 2001
+From 90b2bcc2a6f6d0442ceb8c3f2593373d48a009ba Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 26 Jun 2016 01:57:07 -0400
 Subject: [PATCH] Item cooldown API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 0f47486..f17fa7c 100644
+index 0f47486c..f17fa7ce 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1747,4 +1747,30 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

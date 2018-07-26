@@ -1,11 +1,11 @@
-From 8044c5d20dcd68402b0b93ca70c543a2a278f7ab Mon Sep 17 00:00:00 2001
+From 1bd625d63356c026d02be50af3b97bfb80d20bf3 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 01:42:17 -0400
 Subject: [PATCH] Multi-passenger API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index bc4a26f..d806373 100644
+index bc4a26f1..d806373a 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1909,6 +1909,7 @@ public abstract class Entity implements ICommandListener {
@@ -25,7 +25,7 @@ index bc4a26f..d806373 100644
          return (List) (this.passengers.isEmpty() ? Collections.emptyList() : Lists.newArrayList(this.passengers));
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 9d922bf..084b814 100644
+index 9d922bfc..084b814b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -2,9 +2,12 @@ package org.bukkit.craftbukkit.entity;
@@ -41,10 +41,11 @@ index 9d922bf..084b814 100644
  import java.util.List;
  import java.util.Set;
  import java.util.UUID;
-@@ -396,16 +399,6 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+@@ -395,16 +398,6 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+         }
      }
  
-     @Override
+-    @Override
 -    public List<org.bukkit.entity.Entity> getPassengers() {
 -        return Lists.newArrayList(Lists.transform(getHandle().passengers, new Function<Entity, org.bukkit.entity.Entity>() {
 -            @Override
@@ -54,10 +55,9 @@ index 9d922bf..084b814 100644
 -        }));
 -    }
 -
--    @Override
+     @Override
      public boolean addPassenger(org.bukkit.entity.Entity passenger) {
          Preconditions.checkArgument(passenger != null, "passenger == null");
- 
 @@ -433,6 +426,47 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
          return true;
      }
@@ -120,13 +120,14 @@ index 9d922bf..084b814 100644
          if (!isInsideVehicle()) {
              return false;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 77355f5..ae4bcce 100644
+index 77355f54..ae4bcced 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -2002,6 +2002,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -2001,6 +2001,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         getHandle().playerConnection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.CLEAR, (BaseComponent[]) null, 0, 0, 0));
      }
  
-     @Override
++    @Override
 +    public Vector getPredictedVelocity() {
 +        return getHandle().getPredictedVelocity();
 +    }
@@ -146,7 +147,6 @@ index 77355f5..ae4bcce 100644
 +        return getHandle().hasUnackedVelocity();
 +    }
 +
-+    @Override
+     @Override
      public boolean teleportRelative(org.bukkit.util.Vector deltaPos, float deltaYaw, float deltaPitch) {
          return teleportRelative(deltaPos, deltaYaw, deltaPitch, PlayerTeleportEvent.TeleportCause.PLUGIN);
-     }

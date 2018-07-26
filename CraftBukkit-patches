@@ -175,3 +175,4 @@ Add-setting-to-disable-shield-knockback
 SportBukkit
 Rework-knockback
 Fix-sprint-disabling-when-engaging-in-combat
+Dont-kick-for-tab-complete-spamming

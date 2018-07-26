@@ -1,11 +1,11 @@
-From 2a86f05992e21bb5a89c47e539c5a80728f9e5d9 Mon Sep 17 00:00:00 2001
+From af558456d89e3d6ecb9decf0a43344fdab66362c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:05 -0500
 Subject: [PATCH] SportBukkit
 
 
 diff --git a/README.md b/README.md
-index eb5af6b..b2bea51 100644
+index eb5af6b7..b2bea516 100644
 --- a/README.md
 +++ b/README.md
 @@ -1,4 +1,4 @@
@@ -15,7 +15,7 @@ index eb5af6b..b2bea51 100644
  A plugin API for [Minecraft](https://minecraft.net/) servers, currently maintained by [SpigotMC](http://www.spigotmc.org/).
  
 diff --git a/src/main/java/org/bukkit/OfflinePlayer.java b/src/main/java/org/bukkit/OfflinePlayer.java
-index 3a48184..4038513 100644
+index 3a481844..4038513e 100644
 --- a/src/main/java/org/bukkit/OfflinePlayer.java
 +++ b/src/main/java/org/bukkit/OfflinePlayer.java
 @@ -9,8 +9,9 @@ import org.bukkit.entity.Player;
@@ -30,7 +30,7 @@ index 3a48184..4038513 100644
      /**
       * Checks if this player is currently online
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 8a02d40..456f53c 100644
+index 8a02d40a..456f53c0 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -670,6 +670,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
@@ -46,7 +46,7 @@ index 8a02d40..456f53c 100644
       * Broadcasts the specified message to every user with the given
       * permission name.
 diff --git a/src/main/java/org/bukkit/event/server/ServerListPingEvent.java b/src/main/java/org/bukkit/event/server/ServerListPingEvent.java
-index 343f238..ef43a39 100644
+index 343f238f..ef43a393 100644
 --- a/src/main/java/org/bukkit/event/server/ServerListPingEvent.java
 +++ b/src/main/java/org/bukkit/event/server/ServerListPingEvent.java
 @@ -1,7 +1,9 @@
@@ -83,7 +83,7 @@ index 343f238..ef43a39 100644
      public HandlerList getHandlers() {
          return handlers;
 diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
-index 545dbff..53c316c 100644
+index 545dbffe..53c316c7 100644
 --- a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 +++ b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 @@ -24,6 +24,7 @@ import org.yaml.snakeyaml.nodes.Tag;
@@ -105,7 +105,7 @@ index 545dbff..53c316c 100644
          loadBefore = makePluginNameList(map, "loadbefore");
  
 diff --git a/src/test/java/org/bukkit/LocationTest.java b/src/test/java/org/bukkit/LocationTest.java
-index fa24776..4d56747 100644
+index fa247763..4d56747f 100644
 --- a/src/test/java/org/bukkit/LocationTest.java
 +++ b/src/test/java/org/bukkit/LocationTest.java
 @@ -5,6 +5,7 @@ import static org.junit.Assert.*;

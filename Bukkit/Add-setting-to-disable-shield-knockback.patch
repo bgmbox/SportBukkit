@@ -1,40 +1,40 @@
-From a1aac194c74596c13eabef355605b1f429c3b8aa Mon Sep 17 00:00:00 2001
+From 513b9997cb27695e12344bbba837587329b143c1 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Mon, 12 Feb 2018 17:15:54 -0800
 Subject: [PATCH] Add setting to disable shield knockback
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 791ed02..c163cde 100644
+index 791ed020..c163cde4 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -368,6 +368,13 @@ public final class Bukkit {
+@@ -367,6 +367,13 @@ public final class Bukkit {
+         return server.getAdvancementsEnabled();
      }
  
-     /**
++    /**
 +     * @see Server#getDisableShieldKnockback()
 +     */
 +    public static boolean getDisableShieldKnockback() {
 +        return server.getDisableShieldKnockback();
 +    }
 +
-+    /**
+     /**
       * Gets default ticks per animal spawns value.
       * <p>
-      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 874a92c..8a02d40 100644
+index 874a92c4..8a02d40a 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -294,6 +294,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -293,6 +293,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+      */
      public boolean getAdvancementsEnabled();
  
-     /**
++    /**
 +     * Make shields less effective
 +     */
 +    public boolean getDisableShieldKnockback();
 +
-+    /**
+     /**
       * Gets default ticks per animal spawns value.
       * <p>
-      * <b>Example Usage:</b>

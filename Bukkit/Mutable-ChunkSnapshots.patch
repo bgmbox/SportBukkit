@@ -1,11 +1,11 @@
-From 13ddacbe7abd5537950174a02420ee7d719a7762 Mon Sep 17 00:00:00 2001
+From db062d9ca63583af5dbfb7137fc5796c40eb5aca Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 3 Jun 2015 19:09:27 -0400
 Subject: [PATCH] Mutable ChunkSnapshots
 
 
 diff --git a/src/main/java/org/bukkit/ChunkSnapshot.java b/src/main/java/org/bukkit/ChunkSnapshot.java
-index 08e0bcd..462d6ac 100644
+index 08e0bcdd..462d6ac6 100644
 --- a/src/main/java/org/bukkit/ChunkSnapshot.java
 +++ b/src/main/java/org/bukkit/ChunkSnapshot.java
 @@ -1,6 +1,9 @@
@@ -18,10 +18,11 @@ index 08e0bcd..462d6ac 100644
  
  /**
   * Represents a static, thread-safe snapshot of chunk of blocks.
-@@ -66,6 +69,16 @@ public interface ChunkSnapshot {
+@@ -65,6 +68,16 @@ public interface ChunkSnapshot {
+     @Deprecated
      int getBlockData(int x, int y, int z);
  
-     /**
++    /**
 +     * Get the material of the block at the given position in the chunk
 +     */
 +    MaterialData getMaterialData(int x, int y, int z);
@@ -31,10 +32,9 @@ index 08e0bcd..462d6ac 100644
 +     */
 +    MaterialData getMaterialData(Vector pos);
 +
-+    /**
+     /**
       * Get sky light level for block at corresponding coordinate in the chunk
       *
-      * @param x 0-15
 @@ -138,4 +151,38 @@ public interface ChunkSnapshot {
       * @return true if empty, false if not
       */

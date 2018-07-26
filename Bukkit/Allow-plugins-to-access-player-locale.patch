@@ -1,28 +1,28 @@
-From 8edfabcd804de2924580b067240b61fca9e6e2cf Mon Sep 17 00:00:00 2001
+From 340b30cab0b73578aa1cf818e5f51cfe75d9558d Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Sun, 5 Jan 2014 20:32:00 -0600
 Subject: [PATCH] Allow plugins to access player locale
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index fdb5f0c..1dd6de7 100644
+index fdb5f0c8..1dd6de7b 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1443,6 +1443,12 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1442,6 +1442,12 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+      */
      public String getLocale();
  
-     /**
++    /**
 +     * Set the player's ISO-standard locale. Passing null will clear the player's locale,
 +     * effectively setting it to the default of "en_US".
 +     */
 +    public void setLocale(String locale);
 +
-+    /**
+     /**
       * Gets the hostname (an IP or a DNS domain) and port the client has used
       * to connect to this server. This is generated client-side, and it may
-      * return a blank string if the client didn't send it, or an invalid
 diff --git a/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java b/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java
-index fbbfccc..33c95f3 100644
+index fbbfcccc..33c95f3c 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerLocaleChangeEvent.java
 @@ -4,26 +4,38 @@ import org.bukkit.entity.Player;

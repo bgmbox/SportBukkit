@@ -1,11 +1,11 @@
-From 20d860721d87b818a38ddbe559b796ebd59ac282 Mon Sep 17 00:00:00 2001
+From e9f31e5fe5f678f4f0cb40a3584ae08d6a54a5c5 Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 13 Dec 2014 12:59:14 +1100
 Subject: [PATCH] BungeeCord Chat API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 448354c..ee3cb96 100644
+index 448354cf..ee3cb967 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -1205,4 +1205,22 @@ public final class Bukkit {
@@ -32,7 +32,7 @@ index 448354c..ee3cb96 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index a816b91..e712174 100644
+index a816b91c..e7121742 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -983,4 +983,18 @@ public interface Server extends PluginMessageRecipient {
@@ -55,7 +55,7 @@ index a816b91..e712174 100644
 +    public void broadcast(net.md_5.bungee.api.chat.BaseComponent... components);
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 5dbcdbb..d86fc6b 100644
+index 5dbcdbbe..d86fc6b3 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1567,4 +1567,18 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

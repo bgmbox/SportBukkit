@@ -1,11 +1,11 @@
-From 3a4f54b8e768646bb70f03373f8d61d5220f6133 Mon Sep 17 00:00:00 2001
+From 25cb800f31d9b7346e3fe9040a485406f6883ea2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 11 Feb 2014 22:12:50 -0600
 Subject: [PATCH] Fake name and skin API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 801a4b1..e325bd4 100644
+index 801a4b18..e325bd43 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -26,7 +26,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -27,7 +27,7 @@ index 801a4b1..e325bd4 100644
          this.datawatcher.register(EntityHuman.bt, new NBTTagCompound());
          this.datawatcher.register(EntityHuman.bu, new NBTTagCompound());
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 35d6f30..57d51d3 100644
+index 35d6f308..57d51d34 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -20,10 +20,12 @@ import org.bukkit.craftbukkit.CraftWorld;
@@ -71,7 +71,7 @@ index 35d6f30..57d51d3 100644
  
      public EntityHuman.EnumChatVisibility getChatFlags() {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java b/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
-index d385a9c..cb3b8a2 100644
+index d385a9c9..cb3b8a2f 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutPlayerInfo.java
 @@ -14,6 +14,21 @@ public class PacketPlayOutPlayerInfo implements Packet<PacketListenerPlayOut> {
@@ -97,7 +97,7 @@ index d385a9c..cb3b8a2 100644
  
      public PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction packetplayoutplayerinfo_enumplayerinfoaction, EntityPlayer... aentityplayer) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java b/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java
-index 549d4e8..6ecd703 100644
+index 549d4e89..6ecd7036 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutScoreboardTeam.java
 @@ -18,6 +18,30 @@ public class PacketPlayOutScoreboardTeam implements Packet<PacketListenerPlayOut
@@ -132,7 +132,7 @@ index 549d4e8..6ecd703 100644
          this.e = ScoreboardTeamBase.EnumNameTagVisibility.ALWAYS.e;
          this.f = ScoreboardTeamBase.EnumTeamPush.ALWAYS.e;
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 024293a..484d1a4 100644
+index 024293a3..484d1a4c 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -8,6 +8,7 @@ import io.netty.util.concurrent.Future;
@@ -213,7 +213,7 @@ index 024293a..484d1a4 100644
              CrashReport crashreport = CrashReport.a(throwable, "Sending packet");
              CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Packet being sent");
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index bdf06f9..df0886b 100644
+index bdf06f97..df0886b0 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -30,6 +30,7 @@ import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
@@ -255,7 +255,7 @@ index bdf06f9..df0886b 100644
          entityplayer.sentListPacket = true;
          // CraftBukkit end
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e3f4f0a..a59f3b9 100644
+index e3f4f0a3..a59f3b9e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -407,7 +407,7 @@ public final class CraftServer implements Server {
@@ -316,10 +316,11 @@ index e3f4f0a..a59f3b9 100644
  
              if (partialName.equalsIgnoreCase(iterPlayerName)) {
                  // Exact match
-@@ -486,6 +493,21 @@ public final class CraftServer implements Server {
+@@ -485,6 +492,21 @@ public final class CraftServer implements Server {
+         return matchedPlayers;
      }
  
-     @Override
++    @Override
 +    public Player getPlayer(String name) {
 +        return this.getPlayer(name, null);
 +    }
@@ -334,10 +335,9 @@ index e3f4f0a..a59f3b9 100644
 +        return this.matchPlayer(name, null);
 +    }
 +
-+    @Override
+     @Override
      public int getMaxPlayers() {
          return playerList.getMaxPlayers();
-     }
 @@ -1616,8 +1638,8 @@ public final class CraftServer implements Server {
          PlayerChatTabCompleteEvent event = new PlayerChatTabCompleteEvent(player, message, completions);
          String token = event.getLastToken();
@@ -350,23 +350,23 @@ index e3f4f0a..a59f3b9 100644
          }
          pluginManager.callEvent(event);
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
-index 9acd92c..12fb615 100644
+index 9acd92c3..12fb6156 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
-@@ -59,6 +59,11 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
+@@ -58,6 +58,11 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
+         return getCallee().getName();
      }
  
-     @Override
++    @Override
 +    public String getName(CommandSender viewer) {
 +        return getCallee().getName(viewer);
 +    }
 +
-+    @Override
+     @Override
      public boolean isPermissionSet(String name) {
          return getCaller().isPermissionSet(name);
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
-index 1314c74..8f875ca 100644
+index 1314c744..8f875ca0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 @@ -68,4 +68,9 @@ public abstract class ServerCommandSender implements CommandSender {
@@ -380,7 +380,7 @@ index 1314c74..8f875ca 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 3ce1e67..1ce0dac 100644
+index 3ce1e671..1ce0dac8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -14,6 +14,7 @@ import org.bukkit.Location;
@@ -391,36 +391,36 @@ index 3ce1e67..1ce0dac 100644
  import org.bukkit.craftbukkit.CraftServer;
  import org.bukkit.craftbukkit.CraftWorld;
  import org.bukkit.event.entity.EntityDamageEvent;
-@@ -563,6 +564,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+@@ -562,6 +563,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+         return getHandle().getName();
      }
  
-     @Override
++    @Override
 +    public String getName(CommandSender viewer) {
 +        return this.getName();
 +    }
 +
-+    @Override
+     @Override
      public boolean isPermissionSet(String name) {
          return getPermissibleBase().isPermissionSet(name);
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
-index 3817675..75c428b 100644
+index 38176750..75c428b4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
-@@ -62,6 +62,11 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
+@@ -61,6 +61,11 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
+         return getHandle().getCommandBlock().getName();
      }
  
-     @Override
++    @Override
 +    public String getName(org.bukkit.command.CommandSender viewer) {
 +        return this.getName();
 +    }
 +
-+    @Override
+     @Override
      public boolean isOp() {
          return true;
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index cf91ce5..04d04c6 100644
+index cf91ce5a..04d04c63 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1,5 +1,6 @@
@@ -471,10 +471,11 @@ index cf91ce5..04d04c6 100644
      }
  
      public GameProfile getProfile() {
-@@ -164,6 +173,257 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -163,6 +172,257 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         }
      }
  
-     @Override
++    @Override
 +    public Set<Skin.Part> getSkinParts() {
 +        return Skins.partsFromFlags((int) this.getHandle().getDataWatcher().get(EntityHuman.SKIN_PARTS));
 +    }
@@ -725,10 +726,9 @@ index cf91ce5..04d04c6 100644
 +        }
 +        return name;
 +    }
-+    @Override
+     @Override
      public String getDisplayName() {
          return getHandle().displayName;
-     }
 @@ -1018,7 +1278,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          EntityTracker tracker = ((WorldServer) entity.world).tracker;
          EntityPlayer other = ((CraftPlayer) player).getHandle();
@@ -748,7 +748,7 @@ index cf91ce5..04d04c6 100644
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Skins.java b/src/main/java/org/bukkit/craftbukkit/util/Skins.java
 new file mode 100644
-index 0000000..43345fa
+index 00000000..43345fa5
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/util/Skins.java
 @@ -0,0 +1,61 @@

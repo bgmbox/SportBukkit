@@ -1,4 +1,4 @@
-From b6a81951682a877d1d8049538fa3031a717475c0 Mon Sep 17 00:00:00 2001
+From 2ceb2348095370ca6e112b217f36d18b94133fae Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:15 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
@@ -6,7 +6,7 @@ Subject: [PATCH] Add PoseFlag and EntityLocation
 
 diff --git a/src/main/java/org/bukkit/EntityLocation.java b/src/main/java/org/bukkit/EntityLocation.java
 new file mode 100644
-index 0000000..13a98ee
+index 00000000..13a98ee3
 --- /dev/null
 +++ b/src/main/java/org/bukkit/EntityLocation.java
 @@ -0,0 +1,104 @@
@@ -116,7 +116,7 @@ index 0000000..13a98ee
 +}
 diff --git a/src/main/java/org/bukkit/PoseFlag.java b/src/main/java/org/bukkit/PoseFlag.java
 new file mode 100644
-index 0000000..4d8fbee
+index 00000000..4d8fbeed
 --- /dev/null
 +++ b/src/main/java/org/bukkit/PoseFlag.java
 @@ -0,0 +1,41 @@
@@ -162,7 +162,7 @@ index 0000000..4d8fbee
 +    RIDING;
 +}
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index b367baa..6264292 100644
+index b367baae..62642922 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -1,9 +1,11 @@
@@ -186,20 +186,20 @@ index b367baa..6264292 100644
      /**
       * Stores the entity's current position in the provided Location object.
       * <p>
-@@ -42,6 +46,11 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
+@@ -41,6 +45,11 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
+      */
      public Location getLocation(Location loc);
  
-     /**
++    /**
 +     * The set of {@link PoseFlag}s describing this entity's current state
 +     */
 +    Set<PoseFlag> getPoseFlags();
 +
-+    /**
+     /**
       * Sets this entity's velocity
       *
-      * @param velocity New velocity to travel with
 diff --git a/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java b/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java
-index 7687667..60160a3 100644
+index 7687667a..60160a3c 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerMoveEvent.java
 @@ -1,24 +1,35 @@
@@ -284,7 +284,7 @@ index 7687667..60160a3 100644
  
      private void validateLocation(Location loc) {
 diff --git a/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java b/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java
-index 330311d..3ca7266 100644
+index 330311df..3ca72663 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerPortalEvent.java
 @@ -1,5 +1,7 @@
@@ -328,7 +328,7 @@ index 330311d..3ca7266 100644
  
      /**
 diff --git a/src/test/java/org/bukkit/plugin/TimedRegisteredListenerTest.java b/src/test/java/org/bukkit/plugin/TimedRegisteredListenerTest.java
-index 88a947f..1d88ffb 100644
+index 88a947f6..1d88ffb1 100644
 --- a/src/test/java/org/bukkit/plugin/TimedRegisteredListenerTest.java
 +++ b/src/test/java/org/bukkit/plugin/TimedRegisteredListenerTest.java
 @@ -9,8 +9,8 @@ import org.bukkit.event.EventPriority;
