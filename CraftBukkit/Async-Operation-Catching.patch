@@ -1,4 +1,4 @@
-From 5e2741332ed8e711406756c1896c13de6ac74164 Mon Sep 17 00:00:00 2001
+From 6747d027770880c4a07fa157f502ba22c154f13f Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Tue, 25 Mar 2014 16:10:01 +1100
 Subject: [PATCH] Async Operation Catching

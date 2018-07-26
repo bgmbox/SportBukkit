@@ -1,4 +1,4 @@
-From 9a9cb828d055b947f7635ed1f2ebd3ce00a53a0a Mon Sep 17 00:00:00 2001
+From 3c400c5e9a1b0905f20630c40e08cbd5839dfc81 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 01:41:17 -0500
 Subject: [PATCH] Enhanced boss bar API

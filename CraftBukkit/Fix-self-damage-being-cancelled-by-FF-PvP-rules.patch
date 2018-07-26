@@ -1,4 +1,4 @@
-From c0ca4610fab9f1c51eb68207743eadbc881ba2ae Mon Sep 17 00:00:00 2001
+From 3e5fb5bbe805a861f61028e99fe798ad0869edc2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 10 Jul 2015 23:32:00 -0400
 Subject: [PATCH] Fix self-damage being cancelled by FF/PvP rules

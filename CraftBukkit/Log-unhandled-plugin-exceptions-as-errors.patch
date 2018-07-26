@@ -1,4 +1,4 @@
-From e4635f12e71208917ca0711b6a95d7422f8f85a9 Mon Sep 17 00:00:00 2001
+From a0550535a6aaf7cad786913ad6c0ed9e40eb0b16 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 9 Dec 2014 02:54:19 -0500
 Subject: [PATCH] Log unhandled plugin exceptions as errors

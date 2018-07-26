@@ -1,4 +1,4 @@
-From 0be28eede5e28348e76818e33865d399e8e28c84 Mon Sep 17 00:00:00 2001
+From eca5f1eb90916ca9a85878359cc526827725bd49 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 1 Jun 2015 06:29:07 -0400
 Subject: [PATCH] Improve BlockState API

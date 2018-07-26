@@ -1,13 +1,31 @@
-From d61d79df9bd735e853949d9b09f0f92531896024 Mon Sep 17 00:00:00 2001
+From cbab75adc2d20b65dbaa2450c8bf956b32f1c6d4 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Thu, 26 Jul 2018 00:37:50 -0700
 Subject: [PATCH] Dont kick for tab complete spamming
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 97b0ac76..a7f8ed67 100644
+index 97b0ac76..be636bb2 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
+@@ -1413,7 +1413,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+                     Waitable waitable = new Waitable() {
+                         @Override
+                         protected Object evaluate() {
+-                            PlayerConnection.this.disconnect(new ChatMessage("disconnect.spam", new Object[0]));
++                            //PlayerConnection.this.disconnect(new ChatMessage("disconnect.spam", new Object[0]));
+                             return null;
+                         }
+                     };
+@@ -1428,7 +1428,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+                         throw new RuntimeException(e);
+                     }
+                 } else {
+-                    this.disconnect(new ChatMessage("disconnect.spam", new Object[0]));
++                    //this.disconnect(new ChatMessage("disconnect.spam", new Object[0]));
+                 }
+                 // CraftBukkit end
+             }
 @@ -2326,7 +2326,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
          PlayerConnectionUtils.ensureMainThread(packetplayintabcomplete, this, this.player.x());
          // CraftBukkit start

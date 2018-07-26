@@ -1,4 +1,4 @@
-From 2ae8ea7cd0ad431fbb98860136189baaf625c079 Mon Sep 17 00:00:00 2001
+From f756d2a986d1f118ea430224fe7c1c4bf1fdd02c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 21 Jan 2017 04:16:04 -0500
 Subject: [PATCH] Fix player leak through map items

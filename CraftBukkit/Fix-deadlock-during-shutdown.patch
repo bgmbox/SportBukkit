@@ -1,4 +1,4 @@
-From e8b2732dd99347f44e8cc3622668788237532c62 Mon Sep 17 00:00:00 2001
+From 37337ac92cdb75f3b81789b1796a9fb767cecb05 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 25 Sep 2014 18:42:47 -0400
 Subject: [PATCH] Fix deadlock during shutdown

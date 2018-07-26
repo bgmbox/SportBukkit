@@ -1,4 +1,4 @@
-From 91883ffc3e3a9c7f68bc613d07b3150b97637ea3 Mon Sep 17 00:00:00 2001
+From e815e348fda70c25862f1dd05bd5c39e49f7dc1d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 03:45:49 -0500
 Subject: [PATCH] Fix invalid items in villager trades

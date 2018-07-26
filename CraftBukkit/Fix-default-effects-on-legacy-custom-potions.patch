@@ -1,4 +1,4 @@
-From 70b779c926c5df873d1002e0b90e402e2b972309 Mon Sep 17 00:00:00 2001
+From a484ee2c283a31cc14a072671049b8cc628f9858 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 7 Sep 2016 03:17:16 -0400
 Subject: [PATCH] Fix default effects on legacy custom potions
