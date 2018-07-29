@@ -1,11 +1,11 @@
-From e2c1bd5e180e6a11dd986384f8dc2a4b47cb7200 Mon Sep 17 00:00:00 2001
+From 14c5538ce6d99feb4d7692a4ef3f36af69da8305 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 6 Mar 2016 03:43:35 -0500
 Subject: [PATCH] Empty chunk API
 
 
 diff --git a/src/main/java/net/minecraft/server/ChunkSection.java b/src/main/java/net/minecraft/server/ChunkSection.java
-index 3d784d0d..06e7fa21 100644
+index 3d784d0..06e7fa2 100644
 --- a/src/main/java/net/minecraft/server/ChunkSection.java
 +++ b/src/main/java/net/minecraft/server/ChunkSection.java
 @@ -63,6 +63,7 @@ public class ChunkSection {
@@ -17,7 +17,7 @@ index 3d784d0d..06e7fa21 100644
          return false; // CraftBukkit - MC-80966
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
-index 99af6359..e219ecb1 100644
+index 99af635..e219ecb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 @@ -103,6 +103,14 @@ public class CraftChunk implements Chunk {

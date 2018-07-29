@@ -1,11 +1,11 @@
-From 74c591e89f7e28d541fcc1299ab10915bc32f516 Mon Sep 17 00:00:00 2001
+From 3edc121a88f01ebefbd32d1b933496ad26450fe6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Mar 2015 03:02:27 -0400
 Subject: [PATCH] Relative teleport API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index c7937198..bae79b7b 100644
+index c793719..bae79b7 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1654,4 +1654,12 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

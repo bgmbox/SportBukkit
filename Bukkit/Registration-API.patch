@@ -1,11 +1,11 @@
-From 9a5c9f7ce887cf857e8342971f7e02c9cd1ddda3 Mon Sep 17 00:00:00 2001
+From 6aa8697aa26f6d577b5ae34a0181cafafe6102fe Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:07:43 -0500
 Subject: [PATCH] Registration API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index fd615d58..0b162c65 100644
+index fd615d5..0b162c6 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -37,6 +37,7 @@ import org.bukkit.permissions.Permissible;
@@ -82,7 +82,7 @@ index fd615d58..0b162c65 100644
  }
 diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/bukkit/BukkitRuntime.java
 new file mode 100644
-index 00000000..1ed31cba
+index 0000000..1ed31cb
 --- /dev/null
 +++ b/src/main/java/org/bukkit/BukkitRuntime.java
 @@ -0,0 +1,20 @@
@@ -107,7 +107,7 @@ index 00000000..1ed31cba
 +    ItemFactory getItemFactory();
 +}
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 446acc49..48d7d4e0 100644
+index 446acc4..48d7d4e 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -52,7 +52,7 @@ import org.bukkit.inventory.meta.ItemMeta;
@@ -121,7 +121,7 @@ index 446acc49..48d7d4e0 100644
       * Used for all administrative messages, such as an operator using a
 diff --git a/src/main/java/org/bukkit/registry/Key.java b/src/main/java/org/bukkit/registry/Key.java
 new file mode 100644
-index 00000000..b8ce9e4f
+index 0000000..b8ce9e4
 --- /dev/null
 +++ b/src/main/java/org/bukkit/registry/Key.java
 @@ -0,0 +1,6 @@
@@ -133,7 +133,7 @@ index 00000000..b8ce9e4f
 +}
 diff --git a/src/main/java/org/bukkit/registry/Registerable.java b/src/main/java/org/bukkit/registry/Registerable.java
 new file mode 100644
-index 00000000..4c22aeab
+index 0000000..4c22aea
 --- /dev/null
 +++ b/src/main/java/org/bukkit/registry/Registerable.java
 @@ -0,0 +1,5 @@
@@ -144,7 +144,7 @@ index 00000000..4c22aeab
 +}
 diff --git a/src/main/java/org/bukkit/registry/Registry.java b/src/main/java/org/bukkit/registry/Registry.java
 new file mode 100644
-index 00000000..d7c63685
+index 0000000..d7c6368
 --- /dev/null
 +++ b/src/main/java/org/bukkit/registry/Registry.java
 @@ -0,0 +1,23 @@

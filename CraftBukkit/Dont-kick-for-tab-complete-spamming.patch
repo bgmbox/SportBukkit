@@ -1,11 +1,11 @@
-From cbab75adc2d20b65dbaa2450c8bf956b32f1c6d4 Mon Sep 17 00:00:00 2001
+From d9447aae396a5f06aa72fc299a9907a611cccf23 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Thu, 26 Jul 2018 00:37:50 -0700
 Subject: [PATCH] Dont kick for tab complete spamming
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 97b0ac76..be636bb2 100644
+index 97b0ac7..be636bb 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1413,7 +1413,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {

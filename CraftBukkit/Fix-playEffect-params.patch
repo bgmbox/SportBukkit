@@ -1,11 +1,11 @@
-From fb5e1aa5dc4df4b641c44c87fe3e2ed099e038de Mon Sep 17 00:00:00 2001
+From 20432acbbcfb9bb32077f1623c41e5b3b289c110 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 20 Feb 2015 15:23:57 -0500
 Subject: [PATCH] Fix playEffect params
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 85f9574b..350a576b 100644
+index 85f9574..350a576 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -876,7 +876,7 @@ public class CraftWorld implements World {

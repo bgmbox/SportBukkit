@@ -1,11 +1,11 @@
-From 5e2f0b89be5fbf8edca93577379c420402b2927f Mon Sep 17 00:00:00 2001
+From 4b6f4ac50bc76dea57afab84123cfde386d1136b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 20 Jun 2015 12:27:57 -0400
 Subject: [PATCH] Call onDisable before disabling the plugin
 
 
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 60b23995..ecbc931c 100644
+index 60b2399..ecbc931 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -392,6 +392,18 @@ public final class SimplePluginManager implements PluginManager {
@@ -28,7 +28,7 @@ index 60b23995..ecbc931c 100644
  
              if (!pluginCommands.isEmpty()) {
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
-index 16b1eb37..744314a5 100644
+index 16b1eb3..744314a 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 @@ -257,13 +257,19 @@ public abstract class JavaPlugin extends PluginBase {

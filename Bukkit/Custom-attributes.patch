@@ -1,11 +1,11 @@
-From 0f60aa64d9031681f4ac395f4ab4115feb19c5bb Mon Sep 17 00:00:00 2001
+From 9c86f56a4599d1650ab4f2fe7c19616143238d20 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 2 Apr 2016 21:57:13 -0400
 Subject: [PATCH] Custom attributes
 
 
 diff --git a/src/main/java/org/bukkit/attribute/Attribute.java b/src/main/java/org/bukkit/attribute/Attribute.java
-index b5e0df19..49682ccf 100644
+index b5e0df1..49682cc 100644
 --- a/src/main/java/org/bukkit/attribute/Attribute.java
 +++ b/src/main/java/org/bukkit/attribute/Attribute.java
 @@ -55,7 +55,13 @@ public enum Attribute {

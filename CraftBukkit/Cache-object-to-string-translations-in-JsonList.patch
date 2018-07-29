@@ -1,4 +1,4 @@
-From 8a94209d3c536cabc7c1c9287c438247a32437b7 Mon Sep 17 00:00:00 2001
+From c0767ff3e7972a9d51bf29383993ac809ca052b3 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Fri, 2 May 2014 20:48:11 -0500
 Subject: [PATCH] Cache object to string translations in JsonList
@@ -8,7 +8,7 @@ With 1.7 the ban, white, and op lists all use JsonList. While this is nice, when
 Without this change, player.isOp() and player.hasPermission() are far more expensive than they were in 1.6.
 
 diff --git a/src/main/java/net/minecraft/server/GameProfileBanList.java b/src/main/java/net/minecraft/server/GameProfileBanList.java
-index 5886e4ce..fd3c345a 100644
+index 5886e4c..fd3c345 100644
 --- a/src/main/java/net/minecraft/server/GameProfileBanList.java
 +++ b/src/main/java/net/minecraft/server/GameProfileBanList.java
 @@ -33,7 +33,7 @@ public class GameProfileBanList extends JsonList<GameProfile, GameProfileBanEntr
@@ -21,7 +21,7 @@ index 5886e4ce..fd3c345a 100644
  
      public GameProfile a(String s) {
 diff --git a/src/main/java/net/minecraft/server/JsonList.java b/src/main/java/net/minecraft/server/JsonList.java
-index 1834cb5a..4fd2a879 100644
+index 1834cb5..4fd2a87 100644
 --- a/src/main/java/net/minecraft/server/JsonList.java
 +++ b/src/main/java/net/minecraft/server/JsonList.java
 @@ -30,6 +30,12 @@ import org.apache.commons.io.IOUtils;
@@ -72,7 +72,7 @@ index 1834cb5a..4fd2a879 100644
  
      protected boolean d(K k0) {
 diff --git a/src/main/java/net/minecraft/server/OpList.java b/src/main/java/net/minecraft/server/OpList.java
-index bf3bc6e6..e0410dfd 100644
+index bf3bc6e..e0410df 100644
 --- a/src/main/java/net/minecraft/server/OpList.java
 +++ b/src/main/java/net/minecraft/server/OpList.java
 @@ -41,7 +41,7 @@ public class OpList extends JsonList<GameProfile, OpListEntry> {
@@ -85,7 +85,7 @@ index bf3bc6e6..e0410dfd 100644
  
      public GameProfile a(String s) {
 diff --git a/src/main/java/net/minecraft/server/WhiteList.java b/src/main/java/net/minecraft/server/WhiteList.java
-index be2f4c1c..44c565e5 100644
+index be2f4c1..44c565e 100644
 --- a/src/main/java/net/minecraft/server/WhiteList.java
 +++ b/src/main/java/net/minecraft/server/WhiteList.java
 @@ -33,7 +33,7 @@ public class WhiteList extends JsonList<GameProfile, WhiteListEntry> {

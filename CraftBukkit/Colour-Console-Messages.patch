@@ -1,11 +1,11 @@
-From 37cbf4b4990bb647c25c7f0fbf5810c8818e91d7 Mon Sep 17 00:00:00 2001
+From 5e47a7f895ba20354beadcf3e851ad12fa18bebd Mon Sep 17 00:00:00 2001
 From: md_5 <md_5@live.com.au>
 Date: Thu, 4 Jul 2013 10:11:46 +1000
 Subject: [PATCH] Colour Console Messages
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 646a3c86..9cd3a6f2 100644
+index 646a3c8..9cd3a6f 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1053,7 +1053,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs

@@ -1,11 +1,11 @@
-From db8ce2e3e43cee5961d0c69b2367a263f980232e Mon Sep 17 00:00:00 2001
+From ed1d0acbd8531d733304daa59352425054a14675 Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Sun, 28 Jul 2013 21:56:56 +0200
 Subject: [PATCH] Add getHostname to Player
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index f5ec669c..fdb5f0c8 100644
+index f5ec669..fdb5f0c 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1441,4 +1441,14 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

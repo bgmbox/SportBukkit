@@ -1,11 +1,11 @@
-From 52193220fb8eb58b25986c96cb5fed6eeacde80a Mon Sep 17 00:00:00 2001
+From 5ca365301bc38331d5a9af73e3927e2ec90ac0d6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 3 Jun 2014 08:02:58 -0400
 Subject: [PATCH] Fix head rotation packet spam
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityTrackerEntry.java b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
-index a68b8a5b..b7ce9d29 100644
+index a68b8a5..b7ce9d2 100644
 --- a/src/main/java/net/minecraft/server/EntityTrackerEntry.java
 +++ b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
 @@ -396,8 +396,10 @@ public class EntityTrackerEntry {

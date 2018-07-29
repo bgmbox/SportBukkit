@@ -1,11 +1,11 @@
-From bce1f5c9d853e2e2cbde2d4fec1451ed6f0b0f8f Mon Sep 17 00:00:00 2001
+From 55977da94bce02855c24a96543a9acd4233cc110 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 04:31:06 -0400
 Subject: [PATCH] Natural regeneration API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index a8ca35e1..8acf394a 100644
+index a8ca35e..8acf394 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -981,6 +981,14 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

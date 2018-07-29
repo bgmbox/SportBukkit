@@ -1,11 +1,11 @@
-From 7e062349adf03d6bc0e12cf0be75d16c7f85a8bc Mon Sep 17 00:00:00 2001
+From b43d11b057b1ad8278c750f29be3dbd39795f765 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 10 Oct 2016 04:53:27 -0400
 Subject: [PATCH] Block images
 
 
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
-index f8487998..4afc3622 100644
+index f848799..4afc362 100644
 --- a/src/main/java/org/bukkit/CraftBukkitRuntime.java
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -2,6 +2,8 @@ package org.bukkit;
@@ -25,36 +25,36 @@ index f8487998..4afc3622 100644
      private final CraftVectorFactory vectorFactory = new CraftVectorFactory();
  
      private final PotionBrewRegistry potionBrewRegistry = new CraftPotionBrewRegistry();
-@@ -45,6 +48,11 @@ public class CraftBukkitRuntime implements BukkitRuntime {
-         return CraftKey.get(key);
+@@ -46,6 +49,11 @@ public class CraftBukkitRuntime implements BukkitRuntime {
      }
  
-+    @Override
+     @Override
 +    public BlockFactory blocks() {
 +        return blockFactory;
 +    }
 +
-     @Override
++    @Override
      public VectorFactory vectors() {
          return vectorFactory;
+     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1777cfb6..a4362797 100644
+index 1777cfb..a436279 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1688,11 +1688,6 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-         return completions;
+@@ -1689,11 +1689,6 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
--    @Override
+     @Override
 -    public CraftItemFactory getItemFactory() {
 -        return CraftItemFactory.instance();
 -    }
 -
-     @Override
+-    @Override
      public CraftScoreboardManager getScoreboardManager() {
          return scoreboardManager;
+     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 0a1b97df..f02a5d78 100644
+index 0a1b97d..f02a5d7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -11,6 +11,7 @@ import java.util.Iterator;
@@ -209,7 +209,7 @@ index 0a1b97df..f02a5d78 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 456fd209..9b134994 100644
+index 456fd20..9b13499 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -4,6 +4,7 @@ import java.util.ArrayList;
@@ -479,7 +479,7 @@ index 456fd209..9b134994 100644
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockFactory.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockFactory.java
 new file mode 100644
-index 00000000..88101d0d
+index 0000000..88101d0
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockFactory.java
 @@ -0,0 +1,91 @@
@@ -576,7 +576,7 @@ index 00000000..88101d0d
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockImage.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockImage.java
 new file mode 100644
-index 00000000..1f60a747
+index 0000000..1f60a74
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockImage.java
 @@ -0,0 +1,225 @@
@@ -806,7 +806,7 @@ index 00000000..1f60a747
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-index 7d082117..54506b5c 100644
+index 7d08211..54506b5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 @@ -1,6 +1,7 @@
@@ -993,18 +993,18 @@ index 7d082117..54506b5c 100644
          hash = 73 * hash + this.type;
          hash = 73 * hash + (this.data != null ? this.data.hashCode() : 0);
          return hash;
-@@ -292,6 +290,11 @@ public class CraftBlockState implements BlockState {
-         chunk.getCraftWorld().getBlockMetadata().removeMetadata(getBlock(), metadataKey, owningPlugin);
+@@ -293,6 +291,11 @@ public class CraftBlockState implements BlockState {
      }
  
-+    @Override
+     @Override
 +    public boolean hasPosition() {
 +        return position != null;
 +    }
 +
-     @Override
++    @Override
      public boolean isPlaced() {
          return world != null;
+     }
 @@ -302,4 +305,24 @@ public class CraftBlockState implements BlockState {
              throw new IllegalStateException("The blockState must be placed to call this method");
          }
@@ -1034,7 +1034,7 @@ index 7d082117..54506b5c 100644
 +}
 diff --git a/src/test/java/org/bukkit/block/BlockFactoryTest.java b/src/test/java/org/bukkit/block/BlockFactoryTest.java
 new file mode 100644
-index 00000000..e720c7ba
+index 0000000..e720c7b
 --- /dev/null
 +++ b/src/test/java/org/bukkit/block/BlockFactoryTest.java
 @@ -0,0 +1,58 @@

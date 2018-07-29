@@ -1,18 +1,17 @@
-From 1d01d91c035d52edd2d3a7f28e98bfdfd6866c42 Mon Sep 17 00:00:00 2001
+From 26e3ff823917a463e45d0b4f74cd59235755e0b7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 05:57:50 -0500
 Subject: [PATCH] Absorption API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index e6ca2a9e..ed2ad306 100644
+index e6ca2a9..ed2ad30 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -232,6 +232,16 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
-         getHandle().noDamageTicks = ticks;
+@@ -233,6 +233,16 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
      }
  
-+    @Override
+     @Override
 +    public float getAbsorption() {
 +        return getHandle().getAbsorptionHearts();
 +    }
@@ -22,6 +21,7 @@ index e6ca2a9e..ed2ad306 100644
 +        getHandle().setAbsorptionHearts(absorption);
 +    }
 +
-     @Override
++    @Override
      public EntityLiving getHandle() {
          return (EntityLiving) entity;
+     }

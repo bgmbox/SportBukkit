@@ -1,0 +1,40 @@
+From 5df4ebff4d36435799b271a79d46a8ed7bde1273 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Sun, 29 Jul 2018 14:42:10 -0500
+Subject: [PATCH] Make fishing hooks cause the damage effect again
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityFishingHook.java b/src/main/java/net/minecraft/server/EntityFishingHook.java
+index b4d3bcb..120fef3 100644
+--- a/src/main/java/net/minecraft/server/EntityFishingHook.java
++++ b/src/main/java/net/minecraft/server/EntityFishingHook.java
+@@ -268,8 +268,10 @@ public class EntityFishingHook extends Entity {
+         if (movingobjectposition != null && movingobjectposition.type != MovingObjectPosition.EnumMovingObjectType.MISS) {
+             org.bukkit.craftbukkit.event.CraftEventFactory.callProjectileHitEvent(this, movingobjectposition); // Craftbukkit - Call event
+             if (movingobjectposition.type == MovingObjectPosition.EnumMovingObjectType.ENTITY) {
+-                this.hooked = movingobjectposition.entity;
+-                this.s();
++                if (movingobjectposition.entity.damageEntity(DamageSource.projectile(this, this.owner), 0.0F)) {
++                    this.hooked = movingobjectposition.entity;
++                    this.s();
++                }
+             } else {
+                 this.isInGround = true;
+             }
+@@ -488,11 +490,12 @@ public class EntityFishingHook extends Entity {
+             double d0 = this.owner.locX - this.locX;
+             double d1 = this.owner.locY - this.locY;
+             double d2 = this.owner.locZ - this.locZ;
+-            double d3 = 0.1D;
++            double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
++            double d4 = 0.1D;
+ 
+-            this.hooked.motX += d0 * 0.1D;
+-            this.hooked.motY += d1 * 0.1D;
+-            this.hooked.motZ += d2 * 0.1D;
++            this.hooked.motX += d0 * d4;
++            this.hooked.motY += d1 * d4 + (double) MathHelper.sqrt(d3) * 0.08D;
++            this.hooked.motZ += d2 * d4;
+         }
+     }
+ 

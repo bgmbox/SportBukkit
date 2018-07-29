@@ -1,11 +1,11 @@
-From 022d76cff0383a7da1268cc2a4ac319f6c9b1f29 Mon Sep 17 00:00:00 2001
+From d85035b2fbc1b70c804eb9eb34bcfd58f8285d75 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 10 Jul 2015 23:33:46 -0400
 Subject: [PATCH] Fix TNT damage being cancelled by friendly-fire rules
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 5444805f..b3fd66c1 100644
+index 5444805..b3fd66c 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -570,7 +570,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {

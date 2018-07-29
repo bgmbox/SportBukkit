@@ -1,11 +1,11 @@
-From d1b87d387fbc40e7e2ec7e709c418028de065a66 Mon Sep 17 00:00:00 2001
+From d69edbd4d380d0c3ce945b0e720e8fd6b3396538 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 12 Feb 2015 22:15:03 -0500
 Subject: [PATCH] Player list header/footer API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index d86fc6b3..e2e7dddf 100644
+index d86fc6b..e2e7ddd 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -1581,4 +1581,20 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline

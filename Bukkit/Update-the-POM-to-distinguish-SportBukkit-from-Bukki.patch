@@ -1,11 +1,11 @@
-From 61904727663dd7d5266ebe1b673889fbc9f943e5 Mon Sep 17 00:00:00 2001
+From d99dc5ed33616f22f8a528424f32fb90aa1e8dc6 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 10 Dec 2013 23:16:10 -0600
 Subject: [PATCH] Update the POM to distinguish SportBukkit from Bukkit
 
 
 diff --git a/pom.xml b/pom.xml
-index a04ca875..81c2b691 100644
+index a04ca87..81c2b69 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,39 +3,48 @@
@@ -124,11 +124,10 @@ index a04ca875..81c2b691 100644
      </dependencies>
  
      <build>
-@@ -110,6 +137,26 @@
-                     </dependency>
+@@ -111,6 +138,26 @@
                  </dependencies>
              </plugin>
-+            <plugin>
+             <plugin>
 +                <groupId>org.codehaus.mojo</groupId>
 +                <artifactId>animal-sniffer-maven-plugin</artifactId>
 +                <version>1.16</version>
@@ -148,6 +147,7 @@ index a04ca875..81c2b691 100644
 +                    </signature>
 +                </configuration>
 +            </plugin>
-             <plugin>
++            <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-shade-plugin</artifactId>
+                 <version>3.1.0</version>

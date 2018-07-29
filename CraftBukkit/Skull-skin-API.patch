@@ -1,11 +1,11 @@
-From 8e4f67cfc903d59f274099dc81cf4bea629b583c Mon Sep 17 00:00:00 2001
+From 960eb8b30a65d1c971cc3368ae724bf9399af38b Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 6 Aug 2015 22:18:57 -0400
 Subject: [PATCH] Skull skin API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java b/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java
-index f2865688..d4b7d54d 100644
+index f286568..d4b7d54 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftSkull.java
 @@ -8,10 +8,15 @@ import org.bukkit.Bukkit;
@@ -43,7 +43,7 @@ index f2865688..d4b7d54d 100644
          return getBlockFace(rotation);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
-index 8c5d3eff..b0ce9c23 100644
+index 8c5d3ef..b0ce9c2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
 @@ -1,6 +1,7 @@

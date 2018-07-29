@@ -1,4 +1,4 @@
-From f2edc77b2b347cd9ec195f0c9b896eea9e442f7b Mon Sep 17 00:00:00 2001
+From 7e2a86333f258da7cedfbcff085f8811933f1572 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 15 Nov 2014 16:17:15 -0500
 Subject: [PATCH] Add PlayerAttackEntityEvent
@@ -6,7 +6,7 @@ Subject: [PATCH] Add PlayerAttackEntityEvent
 
 diff --git a/src/main/java/org/bukkit/event/player/PlayerAttackEntityEvent.java b/src/main/java/org/bukkit/event/player/PlayerAttackEntityEvent.java
 new file mode 100644
-index 00000000..b05b2314
+index 0000000..b05b231
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/player/PlayerAttackEntityEvent.java
 @@ -0,0 +1,47 @@

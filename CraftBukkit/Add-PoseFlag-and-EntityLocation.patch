@@ -1,11 +1,11 @@
-From a9eabf5a6af4c120eaed928d59817d78dd081520 Mon Sep 17 00:00:00 2001
+From 98ccaf17b228d9d2e9f51954e915014ca901ba32 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 1 Jul 2016 03:36:25 -0400
 Subject: [PATCH] Add PoseFlag and EntityLocation
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index bf1b8cba..f8f26c2e 100644
+index bf1b8cb..f8f26c2 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -18,12 +18,15 @@ import org.apache.logging.log4j.Logger;
@@ -48,7 +48,7 @@ index bf1b8cba..f8f26c2e 100644
                  Entity n = craftn == null ? null : craftn.getHandle();
                  if (event.isCancelled() || n != orig) {
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 38dc34a9..8bc82c02 100644
+index 38dc34a..8bc82c0 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -10,8 +10,10 @@ import java.util.UUID;
@@ -79,7 +79,7 @@ index 38dc34a9..8bc82c02 100644
          // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 6745c8c7..cb28ee26 100644
+index 6745c8c..cb28ee2 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -22,7 +22,9 @@ import org.apache.logging.log4j.Logger;
@@ -164,7 +164,7 @@ index 6745c8c7..cb28ee26 100644
                  this.player.abilities.isFlying = packetplayinabilities.isFlying(); // Actually set the player's flying status
              } else {
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 7f78d670..8122bbd3 100644
+index 7f78d67..8122bbd 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -23,6 +23,7 @@ import org.apache.logging.log4j.Logger;
@@ -192,7 +192,7 @@ index 7f78d670..8122bbd3 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 9fa3b228..1e0c3137 100644
+index 9fa3b22..1e0c313 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
@@ -255,7 +255,7 @@ index 9fa3b228..1e0c3137 100644
          return new Vector(entity.motX, entity.motY, entity.motZ);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 945f18e4..09104733 100644
+index 945f18e..0910473 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -3,12 +3,14 @@ package org.bukkit.craftbukkit.entity;
@@ -273,7 +273,7 @@ index 945f18e4..09104733 100644
  import org.bukkit.inventory.MainHand;
  import org.bukkit.inventory.Merchant;
  import org.bukkit.Material;
-@@ -531,10 +533,18 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
+@@ -531,11 +533,19 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
  
      @Override
      public float getAttackCooldownCoefficient() {
@@ -282,7 +282,7 @@ index 945f18e4..09104733 100644
          return 0.2f + f * f * 0.8f;
      }
  
-+    @Override
+     @Override
 +    public EnumSet<PoseFlag> getPoseFlags() {
 +        final EnumSet<PoseFlag> flags = super.getPoseFlags();
 +        if(isSleeping()) flags.add(PoseFlag.SLEEPING);
@@ -290,11 +290,12 @@ index 945f18e4..09104733 100644
 +        return flags;
 +    }
 +
-     @Override
++    @Override
      public int getCooldown(Material material) {
          Preconditions.checkArgument(material != null, "material");
+ 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 6b8c9d82..134338d3 100644
+index 6b8c9d8..134338d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -2,6 +2,7 @@ package org.bukkit.craftbukkit.entity;
@@ -327,7 +328,7 @@ index 6b8c9d82..134338d3 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 08871ebf..bfd70534 100644
+index 08871eb..bfd7053 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -14,7 +14,9 @@ import com.google.common.base.Functions;

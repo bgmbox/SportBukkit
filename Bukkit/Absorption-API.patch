@@ -1,18 +1,17 @@
-From 14af736209c05c620190dead6038b16b37e6539c Mon Sep 17 00:00:00 2001
+From f245938966af86e1cefd9fe5a5521d85c0fad8d1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 05:57:57 -0500
 Subject: [PATCH] Absorption API
 
 
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
-index b339f45f..fe08ce44 100644
+index b339f45..fe08ce4 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
-@@ -160,6 +160,16 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti
-      */
+@@ -161,6 +161,16 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti
      public void setNoDamageTicks(int ticks);
  
-+    /**
+     /**
 +     * Get the amount of absorption this entity currently has, in half-hearts.
 +     */
 +    float getAbsorption();
@@ -22,6 +21,7 @@ index b339f45f..fe08ce44 100644
 +     */
 +    void setAbsorption(float absorption);
 +
-     /**
++    /**
       * Gets the player identified as the killer of the living entity.
       * <p>
+      * May be null.

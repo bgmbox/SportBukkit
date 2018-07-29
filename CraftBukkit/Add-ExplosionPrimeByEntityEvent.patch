@@ -1,11 +1,11 @@
-From d90ab39ec7477f0b302ee6b82f2b841d4ba8e2ea Mon Sep 17 00:00:00 2001
+From 6da31318dc210157f232de0ab0b1af1fb38f0117 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 14 Jun 2015 04:13:52 -0400
 Subject: [PATCH] Add ExplosionPrimeByEntityEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/BlockTNT.java b/src/main/java/net/minecraft/server/BlockTNT.java
-index 8105bebe..22d3efbe 100644
+index 8105beb..22d3efb 100644
 --- a/src/main/java/net/minecraft/server/BlockTNT.java
 +++ b/src/main/java/net/minecraft/server/BlockTNT.java
 @@ -2,6 +2,7 @@ package net.minecraft.server;
@@ -70,7 +70,7 @@ index 8105bebe..22d3efbe 100644
              if (itemstack.getItem() == Items.FLINT_AND_STEEL) {
                  itemstack.damage(1, entityhuman);
 diff --git a/src/main/java/net/minecraft/server/EntityCreeper.java b/src/main/java/net/minecraft/server/EntityCreeper.java
-index dad07a6a..b41c239c 100644
+index dad07a6..b41c239 100644
 --- a/src/main/java/net/minecraft/server/EntityCreeper.java
 +++ b/src/main/java/net/minecraft/server/EntityCreeper.java
 @@ -6,6 +6,7 @@ import javax.annotation.Nullable;
@@ -128,7 +128,7 @@ index dad07a6a..b41c239c 100644
              if (!event.isCancelled()) {
                  this.aU = true;
 diff --git a/src/main/java/net/minecraft/server/EntityEnderCrystal.java b/src/main/java/net/minecraft/server/EntityEnderCrystal.java
-index 9e77fb63..52af5b75 100644
+index 9e77fb6..52af5b7 100644
 --- a/src/main/java/net/minecraft/server/EntityEnderCrystal.java
 +++ b/src/main/java/net/minecraft/server/EntityEnderCrystal.java
 @@ -5,6 +5,7 @@ import javax.annotation.Nullable;

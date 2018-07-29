@@ -1,11 +1,11 @@
-From ff590071c9822ccd31285ffdf1239a5a5d63ad14 Mon Sep 17 00:00:00 2001
+From 6c0753074947b14790ab1704df82974e6c6ed331 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 29 Dec 2016 23:25:25 -0500
 Subject: [PATCH] Don't tick empty worlds
 
 
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 30e51979..2a09d829 100644
+index 30e5197..2a09d82 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -193,6 +193,10 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min

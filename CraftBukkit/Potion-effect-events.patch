@@ -1,11 +1,11 @@
-From 3ffcc87fe3b83b5a868783440db6bdeec0076560 Mon Sep 17 00:00:00 2001
+From 3995cc8083498cfbd1a8181023a9dcea0419f482 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 29 Jun 2015 04:47:28 -0400
 Subject: [PATCH] Potion effect events
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 3800f4f1..fae4888a 100644
+index 3800f4f..fae4888 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -22,13 +22,11 @@ import org.bukkit.craftbukkit.attribute.CraftAttributeMap;
@@ -175,7 +175,7 @@ index 3800f4f1..fae4888a 100644
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtils.java b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtils.java
 new file mode 100644
-index 00000000..ef29a034
+index 0000000..ef29a03
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtils.java
 @@ -0,0 +1,42 @@

@@ -1,11 +1,11 @@
-From 86df388d104add4ce5af1c807bd0922580337625 Mon Sep 17 00:00:00 2001
+From a29c591e6a5a44e2459ddc4fa94d44b5dc0e55c9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 6 Aug 2015 22:18:43 -0400
 Subject: [PATCH] Skull skin API
 
 
 diff --git a/src/main/java/org/bukkit/block/Skull.java b/src/main/java/org/bukkit/block/Skull.java
-index f69f9477..3499a8f6 100644
+index f69f947..3499a8f 100644
 --- a/src/main/java/org/bukkit/block/Skull.java
 +++ b/src/main/java/org/bukkit/block/Skull.java
 @@ -1,8 +1,11 @@
@@ -20,11 +20,10 @@ index f69f9477..3499a8f6 100644
  /**
   * Represents a captured state of a skull block.
   */
-@@ -53,6 +56,21 @@ public interface Skull extends BlockState {
-      */
+@@ -54,6 +57,21 @@ public interface Skull extends BlockState {
      public void setOwningPlayer(OfflinePlayer player);
  
-+    /**
+     /**
 +     * Set the owner and appearance of this skull. A skull with this data set
 +     * does not need to fetch anything remotely.
 +     *
@@ -39,11 +38,12 @@ index f69f9477..3499a8f6 100644
 +     */
 +    void clearOwner();
 +
-     /**
++    /**
       * Gets the rotation of the skull in the world
       *
+      * @return the rotation of the skull
 diff --git a/src/main/java/org/bukkit/inventory/meta/SkullMeta.java b/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
-index c60860e1..661bcd39 100644
+index c60860e..661bcd3 100644
 --- a/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
 +++ b/src/main/java/org/bukkit/inventory/meta/SkullMeta.java
 @@ -1,7 +1,10 @@

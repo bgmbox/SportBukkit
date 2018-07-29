@@ -1,4 +1,4 @@
-From 9681b11701441829386bd0602ca25807f0463254 Mon Sep 17 00:00:00 2001
+From 750cc530e7d591ec33116cd4e858d664100f5659 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 17 Feb 2013 23:15:32 -0600
 Subject: [PATCH] Fire PlayerInteractEvent when anyone steps on a pressure
@@ -9,7 +9,7 @@ In order to not spam the PlayerInteractEvent, we need to keep track of wether or
 This does modify PlayerInteractEvent firing, but it shouldn't be 'breaking'.
 
 diff --git a/src/main/java/net/minecraft/server/BlockPressurePlateBinary.java b/src/main/java/net/minecraft/server/BlockPressurePlateBinary.java
-index 052d2243..ee9e54de 100644
+index 052d224..ee9e54d 100644
 --- a/src/main/java/net/minecraft/server/BlockPressurePlateBinary.java
 +++ b/src/main/java/net/minecraft/server/BlockPressurePlateBinary.java
 @@ -9,6 +9,7 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {

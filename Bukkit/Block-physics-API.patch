@@ -1,11 +1,11 @@
-From a42560eb7c35f6ef6b35428bf218b19d347ad187 Mon Sep 17 00:00:00 2001
+From 07b038698b551539919067144d84e7fbc5f3dae0 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 18 Jun 2016 08:17:57 -0400
 Subject: [PATCH] Block physics API
 
 
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
-index 5f3a6ffc..ff597f1b 100644
+index 5f3a6ff..ff597f1 100644
 --- a/src/main/java/org/bukkit/block/Block.java
 +++ b/src/main/java/org/bukkit/block/Block.java
 @@ -8,6 +8,7 @@ import org.bukkit.Material;

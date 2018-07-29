@@ -1,11 +1,11 @@
-From a200a19ca781bf78f735e1386de1ef0610c0b107 Mon Sep 17 00:00:00 2001
+From 765e52e8499d97bf20e7e1a207290749cdd93e4a Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Thu, 5 Jun 2014 22:02:07 +0200
 Subject: [PATCH] Normalize offline player's name case before creating an UUID
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index e516d37b..801a4b18 100644
+index e516d37..801a4b1 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -1794,7 +1794,7 @@ public abstract class EntityHuman extends EntityLiving {
@@ -18,7 +18,7 @@ index e516d37b..801a4b18 100644
  
      public boolean a(ChestLock chestlock) {
 diff --git a/src/main/java/net/minecraft/server/LoginListener.java b/src/main/java/net/minecraft/server/LoginListener.java
-index 30a8f89b..c96eae85 100644
+index 30a8f89..c96eae8 100644
 --- a/src/main/java/net/minecraft/server/LoginListener.java
 +++ b/src/main/java/net/minecraft/server/LoginListener.java
 @@ -294,7 +294,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
@@ -31,7 +31,7 @@ index 30a8f89b..c96eae85 100644
          return new GameProfile(uuid, gameprofile.getName());
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index af690d4e..f003ad47 100644
+index af690d4..f003ad4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1278,7 +1278,7 @@ public final class CraftServer implements Server {

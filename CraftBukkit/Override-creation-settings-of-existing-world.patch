@@ -1,11 +1,11 @@
-From b0d7eb4a5097f9d8a4755d1adb1ce4a878ebce7c Mon Sep 17 00:00:00 2001
+From 2c0ee6d4daf832456e3c0007bdf53d204f5c6436 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 28 Jun 2015 03:39:14 -0400
 Subject: [PATCH] Override creation settings of existing world
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index cdcef0ff..bdba0911 100644
+index cdcef0f..bdba091 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -850,6 +850,25 @@ public final class CraftServer implements Server {
