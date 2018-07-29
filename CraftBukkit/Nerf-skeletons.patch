@@ -1,0 +1,41 @@
+From 1a19f78b581bbae3e7313c9cd700c11472131fbe Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Sun, 29 Jul 2018 14:44:32 -0500
+Subject: [PATCH] Nerf skeletons
+
+
+diff --git a/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java b/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java
+index b92cf8e..a0e937d 100644
+--- a/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java
++++ b/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java
+@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityCombustEvent; // CraftBukkit
+ public abstract class EntitySkeletonAbstract extends EntityMonster implements IRangedEntity {
+ 
+     private static final DataWatcherObject<Boolean> a = DataWatcher.a(EntitySkeletonAbstract.class, DataWatcherRegistry.h);
+-    private final PathfinderGoalBowShoot<EntitySkeletonAbstract> b = new PathfinderGoalBowShoot(this, 1.0D, 20, 15.0F);
++    private final PathfinderGoalBowShoot<EntitySkeletonAbstract> b = new PathfinderGoalBowShoot(this, 1.0D, 20, 5.0F);
+     private final PathfinderGoalMeleeAttack c = new PathfinderGoalMeleeAttack(this, 1.2D, false) { // CraftBukkit - decompile error
+         public void d() {
+             super.d();
+@@ -137,11 +137,7 @@ public abstract class EntitySkeletonAbstract extends EntityMonster implements IR
+             ItemStack itemstack = this.getItemInMainHand();
+ 
+             if (itemstack.getItem() == Items.BOW) {
+-                byte b0 = 20;
+-
+-                if (this.world.getDifficulty() != EnumDifficulty.HARD) {
+-                    b0 = 40;
+-                }
++                byte b0 = 120;
+ 
+                 this.b.b(b0);
+                 this.goalSelector.a(4, this.b);
+@@ -159,7 +155,7 @@ public abstract class EntitySkeletonAbstract extends EntityMonster implements IR
+         double d2 = entityliving.locZ - this.locZ;
+         double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+ 
+-        entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - this.world.getDifficulty().a() * 4));
++        entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 10F);
+         // CraftBukkit start
+         org.bukkit.event.entity.EntityShootBowEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callEntityShootBowEvent(this, this.getItemInMainHand(), entityarrow, 0.8F);
+         if (event.isCancelled()) {
