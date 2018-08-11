@@ -1,4 +1,4 @@
-From 55977da94bce02855c24a96543a9acd4233cc110 Mon Sep 17 00:00:00 2001
+From d799adc27d625b3d3d26a69360704ff3075b4266 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 04:31:06 -0400
 Subject: [PATCH] Natural regeneration API

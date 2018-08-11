@@ -1,4 +1,4 @@
-From d016c74a7c00e748e0134253ea77e793442b9a80 Mon Sep 17 00:00:00 2001
+From 10ad57be4e9de9695d1755503aeb7c28663bced4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 12 Aug 2016 20:49:50 -0400
 Subject: [PATCH] Remove armorToughness limit

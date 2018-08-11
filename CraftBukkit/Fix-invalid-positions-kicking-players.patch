@@ -1,4 +1,4 @@
-From 0eeef0c89d50f5508d3d0160105b4b879efb0b1d Mon Sep 17 00:00:00 2001
+From 9eb8a2ad009cb9a6b77eb81d11fe6676c473272f Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 9 Jul 2013 17:06:59 -0500
 Subject: [PATCH] Fix invalid positions kicking players

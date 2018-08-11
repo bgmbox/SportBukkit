@@ -1,4 +1,4 @@
-From e3c809d5cc6709ab184b30dd1ee89935c7235db3 Mon Sep 17 00:00:00 2001
+From 4c092359896cc4eba5979c5196e3e48d13e4ffe5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:13:07 -0400
 Subject: [PATCH] Attack cooldown info API

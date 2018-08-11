@@ -1,4 +1,4 @@
-From 73c724cac75b4a590b4c060f2b4c20e07ea0f816 Mon Sep 17 00:00:00 2001
+From e54b574341b30bf5bad1e1959a52f7010b78250a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Feb 2015 03:50:47 -0500
 Subject: [PATCH] Fix exception playing particle effects

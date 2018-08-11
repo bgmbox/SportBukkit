@@ -1,0 +1,129 @@
+From 187a0761b12c939d92fde57b5b3f984b4cd05769 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Sat, 11 Aug 2018 01:20:08 -0500
+Subject: [PATCH] Re-add w-tapping
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index b6f7651..e117dd2 100644
+--- a/src/main/java/net/minecraft/server/EntityHuman.java
++++ b/src/main/java/net/minecraft/server/EntityHuman.java
+@@ -1039,7 +1039,7 @@ public abstract class EntityHuman extends EntityLiving {
+ 
+                             this.motX *= 0.6D;
+                             this.motZ *= 0.6D;
+-//                            this.setSprinting(false); //SportBukkit - fix sprinting bug
++                            this.setSprinting(false); //SportBukkit - fix sprinting bug
+                         }
+ 
+                         if (flag3) {
+@@ -1063,35 +1063,30 @@ public abstract class EntityHuman extends EntityLiving {
+                             this.cX();
+                         }
+ 
+-                        if (entity instanceof EntityPlayer && entity.velocityChanged) {
+-                            // CraftBukkit start - Add Velocity Event
+-                            ((EntityPlayer) entity).sendVelocity();
+-                            /*
+-                            boolean cancelled = false;
+-                            Player player = (Player) entity.getBukkitEntity();
+-                            org.bukkit.util.Vector velocity = new Vector( d1, d2, d3 );
+-
+-                            PlayerVelocityEvent event = new PlayerVelocityEvent(player, velocity.clone());
+-                            world.getServer().getPluginManager().callEvent(event);
+-
+-                            if (event.isCancelled()) {
+-                                cancelled = true;
+-                            } else if (!velocity.equals(event.getVelocity())) {
+-                                player.setVelocity(event.getVelocity());
++                        // CraftBukkit start
++                        // If the attack caused knockback, send the new velocity to the victim's client immediately,
++                        // and undo the change. Otherwise, if movement packets from the victim are processed before
++                        // the end of the tick, then friction may reduce the velocity considerably before it's sent
++                        // to the client, particularly if the victim was standing on the ground when those packets
++                        // were generated. And because this glitch is also likely to make server-side velocity very
++                        // inconsistent, we simply reverse the knockback after sending it so that KB, like most other
++                        // things, doesn't affect server velocity at all.
++                        if(entity instanceof EntityPlayer && entity.velocityChanged) {
++                            EntityPlayer attackedPlayer = (EntityPlayer) entity;
++                            PlayerVelocityEvent event = new PlayerVelocityEvent(attackedPlayer.getBukkitEntity(),
++                                    attackedPlayer.getBukkitEntity().getVelocity(), this.impulse);
++                            this.world.getServer().getPluginManager().callEvent(event);
++                            if(!event.isCancelled()) {
++                                attackedPlayer.getBukkitEntity().setVelocityDirect(event.getVelocity());
++                                attackedPlayer.playerConnection.sendPacket(new PacketPlayOutEntityVelocity(attackedPlayer));
+                             }
+ 
+-                            if (!cancelled) {
+-                            ((EntityPlayer) entity).playerConnection.sendPacket(new PacketPlayOutEntityVelocity(entity));
+-                            entity.velocityChanged = false;
+-                            */
+-                            entity.motX = d1;
+-                            entity.motY = d2;
+-                            entity.motZ = d3;
+-                            /*
+-                            }
+-                            */
+-                            // CraftBukkit end
++                            attackedPlayer.velocityChanged = false;
++                            attackedPlayer.motX = d1;
++                            attackedPlayer.motY = d2;
++                            attackedPlayer.motZ = d3;
+                         }
++                        // CraftBukkit end
+ 
+                         if (flag2) {
+                             this.world.a((EntityHuman) null, this.locX, this.locY, this.locZ, SoundEffects.fv, this.bK(), 1.0F, 1.0F);
+diff --git a/src/main/java/net/minecraft/server/EntityTrackerEntry.java b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
+index e01f089..fde818f 100644
+--- a/src/main/java/net/minecraft/server/EntityTrackerEntry.java
++++ b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
+@@ -255,8 +255,7 @@ public class EntityTrackerEntry {
+         }
+ 
+         ++this.a;
+-        // SportBukkit start - velocity API
+-        /*
++
+         if (this.tracker.velocityChanged) {
+             // CraftBukkit start - Create PlayerVelocity event
+             boolean cancelled = false;
+@@ -265,7 +264,7 @@ public class EntityTrackerEntry {
+                 Player player = (Player) this.tracker.getBukkitEntity();
+                 org.bukkit.util.Vector velocity = player.getVelocity();
+ 
+-                PlayerVelocityEvent event = new PlayerVelocityEvent(player, velocity.clone());
++                PlayerVelocityEvent event = new PlayerVelocityEvent(player, velocity.clone(), this.tracker.impulse);
+                 this.tracker.world.getServer().getPluginManager().callEvent(event);
+ 
+                 if (event.isCancelled()) {
+@@ -281,13 +280,7 @@ public class EntityTrackerEntry {
+             // CraftBukkit end
+             this.tracker.velocityChanged = false;
+         }
+-        */
+-        if(this.tracker instanceof EntityPlayer) {
+-            ((EntityPlayer) this.tracker).sendVelocity();
+-        } else if(this.tracker.velocityChanged) {
+-            broadcast(new PacketPlayOutEntityVelocity(this.tracker));
+-            this.tracker.velocityChanged = false;
+-        }
++
+         // SportBukkit end
+     }
+ 
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 80ce19e..b374c52 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+@@ -2124,4 +2124,10 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+     public float getRemainingItemCooldown(Material item) {
+         return getHandle().getCooldownTracker().a(CraftMagicNumbers.getItem(item), 0F);
+     }
++
++    public void setVelocityDirect(Vector vel) {
++        entity.motX = vel.getX();
++        entity.motY = vel.getY();
++        entity.motZ = vel.getZ();
++    }
+ }
