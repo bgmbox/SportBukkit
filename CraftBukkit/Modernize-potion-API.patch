@@ -1,4 +1,4 @@
-From 9de5bd35be12f2e37e13ec3e5849067ebc875cc9 Mon Sep 17 00:00:00 2001
+From b8f0d2f6c18c65c10a9133effe09ba437f17f3ce Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:10:18 -0500
 Subject: [PATCH] Modernize potion API

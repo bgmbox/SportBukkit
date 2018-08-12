@@ -1,4 +1,4 @@
-From dd108afbb2881152d7df777d86cf0b1320fdb0b9 Mon Sep 17 00:00:00 2001
+From 3eb18d5f2647b31f84aa66ab12010c36530bd59a Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Wed, 25 Jul 2018 15:38:58 -0500
 Subject: [PATCH] Fix sprint disabling when engaging in combat

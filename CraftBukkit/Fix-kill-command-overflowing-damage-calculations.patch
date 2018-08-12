@@ -1,4 +1,4 @@
-From 36ec26519690b80fe6eb31bb52d2ea614da6e029 Mon Sep 17 00:00:00 2001
+From 55529df8b487dd4e99448b7c6338691858273c49 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 08:44:13 -0400
 Subject: [PATCH] Fix /kill command overflowing damage calculations

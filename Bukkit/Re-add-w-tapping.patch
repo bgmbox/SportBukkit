@@ -1,0 +1,50 @@
+From bd0cf175d6ebd69d7acde296a8027955311731ed Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Sat, 11 Aug 2018 23:50:00 -0500
+Subject: [PATCH] Re-add w-tapping
+
+
+diff --git a/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java b/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java
+index 7411633..138cbc5 100644
+--- a/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java
++++ b/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java
+@@ -11,8 +11,8 @@ public class PlayerKnockbackEvent extends PlayerVelocityEvent {
+ 
+     private final Entity damager;
+ 
+-    public PlayerKnockbackEvent(Player player, Entity damager, Vector velocity, boolean impulse) {
+-        super(player, velocity, impulse);
++    public PlayerKnockbackEvent(Player player, Entity damager, Vector velocity) {
++        super(player, velocity);
+         this.damager = damager;
+     }
+ 
+diff --git a/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java b/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
+index 4afa837..efe1f63 100644
+--- a/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
++++ b/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
+@@ -12,12 +12,10 @@ public class PlayerVelocityEvent extends PlayerEvent implements Cancellable {
+     private static final HandlerList handlers = new HandlerList();
+     private boolean cancel = false;
+     private final Vector velocity;
+-    private final boolean impulse;
+ 
+-    public PlayerVelocityEvent(final Player player, final Vector velocity, boolean impulse) {
++    public PlayerVelocityEvent(final Player player, final Vector velocity) {
+         super(player);
+         this.velocity = velocity;
+-        this.impulse = impulse;
+     }
+ 
+     public boolean isCancelled() {
+@@ -28,10 +26,6 @@ public class PlayerVelocityEvent extends PlayerEvent implements Cancellable {
+         this.cancel = cancel;
+     }
+ 
+-    public boolean isImpulse() {
+-        return impulse;
+-    }
+-
+     public Vector getVelocity() {
+         return velocity;
+     }

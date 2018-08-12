@@ -1,4 +1,4 @@
-From d9f5e4f5f8a7a0aacaeb67221bff87eb5f34f1ef Mon Sep 17 00:00:00 2001
+From 20e0617fe70e9e4f3b2fef104c03dcbdcdeb0f07 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:18:19 -0500
 Subject: [PATCH] Multi-trade API

@@ -1,4 +1,4 @@
-From 633217f31d492904ebb2e8eab907ddcd0c51ac76 Mon Sep 17 00:00:00 2001
+From fdeb9422353d5bb54016c858065f4f4db138131a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 28 May 2015 04:31:07 -0400
 Subject: [PATCH] Improve Permissible interface

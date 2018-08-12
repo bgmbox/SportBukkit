@@ -1,4 +1,4 @@
-From 59c548de41c1ddb91d2fd6c49d8c2ec7ab2d0586 Mon Sep 17 00:00:00 2001
+From 480dfdd68a6548f047cbcfb1f0cea221e115c629 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:15:32 -0500
 Subject: [PATCH] Remove BukkitMirrorTest
