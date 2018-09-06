@@ -1,11 +1,11 @@
-From d5feeca090d30870940acd2a93cdbbfeda531d94 Mon Sep 17 00:00:00 2001
+From 3ce49db23fb5c9b491b5dd53ee3ccee264e91b1c Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Thu, 17 Apr 2014 19:56:31 -0500
 Subject: [PATCH] Make ticksFlown in EntityFireworks public
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityFireworks.java b/src/main/java/net/minecraft/server/EntityFireworks.java
-index f1f4796..7a7ca07 100644
+index f1f47962..7a7ca07f 100644
 --- a/src/main/java/net/minecraft/server/EntityFireworks.java
 +++ b/src/main/java/net/minecraft/server/EntityFireworks.java
 @@ -8,7 +8,7 @@ public class EntityFireworks extends Entity {

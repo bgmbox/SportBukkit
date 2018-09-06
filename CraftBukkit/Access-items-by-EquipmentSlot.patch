@@ -1,11 +1,11 @@
-From 20af10fc8bbf5c8ba4e35b93c69b60f998dda953 Mon Sep 17 00:00:00 2001
+From 5898d92ce0d2b4c8e1c5e5311a7f0ff3fda6587e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 06:45:01 -0400
 Subject: [PATCH] Access items by EquipmentSlot
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
-index 67c5489..06d9aba 100644
+index 67c54899..06d9abad 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java
 @@ -10,6 +10,7 @@ import org.apache.commons.lang.Validate;
@@ -16,10 +16,11 @@ index 67c5489..06d9aba 100644
  import org.bukkit.inventory.ItemStack;
  
  public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.inventory.PlayerInventory, EntityEquipment {
-@@ -60,6 +61,32 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
+@@ -59,6 +60,32 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
+         setItemInMainHand(stack);
      }
  
-     @Override
++    @Override
 +    public ItemStack getItem(EquipmentSlot slot) {
 +        switch(slot) {
 +            case HAND: return getItemInMainHand();
@@ -45,7 +46,6 @@ index 67c5489..06d9aba 100644
 +        throw new UnsupportedOperationException(slot.name());
 +    }
 +
-+    @Override
+     @Override
      public void setItem(int index, ItemStack item) {
          super.setItem(index, item);
-         if (this.getHolder() == null) return;

@@ -1,11 +1,11 @@
-From 083f47cb2cb6eb3a2b938501a038895b28705050 Mon Sep 17 00:00:00 2001
+From a56a11322224a42d719b8301b906f108cba7d1db Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 18 Jun 2016 08:18:33 -0400
 Subject: [PATCH] Block physics API
 
 
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index a2ca2c8..ada6751 100644
+index a2ca2c81..ada67517 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -396,6 +396,15 @@ public abstract class World implements IBlockAccess {
@@ -48,7 +48,7 @@ index a2ca2c8..ada6751 100644
                  IBlockData iblockdata = this.getType(blockposition1);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index b4756fc..456fd20 100644
+index b4756fc7..456fd209 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -20,6 +20,7 @@ import org.bukkit.craftbukkit.CraftChunk;

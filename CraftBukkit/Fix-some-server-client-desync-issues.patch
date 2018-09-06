@@ -1,0 +1,58 @@
+From ad001928e914a827c69e08934258158a1805b496 Mon Sep 17 00:00:00 2001
+From: cswhite2000 <18whitechristop@gmail.com>
+Date: Thu, 6 Sep 2018 00:33:00 -0700
+Subject: [PATCH] Fix some server client desync issues
+
+
+diff --git a/src/main/java/net/minecraft/server/ItemBucket.java b/src/main/java/net/minecraft/server/ItemBucket.java
+index 41fea5bb..0bf2995b 100644
+--- a/src/main/java/net/minecraft/server/ItemBucket.java
++++ b/src/main/java/net/minecraft/server/ItemBucket.java
+@@ -44,6 +44,7 @@ public class ItemBucket extends Item {
+                         PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack, Items.WATER_BUCKET);
+  
+                         if (event.isCancelled()) {
++                            ((EntityPlayer)entityhuman).updateInventory(entityhuman.defaultContainer);
+                             return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
+                         }
+                         // CraftBukkit end
+@@ -56,6 +57,7 @@ public class ItemBucket extends Item {
+                         PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack, Items.LAVA_BUCKET);
+ 
+                         if (event.isCancelled()) {
++                            ((EntityPlayer)entityhuman).updateInventory(entityhuman.defaultContainer);
+                             return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
+                         }
+                         // CraftBukkit end
+@@ -129,7 +131,7 @@ public class ItemBucket extends Item {
+                 if (entityhuman != null) {
+                     PlayerBucketEmptyEvent event = CraftEventFactory.callPlayerBucketEmptyEvent(entityhuman, clicked.getX(), clicked.getY(), clicked.getZ(), enumdirection, itemstack);
+                     if (event.isCancelled()) {
+-                        // TODO: inventory not updated
++                        ((EntityPlayer)entityhuman).updateInventory(entityhuman.defaultContainer);
+                         return false;
+                     }
+                 }
+diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 4c33e482..1f04394f 100644
+--- a/src/main/java/net/minecraft/server/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/PlayerConnection.java
+@@ -1071,6 +1071,18 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+ 
+             if (cancelled) {
+                 this.player.getBukkitEntity().updateInventory(); // SPIGOT-2524
++                // SportBukkit start - Fix client desync
++                if (itemstack.getItem() == Item.getItemOf(Blocks.WATERLILY)) {
++                    BlockPosition blockPosition = this.player.world.rayTrace(vec3d, vec3d1, true, false, false).a().up();
++                    org.bukkit.craftbukkit.block.CraftBlockState.getBlockState(worldserver, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ()).update(true, false);
++                } else if (itemstack.getItem() == Items.BUCKET) {
++                    MovingObjectPosition movingObjectPosition1 = this.player.world.rayTrace(vec3d, vec3d1, true, false, false);
++                    if (movingObjectPosition1 != null) {
++                        BlockPosition blockPosition = movingObjectPosition1.a();
++                        org.bukkit.craftbukkit.block.CraftBlockState.getBlockState(worldserver, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ()).update(true, false);
++                    }
++                }
++                // SportBukkit end
+             } else {
+                 this.player.playerInteractManager.a(this.player, worldserver, itemstack, enumhand);
+             }

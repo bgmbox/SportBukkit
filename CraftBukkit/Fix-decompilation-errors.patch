@@ -1,11 +1,11 @@
-From d5f13b72affcc85b305248380ebb615a01e79abf Mon Sep 17 00:00:00 2001
+From cb967d0aa5646d92cbd921803fc8c406c69f97c7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 1 Mar 2016 05:48:53 -0500
 Subject: [PATCH] Fix decompilation errors
 
 
 diff --git a/src/main/java/net/minecraft/server/EnumProtocol.java b/src/main/java/net/minecraft/server/EnumProtocol.java
-index 19bfe57..3c93c98 100644
+index 19bfe57e..3c93c98b 100644
 --- a/src/main/java/net/minecraft/server/EnumProtocol.java
 +++ b/src/main/java/net/minecraft/server/EnumProtocol.java
 @@ -159,7 +159,7 @@ public enum EnumProtocol {
@@ -18,7 +18,7 @@ index 19bfe57..3c93c98 100644
          if (object == null) {
              object = HashBiMap.create();
 diff --git a/src/main/java/net/minecraft/server/GameProfileBanList.java b/src/main/java/net/minecraft/server/GameProfileBanList.java
-index 737035b..5886e4c 100644
+index 737035bf..5886e4ce 100644
 --- a/src/main/java/net/minecraft/server/GameProfileBanList.java
 +++ b/src/main/java/net/minecraft/server/GameProfileBanList.java
 @@ -52,7 +52,9 @@ public class GameProfileBanList extends JsonList<GameProfile, GameProfileBanEntr
@@ -32,7 +32,7 @@ index 737035b..5886e4c 100644
 +    SportBukkit */
  }
 diff --git a/src/main/java/net/minecraft/server/Item.java b/src/main/java/net/minecraft/server/Item.java
-index deda40e..97dc673 100644
+index deda40e8..97dc673c 100644
 --- a/src/main/java/net/minecraft/server/Item.java
 +++ b/src/main/java/net/minecraft/server/Item.java
 @@ -33,7 +33,7 @@ public class Item {
@@ -45,7 +45,7 @@ index deda40e..97dc673 100644
  
      public static Item getById(int i) {
 diff --git a/src/main/java/net/minecraft/server/ItemBlock.java b/src/main/java/net/minecraft/server/ItemBlock.java
-index 60149c1..9d62489 100644
+index 60149c1c..9d624891 100644
 --- a/src/main/java/net/minecraft/server/ItemBlock.java
 +++ b/src/main/java/net/minecraft/server/ItemBlock.java
 @@ -93,13 +93,6 @@ public class ItemBlock extends Item {
@@ -63,7 +63,7 @@ index 60149c1..9d62489 100644
          return this.a;
      }
 diff --git a/src/main/java/net/minecraft/server/ItemDye.java b/src/main/java/net/minecraft/server/ItemDye.java
-index 2dc18db..b21c05e 100644
+index 2dc18dbe..b21c05eb 100644
 --- a/src/main/java/net/minecraft/server/ItemDye.java
 +++ b/src/main/java/net/minecraft/server/ItemDye.java
 @@ -111,13 +111,4 @@ public class ItemDye extends Item {
@@ -81,7 +81,7 @@ index 2dc18db..b21c05e 100644
 -    }
  }
 diff --git a/src/main/java/net/minecraft/server/ItemMonsterEgg.java b/src/main/java/net/minecraft/server/ItemMonsterEgg.java
-index b24f7d8..4ce7ffe 100644
+index b24f7d8b..4ce7ffee 100644
 --- a/src/main/java/net/minecraft/server/ItemMonsterEgg.java
 +++ b/src/main/java/net/minecraft/server/ItemMonsterEgg.java
 @@ -185,21 +185,6 @@ public class ItemMonsterEgg extends Item {
@@ -107,7 +107,7 @@ index b24f7d8..4ce7ffe 100644
          NBTTagCompound nbttagcompound = itemstack.hasTag() ? itemstack.getTag() : new NBTTagCompound();
          NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 diff --git a/src/main/java/net/minecraft/server/ItemSkull.java b/src/main/java/net/minecraft/server/ItemSkull.java
-index cbb902f..f5e6646 100644
+index cbb902f5..f5e66465 100644
 --- a/src/main/java/net/minecraft/server/ItemSkull.java
 +++ b/src/main/java/net/minecraft/server/ItemSkull.java
 @@ -83,15 +83,6 @@ public class ItemSkull extends Item {
@@ -127,7 +127,7 @@ index cbb902f..f5e6646 100644
          return i;
      }
 diff --git a/src/main/java/net/minecraft/server/OpList.java b/src/main/java/net/minecraft/server/OpList.java
-index e5f457b..bf3bc6e 100644
+index e5f457bf..bf3bc6e6 100644
 --- a/src/main/java/net/minecraft/server/OpList.java
 +++ b/src/main/java/net/minecraft/server/OpList.java
 @@ -28,7 +28,7 @@ public class OpList extends JsonList<GameProfile, OpListEntry> {
@@ -149,7 +149,7 @@ index e5f457b..bf3bc6e 100644
 -    }
  }
 diff --git a/src/main/java/net/minecraft/server/PacketEncoder.java b/src/main/java/net/minecraft/server/PacketEncoder.java
-index a6da6f5..c81822d 100644
+index a6da6f5c..c81822d6 100644
 --- a/src/main/java/net/minecraft/server/PacketEncoder.java
 +++ b/src/main/java/net/minecraft/server/PacketEncoder.java
 @@ -48,7 +48,7 @@ public class PacketEncoder extends MessageToByteEncoder<Packet<?>> {
@@ -162,7 +162,7 @@ index a6da6f5..c81822d 100644
      }
  }
 diff --git a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java b/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
-index c67cb54..458b4da 100644
+index c67cb54a..458b4da6 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayInUseEntity.java
 @@ -17,7 +17,7 @@ public class PacketPlayInUseEntity implements Packet<PacketListenerPlayIn> {
@@ -184,7 +184,7 @@ index c67cb54..458b4da 100644
          packetdataserializer.a((Enum) this.action);
          if (this.action == PacketPlayInUseEntity.EnumEntityUseAction.INTERACT_AT) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java b/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
-index 736015c..030f02f 100644
+index 736015cf..030f02fd 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutNamedSoundEffect.java
 @@ -37,7 +37,7 @@ public class PacketPlayOutNamedSoundEffect implements Packet<PacketListenerPlayO
@@ -197,7 +197,7 @@ index 736015c..030f02f 100644
          packetdataserializer.writeInt(this.c);
          packetdataserializer.writeInt(this.d);
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
-index 6c86341..c0d0ba5 100644
+index 6c863414..c0d0ba5f 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutSpawnEntityLiving.java
 @@ -26,7 +26,7 @@ public class PacketPlayOutSpawnEntityLiving implements Packet<PacketListenerPlay
@@ -210,7 +210,7 @@ index 6c86341..c0d0ba5 100644
          this.e = entityliving.locY;
          this.f = entityliving.locZ;
 diff --git a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java b/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
-index 3926495..8245cb5 100644
+index 3926495e..8245cb53 100644
 --- a/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
 +++ b/src/main/java/net/minecraft/server/PacketStatusOutServerInfo.java
 @@ -6,7 +6,7 @@ import java.io.IOException;
@@ -223,7 +223,7 @@ index 3926495..8245cb5 100644
  
      public PacketStatusOutServerInfo() {}
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 0c98902..73c6d96 100644
+index 0c989024..73c6d963 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -767,7 +767,7 @@ public abstract class PlayerList {
@@ -236,7 +236,7 @@ index 0c98902..73c6d96 100644
          i = this.server.R() && this.server.worldServer[0].getWorldData().u() ? 4 : i;
          i = this.u ? 4 : i;
 diff --git a/src/main/java/net/minecraft/server/ServerConnection.java b/src/main/java/net/minecraft/server/ServerConnection.java
-index b85c1c5..b92d916 100644
+index b85c1c58..b92d916f 100644
 --- a/src/main/java/net/minecraft/server/ServerConnection.java
 +++ b/src/main/java/net/minecraft/server/ServerConnection.java
 @@ -58,8 +58,10 @@ public class ServerConnection {
@@ -262,7 +262,7 @@ index b85c1c5..b92d916 100644
                                      networkmanager.close(chatcomponenttext);
                                  }
 diff --git a/src/main/java/net/minecraft/server/WhiteList.java b/src/main/java/net/minecraft/server/WhiteList.java
-index 85085d5..be2f4c1 100644
+index 85085d54..be2f4c1c 100644
 --- a/src/main/java/net/minecraft/server/WhiteList.java
 +++ b/src/main/java/net/minecraft/server/WhiteList.java
 @@ -52,7 +52,9 @@ public class WhiteList extends JsonList<GameProfile, WhiteListEntry> {

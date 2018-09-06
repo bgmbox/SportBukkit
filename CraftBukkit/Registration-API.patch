@@ -1,4 +1,4 @@
-From 1ec8f442e568e0c08cbf973064b328645134ef35 Mon Sep 17 00:00:00 2001
+From 1ff408674837553cca2ac55f5a5888e8035083bc Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:10:05 -0500
 Subject: [PATCH] Registration API
@@ -6,7 +6,7 @@ Subject: [PATCH] Registration API
 
 diff --git a/src/main/java/org/bukkit/CraftBukkitRuntime.java b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 new file mode 100644
-index 0000000..a9a30e8
+index 00000000..a9a30e82
 --- /dev/null
 +++ b/src/main/java/org/bukkit/CraftBukkitRuntime.java
 @@ -0,0 +1,41 @@
@@ -52,7 +52,7 @@ index 0000000..a9a30e8
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d0734fc..021a23d 100644
+index d0734fc2..021a23d7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -27,18 +27,11 @@ import com.google.common.collect.*;
@@ -92,7 +92,7 @@ index d0734fc..021a23d 100644
      private final String serverVersion;
 diff --git a/src/main/java/org/bukkit/craftbukkit/registry/CraftKey.java b/src/main/java/org/bukkit/craftbukkit/registry/CraftKey.java
 new file mode 100644
-index 0000000..4d35c22
+index 00000000..4d35c22d
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/registry/CraftKey.java
 @@ -0,0 +1,62 @@
@@ -160,7 +160,7 @@ index 0000000..4d35c22
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/registry/CraftRegistry.java b/src/main/java/org/bukkit/craftbukkit/registry/CraftRegistry.java
 new file mode 100644
-index 0000000..10fd526
+index 00000000..10fd5261
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/registry/CraftRegistry.java
 @@ -0,0 +1,101 @@
@@ -266,7 +266,7 @@ index 0000000..10fd526
 +    }
 +}
 diff --git a/src/test/java/org/bukkit/support/DummyServer.java b/src/test/java/org/bukkit/support/DummyServer.java
-index e5215bb..3a6cea4 100644
+index e5215bb4..3a6cea4c 100644
 --- a/src/test/java/org/bukkit/support/DummyServer.java
 +++ b/src/test/java/org/bukkit/support/DummyServer.java
 @@ -1,79 +1,84 @@

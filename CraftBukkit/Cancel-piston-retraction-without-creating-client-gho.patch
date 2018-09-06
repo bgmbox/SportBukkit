@@ -1,11 +1,11 @@
-From a3caa31b9964edefdc3868d04905f287d68a05ab Mon Sep 17 00:00:00 2001
+From d84174b885b45d1177c70257afebf1cdd1d5af0e Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 18 Feb 2015 05:18:37 -0500
 Subject: [PATCH] Cancel piston retraction without creating client ghost blocks
 
 
 diff --git a/src/main/java/net/minecraft/server/BlockPiston.java b/src/main/java/net/minecraft/server/BlockPiston.java
-index 0f90172..596d5f3 100644
+index 0f90172f..596d5f3f 100644
 --- a/src/main/java/net/minecraft/server/BlockPiston.java
 +++ b/src/main/java/net/minecraft/server/BlockPiston.java
 @@ -183,6 +183,11 @@ public class BlockPiston extends BlockDirectional {
@@ -50,7 +50,7 @@ index 0f90172..596d5f3 100644
              int k;
              BlockPosition blockposition2;
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 40f7080..4b97709 100644
+index 40f70805..4b977097 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -1,6 +1,7 @@

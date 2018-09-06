@@ -1,11 +1,11 @@
-From 14ed7f3f4b239889c49524f2b7d5edf58f622499 Mon Sep 17 00:00:00 2001
+From 1af88a0896a1de34718a6c3e46d8dbad7b91e016 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 7 Sep 2014 21:17:24 -0400
 Subject: [PATCH] Keep players in the player list while respawning
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index c1c3eca..bdf06f9 100644
+index c1c3eca8..bdf06f97 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -629,6 +629,7 @@ public abstract class PlayerList {

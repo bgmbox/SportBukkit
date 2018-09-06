@@ -1,11 +1,11 @@
-From 709c42c09f497f0a22639e8153659bd0b4cb9439 Mon Sep 17 00:00:00 2001
+From 478193849ceaa562b0019a626dedfc2e70e497b8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Mar 2016 19:53:00 -0400
 Subject: [PATCH] Run data converters on passenger entities
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index bdff1b4..dc36ce8 100644
+index bdff1b49..dc36ce84 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -142,6 +142,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
@@ -18,7 +18,7 @@ index bdff1b4..dc36ce8 100644
          // Try to see if we're actually running in a terminal, disable jline if not
 diff --git a/src/main/java/org/bukkit/craftbukkit/DataInspectorEntityPassengers.java b/src/main/java/org/bukkit/craftbukkit/DataInspectorEntityPassengers.java
 new file mode 100644
-index 0000000..3afe5b8
+index 00000000..3afe5b8f
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/DataInspectorEntityPassengers.java
 @@ -0,0 +1,23 @@

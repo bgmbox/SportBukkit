@@ -1,11 +1,11 @@
-From 3eb18d5f2647b31f84aa66ab12010c36530bd59a Mon Sep 17 00:00:00 2001
+From 95559e3ddd5e58c9a78e7d74242337990f51eab9 Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Wed, 25 Jul 2018 15:38:58 -0500
 Subject: [PATCH] Fix sprint disabling when engaging in combat
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 8bc82c0..b6f7651 100644
+index 8bc82c02..b6f76516 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -1039,7 +1039,7 @@ public abstract class EntityHuman extends EntityLiving {

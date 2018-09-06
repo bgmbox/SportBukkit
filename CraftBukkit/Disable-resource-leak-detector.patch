@@ -1,11 +1,11 @@
-From 82115eb6da165daf41f8a672be2433b7e7b4a7f3 Mon Sep 17 00:00:00 2001
+From 9d6aaa9445b1e3a92701e9277c75ee2362cb7e34 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Wed, 30 Apr 2014 17:37:27 -0500
 Subject: [PATCH] Disable resource leak detector
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 1f7c541..bf3f88f 100644
+index 1f7c541f..bf3f88f1 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -132,6 +132,10 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs

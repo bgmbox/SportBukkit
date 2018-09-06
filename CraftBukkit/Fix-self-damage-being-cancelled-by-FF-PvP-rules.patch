@@ -1,11 +1,11 @@
-From 3092e5508c34271037f8bb1ab5bd2a026fa297df Mon Sep 17 00:00:00 2001
+From cfd5fa4de131277acf42ac9d9caa236d83fe8d98 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 10 Jul 2015 23:32:00 -0400
 Subject: [PATCH] Fix self-damage being cancelled by FF/PvP rules
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index e325bd4..3608e25 100644
+index e325bd43..3608e25d 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -777,6 +777,9 @@ public abstract class EntityHuman extends EntityLiving {
@@ -19,7 +19,7 @@ index e325bd4..3608e25 100644
          if (entityhuman instanceof EntityPlayer) {
              EntityPlayer thatPlayer = (EntityPlayer) entityhuman;
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index 57d51d3..5444805 100644
+index 57d51d34..5444805f 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -592,6 +592,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {

@@ -1,11 +1,11 @@
-From 80fd517ea3b7815f5065d5cdd6a5605b6be6751a Mon Sep 17 00:00:00 2001
+From f69a337bcad0e66b327d660a62d4552fba905f38 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:36:20 -0500
 Subject: [PATCH] Arrow damage API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityArrow.java b/src/main/java/net/minecraft/server/EntityArrow.java
-index 4604e1f..f5db5a3 100644
+index 4604e1f5..f5db5a3c 100644
 --- a/src/main/java/net/minecraft/server/EntityArrow.java
 +++ b/src/main/java/net/minecraft/server/EntityArrow.java
 @@ -469,10 +469,12 @@ public abstract class EntityArrow extends Entity implements IProjectile {
@@ -22,7 +22,7 @@ index 4604e1f..f5db5a3 100644
          return this.damage;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java
-index dcbdddc..1ff0d28 100644
+index dcbdddce..1ff0d288 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftArrow.java
 @@ -17,6 +17,16 @@ public class CraftArrow extends AbstractProjectile implements Arrow {
