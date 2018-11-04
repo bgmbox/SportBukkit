@@ -1,11 +1,11 @@
-From 71500bd6c433f8e94b9e76f1bcf73b76147b35d9 Mon Sep 17 00:00:00 2001
+From 19f1b283ac0e341e73d9bc29ba3375529010f177 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 25 Sep 2014 20:42:35 -0400
 Subject: [PATCH] Implement equals() and hashCode() for DoubleChestInventory
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java
-index f028b339..44e490c0 100644
+index f028b33..44e490c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryDoubleChest.java
 @@ -64,4 +64,16 @@ public class CraftInventoryDoubleChest extends CraftInventory implements DoubleC

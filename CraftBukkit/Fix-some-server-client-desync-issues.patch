@@ -1,11 +1,11 @@
-From 760304107d70c7df624585d3a7e6cf42fc7d905a Mon Sep 17 00:00:00 2001
+From fbf18a6da881dc9de57821ba5350f1ee303b6718 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Thu, 6 Sep 2018 00:33:00 -0700
 Subject: [PATCH] Fix some server client desync issues
 
 
 diff --git a/src/main/java/net/minecraft/server/ItemBucket.java b/src/main/java/net/minecraft/server/ItemBucket.java
-index 41fea5bb..0bf2995b 100644
+index 41fea5b..0bf2995 100644
 --- a/src/main/java/net/minecraft/server/ItemBucket.java
 +++ b/src/main/java/net/minecraft/server/ItemBucket.java
 @@ -44,6 +44,7 @@ public class ItemBucket extends Item {
@@ -34,7 +34,7 @@ index 41fea5bb..0bf2995b 100644
                      }
                  }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 4c33e482..5029ee44 100644
+index 4c33e48..5029ee4 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1071,6 +1071,21 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {

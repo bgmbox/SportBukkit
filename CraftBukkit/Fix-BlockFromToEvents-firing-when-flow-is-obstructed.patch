@@ -1,11 +1,11 @@
-From 911c600c499a3497a411c7c1316871adfb18d3e0 Mon Sep 17 00:00:00 2001
+From 29f8f9ddbc47a5b81d27966a021a1330781a6098 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 12 Apr 2014 22:42:11 -0400
 Subject: [PATCH] Fix BlockFromToEvents firing when flow is obstructed
 
 
 diff --git a/src/main/java/net/minecraft/server/BlockFlowing.java b/src/main/java/net/minecraft/server/BlockFlowing.java
-index 7b74df5b..b3a7f37a 100644
+index 7b74df5..b3a7f37 100644
 --- a/src/main/java/net/minecraft/server/BlockFlowing.java
 +++ b/src/main/java/net/minecraft/server/BlockFlowing.java
 @@ -134,6 +134,8 @@ public class BlockFlowing extends BlockFluids {

@@ -1,11 +1,11 @@
-From c4e79ab2c9d47cdb9cc0d4a467616242f5e7aa0b Mon Sep 17 00:00:00 2001
+From c40157ae04ebfb3f63dd8458b1801d79f9caf0b2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 9 Aug 2016 14:48:53 -0400
 Subject: [PATCH] Fix inverted team visibility
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java
-index b2a3df47..3de3b510 100644
+index b2a3df4..3de3b51 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftTeam.java
 @@ -206,11 +206,11 @@ public final class CraftTeam extends CraftScoreboardComponent implements Team {

@@ -1,4 +1,4 @@
-From da507bae30cd2d0e4e9ebcda7323f8ff99146ed8 Mon Sep 17 00:00:00 2001
+From 1f15bcdf5f6bdf29a755c3df846835578c55b6d5 Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Sun, 5 Jan 2014 20:32:00 -0600
 Subject: [PATCH] Allow plugins to access player locale

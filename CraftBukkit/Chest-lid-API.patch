@@ -1,11 +1,11 @@
-From 06cfe8f80ec8e63a4aaa84b852b45aeb5dd1abb2 Mon Sep 17 00:00:00 2001
+From b9e8540f05a3c4a44571b7c0647cef0d2b3f6bf6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 24 Dec 2016 20:03:43 -0500
 Subject: [PATCH] Chest lid API
 
 
 diff --git a/src/main/java/net/minecraft/server/TileEntityChest.java b/src/main/java/net/minecraft/server/TileEntityChest.java
-index 3b5af473..c146374e 100644
+index 3b5af47..c146374 100644
 --- a/src/main/java/net/minecraft/server/TileEntityChest.java
 +++ b/src/main/java/net/minecraft/server/TileEntityChest.java
 @@ -4,6 +4,7 @@ import java.util.Iterator;
@@ -95,7 +95,7 @@ index 3b5af473..c146374e 100644
  
              // CraftBukkit start - Call redstone event
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java b/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java
-index 85f3bb27..445f1800 100644
+index 85f3bb2..445f180 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java
 @@ -75,4 +75,25 @@ public class CraftChest extends CraftLootable<TileEntityChest> implements Chest

@@ -1,11 +1,11 @@
-From bcf3e60fd8e7903c39f3d3581de78414872c3b6a Mon Sep 17 00:00:00 2001
+From 660e4358615cfbb93a9495e945b44aebe15b21a0 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sat, 17 Nov 2012 12:41:06 -0600
 Subject: [PATCH] Make AsyncPlayerPreLoginEvent more versatile
 
 
 diff --git a/src/main/java/net/minecraft/server/LoginListener.java b/src/main/java/net/minecraft/server/LoginListener.java
-index 22cfd596..ff40e102 100644
+index 22cfd59..ff40e10 100644
 --- a/src/main/java/net/minecraft/server/LoginListener.java
 +++ b/src/main/java/net/minecraft/server/LoginListener.java
 @@ -74,6 +74,12 @@ public class LoginListener implements PacketLoginInListener, ITickable {

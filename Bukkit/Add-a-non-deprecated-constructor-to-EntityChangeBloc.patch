@@ -1,4 +1,4 @@
-From 5cc5f58372053e52e2597d93a566662f47c4ca0b Mon Sep 17 00:00:00 2001
+From f47a1eff3a721d3f4ef1601eb5a1813adc26ac48 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 30 May 2015 06:53:57 -0400
 Subject: [PATCH] Add a non-deprecated constructor to EntityChangeBlockEvent

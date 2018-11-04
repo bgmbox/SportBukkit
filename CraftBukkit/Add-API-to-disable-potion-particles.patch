@@ -1,11 +1,11 @@
-From 6291e1acd5e2a0eb6237b2a01402b200e7095de6 Mon Sep 17 00:00:00 2001
+From c04e0c568c74bc1bbf7f153ddc0ea66f55246952 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 9 May 2014 23:48:01 -0400
 Subject: [PATCH] Add API to disable potion particles
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index c37698ba..7fe7284b 100644
+index c37698b..7fe7284 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -19,6 +19,7 @@ import com.google.common.base.Function;
@@ -37,7 +37,7 @@ index c37698ba..7fe7284b 100644
          }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 7d6dbcfe..e6ca2a9e 100644
+index 7d6dbcf..e6ca2a9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -78,6 +78,7 @@ import org.bukkit.util.Vector;

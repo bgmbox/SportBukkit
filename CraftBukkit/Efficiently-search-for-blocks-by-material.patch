@@ -1,11 +1,11 @@
-From cce59d923884432aa7353b8ce0f795fca823b59b Mon Sep 17 00:00:00 2001
+From c69786cf61099899258ad569a6c5fe92d3e3f339 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 16 Feb 2015 04:58:46 -0500
 Subject: [PATCH] Efficiently search for blocks by material
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
-index 70730021..99af6359 100644
+index 7073002..99af635 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 @@ -3,7 +3,10 @@ package org.bukkit.craftbukkit;

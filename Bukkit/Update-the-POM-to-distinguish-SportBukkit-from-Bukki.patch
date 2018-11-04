@@ -1,4 +1,4 @@
-From 4efcd55fec6e7144dddf1084bff61f1ec9386c6b Mon Sep 17 00:00:00 2001
+From efc00752b08e26f84f105ea851fc5ed8beb2b073 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 10 Dec 2013 23:16:10 -0600
 Subject: [PATCH] Update the POM to distinguish SportBukkit from Bukkit

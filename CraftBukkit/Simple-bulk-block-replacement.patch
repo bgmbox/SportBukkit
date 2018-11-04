@@ -1,11 +1,11 @@
-From 00b27ead8d1a0fcbfb524be8bd4a35db0122f6e1 Mon Sep 17 00:00:00 2001
+From a6b604ff3412670b8a701850874f9fbf442bd95f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 28 Sep 2014 05:48:35 -0400
 Subject: [PATCH] Simple bulk block replacement
 
 
 diff --git a/src/main/java/net/minecraft/server/Block.java b/src/main/java/net/minecraft/server/Block.java
-index 26a4c825..071a3d58 100644
+index 26a4c82..071a3d5 100644
 --- a/src/main/java/net/minecraft/server/Block.java
 +++ b/src/main/java/net/minecraft/server/Block.java
 @@ -106,6 +106,7 @@ public class Block {
@@ -17,7 +17,7 @@ index 26a4c825..071a3d58 100644
      public Material q(IBlockData iblockdata) {
          return this.material;
 diff --git a/src/main/java/net/minecraft/server/BlockPosition.java b/src/main/java/net/minecraft/server/BlockPosition.java
-index 67b476b2..d73e161c 100644
+index 67b476b..d73e161 100644
 --- a/src/main/java/net/minecraft/server/BlockPosition.java
 +++ b/src/main/java/net/minecraft/server/BlockPosition.java
 @@ -383,7 +383,9 @@ public class BlockPosition extends BaseBlockPosition {
@@ -32,7 +32,7 @@ index 67b476b2..d73e161c 100644
              this.c = j;
              this.d = k;
 diff --git a/src/main/java/net/minecraft/server/Chunk.java b/src/main/java/net/minecraft/server/Chunk.java
-index 1c1499a9..d8a93d43 100644
+index 1c1499a..d8a93d4 100644
 --- a/src/main/java/net/minecraft/server/Chunk.java
 +++ b/src/main/java/net/minecraft/server/Chunk.java
 @@ -697,6 +697,7 @@ public class Chunk {
@@ -44,7 +44,7 @@ index 1c1499a9..d8a93d43 100644
          if (this.j) {
              TileEntity tileentity = (TileEntity) this.tileEntities.remove(blockposition);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
-index 0cc838cc..70730021 100644
+index 0cc838c..7073002 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 @@ -7,12 +7,15 @@ import java.util.Random;
@@ -101,7 +101,7 @@ index 0cc838cc..70730021 100644
          BiomeBase[] biomes = chunkmanager.getBiomes(null, chunkX, chunkZ, 16, 16);
          float[] temps = new float[biomes.length];
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index a1be7ec4..ba1a58df 100644
+index a1be7ec..ba1a58d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -1,6 +1,7 @@
