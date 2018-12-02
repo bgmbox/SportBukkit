@@ -1,11 +1,11 @@
-From 35a8ca0f8991941bca35c0bf80097b4b7d9ec318 Mon Sep 17 00:00:00 2001
+From 43875ec4cb8ac53dd970c7729208eb2548107d77 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 22 May 2015 00:45:13 -0400
 Subject: [PATCH] Add CanDestroy and CanPlaceOn to ItemMeta
 
 
 diff --git a/src/main/java/org/bukkit/inventory/meta/ItemMeta.java b/src/main/java/org/bukkit/inventory/meta/ItemMeta.java
-index e30ebe8..26d6a55 100644
+index e30ebe8f..26d6a553 100644
 --- a/src/main/java/org/bukkit/inventory/meta/ItemMeta.java
 +++ b/src/main/java/org/bukkit/inventory/meta/ItemMeta.java
 @@ -5,11 +5,13 @@ import java.util.List;
@@ -43,7 +43,7 @@ index e30ebe8..26d6a55 100644
  }
 diff --git a/src/main/java/org/bukkit/util/EnumUtils.java b/src/main/java/org/bukkit/util/EnumUtils.java
 new file mode 100644
-index 0000000..27da631
+index 00000000..27da6315
 --- /dev/null
 +++ b/src/main/java/org/bukkit/util/EnumUtils.java
 @@ -0,0 +1,21 @@
@@ -70,7 +70,7 @@ index 0000000..27da631
 +}
 diff --git a/src/main/java/org/bukkit/util/ImmutableMaterialSet.java b/src/main/java/org/bukkit/util/ImmutableMaterialSet.java
 new file mode 100644
-index 0000000..53f56a9
+index 00000000..53f56a96
 --- /dev/null
 +++ b/src/main/java/org/bukkit/util/ImmutableMaterialSet.java
 @@ -0,0 +1,78 @@

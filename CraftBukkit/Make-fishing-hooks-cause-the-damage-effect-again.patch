@@ -1,11 +1,11 @@
-From e1d327b1000dbe1b2132f70068e252e8e962ae40 Mon Sep 17 00:00:00 2001
+From cf4ac0d7b9805bd170bc7ae2a61b017f42813825 Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Sun, 29 Jul 2018 14:42:10 -0500
 Subject: [PATCH] Make fishing hooks cause the damage effect again
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityFishingHook.java b/src/main/java/net/minecraft/server/EntityFishingHook.java
-index b4d3bcb..120fef3 100644
+index b4d3bcb4..120fef37 100644
 --- a/src/main/java/net/minecraft/server/EntityFishingHook.java
 +++ b/src/main/java/net/minecraft/server/EntityFishingHook.java
 @@ -268,8 +268,10 @@ public class EntityFishingHook extends Entity {

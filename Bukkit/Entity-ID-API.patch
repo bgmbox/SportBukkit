@@ -1,42 +1,42 @@
-From 76e48e90493a5ae6d3d6a4ab0183bf096f382150 Mon Sep 17 00:00:00 2001
+From b19a740ccc4aa82dc3c1c150cbe09594ce69cb07 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 16 Jun 2013 16:57:59 -0500
 Subject: [PATCH] Entity ID API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index d57e4a5..bc6f025 100644
+index d57e4a57..bc6f0250 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -1031,6 +1031,13 @@ public final class Bukkit {
+@@ -1030,6 +1030,13 @@ public final class Bukkit {
+         return server.getScoreboardManager();
      }
  
-     /**
++    /**
 +     * @see Server#allocateEntityId()
 +     */
 +    public static int allocateEntityId() {
 +        return server.allocateEntityId();
 +    }
 +
-+    /**
+     /**
       * Gets an instance of the server's default server-icon.
       *
-      * @return the default server-icon; null values may be used by the
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 5f88b72..13c028a 100644
+index 5f88b720..13c028a6 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -841,6 +841,13 @@ public interface Server extends PluginMessageRecipient {
+@@ -840,6 +840,13 @@ public interface Server extends PluginMessageRecipient {
+      */
      ScoreboardManager getScoreboardManager();
  
-     /**
++    /**
 +     * Allocate and return a unique entity ID.
 +     *
 +     * The returned ID has never been, and will never be used as the ID of a real entity.
 +     */
 +    int allocateEntityId();
 +
-+    /**
+     /**
       * Gets an instance of the server's default server-icon.
       *
-      * @return the default server-icon; null values may be used by the

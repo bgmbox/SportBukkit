@@ -1,11 +1,11 @@
-From 25ccccad355d088a85f19d2ce05a176364d93cc3 Mon Sep 17 00:00:00 2001
+From 06c3b12ecaa9c27c824a64ac4751a0f2c1a5519d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 29 May 2015 01:08:37 -0400
 Subject: [PATCH] Plugin isolation
 
 
 diff --git a/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java b/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java
-index f5441bf..f051b7f 100644
+index f5441bfd..f051b7f8 100644
 --- a/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java
 +++ b/src/main/java/org/bukkit/configuration/serialization/ConfigurationSerialization.java
 @@ -5,10 +5,13 @@ import java.lang.reflect.InvocationTargetException;
@@ -136,7 +136,7 @@ index f5441bf..f051b7f 100644
  
      /**
 diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
-index 4cdaac4..09198ae 100644
+index 4cdaac45..09198aec 100644
 --- a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 +++ b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 @@ -221,6 +221,7 @@ public final class PluginDescriptionFile {
@@ -171,7 +171,7 @@ index 4cdaac4..09198ae 100644
  
      private static List<String> makePluginNameList(final Map<?, ?> map, final String key) throws InvalidDescriptionException {
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index ecbc931..3049d04 100644
+index ecbc931c..3049d046 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -23,6 +23,7 @@ import org.bukkit.Server;
@@ -196,7 +196,7 @@ index ecbc931..3049d04 100644
      }
  
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-index 885f8ae..5fbfc39 100644
+index 885f8ae8..5fbfc39b 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 @@ -6,18 +6,18 @@ import java.io.IOException;
@@ -397,7 +397,7 @@ index 885f8ae..5fbfc39 100644
              }
          }
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index 7e41e79..765d6ce 100644
+index 7e41e79a..765d6ce8 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 @@ -2,20 +2,17 @@ package org.bukkit.plugin.java;

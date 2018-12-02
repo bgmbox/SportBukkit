@@ -1,11 +1,11 @@
-From 76916da8f18b9feb67c88cc5d729fb29ca702094 Mon Sep 17 00:00:00 2001
+From 8091067a9b8bd16c5883c165d221996167602788 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 30 Oct 2014 00:40:07 -0400
 Subject: [PATCH] Fix combustion events
 
 
 diff --git a/src/main/java/net/minecraft/server/DispenserRegistry.java b/src/main/java/net/minecraft/server/DispenserRegistry.java
-index 5c6b259..2fc5b08 100644
+index 5c6b2594..2fc5b08c 100644
 --- a/src/main/java/net/minecraft/server/DispenserRegistry.java
 +++ b/src/main/java/net/minecraft/server/DispenserRegistry.java
 @@ -237,6 +237,7 @@ public class DispenserRegistry {
@@ -25,7 +25,7 @@ index 5c6b259..2fc5b08 100644
                  ((Fireball) fireball.getBukkitEntity()).setDirection(event.getVelocity()); // don't call the NMS version because it randomizes the value
  
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 531985d..1557a07 100644
+index 531985d8..1557a077 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -106,6 +106,7 @@ public abstract class Entity implements ICommandListener {
@@ -168,7 +168,7 @@ index 531985d..1557a07 100644
          float f4 = f * f + f1 * f1 + f2 * f2;
  
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index d27c4fc..32061b7 100644
+index d27c4fcc..32061b73 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -1741,6 +1741,41 @@ public abstract class World implements IBlockAccess {
@@ -214,7 +214,7 @@ index d27c4fc..32061b7 100644
          return this.createExplosion(entity, d0, d1, d2, f, false, flag);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index f7bed19..40f7080 100644
+index f7bed197..40f70805 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -487,18 +487,16 @@ public class CraftEventFactory {

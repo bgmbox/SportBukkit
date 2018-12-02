@@ -1,11 +1,11 @@
-From 590945abb94ec0aead0e5868cedf777a7548a7ba Mon Sep 17 00:00:00 2001
+From 4a984ebafa0612167197235248bc1ec38cc1a444 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Fri, 17 May 2013 20:44:04 -0500
 Subject: [PATCH] Add PlayerPickupExperienceEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityExperienceOrb.java b/src/main/java/net/minecraft/server/EntityExperienceOrb.java
-index eae7063..cf15ef2 100644
+index eae70636..cf15ef23 100644
 --- a/src/main/java/net/minecraft/server/EntityExperienceOrb.java
 +++ b/src/main/java/net/minecraft/server/EntityExperienceOrb.java
 @@ -161,6 +161,7 @@ public class EntityExperienceOrb extends Entity {
@@ -17,7 +17,7 @@ index eae7063..cf15ef2 100644
                  ItemStack itemstack = EnchantmentManager.b(Enchantments.C, (EntityLiving) entityhuman);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index c4bc628..b157fea 100644
+index c4bc628b..b157fea6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -961,6 +961,13 @@ public class CraftEventFactory {

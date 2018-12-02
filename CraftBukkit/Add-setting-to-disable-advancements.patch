@@ -1,11 +1,11 @@
-From f47fef2f2cef43125901570763d8bbd2ed690a00 Mon Sep 17 00:00:00 2001
+From ab1dc1283be59274196aaea6ad4dececd660ae88 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Wed, 31 Jan 2018 23:42:29 -0800
 Subject: [PATCH] Add setting to disable advancements
 
 
 diff --git a/src/main/java/net/minecraft/server/AdvancementDataPlayer.java b/src/main/java/net/minecraft/server/AdvancementDataPlayer.java
-index 495e7f8..38b2416 100644
+index 495e7f88..38b24163 100644
 --- a/src/main/java/net/minecraft/server/AdvancementDataPlayer.java
 +++ b/src/main/java/net/minecraft/server/AdvancementDataPlayer.java
 @@ -165,6 +165,7 @@ public class AdvancementDataPlayer {
@@ -17,7 +17,7 @@ index 495e7f8..38b2416 100644
          Iterator iterator = this.data.entrySet().iterator();
  
 diff --git a/src/main/java/net/minecraft/server/AdvancementDataWorld.java b/src/main/java/net/minecraft/server/AdvancementDataWorld.java
-index 5ae0609..940a463 100644
+index 5ae0609d..940a463b 100644
 --- a/src/main/java/net/minecraft/server/AdvancementDataWorld.java
 +++ b/src/main/java/net/minecraft/server/AdvancementDataWorld.java
 @@ -150,6 +150,9 @@ public class AdvancementDataWorld {
@@ -31,18 +31,18 @@ index 5ae0609..940a463 100644
                          String s = FilenameUtils.removeExtension(java_nio_file_path2.toString()).replaceAll("\\\\", "/");
                          MinecraftKey minecraftkey = new MinecraftKey("minecraft", s);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 69c880e..c63fa44 100644
+index 69c880ef..c63fa44a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -644,6 +644,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -643,6 +643,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+         return this.configuration.getBoolean("settings.legacy-knockback", false);
      }
  
-     @Override
++    @Override
 +    public boolean getAdvancementsEnabled() {
 +        return this.configuration.getBoolean("settings.advancements-enabled", true);
 +    }
 +
-+    @Override
+     @Override
      public int getTicksPerAnimalSpawns() {
          return this.configuration.getInt("ticks-per.animal-spawns");
-     }

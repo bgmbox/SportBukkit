@@ -1,11 +1,11 @@
-From 97a2c794252c9829eaa5584b751da7145c677f83 Mon Sep 17 00:00:00 2001
+From 7c925216dc01746e22bbd93414174fae30107f0a Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Sat, 11 Aug 2018 01:20:08 -0500
 Subject: [PATCH] Re-add w-tapping
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 7c9147f..d9159d5 100644
+index 7c9147f5..d9159d51 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -1403,7 +1403,10 @@ public abstract class Entity implements ICommandListener {
@@ -21,7 +21,7 @@ index 7c9147f..d9159d5 100644
      // SportBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index b6f7651..7cff6b7 100644
+index b6f76516..7cff6b72 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -67,8 +67,6 @@ public abstract class EntityHuman extends EntityLiving {
@@ -188,7 +188,7 @@ index b6f7651..7cff6b7 100644
  
      public ItemCooldown getCooldownTracker() {
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 3e0431f..756378d 100644
+index 3e0431f2..756378d5 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -820,7 +820,7 @@ public abstract class EntityLiving extends Entity {
@@ -218,7 +218,7 @@ index 3e0431f..756378d 100644
                          this.aA = (float) ((int) (Math.random() * 2.0D) * 180);
                      }
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
-index ca6f57d..1c34bd2 100644
+index ca6f57d2..1c34bd27 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
 @@ -103,7 +103,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
@@ -249,7 +249,7 @@ index ca6f57d..1c34bd2 100644
          if(event.isCancelled()) return;
  
 diff --git a/src/main/java/net/minecraft/server/EntityTrackerEntry.java b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
-index e01f089..15598ec 100644
+index e01f0895..15598ec5 100644
 --- a/src/main/java/net/minecraft/server/EntityTrackerEntry.java
 +++ b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
 @@ -255,8 +255,7 @@ public class EntityTrackerEntry {
@@ -278,7 +278,7 @@ index e01f089..15598ec 100644
      }
  
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index be636bb..907ec93 100644
+index be636bb2..907ec938 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -547,8 +547,6 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -291,7 +291,7 @@ index be636bb..907ec93 100644
                  this.player.handleClientTick(
                          packetplayinflying.hasPos ? new Vector(packetplayinflying.x,
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 0910473..04c621d 100644
+index 09104733..04c621d6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -528,13 +528,12 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
@@ -311,7 +311,7 @@ index 0910473..04c621d 100644
  
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 80ce19e..2cfb6c0 100644
+index 80ce19e9..2cfb6c02 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -1785,12 +1785,9 @@ public class CraftPlayer extends CraftHumanEntity implements Player {

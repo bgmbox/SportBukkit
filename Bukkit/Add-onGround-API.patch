@@ -1,4 +1,4 @@
-From 423ffa577b38fdd9aa14a2f0522f97c3d2b42d43 Mon Sep 17 00:00:00 2001
+From 225fb4dc730037afef8193905296d69e86af246d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 25 Dec 2012 01:50:07 -0500
 Subject: [PATCH] Add onGround API
@@ -6,7 +6,7 @@ Subject: [PATCH] Add onGround API
 
 diff --git a/src/main/java/org/bukkit/event/player/PlayerOnGroundEvent.java b/src/main/java/org/bukkit/event/player/PlayerOnGroundEvent.java
 new file mode 100644
-index 0000000..4a6c3d4
+index 00000000..4a6c3d4b
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/player/PlayerOnGroundEvent.java
 @@ -0,0 +1,32 @@

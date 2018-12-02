@@ -1,4 +1,4 @@
-From 0e4f36010d979882ff11c212c46677460da1819f Mon Sep 17 00:00:00 2001
+From 97a0a63d4fe7c71b9447d4a30a107e42a9e64fe1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 10 Dec 2016 20:15:32 -0500
 Subject: [PATCH] Remove BukkitMirrorTest
@@ -6,7 +6,7 @@ Subject: [PATCH] Remove BukkitMirrorTest
 
 diff --git a/src/test/java/org/bukkit/BukkitMirrorTest.java b/src/test/java/org/bukkit/BukkitMirrorTest.java
 deleted file mode 100644
-index 219788f..0000000
+index 219788fb..00000000
 --- a/src/test/java/org/bukkit/BukkitMirrorTest.java
 +++ /dev/null
 @@ -1,75 +0,0 @@

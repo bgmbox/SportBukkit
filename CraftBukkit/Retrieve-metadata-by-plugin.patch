@@ -1,11 +1,11 @@
-From 155f50c0d63f26a66ac897ad7e1e84514a7f1d0a Mon Sep 17 00:00:00 2001
+From 2455fc5a50890d5169c6491d78c0fcc015c9f185 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 19 Jun 2015 15:02:55 -0400
 Subject: [PATCH] Retrieve metadata by plugin
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 5675d65..f732b8b 100644
+index 5675d652..f732b8b2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -1397,6 +1397,11 @@ public class CraftWorld implements World {
@@ -21,7 +21,7 @@ index 5675d65..f732b8b 100644
          return server.getWorldMetadata().getMetadata(this, metadataKey);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
-index 1236f80..b4756fc 100644
+index 1236f804..b4756fc7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -529,6 +529,11 @@ public class CraftBlock implements Block {
@@ -37,7 +37,7 @@ index 1236f80..b4756fc 100644
          return chunk.getCraftWorld().getBlockMetadata().getMetadata(this, metadataKey);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
-index 08634fa..7d08211 100644
+index 08634fad..7d082117 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockState.java
 @@ -271,6 +271,12 @@ public class CraftBlockState implements BlockState {
@@ -54,7 +54,7 @@ index 08634fa..7d08211 100644
          requirePlaced();
          return chunk.getCraftWorld().getBlockMetadata().getMetadata(getBlock(), metadataKey);
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index edea21f..99c6b9f 100644
+index edea21f8..99c6b9f6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -487,6 +487,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
@@ -70,18 +70,18 @@ index edea21f..99c6b9f 100644
          return server.getEntityMetadata().getMetadata(this, metadataKey);
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 25241a4..e8af5bb 100644
+index 25241a4d..e8af5bb4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -1537,6 +1537,11 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1536,6 +1536,11 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         server.getPlayerMetadata().setMetadata(this, metadataKey, newMetadataValue);
      }
  
-     @Override
++    @Override
 +    public MetadataValue getMetadata(String metadataKey, Plugin owningPlugin) {
 +        return server.getPlayerMetadata().getMetadata(this, metadataKey, owningPlugin);
 +    }
 +
-+    @Override
+     @Override
      public List<MetadataValue> getMetadata(String metadataKey) {
          return server.getPlayerMetadata().getMetadata(this, metadataKey);
-     }

@@ -1,11 +1,11 @@
-From 790a90d6eb60a062f84e10bfe049e0b17ff44f8f Mon Sep 17 00:00:00 2001
+From 33bb8f0f4206eb9e8e4326dc854159e8aa5a5d58 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:23 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit/block/Sign.java
-index f30666a..541e60e 100644
+index f30666a4..541e60e4 100644
 --- a/src/main/java/org/bukkit/block/Sign.java
 +++ b/src/main/java/org/bukkit/block/Sign.java
 @@ -1,5 +1,7 @@
@@ -49,7 +49,7 @@ index f30666a..541e60e 100644
      public void setLine(int index, String line) throws IndexOutOfBoundsException;
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 8acf394..0f47486 100644
+index 8acf394a..0f47486c 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -3,6 +3,7 @@ package org.bukkit.entity;
@@ -71,7 +71,7 @@ index 8acf394..0f47486 100644
  
      /**
 diff --git a/src/main/java/org/bukkit/event/block/SignChangeEvent.java b/src/main/java/org/bukkit/event/block/SignChangeEvent.java
-index f884f3d..47b0d1f 100644
+index f884f3d7..47b0d1f6 100644
 --- a/src/main/java/org/bukkit/event/block/SignChangeEvent.java
 +++ b/src/main/java/org/bukkit/event/block/SignChangeEvent.java
 @@ -1,5 +1,7 @@

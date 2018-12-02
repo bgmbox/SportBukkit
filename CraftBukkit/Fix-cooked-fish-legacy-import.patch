@@ -1,11 +1,11 @@
-From 68e9c4aa9a5edbf598edbe2f7a5498df2e4255fa Mon Sep 17 00:00:00 2001
+From a70225643b9457588d253de1cfa8ccf99c80f63d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Mar 2016 16:00:16 -0400
 Subject: [PATCH] Fix cooked fish legacy import
 
 
 diff --git a/src/main/java/net/minecraft/server/DataConverterMaterialId.java b/src/main/java/net/minecraft/server/DataConverterMaterialId.java
-index 87b82eb..f6c070a 100644
+index 87b82eb3..f6c070ae 100644
 --- a/src/main/java/net/minecraft/server/DataConverterMaterialId.java
 +++ b/src/main/java/net/minecraft/server/DataConverterMaterialId.java
 @@ -261,7 +261,7 @@ public class DataConverterMaterialId implements IDataConverter {

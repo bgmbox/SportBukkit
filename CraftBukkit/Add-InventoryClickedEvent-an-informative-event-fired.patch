@@ -1,4 +1,4 @@
-From 07834072729493ed797d0ff4912832637d75b91c Mon Sep 17 00:00:00 2001
+From ceaf411c2e2b032b60147c735b48c64f447253a0 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Mon, 12 Nov 2012 20:53:11 -0600
 Subject: [PATCH] Add InventoryClickedEvent, an informative event fired after
@@ -6,7 +6,7 @@ Subject: [PATCH] Add InventoryClickedEvent, an informative event fired after
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 3e063e4..dedfedb 100644
+index 3e063e47..dedfedba 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1875,9 +1875,11 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {

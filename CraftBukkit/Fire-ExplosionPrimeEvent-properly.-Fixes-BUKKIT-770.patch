@@ -1,11 +1,11 @@
-From 72b36d5b15e28656310d9b133e68430d500d1ca6 Mon Sep 17 00:00:00 2001
+From 6670988cdc2b78e163a88fe6e2d265d9d7cbad44 Mon Sep 17 00:00:00 2001
 From: Chad Waters <authorblues@gmail.com>
 Date: Thu, 2 Aug 2012 16:47:02 -0700
 Subject: [PATCH] Fire ExplosionPrimeEvent properly. Fixes BUKKIT-770
 
 
 diff --git a/src/main/java/net/minecraft/server/BlockTNT.java b/src/main/java/net/minecraft/server/BlockTNT.java
-index 9473e31..8105beb 100644
+index 9473e314..8105bebe 100644
 --- a/src/main/java/net/minecraft/server/BlockTNT.java
 +++ b/src/main/java/net/minecraft/server/BlockTNT.java
 @@ -1,6 +1,7 @@
@@ -91,7 +91,7 @@ index 9473e31..8105beb 100644
          }
  
 diff --git a/src/main/java/net/minecraft/server/EntityCreeper.java b/src/main/java/net/minecraft/server/EntityCreeper.java
-index c872607..dad07a6 100644
+index c872607f..dad07a6a 100644
 --- a/src/main/java/net/minecraft/server/EntityCreeper.java
 +++ b/src/main/java/net/minecraft/server/EntityCreeper.java
 @@ -103,7 +103,16 @@ public class EntityCreeper extends EntityMonster {
@@ -113,7 +113,7 @@ index c872607..dad07a6 100644
  
              this.fuseTicks += i;
 diff --git a/src/main/java/net/minecraft/server/EntityLargeFireball.java b/src/main/java/net/minecraft/server/EntityLargeFireball.java
-index b922168..ce57100 100644
+index b9221689..ce57100b 100644
 --- a/src/main/java/net/minecraft/server/EntityLargeFireball.java
 +++ b/src/main/java/net/minecraft/server/EntityLargeFireball.java
 @@ -25,15 +25,9 @@ public class EntityLargeFireball extends EntityFireball {
@@ -135,7 +135,7 @@ index b922168..ce57100 100644
          }
  
 diff --git a/src/main/java/net/minecraft/server/EntityTNTPrimed.java b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
-index 419d76e..6c3d019 100644
+index 419d76ee..6c3d0192 100644
 --- a/src/main/java/net/minecraft/server/EntityTNTPrimed.java
 +++ b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
 @@ -86,12 +86,9 @@ public class EntityTNTPrimed extends Entity {

@@ -1,11 +1,11 @@
-From 87b062cc9c3e10945a549c69a27f712f3a67a221 Mon Sep 17 00:00:00 2001
+From a898e354063f65843cb2e7f949cc51397886b763 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 25 Apr 2016 20:47:20 -0400
 Subject: [PATCH] Add Player.willBeOnline method
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index a4fe885..8fa4960 100644
+index a4fe8857..8fa49607 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -404,6 +404,8 @@ public abstract class PlayerList {
@@ -18,7 +18,7 @@ index a4fe885..8fa4960 100644
          org.bukkit.craftbukkit.event.CraftEventFactory.handleInventoryCloseEvent(entityplayer);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftOfflinePlayer.java b/src/main/java/org/bukkit/craftbukkit/CraftOfflinePlayer.java
-index 4521786..b4ca640 100644
+index 45217866..b4ca6401 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftOfflinePlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftOfflinePlayer.java
 @@ -43,6 +43,12 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
@@ -35,7 +35,7 @@ index 4521786..b4ca640 100644
          Player player = getPlayer();
          if (player != null) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 9d672b0..f0f8b82 100644
+index 9d672b03..f0f8b829 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -98,6 +98,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {

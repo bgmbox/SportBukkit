@@ -1,11 +1,11 @@
-From 9bd1b0fe576b10f68443cf6c0379f2103b3fdb35 Mon Sep 17 00:00:00 2001
+From a35c94b5f50fb00373f5697b7bf7d97d8d49e6ac Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 3 Jun 2015 19:10:45 -0400
 Subject: [PATCH] Mutable ChunkSnapshots
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java b/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java
-index c0fb34b..f92339a 100644
+index c0fb34b9..f92339a7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java
 @@ -1,11 +1,16 @@

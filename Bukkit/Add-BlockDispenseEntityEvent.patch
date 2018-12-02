@@ -1,4 +1,4 @@
-From 50682e0a4e0fe89c8d5fbb6eeb55542478e0d294 Mon Sep 17 00:00:00 2001
+From 13f081ea92eb5e7ad9a89f0a48be8b662a193331 Mon Sep 17 00:00:00 2001
 From: YukonAppleGeek <yukonvinecki@gmail.com>
 Date: Mon, 8 Apr 2013 20:14:25 -0700
 Subject: [PATCH] Add BlockDispenseEntityEvent
@@ -6,7 +6,7 @@ Subject: [PATCH] Add BlockDispenseEntityEvent
 
 diff --git a/src/main/java/org/bukkit/event/block/BlockDispenseEntityEvent.java b/src/main/java/org/bukkit/event/block/BlockDispenseEntityEvent.java
 new file mode 100644
-index 0000000..9d2227e
+index 00000000..9d2227e9
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/block/BlockDispenseEntityEvent.java
 @@ -0,0 +1,49 @@

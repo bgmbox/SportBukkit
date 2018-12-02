@@ -1,11 +1,11 @@
-From 2a681ce017fd727b3f2c1bb11c4d786c247a119f Mon Sep 17 00:00:00 2001
+From 6a7b010e7fa26869d225ef74df2d4e2764ab5be4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 04:31:29 -0400
 Subject: [PATCH] Natural regeneration API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
-index 8ae4cbf..f35a951 100644
+index 8ae4cbf0..f35a9512 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
 @@ -65,6 +65,11 @@ public abstract class EntityHuman extends EntityLiving {
@@ -21,7 +21,7 @@ index 8ae4cbf..f35a951 100644
      public boolean affectsSpawning = true;
  
 diff --git a/src/main/java/net/minecraft/server/FoodMetaData.java b/src/main/java/net/minecraft/server/FoodMetaData.java
-index 33a2df5..7c54359 100644
+index 33a2df5d..7c54359e 100644
 --- a/src/main/java/net/minecraft/server/FoodMetaData.java
 +++ b/src/main/java/net/minecraft/server/FoodMetaData.java
 @@ -60,7 +60,7 @@ public class FoodMetaData {
@@ -43,7 +43,7 @@ index 33a2df5..7c54359 100644
              if (this.foodTickTimer >= 80) {
                  entityhuman.heal(1.0F, org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason.SATIATED); // CraftBukkit - added RegainReason
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index ae4bcce..28214ce 100644
+index ae4bcced..28214cee 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -19,6 +19,7 @@ import java.util.HashMap;
@@ -54,10 +54,11 @@ index ae4bcce..28214ce 100644
  import java.util.Map;
  import java.util.Set;
  import java.util.UUID;
-@@ -1175,6 +1176,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1174,6 +1175,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         getHandle().getFoodData().foodLevel = value;
      }
  
-     @Override
++    @Override
 +    public boolean getFastNaturalRegeneration() {
 +        return getHandle().fastNaturalRegeneration;
 +    }
@@ -77,7 +78,6 @@ index ae4bcce..28214ce 100644
 +        getHandle().slowNaturalRegeneration = enabled;
 +    }
 +
-+    @Override
+     @Override
      public Location getBedSpawnLocation() {
          World world = getServer().getWorld(getHandle().spawnWorld);
-         BlockPosition bed = getHandle().getBed();

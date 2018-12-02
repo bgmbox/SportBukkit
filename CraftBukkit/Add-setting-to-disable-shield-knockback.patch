@@ -1,11 +1,11 @@
-From b617265674e47a7ca10d4fc98f522128fc1418db Mon Sep 17 00:00:00 2001
+From 894c7b25b269ca0bcacdea8f44fd60e11a8a25d3 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Mon, 12 Feb 2018 17:26:03 -0800
 Subject: [PATCH] Add setting to disable shield knockback
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 74d5760..ce1583f 100644
+index 74d57607..ce1583f7 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
@@ -26,18 +26,18 @@ index 74d5760..ce1583f 100644
                  }
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c63fa44..0c0bc50 100644
+index c63fa44a..0c0bc507 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -649,6 +649,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+@@ -648,6 +648,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
+         return this.configuration.getBoolean("settings.advancements-enabled", true);
      }
  
-     @Override
++    @Override
 +    public boolean getDisableShieldKnockback() {
 +        return this.configuration.getBoolean("settings.disable-shield-knockback", false);
 +    }
 +
-+    @Override
+     @Override
      public int getTicksPerAnimalSpawns() {
          return this.configuration.getInt("ticks-per.animal-spawns");
-     }

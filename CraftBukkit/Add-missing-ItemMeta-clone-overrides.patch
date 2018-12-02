@@ -1,11 +1,11 @@
-From 53927b87d9583f6b1175e28ed380a21c0b08e824 Mon Sep 17 00:00:00 2001
+From 9c75b86a3dc1984317c90b06bea7287c84610eed Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 15:16:32 -0500
 Subject: [PATCH] Add missing ItemMeta clone overrides
 
 
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java
-index f1b4ec0..d3c4ee0 100644
+index f1b4ec0d..d3c4ee0c 100644
 --- a/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java
 @@ -47,7 +47,11 @@ public class ItemMetaImplementationOverrideTest {
