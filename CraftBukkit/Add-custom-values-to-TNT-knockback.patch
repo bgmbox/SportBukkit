@@ -1,0 +1,75 @@
+From 631dae5deafb8ac51d10064654d8678060bef5a2 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Sat, 5 Jan 2019 20:00:18 -0600
+Subject: [PATCH] Add custom values to TNT knockback
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index b6f9ad3..473be09 100644
+--- a/src/main/java/net/minecraft/server/EntityLiving.java
++++ b/src/main/java/net/minecraft/server/EntityLiving.java
+@@ -1168,10 +1168,10 @@ public abstract class EntityLiving extends Entity {
+         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
+             this.impulse = true;
+             float f1 = MathHelper.sqrt(fromX * fromX + fromZ * fromZ);
+-            float knockbackConstant = explosion ? 0.40F : 0.36F;
++            float knockbackConstant = explosion ? 0.05F : 0.36F;
+ 
+-            double horizontalFriction = explosion ? 2 : 1.65;
+-            double verticalFriction = explosion ? 2 : 1.75;
++            double horizontalFriction = explosion ? 0.05 : 1.65;
++            double verticalFriction = explosion ? 0.05 : 1.75;
+ 
+             this.motX /= horizontalFriction;
+             this.motY /= verticalFriction;
+@@ -1181,7 +1181,7 @@ public abstract class EntityLiving extends Entity {
+             this.motY += (double) knockbackConstant;
+             this.motZ -= fromZ / (double) f1 * (double) knockbackConstant;
+ 
+-            if (this.motY > 0.41) {
++            if (this.motY > 0.41 && !explosion) {
+                 this.motY = 0.41;
+             }
+         }
+diff --git a/src/main/java/net/minecraft/server/Explosion.java b/src/main/java/net/minecraft/server/Explosion.java
+index a0eabda..7a02e71 100644
+--- a/src/main/java/net/minecraft/server/Explosion.java
++++ b/src/main/java/net/minecraft/server/Explosion.java
+@@ -130,7 +130,7 @@ public class Explosion {
+                         // entity.damageEntity(DamageSource.explosion(this), (float) ((int) ((d13 * d13 + d13) / 2.0D * 7.0D * (double) f3 + 1.0D)));
+                         CraftEventFactory.entityDamage = source;
+                         entity.forceExplosionKnockback = false;
+-                        boolean wasDamaged = entity.damageEntity(DamageSource.explosion(this), (float) ((int) ((d13 * d13 + d13) / 2.0D * 7.0D * (double) f3 + 1.0D)));
++                        boolean wasDamaged = entity.damageEntity(DamageSource.explosion(this), (float) ((int) ((d13 * d13 + d13) / 2.0D * 8.0D * (double) this.size + 1.0D)));
+                         CraftEventFactory.entityDamage = null;
+                         if (!wasDamaged && !(entity instanceof EntityTNTPrimed || entity instanceof EntityFallingBlock) && !entity.forceExplosionKnockback) {
+                             continue;
+@@ -155,10 +155,13 @@ public class Explosion {
+                         }
+                         // SportBukkit end
+                         if (entity instanceof EntityHuman) {
++                            d13 = (1.0D - d7/0.75) * (d12 / 0.75) * 1.95;
++                            d14 = d13 * 5;
++
+                             EntityHuman entityhuman = (EntityHuman) entity;
+ 
+                             if (!entityhuman.isSpectator() && (!entityhuman.z() || !entityhuman.abilities.isFlying)) {
+-                                this.k.put(entityhuman, new Vec3D(d8 * d13, d9 * d13, d10 * d13));
++                                this.k.put(entityhuman, new Vec3D(d8 * d13 * 2.15, d9 * d13 * 6, d10 * d13 * 2.15));
+                             }
+                         }
+                     }
+diff --git a/src/main/java/net/minecraft/server/WorldServer.java b/src/main/java/net/minecraft/server/WorldServer.java
+index 0aeb9ab..649f89e 100644
+--- a/src/main/java/net/minecraft/server/WorldServer.java
++++ b/src/main/java/net/minecraft/server/WorldServer.java
+@@ -1228,8 +1228,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
+ 
+             if (entityhuman.d(d0, d1, d2) < 4096.0D) {
+                 // SportBukkit start - call knockback method
+-                ((EntityPlayer) entityhuman).playerConnection.sendPacket(new PacketPlayOutExplosion(d0, d1, d2, f, explosion.getBlocks(), null));
+                 entityhuman.applyKnockback(entity, explosion.b().get(entityhuman), true);
++                ((EntityPlayer) entityhuman).playerConnection.sendPacket(new PacketPlayOutExplosion(d0, d1, d2, f, explosion.getBlocks(), explosion.b().get(entityhuman)));
+                 // SportBukkit end
+             }
+         }

@@ -1,4 +1,4 @@
-From dd6c736a089893d589236d8c28e65b7e5c37f56d Mon Sep 17 00:00:00 2001
+From de5ace4358171dc8f82cbc639327471023931f8d Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Wed, 25 Dec 2013 20:12:57 -0600
 Subject: [PATCH] Add EntityDespawnInVoidEvent
@@ -6,7 +6,7 @@ Subject: [PATCH] Add EntityDespawnInVoidEvent
 
 diff --git a/src/main/java/org/bukkit/event/entity/EntityDespawnInVoidEvent.java b/src/main/java/org/bukkit/event/entity/EntityDespawnInVoidEvent.java
 new file mode 100644
-index 00000000..f413467b
+index 0000000..f413467
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/entity/EntityDespawnInVoidEvent.java
 @@ -0,0 +1,25 @@

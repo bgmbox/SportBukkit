@@ -1,11 +1,11 @@
-From d4fdeb5e5c955c40afe56378ec1ec8961167946f Mon Sep 17 00:00:00 2001
+From d57f2ea03a91f13c47f9b7ce92473b60269d5eaa Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Sat, 1 Dec 2018 19:51:29 -0600
 Subject: [PATCH] Allow block fall mechanics to be toggled
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityFallingBlock.java b/src/main/java/net/minecraft/server/EntityFallingBlock.java
-index 608d4bc4..dfb2d49a 100644
+index 608d4bc..dfb2d49 100644
 --- a/src/main/java/net/minecraft/server/EntityFallingBlock.java
 +++ b/src/main/java/net/minecraft/server/EntityFallingBlock.java
 @@ -114,7 +114,7 @@ public class EntityFallingBlock extends Entity {
@@ -18,18 +18,18 @@ index 608d4bc4..dfb2d49a 100644
  
                      this.motX *= 0.699999988079071D;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a8646cc1..0004fef0 100644
+index a8646cc..0004fef 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -679,6 +679,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-         return this.configuration.getBoolean("settings.legacy-knockback", false);
+@@ -680,6 +680,11 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
-+    @Override
+     @Override
 +    public boolean getContinueFalling() {
 +        return this.configuration.getBoolean("settings.continue-falling", true);
 +    }
 +
-     @Override
++    @Override
      public boolean getAdvancementsEnabled() {
          return this.configuration.getBoolean("settings.advancements-enabled", true);
+     }

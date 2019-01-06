@@ -1,11 +1,11 @@
-From 45ea476a7416b0921b67f212287e13ffcc9f6e0f Mon Sep 17 00:00:00 2001
+From 6c998d22cf91aae6521eb763890d7beac602d0ac Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 18 Nov 2016 04:34:11 -0500
 Subject: [PATCH] Geometry API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index de1fe566..b4aca63a 100644
+index de1fe56..b4aca63 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -26,6 +26,7 @@ import org.bukkit.entity.Entity;
@@ -37,7 +37,7 @@ index de1fe566..b4aca63a 100644
          return runtime().potionRegistry();
      }
 diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/bukkit/BukkitRuntime.java
-index b452cd30..9e083daa 100644
+index b452cd3..9e083da 100644
 --- a/src/main/java/org/bukkit/BukkitRuntime.java
 +++ b/src/main/java/org/bukkit/BukkitRuntime.java
 @@ -1,5 +1,6 @@
@@ -57,7 +57,7 @@ index b452cd30..9e083daa 100644
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/Location.java b/src/main/java/org/bukkit/Location.java
-index 3896c63e..9ac548da 100644
+index 3896c63..9ac548d 100644
 --- a/src/main/java/org/bukkit/Location.java
 +++ b/src/main/java/org/bukkit/Location.java
 @@ -2,28 +2,64 @@ package org.bukkit;
@@ -433,7 +433,7 @@ index 3896c63e..9ac548da 100644
      }
  
      /**
-@@ -472,12 +534,30 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
+@@ -472,72 +534,59 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
       * @return the same location
       */
      public Location multiply(double m) {
@@ -454,7 +454,7 @@ index 3896c63e..9ac548da 100644
          return this;
      }
  
-+    /**
+     /**
 +     * Copy position and angles from the given {@link Location} to this one.
 +     * @return this object
 +     */
@@ -464,10 +464,10 @@ index 3896c63e..9ac548da 100644
 +    }
 +
 +
-     /**
++    /**
       * Zero this location's components. Not world-aware.
       *
-@@ -485,59 +565,28 @@ public class Location implements Cloneable, ConfigurationSerializable, Physical
+      * @see Vector
       * @return the same location
       */
      public Location zero() {
@@ -599,7 +599,7 @@ index 3896c63e..9ac548da 100644
 +}
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 48d7d4e0..e443dddb 100644
+index 48d7d4e..e443ddd 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -466,6 +466,8 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
@@ -612,7 +612,7 @@ index 48d7d4e0..e443dddb 100644
       * Gets the map from the given item ID.
       *
 diff --git a/src/main/java/org/bukkit/block/BlockFace.java b/src/main/java/org/bukkit/block/BlockFace.java
-index 58fb195d..4de21d23 100644
+index 58fb195..4de21d2 100644
 --- a/src/main/java/org/bukkit/block/BlockFace.java
 +++ b/src/main/java/org/bukkit/block/BlockFace.java
 @@ -1,43 +1,79 @@
@@ -1011,7 +1011,7 @@ index 58fb195d..4de21d23 100644
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/geometry/Axis.java b/src/main/java/org/bukkit/geometry/Axis.java
 new file mode 100644
-index 00000000..d0122e61
+index 0000000..d0122e6
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Axis.java
 @@ -0,0 +1,63 @@
@@ -1080,7 +1080,7 @@ index 00000000..d0122e61
 +}
 diff --git a/src/main/java/org/bukkit/geometry/BlockReflection.java b/src/main/java/org/bukkit/geometry/BlockReflection.java
 new file mode 100644
-index 00000000..dd927b65
+index 0000000..dd927b6
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/BlockReflection.java
 @@ -0,0 +1,56 @@
@@ -1142,7 +1142,7 @@ index 00000000..dd927b65
 +}
 diff --git a/src/main/java/org/bukkit/geometry/BlockRotation.java b/src/main/java/org/bukkit/geometry/BlockRotation.java
 new file mode 100644
-index 00000000..bb709609
+index 0000000..bb70960
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/BlockRotation.java
 @@ -0,0 +1,94 @@
@@ -1243,7 +1243,7 @@ index 00000000..bb709609
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/geometry/BlockRotoflection.java b/src/main/java/org/bukkit/geometry/BlockRotoflection.java
 new file mode 100644
-index 00000000..1b7cd42a
+index 0000000..1b7cd42
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/BlockRotoflection.java
 @@ -0,0 +1,149 @@
@@ -1398,7 +1398,7 @@ index 00000000..1b7cd42a
 +}
 diff --git a/src/main/java/org/bukkit/geometry/BlockTransform.java b/src/main/java/org/bukkit/geometry/BlockTransform.java
 new file mode 100644
-index 00000000..12295300
+index 0000000..1229530
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/BlockTransform.java
 @@ -0,0 +1,237 @@
@@ -1641,7 +1641,7 @@ index 00000000..12295300
 +}
 diff --git a/src/main/java/org/bukkit/geometry/CoarseTransform.java b/src/main/java/org/bukkit/geometry/CoarseTransform.java
 new file mode 100644
-index 00000000..41e7ca1f
+index 0000000..41e7ca1
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/CoarseTransform.java
 @@ -0,0 +1,59 @@
@@ -1706,7 +1706,7 @@ index 00000000..41e7ca1f
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Cuboid.java b/src/main/java/org/bukkit/geometry/Cuboid.java
 new file mode 100644
-index 00000000..e2fd218f
+index 0000000..e2fd218
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Cuboid.java
 @@ -0,0 +1,589 @@
@@ -2301,7 +2301,7 @@ index 00000000..e2fd218f
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Direction.java b/src/main/java/org/bukkit/geometry/Direction.java
 new file mode 100644
-index 00000000..91c129b8
+index 0000000..91c129b
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Direction.java
 @@ -0,0 +1,79 @@
@@ -2386,7 +2386,7 @@ index 00000000..91c129b8
 +}
 diff --git a/src/main/java/org/bukkit/geometry/EmptyRegion.java b/src/main/java/org/bukkit/geometry/EmptyRegion.java
 new file mode 100644
-index 00000000..578e7183
+index 0000000..578e718
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/EmptyRegion.java
 @@ -0,0 +1,82 @@
@@ -2474,7 +2474,7 @@ index 00000000..578e7183
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Everywhere.java b/src/main/java/org/bukkit/geometry/Everywhere.java
 new file mode 100644
-index 00000000..1c535db6
+index 0000000..1c535db
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Everywhere.java
 @@ -0,0 +1,81 @@
@@ -2561,7 +2561,7 @@ index 00000000..1c535db6
 +}
 diff --git a/src/main/java/org/bukkit/geometry/IdentityTransform.java b/src/main/java/org/bukkit/geometry/IdentityTransform.java
 new file mode 100644
-index 00000000..0ab8b120
+index 0000000..0ab8b12
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/IdentityTransform.java
 @@ -0,0 +1,75 @@
@@ -2642,7 +2642,7 @@ index 00000000..0ab8b120
 +}
 diff --git a/src/main/java/org/bukkit/geometry/MutableVec3.java b/src/main/java/org/bukkit/geometry/MutableVec3.java
 new file mode 100644
-index 00000000..f2b8525f
+index 0000000..f2b8525
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/MutableVec3.java
 @@ -0,0 +1,123 @@
@@ -2771,7 +2771,7 @@ index 00000000..f2b8525f
 +}
 diff --git a/src/main/java/org/bukkit/geometry/MutableVec3Coarse.java b/src/main/java/org/bukkit/geometry/MutableVec3Coarse.java
 new file mode 100644
-index 00000000..2dfb6d65
+index 0000000..2dfb6d6
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/MutableVec3Coarse.java
 @@ -0,0 +1,189 @@
@@ -2966,7 +2966,7 @@ index 00000000..2dfb6d65
 +}
 diff --git a/src/main/java/org/bukkit/geometry/MutableVec3Fine.java b/src/main/java/org/bukkit/geometry/MutableVec3Fine.java
 new file mode 100644
-index 00000000..842cc84f
+index 0000000..842cc84
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/MutableVec3Fine.java
 @@ -0,0 +1,177 @@
@@ -3149,7 +3149,7 @@ index 00000000..842cc84f
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Nowhere.java b/src/main/java/org/bukkit/geometry/Nowhere.java
 new file mode 100644
-index 00000000..ca7b26d8
+index 0000000..ca7b26d
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Nowhere.java
 @@ -0,0 +1,8 @@
@@ -3163,7 +3163,7 @@ index 00000000..ca7b26d8
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Ray.java b/src/main/java/org/bukkit/geometry/Ray.java
 new file mode 100644
-index 00000000..dbe5c3a1
+index 0000000..dbe5c3a
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Ray.java
 @@ -0,0 +1,79 @@
@@ -3248,7 +3248,7 @@ index 00000000..dbe5c3a1
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Region.java b/src/main/java/org/bukkit/geometry/Region.java
 new file mode 100644
-index 00000000..8d203b20
+index 0000000..8d203b2
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Region.java
 @@ -0,0 +1,128 @@
@@ -3382,7 +3382,7 @@ index 00000000..8d203b20
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Transform.java b/src/main/java/org/bukkit/geometry/Transform.java
 new file mode 100644
-index 00000000..9b0325f0
+index 0000000..9b0325f
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Transform.java
 @@ -0,0 +1,66 @@
@@ -3454,7 +3454,7 @@ index 00000000..9b0325f0
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Vec3.java b/src/main/java/org/bukkit/geometry/Vec3.java
 new file mode 100644
-index 00000000..0318ef39
+index 0000000..0318ef3
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Vec3.java
 @@ -0,0 +1,602 @@
@@ -4062,7 +4062,7 @@ index 00000000..0318ef39
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Vec3Coarse.java b/src/main/java/org/bukkit/geometry/Vec3Coarse.java
 new file mode 100644
-index 00000000..dd51b41d
+index 0000000..dd51b41
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Vec3Coarse.java
 @@ -0,0 +1,267 @@
@@ -4335,7 +4335,7 @@ index 00000000..dd51b41d
 +}
 diff --git a/src/main/java/org/bukkit/geometry/Vec3Fine.java b/src/main/java/org/bukkit/geometry/Vec3Fine.java
 new file mode 100644
-index 00000000..f66c5c6f
+index 0000000..f66c5c6
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/Vec3Fine.java
 @@ -0,0 +1,232 @@
@@ -4573,7 +4573,7 @@ index 00000000..f66c5c6f
 +}
 diff --git a/src/main/java/org/bukkit/geometry/VectorFactory.java b/src/main/java/org/bukkit/geometry/VectorFactory.java
 new file mode 100644
-index 00000000..e18729a0
+index 0000000..e18729a
 --- /dev/null
 +++ b/src/main/java/org/bukkit/geometry/VectorFactory.java
 @@ -0,0 +1,67 @@
@@ -4646,7 +4646,7 @@ index 00000000..e18729a0
 +}
 diff --git a/src/main/java/org/bukkit/region/BakedBlockRegion.java b/src/main/java/org/bukkit/region/BakedBlockRegion.java
 new file mode 100644
-index 00000000..7a3041fd
+index 0000000..7a3041f
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/BakedBlockRegion.java
 @@ -0,0 +1,113 @@
@@ -4765,7 +4765,7 @@ index 00000000..7a3041fd
 +}
 diff --git a/src/main/java/org/bukkit/region/BlockRegion.java b/src/main/java/org/bukkit/region/BlockRegion.java
 new file mode 100644
-index 00000000..a74decd2
+index 0000000..a74decd
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/BlockRegion.java
 @@ -0,0 +1,158 @@
@@ -4929,7 +4929,7 @@ index 00000000..a74decd2
 +}
 diff --git a/src/main/java/org/bukkit/region/BlockRegionAdapter.java b/src/main/java/org/bukkit/region/BlockRegionAdapter.java
 new file mode 100644
-index 00000000..34353b71
+index 0000000..34353b7
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/BlockRegionAdapter.java
 @@ -0,0 +1,151 @@
@@ -5086,7 +5086,7 @@ index 00000000..34353b71
 +}
 diff --git a/src/main/java/org/bukkit/region/CuboidBlockIterator.java b/src/main/java/org/bukkit/region/CuboidBlockIterator.java
 new file mode 100644
-index 00000000..5648660f
+index 0000000..5648660
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/CuboidBlockIterator.java
 @@ -0,0 +1,51 @@
@@ -5143,7 +5143,7 @@ index 00000000..5648660f
 +}
 diff --git a/src/main/java/org/bukkit/region/CuboidBlockRegion.java b/src/main/java/org/bukkit/region/CuboidBlockRegion.java
 new file mode 100644
-index 00000000..77ef45b0
+index 0000000..77ef45b
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/CuboidBlockRegion.java
 @@ -0,0 +1,104 @@
@@ -5253,7 +5253,7 @@ index 00000000..77ef45b0
 +}
 diff --git a/src/main/java/org/bukkit/region/EmptyBlockRegion.java b/src/main/java/org/bukkit/region/EmptyBlockRegion.java
 new file mode 100644
-index 00000000..f03e35b9
+index 0000000..f03e35b
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/EmptyBlockRegion.java
 @@ -0,0 +1,82 @@
@@ -5341,7 +5341,7 @@ index 00000000..f03e35b9
 +}
 diff --git a/src/main/java/org/bukkit/region/FilteredBlockIterator.java b/src/main/java/org/bukkit/region/FilteredBlockIterator.java
 new file mode 100644
-index 00000000..4f821474
+index 0000000..4f82147
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/FilteredBlockIterator.java
 @@ -0,0 +1,55 @@
@@ -5402,7 +5402,7 @@ index 00000000..4f821474
 +}
 diff --git a/src/main/java/org/bukkit/region/FilteredBlockRegion.java b/src/main/java/org/bukkit/region/FilteredBlockRegion.java
 new file mode 100644
-index 00000000..c568e170
+index 0000000..c568e17
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/FilteredBlockRegion.java
 @@ -0,0 +1,79 @@
@@ -5487,7 +5487,7 @@ index 00000000..c568e170
 +}
 diff --git a/src/main/java/org/bukkit/region/MutableBlockIterator.java b/src/main/java/org/bukkit/region/MutableBlockIterator.java
 new file mode 100644
-index 00000000..ce5ed1c0
+index 0000000..ce5ed1c
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/MutableBlockIterator.java
 @@ -0,0 +1,22 @@
@@ -5515,7 +5515,7 @@ index 00000000..ce5ed1c0
 +}
 diff --git a/src/main/java/org/bukkit/region/TransformedBlockIterator.java b/src/main/java/org/bukkit/region/TransformedBlockIterator.java
 new file mode 100644
-index 00000000..2fa93251
+index 0000000..2fa9325
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/TransformedBlockIterator.java
 @@ -0,0 +1,37 @@
@@ -5558,7 +5558,7 @@ index 00000000..2fa93251
 +}
 diff --git a/src/main/java/org/bukkit/region/TransformedBlockRegion.java b/src/main/java/org/bukkit/region/TransformedBlockRegion.java
 new file mode 100644
-index 00000000..93f613ec
+index 0000000..93f613e
 --- /dev/null
 +++ b/src/main/java/org/bukkit/region/TransformedBlockRegion.java
 @@ -0,0 +1,73 @@
@@ -5636,7 +5636,7 @@ index 00000000..93f613ec
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/util/BlockVector.java b/src/main/java/org/bukkit/util/BlockVector.java
-index bdf8f6d5..72555a2c 100644
+index bdf8f6d..72555a2 100644
 --- a/src/main/java/org/bukkit/util/BlockVector.java
 +++ b/src/main/java/org/bukkit/util/BlockVector.java
 @@ -2,6 +2,7 @@ package org.bukkit.util;
@@ -5750,7 +5750,7 @@ index bdf8f6d5..72555a2c 100644
      /**
 diff --git a/src/main/java/org/bukkit/util/ImVector.java b/src/main/java/org/bukkit/util/ImVector.java
 new file mode 100644
-index 00000000..ef3b6256
+index 0000000..ef3b625
 --- /dev/null
 +++ b/src/main/java/org/bukkit/util/ImVector.java
 @@ -0,0 +1,190 @@
@@ -5945,7 +5945,7 @@ index 00000000..ef3b6256
 +    @Override public Vector set(double x, double y, double z) { throw ex(); }
 +}
 diff --git a/src/main/java/org/bukkit/util/NumberConversions.java b/src/main/java/org/bukkit/util/NumberConversions.java
-index 440d2798..d57ca7fd 100644
+index 440d279..d57ca7f 100644
 --- a/src/main/java/org/bukkit/util/NumberConversions.java
 +++ b/src/main/java/org/bukkit/util/NumberConversions.java
 @@ -121,4 +121,45 @@ public final class NumberConversions {
@@ -5996,7 +5996,7 @@ index 440d2798..d57ca7fd 100644
  }
 diff --git a/src/main/java/org/bukkit/util/SetBase.java b/src/main/java/org/bukkit/util/SetBase.java
 new file mode 100644
-index 00000000..036df35a
+index 0000000..036df35
 --- /dev/null
 +++ b/src/main/java/org/bukkit/util/SetBase.java
 @@ -0,0 +1,60 @@
@@ -6061,7 +6061,7 @@ index 00000000..036df35a
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/util/Vector.java b/src/main/java/org/bukkit/util/Vector.java
-index 068361f5..14f2082b 100644
+index 068361f..14f2082 100644
 --- a/src/main/java/org/bukkit/util/Vector.java
 +++ b/src/main/java/org/bukkit/util/Vector.java
 @@ -3,10 +3,14 @@ package org.bukkit.util;
@@ -6707,7 +6707,7 @@ index 068361f5..14f2082b 100644
      /**
 diff --git a/src/main/java/org/bukkit/util/VectorBase.java b/src/main/java/org/bukkit/util/VectorBase.java
 new file mode 100644
-index 00000000..ab193d31
+index 0000000..ab193d3
 --- /dev/null
 +++ b/src/main/java/org/bukkit/util/VectorBase.java
 @@ -0,0 +1,57 @@

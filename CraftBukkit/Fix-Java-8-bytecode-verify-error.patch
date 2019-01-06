@@ -1,11 +1,11 @@
-From c1d5152989923ff9ac9ffbc34d2700bc1ce7b5cf Mon Sep 17 00:00:00 2001
+From 4d24f96580d399948164c3e7ca1fe775440bb702 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 13 Oct 2016 16:12:27 -0400
 Subject: [PATCH] Fix Java 8 bytecode verify error
 
 
 diff --git a/src/main/java/net/minecraft/server/DataWatcher.java b/src/main/java/net/minecraft/server/DataWatcher.java
-index 1507f97f..a13e4ff2 100644
+index 1507f97..a13e4ff 100644
 --- a/src/main/java/net/minecraft/server/DataWatcher.java
 +++ b/src/main/java/net/minecraft/server/DataWatcher.java
 @@ -231,7 +231,12 @@ public class DataWatcher {

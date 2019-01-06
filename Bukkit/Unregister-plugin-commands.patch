@@ -1,11 +1,11 @@
-From fb8e8f3c5e7971befe17b0923282a05984ba7766 Mon Sep 17 00:00:00 2001
+From c78d34e7cd9d70cf4a27ae7e81e2134f8a8416d4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 17:23:54 -0500
 Subject: [PATCH] Unregister plugin commands
 
 
 diff --git a/src/main/java/org/bukkit/command/CommandMap.java b/src/main/java/org/bukkit/command/CommandMap.java
-index 30d60247..ee944345 100644
+index 30d6024..ee94434 100644
 --- a/src/main/java/org/bukkit/command/CommandMap.java
 +++ b/src/main/java/org/bukkit/command/CommandMap.java
 @@ -1,6 +1,8 @@
@@ -29,7 +29,7 @@ index 30d60247..ee944345 100644
       * Looks for the requested command and executes it if found.
       *
 diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
-index 07721d8c..7a4b52e3 100644
+index 07721d8..7a4b52e 100644
 --- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
 +++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
 @@ -8,6 +8,7 @@ import java.util.HashMap;
@@ -65,7 +65,7 @@ index 07721d8c..7a4b52e3 100644
       * {@inheritDoc}
       */
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 72797b2c..6e1d9df9 100644
+index 72797b2..6e1d9df 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -475,6 +475,13 @@ public final class SimplePluginManager implements PluginManager {

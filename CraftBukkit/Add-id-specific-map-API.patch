@@ -1,11 +1,11 @@
-From 5c4cfe1c9ee9954f2898c49864be4d57f1af9e10 Mon Sep 17 00:00:00 2001
+From 44744cf89c48cdfa3ce14c3e53ba34b626089912 Mon Sep 17 00:00:00 2001
 From: Pablete1234 <pabloherrerapalacio@gmail.com>
 Date: Mon, 9 Jan 2017 20:51:49 +0100
 Subject: [PATCH] Add id specific map API
 
 
 diff --git a/src/main/java/net/minecraft/server/ItemWorldMap.java b/src/main/java/net/minecraft/server/ItemWorldMap.java
-index db44c1c9..ae59dfe7 100644
+index db44c1c..ae59dfe 100644
 --- a/src/main/java/net/minecraft/server/ItemWorldMap.java
 +++ b/src/main/java/net/minecraft/server/ItemWorldMap.java
 @@ -41,6 +41,20 @@ public class ItemWorldMap extends ItemWorldMapBase {
@@ -30,20 +30,20 @@ index db44c1c9..ae59dfe7 100644
              worldmap.scale = 3;
              worldmap.a((double) world.getWorldData().b(), (double) world.getWorldData().d(), worldmap.scale);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 743d3015..69c880ef 100644
+index 743d301..69c880e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1376,6 +1376,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
-         return worldmap.mapView;
+@@ -1377,6 +1377,13 @@ public final class CraftServer extends CraftBukkitRuntime implements Server {
      }
  
-+    @Override
+     @Override
 +    public CraftMapView createMap(World world, int id) {
 +        Validate.notNull(world, "World cannot be null");
 +
 +        return Items.FILLED_MAP.getNewMap(((CraftWorld) world).getHandle(), id).mapView;
 +    }
 +
-     @Override
++    @Override
      public void shutdown() {
          console.safeShutdown();
+     }

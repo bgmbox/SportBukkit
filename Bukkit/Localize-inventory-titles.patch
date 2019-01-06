@@ -1,11 +1,11 @@
-From 6414984dde6386eaef8d554e4bb3eb9697d23598 Mon Sep 17 00:00:00 2001
+From a8cdb1ebc2093499e14b530adac939548fb5a7f5 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 12 Jul 2015 09:58:54 -0400
 Subject: [PATCH] Localize inventory titles
 
 
 diff --git a/src/main/java/org/bukkit/event/inventory/InventoryType.java b/src/main/java/org/bukkit/event/inventory/InventoryType.java
-index f6446392..4aeeebb7 100644
+index f644639..4aeeebb 100644
 --- a/src/main/java/org/bukkit/event/inventory/InventoryType.java
 +++ b/src/main/java/org/bukkit/event/inventory/InventoryType.java
 @@ -6,82 +6,84 @@ public enum InventoryType {
@@ -122,7 +122,7 @@ index f6446392..4aeeebb7 100644
          /**
           * A result slot in a furnace or crafting inventory.
 diff --git a/src/main/java/org/bukkit/inventory/Inventory.java b/src/main/java/org/bukkit/inventory/Inventory.java
-index bac683b1..7166baa5 100644
+index bac683b..7166baa 100644
 --- a/src/main/java/org/bukkit/inventory/Inventory.java
 +++ b/src/main/java/org/bukkit/inventory/Inventory.java
 @@ -4,6 +4,7 @@ import java.util.HashMap;
@@ -133,7 +133,7 @@ index bac683b1..7166baa5 100644
  import org.bukkit.Location;
  import org.bukkit.Material;
  import org.bukkit.Physical;
-@@ -49,12 +50,24 @@ public interface Inventory extends Iterable<ItemStack>, Physical {
+@@ -49,13 +50,25 @@ public interface Inventory extends Iterable<ItemStack>, Physical {
      public void setMaxStackSize(int size);
  
      /**
@@ -145,7 +145,7 @@ index bac683b1..7166baa5 100644
       */
      public String getName();
  
-+    /**
+     /**
 +     * @return true if this inventory has been given a custom name
 +     *         false if it is using the default (localized) name
 +     */
@@ -156,9 +156,10 @@ index bac683b1..7166baa5 100644
 +     */
 +    BaseComponent getLocalizedName();
 +
-     /**
++    /**
       * Returns the ItemStack found in the slot at the given index
       *
+      * @param index The index of the Slot's ItemStack to return
 @@ -377,9 +390,10 @@ public interface Inventory extends Iterable<ItemStack>, Physical {
      public List<HumanEntity> getViewers();
  

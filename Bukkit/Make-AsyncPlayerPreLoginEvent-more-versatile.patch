@@ -1,36 +1,36 @@
-From a627b6bf14517608b214ebb84a24c7776f4cdcc1 Mon Sep 17 00:00:00 2001
+From cbe9b53066946e9338f538a1c9de75c63c9b4594 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sat, 17 Nov 2012 12:42:05 -0600
 Subject: [PATCH] Make AsyncPlayerPreLoginEvent more versatile
 
 
 diff --git a/src/main/java/org/bukkit/event/player/AsyncPlayerPreLoginEvent.java b/src/main/java/org/bukkit/event/player/AsyncPlayerPreLoginEvent.java
-index 1d571889..78c5ea2a 100644
+index 1d57188..78c5ea2 100644
 --- a/src/main/java/org/bukkit/event/player/AsyncPlayerPreLoginEvent.java
 +++ b/src/main/java/org/bukkit/event/player/AsyncPlayerPreLoginEvent.java
-@@ -188,6 +188,10 @@ public class AsyncPlayerPreLoginEvent extends Event {
-          * white list
+@@ -189,6 +189,10 @@ public class AsyncPlayerPreLoginEvent extends Event {
           */
          KICK_WHITELIST,
-+        /**
+         /**
 +         * The player's username was not verified with Mojang
 +         */
 +        KICK_VERIFY,
-         /**
++        /**
           * The player is not allowed to log in, for reasons undefined
           */
+         KICK_OTHER;
 diff --git a/src/main/java/org/bukkit/event/player/PlayerPreLoginEvent.java b/src/main/java/org/bukkit/event/player/PlayerPreLoginEvent.java
-index e8553f0f..aa49dfa2 100644
+index e8553f0..aa49dfa 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerPreLoginEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerPreLoginEvent.java
-@@ -151,6 +151,10 @@ public class PlayerPreLoginEvent extends Event {
-          * white list
+@@ -152,6 +152,10 @@ public class PlayerPreLoginEvent extends Event {
           */
          KICK_WHITELIST,
-+        /**
+         /**
 +         * The player's username was not verified with Mojang
 +         */
 +        KICK_VERIFY,
-         /**
++        /**
           * The player is not allowed to log in, for reasons undefined
           */
+         KICK_OTHER

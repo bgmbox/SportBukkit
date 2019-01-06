@@ -1,11 +1,11 @@
-From 2220ee94ec5947da17380024d366bb1662658f9f Mon Sep 17 00:00:00 2001
+From e11a538478cdde7a3adba231faca7a336f633be0 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 05:28:58 -0500
 Subject: [PATCH] Expose sound effect classes
 
 
 diff --git a/src/main/java/net/minecraft/server/SoundEffectType.java b/src/main/java/net/minecraft/server/SoundEffectType.java
-index b7bc00c7..a185cbdb 100644
+index b7bc00c..a185cbd 100644
 --- a/src/main/java/net/minecraft/server/SoundEffectType.java
 +++ b/src/main/java/net/minecraft/server/SoundEffectType.java
 @@ -40,15 +40,23 @@ public class SoundEffectType {
@@ -33,7 +33,7 @@ index b7bc00c7..a185cbdb 100644
 +    // SportBukkit end
  }
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 0c22641c..f83771ab 100644
+index 0c22641..f83771a 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -926,6 +926,7 @@ public abstract class World implements IBlockAccess {

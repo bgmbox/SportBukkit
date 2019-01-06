@@ -1,11 +1,11 @@
-From f7747f47b353356e0ce9a26dd1ee859fa2150c31 Mon Sep 17 00:00:00 2001
+From dc1d6b6a728ce6e1c514735b1044baa677cfea9c Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Sun, 29 Jul 2018 14:44:32 -0500
 Subject: [PATCH] Nerf skeletons
 
 
 diff --git a/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java b/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java
-index b92cf8e6..a0e937df 100644
+index b92cf8e..a0e937d 100644
 --- a/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java
 +++ b/src/main/java/net/minecraft/server/EntitySkeletonAbstract.java
 @@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityCombustEvent; // CraftBukkit

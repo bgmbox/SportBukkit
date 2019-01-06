@@ -1,11 +1,11 @@
-From 7fbd51928667635d69c8ecc66ab8e85ea82e1a68 Mon Sep 17 00:00:00 2001
+From 13303def26ca0601df8c833ef3f72e26f9c2436d Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Sun, 10 Sep 2017 01:50:53 -0700
 Subject: [PATCH] Fix respawning
 
 
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java b/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java
-index 1b4f28ed..a8a17002 100644
+index 1b4f28e..a8a1700 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java
 @@ -18,10 +18,8 @@ public class PacketPlayOutWorldBorder implements Packet<PacketListenerPlayOut> {

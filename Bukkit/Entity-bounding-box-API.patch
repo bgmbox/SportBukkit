@@ -1,11 +1,11 @@
-From a71270d9631685f3a13e6c0aa6ffd7be75702ee2 Mon Sep 17 00:00:00 2001
+From 2e89eb543e2661a8f3f286bd86addb1bdb586f4a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:00:35 -0400
 Subject: [PATCH] Entity bounding box API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index 7742e5e9..b367baae 100644
+index 7742e5e..b367baa 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -7,6 +7,7 @@ import org.bukkit.Nameable;
@@ -110,7 +110,7 @@ index 7742e5e9..b367baae 100644
       * Returns the reaction of the entity when moved by a piston.
       *
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
-index fe08ce44..e7408724 100644
+index fe08ce4..e740872 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
 @@ -9,6 +9,7 @@ import org.bukkit.Location;
@@ -121,16 +121,16 @@ index fe08ce44..e7408724 100644
  import org.bukkit.inventory.EntityEquipment;
  import org.bukkit.potion.PotionEffect;
  import org.bukkit.potion.PotionEffectType;
-@@ -42,6 +43,12 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti
-      */
+@@ -43,6 +44,12 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti
      public Location getEyeLocation();
  
-+    /**
+     /**
 +     * Get a {@link Ray} originating at this entity's eye position,
 +     * and pointing in the direction this entity is looking.
 +     */
 +    Ray getEyeRay();
 +
-     /**
++    /**
       * Gets all blocks along the living entity's line of sight.
       * <p>
+      * This list contains all blocks from the living entity's eye position to

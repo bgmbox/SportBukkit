@@ -1,40 +1,40 @@
-From c27b45d29058d6ec0dbd2e0f4f579d4e80311701 Mon Sep 17 00:00:00 2001
+From d9661bd2b2421d0be7aa6afba352575d350cd5e4 Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Sat, 1 Dec 2018 19:51:10 -0600
 Subject: [PATCH] Allow block fall mechanics to be toggled
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index c163cde4..0682348b 100644
+index c163cde..0682348 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -360,6 +360,13 @@ public final class Bukkit {
-         return server.getLegacyKnockback();
+@@ -361,6 +361,13 @@ public final class Bukkit {
      }
  
-+    /**
+     /**
 +     * @see Server#getContinueFalling()
 +     */
 +    public static boolean getContinueFalling() {
 +        return server.getContinueFalling();
 +    }
 +
-     /**
++    /**
       * @see Server#getAdvancementsEnabled()
       */
+     public static boolean getAdvancementsEnabled() {
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 456f53c0..cda9c84f 100644
+index 456f53c..cda9c84 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -288,6 +288,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
-      */
+@@ -289,6 +289,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
      public boolean getLegacyKnockback();
  
-+    /**
+     /**
 +     * If, when shot through the air, falling blocks should continue falling when they land on a non-solid block
 +     */
 +    public boolean getContinueFalling();
 +
-     /**
++    /**
       * Should we announce advancements?
       */
+     public boolean getAdvancementsEnabled();

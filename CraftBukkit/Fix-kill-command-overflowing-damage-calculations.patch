@@ -1,11 +1,11 @@
-From 2fedba90fdd4c804188e3781ca9c3a786b80075c Mon Sep 17 00:00:00 2001
+From 820ac05ec2e3fe8181f5ff2a421d72343ae5ec45 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sun, 20 Mar 2016 08:44:13 -0400
 Subject: [PATCH] Fix /kill command overflowing damage calculations
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 737b0796..dd58eb20 100644
+index 737b079..dd58eb2 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -817,6 +817,7 @@ public abstract class EntityLiving extends Entity {

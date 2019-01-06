@@ -1,11 +1,11 @@
-From 7ab3883c7101b6319ab26129b6870205022fa6c4 Mon Sep 17 00:00:00 2001
+From b77bc74e519e3ae6dfc82ae46f31feb3ccde096c Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 3 Dec 2016 23:45:45 -0500
 Subject: [PATCH] Pause entity API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index 62642922..3b67098a 100644
+index 6264292..3b67098 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
 @@ -559,4 +559,21 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable

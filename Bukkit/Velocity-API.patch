@@ -1,52 +1,51 @@
-From 1c32768fbe464e106474455ed385392a865424f9 Mon Sep 17 00:00:00 2001
+From 910f985d8b939bc858fa2efc3524913a91922de1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:24:15 -0400
 Subject: [PATCH] Velocity API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index b4aca63a..47a5ea72 100644
+index b4aca63..47a5ea7 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -350,6 +350,13 @@ public final class Bukkit {
-         return server.getWaterPushesTNT();
+@@ -351,6 +351,13 @@ public final class Bukkit {
      }
  
-+    /**
+     /**
 +     * @see Server#getLegacyKnockback()
 +     */
 +    public static boolean getLegacyKnockback() {
 +        return server.getLegacyKnockback();
 +    }
 +
-     /**
++    /**
       * Gets default ticks per animal spawns value.
       * <p>
+      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index e443dddb..ffc84c54 100644
+index e443ddd..ffc84c5 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -265,6 +265,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
-      */
+@@ -266,6 +266,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
      public boolean getWaterPushesTNT();
  
-+    /**
+     /**
 +     * Recreate knockback mechanics from Minecraft 1.8
 +     */
 +    public boolean getLegacyKnockback();
 +
-     /**
++    /**
       * Gets default ticks per animal spawns value.
       * <p>
+      * <b>Example Usage:</b>
 diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
-index 17bc8918..c932c60b 100644
+index 17bc891..c932c60b 100644
 --- a/src/main/java/org/bukkit/entity/Entity.java
 +++ b/src/main/java/org/bukkit/entity/Entity.java
-@@ -54,6 +54,48 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
-      */
+@@ -55,6 +55,48 @@ public interface Entity extends Metadatable, CommandSender, Nameable, Locatable
      public Vector getVelocity();
  
-+    /**
+     /**
 +     * Apply an impulse to this entity, i.e. a relative change in velocity.
 +     *
 +     * The given vector is added to the current velocity, and the entity's new
@@ -88,11 +87,12 @@ index 17bc8918..c932c60b 100644
 +     */
 +    Vector getPredictedVelocity();
 +
-     /**
++    /**
       * Gets the entity's height
       *
+      * @return height of entity
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 0bf0a2b5..a8ca35e1 100644
+index 0bf0a2b..a8ca35e 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -14,6 +14,7 @@ import org.bukkit.plugin.Plugin;
@@ -116,7 +116,7 @@ index 0bf0a2b5..a8ca35e1 100644
  }
 diff --git a/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java b/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java
 new file mode 100644
-index 00000000..74116330
+index 0000000..7411633
 --- /dev/null
 +++ b/src/main/java/org/bukkit/event/player/PlayerKnockbackEvent.java
 @@ -0,0 +1,26 @@
@@ -147,7 +147,7 @@ index 00000000..74116330
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java b/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
-index 69d2fce4..4afa8377 100644
+index 69d2fce..4afa837 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerVelocityEvent.java
 @@ -11,11 +11,13 @@ import org.bukkit.util.Vector;

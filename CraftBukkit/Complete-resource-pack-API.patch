@@ -1,11 +1,11 @@
-From 689914355790051a0dfd7fa9e437b3c7ccab469d Mon Sep 17 00:00:00 2001
+From 5bc815f551830f98508c89c78a8bb757f9d42aae Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 4 Apr 2015 23:17:52 -0400
 Subject: [PATCH] Complete resource pack API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 211c4a5b..25a7fdc6 100644
+index 211c4a5..25a7fdc 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -1079,7 +1079,9 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
@@ -20,7 +20,7 @@ index 211c4a5b..25a7fdc6 100644
      // CraftBukkit end
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index be2d25d1..5293a9b3 100644
+index be2d25d..5293a9b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -63,10 +63,7 @@ import org.bukkit.craftbukkit.util.CraftMagicNumbers;

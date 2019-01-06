@@ -1,11 +1,11 @@
-From 0a6d36ec2e2a8d3e77772033411ad22be0860ee2 Mon Sep 17 00:00:00 2001
+From d85066203bd5bd0254e83f7effc688a5bc559a86 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Mon, 1 Sep 2014 15:37:16 -0500
 Subject: [PATCH] Remove this shit
 
 
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index b55a5fe7..acc653f7 100644
+index b55a5fe..acc653f 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
 @@ -128,7 +128,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer

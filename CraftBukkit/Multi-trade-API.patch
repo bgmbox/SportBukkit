@@ -1,11 +1,11 @@
-From c5e80017d4acd3e6302a3653efb2fa133f8d88c7 Mon Sep 17 00:00:00 2001
+From 0e9507516342e1208ce27b3bbe18a690a4535d7a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:18:19 -0500
 Subject: [PATCH] Multi-trade API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-index 667aba92..74902302 100644
+index 667aba9..7490230 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 @@ -467,6 +467,25 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {

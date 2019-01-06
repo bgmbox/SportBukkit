@@ -1,11 +1,11 @@
-From 91a1970d412e550eb1dc0d190c1238e6fa0e43dd Mon Sep 17 00:00:00 2001
+From fc9c40586ee05b65ebbb444f205d7fddeb6c3c9b Mon Sep 17 00:00:00 2001
 From: ShinyDialga <shinydialga45@gmail.com>
 Date: Fri, 10 Aug 2018 13:57:42 -0500
 Subject: [PATCH] Modify kb
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
-index 74932235..3e0431f2 100644
+index 7493223..3e0431f 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
 @@ -1164,27 +1164,21 @@ public abstract class EntityLiving extends Entity {

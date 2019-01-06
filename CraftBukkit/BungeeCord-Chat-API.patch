@@ -1,11 +1,11 @@
-From c6ffaded65e0e95b46786b2d3d0ac8cd4a858e30 Mon Sep 17 00:00:00 2001
+From 01f48ab94044eb310326af3585e6be70f793c04f Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 13 Dec 2014 13:06:05 +1100
 Subject: [PATCH] BungeeCord Chat API
 
 
 diff --git a/src/main/java/net/minecraft/server/ChatModifier.java b/src/main/java/net/minecraft/server/ChatModifier.java
-index 7ebe188e..29d74089 100644
+index 7ebe188..29d7408 100644
 --- a/src/main/java/net/minecraft/server/ChatModifier.java
 +++ b/src/main/java/net/minecraft/server/ChatModifier.java
 @@ -115,6 +115,18 @@ public class ChatModifier {
@@ -28,7 +28,7 @@ index 7ebe188e..29d74089 100644
      public EnumChatFormat getColor() {
          return this.b == null ? this.o().getColor() : this.b;
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutChat.java b/src/main/java/net/minecraft/server/PacketPlayOutChat.java
-index b1fddee7..b1dbe0a7 100644
+index b1fddee..b1dbe0a 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutChat.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutChat.java
 @@ -5,6 +5,7 @@ import java.io.IOException;
@@ -58,7 +58,7 @@ index b1fddee7..b1dbe0a7 100644
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a59f3b9e..acc9a958 100644
+index a59f3b9..acc9a95 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -23,6 +23,7 @@ import java.util.regex.Pattern;
@@ -89,7 +89,7 @@ index a59f3b9e..acc9a958 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 04d04c63..b8fa1f8a 100644
+index 04d04c6..b8fa1f8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -26,6 +26,7 @@ import java.util.WeakHashMap;
@@ -121,7 +121,7 @@ index 04d04c63..b8fa1f8a 100644
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java b/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java
 new file mode 100644
-index 00000000..a09dbf9d
+index 0000000..a09dbf9
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java
 @@ -0,0 +1,173 @@

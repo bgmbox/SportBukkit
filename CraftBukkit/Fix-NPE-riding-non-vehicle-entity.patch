@@ -1,11 +1,11 @@
-From 1242dcd3dcd26b12066d587b41bfcafce502eb70 Mon Sep 17 00:00:00 2001
+From db7353b0be5b56e207a5f89d6fd2085eb190daea Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 23 Dec 2016 13:36:50 -0500
 Subject: [PATCH] Fix NPE riding non-vehicle entity
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index f8f26c2e..7c9147f5 100644
+index f8f26c2..7c9147f 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -2771,7 +2771,10 @@ public abstract class Entity implements ICommandListener {

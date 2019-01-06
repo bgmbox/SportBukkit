@@ -1,4 +1,4 @@
-From ab3577606210e1abba219919dbda62ac454e9254 Mon Sep 17 00:00:00 2001
+From 07ae7bfcb54c5e13a9362c30a03dbdbf35b70be7 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Wed, 15 May 2013 20:09:16 -0500
 Subject: [PATCH] Fire BlockBreakEvent for extinguishing fire and fix
@@ -6,7 +6,7 @@ Subject: [PATCH] Fire BlockBreakEvent for extinguishing fire and fix
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src/main/java/net/minecraft/server/PlayerInteractManager.java
-index a1689c06..56b4b0ae 100644
+index a1689c0..56b4b0a 100644
 --- a/src/main/java/net/minecraft/server/PlayerInteractManager.java
 +++ b/src/main/java/net/minecraft/server/PlayerInteractManager.java
 @@ -110,6 +110,13 @@ public class PlayerInteractManager {
@@ -42,7 +42,7 @@ index a1689c06..56b4b0ae 100644
  
              if (event.useItemInHand() == Event.Result.DENY) {
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index f74eed17..822a1f7e 100644
+index f74eed1..822a1f7 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -1789,8 +1789,13 @@ public abstract class World implements IBlockAccess {
