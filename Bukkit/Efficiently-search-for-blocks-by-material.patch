@@ -1,4 +1,4 @@
-From 6ee361f20defc5c3507e903b5e9b87196c952d4c Mon Sep 17 00:00:00 2001
+From 1c4dbed403d221fc015221813c0952ca0cbb73a7 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 16 Feb 2015 04:58:20 -0500
 Subject: [PATCH] Efficiently search for blocks by material

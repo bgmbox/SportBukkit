@@ -1,4 +1,4 @@
-From 07ae7bfcb54c5e13a9362c30a03dbdbf35b70be7 Mon Sep 17 00:00:00 2001
+From 6b0c39b75d9feb5de6c357ea2c32d84d0e79daf5 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Wed, 15 May 2013 20:09:16 -0500
 Subject: [PATCH] Fire BlockBreakEvent for extinguishing fire and fix

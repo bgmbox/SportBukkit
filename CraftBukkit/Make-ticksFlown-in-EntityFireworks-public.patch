@@ -1,4 +1,4 @@
-From 0a9646d0ed979057e6a2e54049967475796a6a65 Mon Sep 17 00:00:00 2001
+From 3c7bbcb7a2f606d1eacfc7efedddfe307626c751 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Thu, 17 Apr 2014 19:56:31 -0500
 Subject: [PATCH] Make ticksFlown in EntityFireworks public

@@ -1,4 +1,4 @@
-From d0ba35b29c94918f60f019cdaebea7c55cb3b4ec Mon Sep 17 00:00:00 2001
+From 1293964d339811859823e4999a84ea6769a0b3ae Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 22 Jun 2016 15:17:26 -0400
 Subject: [PATCH] Allow empty ItemStack

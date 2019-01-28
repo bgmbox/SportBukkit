@@ -1,4 +1,4 @@
-From cbe9b53066946e9338f538a1c9de75c63c9b4594 Mon Sep 17 00:00:00 2001
+From 2b75094c65e05e3408d3ecb06c9276fb6699cbfa Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sat, 17 Nov 2012 12:42:05 -0600
 Subject: [PATCH] Make AsyncPlayerPreLoginEvent more versatile

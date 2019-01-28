@@ -1,4 +1,4 @@
-From e9c45c5210c4ed12b3448785e869ba3f5cbec9f5 Mon Sep 17 00:00:00 2001
+From 4b9098546b0cfec27358f39243837a17255337fb Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 12 Feb 2015 22:38:42 -0500
 Subject: [PATCH] Player list header/footer API
