@@ -1,12 +1,14 @@
+From 9e5bfa89166f009d716423bd333648179f919ccf Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:36:30 -0500
 Subject: [PATCH] Arrow damage API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Arrow.java b/src/main/java/org/bukkit/entity/Arrow.java
+index 752eeb5..8f77a25 100644
 --- a/src/main/java/org/bukkit/entity/Arrow.java
 +++ b/src/main/java/org/bukkit/entity/Arrow.java
-@@ -6,6 +6,27 @@ package org.bukkit.entity;
+@@ -8,6 +8,27 @@ import org.bukkit.block.Block;
  public interface Arrow extends Projectile {
  
      /**

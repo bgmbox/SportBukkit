@@ -1,22 +1,24 @@
+From 43757a0f5f9064aadacb670506321d6a877ad57a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 22 Jan 2013 14:12:03 -0500
 Subject: [PATCH] Add PlayerOnGroundEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index dedfedb..c69d4d7 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -98,6 +98,8 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
      private int processedMovePackets;
-     private boolean processedDisconnect; // CraftBukkit - Added
+     private AutoRecipe H = new AutoRecipe();
  
 +    boolean clientOnGround; // SportBukkit - only set by client
 +
      public PlayerConnection(MinecraftServer minecraftserver, NetworkManager networkmanager, EntityPlayer entityplayer) {
          this.minecraftServer = minecraftserver;
          this.networkManager = networkmanager;
-@@ -631,6 +633,13 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
-                             this.B &= !this.player.hasEffect(MobEffects.LEVITATION) && !this.player.cH() && !worldserver.c(this.player.getBoundingBox().g(0.0625D).b(0.0D, -0.55D, 0.0D));
+@@ -670,6 +672,13 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+                             this.B &= !this.player.hasEffect(MobEffects.LEVITATION) && !this.player.cP() && !worldserver.c(this.player.getBoundingBox().g(0.0625D).b(0.0D, -0.55D, 0.0D));
                              this.player.onGround = packetplayinflying.a();
                              this.minecraftServer.getPlayerList().d(this.player);
 +                            // SportBukkit start

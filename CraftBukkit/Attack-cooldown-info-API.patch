@@ -1,24 +1,27 @@
+From 4967a829ccad6add7e5b79b1d88359c8b37696dd Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:13:07 -0400
 Subject: [PATCH] Attack cooldown info API
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index d3dceb2..38dc34a 100644
 --- a/src/main/java/net/minecraft/server/EntityHuman.java
 +++ b/src/main/java/net/minecraft/server/EntityHuman.java
-@@ -990,7 +990,7 @@ public abstract class EntityHuman extends EntityLiving {
+@@ -971,7 +971,7 @@ public abstract class EntityHuman extends EntityLiving {
  
                  f *= 0.2F + f2 * f2 * 0.8F;
                  f1 *= f2;
--                this.dh();
-+                // this.dh();   SportBukkit - don't reset cooldown here, let the arm swing packet do it
+-                this.ds();
++                // this.ds();   SportBukkit - don't reset cooldown here, let the arm swing packet do it
                  if (f > 0.0F || f1 > 0.0F) {
                      boolean flag = f2 > 0.9F;
                      boolean flag1 = false;
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index dd58eb2..cc6e01e 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
-@@ -63,7 +63,7 @@ public abstract class EntityLiving extends Entity {
+@@ -55,7 +55,7 @@ public abstract class EntityLiving extends Entity {
      public int deathTicks;
      public float aC;
      public float aD;
@@ -28,21 +31,24 @@ diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/jav
      public float aG;
      public float aH;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
+index 2548d10..945f18e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-@@ -504,4 +504,15 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
-     public int getExpToLevel() {
-         return getHandle().getExpToLevel();
+@@ -525,6 +525,17 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
      }
-+
-+    @Override
+ 
+     @Override
 +    public int getAttackCooldownTicks() {
 +        return Math.max(getHandle().ticksSinceLastAttack(), getHandle().clientTicksSinceLastAttack);
 +    }
 +
 +    @Override
 +    public float getAttackCooldownCoefficient() {
-+        final float f = getHandle().o(0.5f);
++        final float f = getHandle().p(0.5f);
 +        return 0.2f + f * f * 0.8f;
 +    }
- }
++
++    @Override
+     public int getCooldown(Material material) {
+         Preconditions.checkArgument(material != null, "material");
+ 

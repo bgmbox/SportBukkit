@@ -22,14 +22,14 @@
 +
 +    public static BlockPosition of(Vec3 that) {
 +        return that instanceof BlockPosition
-+               ? (BlockPosition) that
-+               : new BlockPosition(that.coarseX(), that.coarseY(), that.coarseZ());
++                ? (BlockPosition) that
++                : new BlockPosition(that.coarseX(), that.coarseY(), that.coarseZ());
 +    }
 +
 +    public static BlockPosition copyOf(Vec3 that) {
 +        return that instanceof BlockPosition && !that.isMutable()
-+               ? (BlockPosition) that
-+               : new BlockPosition(that.coarseX(), that.coarseY(), that.coarseZ());
++                ? (BlockPosition) that
++                : new BlockPosition(that.coarseX(), that.coarseY(), that.coarseZ());
 +    }
 +
 +    @Override
@@ -213,3 +213,12 @@
          public int getX() {
              return this.b;
          }
+@@ -383,7 +483,7 @@
+             return this.d;
+         }
+ 
+-        public BlockPosition.MutableBlockPosition c(int i, int j, int k) {
++        public MutableBlockPosition c(int i, int j, int k) {
+             this.b = i;
+             this.c = j;
+             this.d = k;

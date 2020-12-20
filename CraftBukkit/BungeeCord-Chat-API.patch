@@ -1,9 +1,11 @@
+From 5fabf59fdcb56be3b656c3d9003801939dbfb501 Mon Sep 17 00:00:00 2001
 From: md_5 <git@md-5.net>
 Date: Sat, 13 Dec 2014 13:06:05 +1100
 Subject: [PATCH] BungeeCord Chat API
 
 
 diff --git a/src/main/java/net/minecraft/server/ChatModifier.java b/src/main/java/net/minecraft/server/ChatModifier.java
+index 7ebe188..29d7408 100644
 --- a/src/main/java/net/minecraft/server/ChatModifier.java
 +++ b/src/main/java/net/minecraft/server/ChatModifier.java
 @@ -115,6 +115,18 @@ public class ChatModifier {
@@ -26,6 +28,7 @@ diff --git a/src/main/java/net/minecraft/server/ChatModifier.java b/src/main/jav
      public EnumChatFormat getColor() {
          return this.b == null ? this.o().getColor() : this.b;
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutChat.java b/src/main/java/net/minecraft/server/PacketPlayOutChat.java
+index b1fddee..b1dbe0a 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutChat.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutChat.java
 @@ -5,6 +5,7 @@ import java.io.IOException;
@@ -33,10 +36,10 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutChat.java b/src/mai
  
      private IChatBaseComponent a;
 +    public net.md_5.bungee.api.chat.BaseComponent[] components; // Spigot
-     private byte b;
+     private ChatMessageType b;
  
      public PacketPlayOutChat() {}
-@@ -24,7 +25,13 @@ public class PacketPlayOutChat implements Packet<PacketListenerPlayOut> {
+@@ -24,7 +25,16 @@ public class PacketPlayOutChat implements Packet<PacketListenerPlayOut> {
      }
  
      public void b(PacketDataSerializer packetdataserializer) throws IOException {
@@ -47,22 +50,26 @@ diff --git a/src/main/java/net/minecraft/server/PacketPlayOutChat.java b/src/mai
 +        } else {
 +            packetdataserializer.a(this.a);
 +        }
++        if (this.b == null) {
++            this.b = ChatMessageType.CHAT;
++        }
 +        // Spigot end
-         packetdataserializer.writeByte(this.b);
+         packetdataserializer.writeByte(this.b.a());
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index a59f3b9..acc9a95 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -130,6 +130,7 @@ import io.netty.buffer.Unpooled;
- import io.netty.handler.codec.base64.Base64;
- import jline.console.ConsoleReader;
- import org.bukkit.event.server.TabCompleteEvent;
-+import net.md_5.bungee.api.chat.BaseComponent;
+@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
  
- public final class CraftServer implements Server {
-     private static final Player[] EMPTY_PLAYER_ARRAY = new Player[0];
-@@ -1743,4 +1744,18 @@ public final class CraftServer implements Server {
+ import javax.imageio.ImageIO;
+ 
++import net.md_5.bungee.api.chat.BaseComponent;
+ import net.minecraft.server.*;
+ 
+ import org.bukkit.BanList;
+@@ -1764,4 +1765,18 @@ public final class CraftServer implements Server {
      public UnsafeValues getUnsafe() {
          return CraftMagicNumbers.INSTANCE;
      }
@@ -82,29 +89,30 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 04d04c6..b8fa1f8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -20,6 +20,7 @@ import java.util.Set;
- import java.util.UUID;
+@@ -26,6 +26,7 @@ import java.util.WeakHashMap;
  import java.util.logging.Level;
  import java.util.logging.Logger;
-+import net.md_5.bungee.api.chat.BaseComponent;
  
- import java.util.WeakHashMap;
- import java.util.Arrays;
-@@ -1768,4 +1769,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
++import net.md_5.bungee.api.chat.BaseComponent;
+ import net.minecraft.server.*;
+ import net.minecraft.server.PacketPlayOutTitle.EnumTitleAction;
+ 
+@@ -1834,4 +1835,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
      public void setLocale(String locale) {
          getHandle().locale = locale;
      }
 +
 +    @Override
 +    public void sendMessage(BaseComponent component) {
-+      sendMessage( new BaseComponent[] { component } );
++        sendMessage( new BaseComponent[] { component } );
 +    }
 +
 +    @Override
 +    public void sendMessage(BaseComponent... components) {
-+       if ( getHandle().playerConnection == null ) return;
++        if ( getHandle().playerConnection == null ) return;
 +
 +        PacketPlayOutChat packet = new PacketPlayOutChat();
 +        packet.components = components;
@@ -113,34 +121,20 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java b/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java
 new file mode 100644
-index 0000000..99c214f
+index 0000000..a09dbf9
 --- /dev/null
 +++ b/src/main/java/org/bukkit/craftbukkit/util/BungeeChatUtils.java
-@@ -0,0 +1,187 @@
+@@ -0,0 +1,173 @@
 +package org.bukkit.craftbukkit.util;
++
++import net.md_5.bungee.api.ChatColor;
++import net.md_5.bungee.api.chat.*;
++import net.minecraft.server.*;
++import net.minecraft.server.ChatClickable.EnumClickAction;
++import net.minecraft.server.ChatHoverable.EnumHoverAction;
 +
 +import java.util.ArrayList;
 +import java.util.List;
-+
-+import net.md_5.bungee.api.ChatColor;
-+import net.md_5.bungee.api.chat.BaseComponent;
-+import net.md_5.bungee.api.chat.ClickEvent;
-+import net.md_5.bungee.api.chat.HoverEvent;
-+import net.md_5.bungee.api.chat.ScoreComponent;
-+import net.md_5.bungee.api.chat.SelectorComponent;
-+import net.md_5.bungee.api.chat.TextComponent;
-+import net.md_5.bungee.api.chat.TranslatableComponent;
-+import net.minecraft.server.ChatClickable;
-+import net.minecraft.server.ChatClickable.EnumClickAction;
-+import net.minecraft.server.ChatComponentScore;
-+import net.minecraft.server.ChatComponentSelector;
-+import net.minecraft.server.ChatComponentText;
-+import net.minecraft.server.ChatHoverable;
-+import net.minecraft.server.ChatHoverable.EnumHoverAction;
-+import net.minecraft.server.ChatMessage;
-+import net.minecraft.server.ChatModifier;
-+import net.minecraft.server.EnumChatFormat;
-+import net.minecraft.server.IChatBaseComponent;
 +
 +public final class BungeeChatUtils {
 +    private BungeeChatUtils() {}

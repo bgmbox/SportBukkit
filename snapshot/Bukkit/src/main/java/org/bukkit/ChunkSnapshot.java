@@ -40,6 +40,16 @@ public interface ChunkSnapshot {
      * @param x 0-15
      * @param y 0-127
      * @param z 0-15
+     * @return block material type
+     */
+    Material getBlockType(int x, int y, int z);
+
+    /**
+     * Get block type for block at corresponding coordinate in the chunk
+     *
+     * @param x 0-15
+     * @param y 0-127
+     * @param z 0-15
      * @return 0-255
      * @deprecated Magic value
      */
@@ -122,7 +132,9 @@ public interface ChunkSnapshot {
      * @param x X-coordinate
      * @param z Z-coordinate
      * @return rainfall at given coordinate
+     * @deprecated this is not a chunk property in current Minecraft versions
      */
+    @Deprecated
     double getRawBiomeRainfall(int x, int z);
 
     /**

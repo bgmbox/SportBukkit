@@ -1,0 +1,12 @@
+--- a/net/minecraft/server/AdvancementDataWorld.java
++++ b/net/minecraft/server/AdvancementDataWorld.java
+@@ -150,6 +150,9 @@
+                     java.nio.file.Path java_nio_file_path1 = (java.nio.file.Path) iterator.next();
+ 
+                     if ("json".equals(FilenameUtils.getExtension(java_nio_file_path1.toString()))) {
++                        if (!org.bukkit.Bukkit.getAdvancementsEnabled()) {
++                            continue;
++                        }
+                         java.nio.file.Path java_nio_file_path2 = java_nio_file_path.relativize(java_nio_file_path1);
+                         String s = FilenameUtils.removeExtension(java_nio_file_path2.toString()).replaceAll("\\\\", "/");
+                         MinecraftKey minecraftkey = new MinecraftKey("minecraft", s);

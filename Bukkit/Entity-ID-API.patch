@@ -1,12 +1,14 @@
+From 794edade93845856baa515a9eb192500bc5e1a1e Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Sun, 16 Jun 2013 16:57:59 -0500
 Subject: [PATCH] Entity ID API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index d57e4a5..bc6f025 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -1048,6 +1048,13 @@ public final class Bukkit {
+@@ -1031,6 +1031,13 @@ public final class Bukkit {
      }
  
      /**
@@ -21,9 +23,10 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
       *
       * @return the default server-icon; null values may be used by the
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 5f88b72..13c028a 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -856,6 +856,13 @@ public interface Server extends PluginMessageRecipient {
+@@ -841,6 +841,13 @@ public interface Server extends PluginMessageRecipient {
      ScoreboardManager getScoreboardManager();
  
      /**

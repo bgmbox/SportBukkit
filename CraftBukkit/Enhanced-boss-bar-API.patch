@@ -1,12 +1,14 @@
+From 3d7f7ea9d6f200a58f52430658f9cc2ef5cf35df Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 01:41:17 -0500
 Subject: [PATCH] Enhanced boss bar API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index abb6957..d0734fc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1773,7 +1773,7 @@ public final class CraftServer implements Server {
+@@ -1766,7 +1766,7 @@ public final class CraftServer implements Server {
      }
  
      @Override
@@ -16,6 +18,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/boss/CraftBossBar.java b/src/main/java/org/bukkit/craftbukkit/boss/CraftBossBar.java
+index 9696fe5..bbb54b6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/boss/CraftBossBar.java
 +++ b/src/main/java/org/bukkit/craftbukkit/boss/CraftBossBar.java
 @@ -1,7 +1,12 @@
@@ -158,9 +161,9 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/boss/CraftBossBar.java b/src/m
  
      @Override
      public void addFlag(BarFlag flag) {
--        flags.remove(flag);
+-        flags.add(flag);
 -        updateFlags();
-+        if(flags.remove(flag)) {
++        if(flags.add(flag)) {
 +            updateFlags();
 +            markDirty(PacketPlayOutBoss.Action.UPDATE_PROPERTIES);
 +        }
@@ -168,9 +171,9 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/boss/CraftBossBar.java b/src/m
  
      @Override
      public void removeFlag(BarFlag flag) {
--        flags.add(flag);
+-        flags.remove(flag);
 -        updateFlags();
-+        if(flags.add(flag)) {
++        if(flags.remove(flag)) {
 +            updateFlags();
 +            markDirty(PacketPlayOutBoss.Action.UPDATE_PROPERTIES);
 +        }

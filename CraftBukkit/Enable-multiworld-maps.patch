@@ -1,9 +1,11 @@
+From 90fe6012955f18e838b054bf36cea7c6285a002e Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Tue, 13 Nov 2012 19:38:11 -0600
 Subject: [PATCH] Enable multiworld maps
 
 
 diff --git a/src/main/java/net/minecraft/server/ItemWorldMap.java b/src/main/java/net/minecraft/server/ItemWorldMap.java
+index e0799ff..db44c1c 100644
 --- a/src/main/java/net/minecraft/server/ItemWorldMap.java
 +++ b/src/main/java/net/minecraft/server/ItemWorldMap.java
 @@ -35,19 +35,18 @@ public class ItemWorldMap extends ItemWorldMapBase {
@@ -29,7 +31,7 @@ diff --git a/src/main/java/net/minecraft/server/ItemWorldMap.java b/src/main/jav
  
              // CraftBukkit start
              MapInitializeEvent event = new MapInitializeEvent(worldmap.mapView);
-@@ -322,7 +321,6 @@ public class ItemWorldMap extends ItemWorldMapBase {
+@@ -323,7 +322,6 @@ public class ItemWorldMap extends ItemWorldMapBase {
      protected static void a(ItemStack itemstack, World world, int i) {
          WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, world);
  

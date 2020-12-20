@@ -1,5 +1,7 @@
 package org.bukkit.entity;
 
+import org.bukkit.block.Block;
+
 /**
  * Represents an arrow.
  */
@@ -62,18 +64,50 @@ public interface Arrow extends Projectile {
     public void setCritical(boolean critical);
 
     /**
-     * Which players can pickup this arrow as an item?
+     * Gets whether this arrow is in a block or not.
+     * <p>
+     * Arrows in a block are motionless and may be picked up by players.
      *
-     * This is generally true only if the arrow was NOT fired from a bow with the infinity enchantment.
+     * @return true if in a block
      */
-    PickupRule getPickupRule();
+    public boolean isInBlock();
 
     /**
-     * Set the rule for which players can pickup this arrow as an item.
+     * Gets the block to which this arrow is attached.
+     *
+     * @return the attached block or null if not attached
      */
-    void setPickupRule(PickupRule rule);
+    public Block getAttachedBlock();
 
-    enum PickupRule {
-        DISALLOWED, ALLOWED, CREATIVE_ONLY
+    /**
+     * Gets the current pickup status of this arrow.
+     *
+     * @return the pickup status of this arrow.
+     */
+    public PickupStatus getPickupStatus();
+
+    /**
+     * Sets the current pickup status of this arrow.
+     *
+     * @param status new pickup status of this arrow.
+     */
+    public void setPickupStatus(PickupStatus status);
+
+    /**
+     * Represents the pickup status of this arrow.
+     */
+    public enum PickupStatus {
+        /**
+         * The arrow cannot be picked up.
+         */
+        DISALLOWED,
+        /**
+         * The arrow can be picked up.
+         */
+        ALLOWED,
+        /**
+         * The arrow can only be picked up by players in creative mode.
+         */
+        CREATIVE_ONLY
     }
 }

@@ -1,9 +1,11 @@
+From 355d56695af66ce80b471b71b41aa3cebdcc9edf Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 26 May 2015 04:01:46 -0400
 Subject: [PATCH] Accurate block hit checking
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index 350a576..5675d65 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -59,6 +59,7 @@ import org.bukkit.plugin.messaging.StandardMessenger;
@@ -14,7 +16,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/jav
  import org.bukkit.util.Vector;
  
  public class CraftWorld implements World {
-@@ -586,6 +587,29 @@ public class CraftWorld implements World {
+@@ -593,6 +594,29 @@ public class CraftWorld implements World {
          return getHighestBlockAt(location.getBlockX(), location.getBlockZ());
      }
  
@@ -45,6 +47,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/jav
          return CraftBlock.biomeBaseToBiome(this.world.getBiome(new BlockPosition(x, 0, z)));
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
+index 46670c3..1236f80 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
 @@ -23,6 +23,8 @@ import org.bukkit.inventory.ItemStack;
@@ -56,7 +59,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/ma
  
  public class CraftBlock implements Block {
      private final CraftChunk chunk;
-@@ -529,4 +531,29 @@ public class CraftBlock implements Block {
+@@ -538,4 +540,29 @@ public class CraftBlock implements Block {
      public void removeMetadata(String metadataKey, Plugin owningPlugin) {
          chunk.getCraftWorld().getBlockMetadata().removeMetadata(this, metadataKey, owningPlugin);
      }
@@ -87,17 +90,18 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/ma
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index c2ca5f7..25241a4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -72,6 +72,7 @@ import org.bukkit.metadata.MetadataValue;
+@@ -73,6 +73,7 @@ import org.bukkit.plugin.IllegalPluginAccessException;
  import org.bukkit.plugin.Plugin;
  import org.bukkit.plugin.messaging.StandardMessenger;
  import org.bukkit.scoreboard.Scoreboard;
 +import org.bukkit.util.RayBlockIntersection;
  
- @DelegateDeserialization(CraftOfflinePlayer.class)
- public class CraftPlayer extends CraftHumanEntity implements Player {
-@@ -1911,4 +1912,19 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+ import javax.annotation.Nullable;
+ 
+@@ -1974,4 +1975,19 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          BlockPosition pos = getHandle().playerInteractManager.f;
          return getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
      }

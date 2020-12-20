@@ -1,12 +1,14 @@
+From d9d03789b7e4e331251448f53d6a5f6727a106c8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 20 Jun 2015 12:27:57 -0400
 Subject: [PATCH] Call onDisable before disabling the plugin
 
 
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+index 60b2399..ecbc931 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -394,6 +394,18 @@ public final class SimplePluginManager implements PluginManager {
+@@ -392,6 +392,18 @@ public final class SimplePluginManager implements PluginManager {
  
      public void enablePlugin(final Plugin plugin) {
          if (!plugin.isEnabled()) {
@@ -26,9 +28,10 @@ diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main
  
              if (!pluginCommands.isEmpty()) {
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
+index 16b1eb3..744314a 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
-@@ -264,13 +264,19 @@ public abstract class JavaPlugin extends PluginBase {
+@@ -257,13 +257,19 @@ public abstract class JavaPlugin extends PluginBase {
       * @param enabled true if enabled, otherwise false
       */
      protected final void setEnabled(final boolean enabled) {

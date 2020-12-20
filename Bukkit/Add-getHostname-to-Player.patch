@@ -1,15 +1,18 @@
+From 0a6238e6f89574f847d48fa8b8b0f963f15314c8 Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Sun, 28 Jul 2013 21:56:56 +0200
 Subject: [PATCH] Add getHostname to Player
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index f5ec669..fdb5f0c 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1348,4 +1348,13 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1441,4 +1441,14 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+      * @return the player's locale
       */
-     public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
- 
+     public String getLocale();
++
 +    /**
 +     * Gets the hostname (an IP or a DNS domain) and port the client has used
 +     * to connect to this server. This is generated client-side, and it may

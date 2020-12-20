@@ -1,9 +1,11 @@
+From 474e32aa4ba52e6ca6287c299ab553f841e7a3c1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 24 Dec 2016 20:03:43 -0500
 Subject: [PATCH] Chest lid API
 
 
 diff --git a/src/main/java/net/minecraft/server/TileEntityChest.java b/src/main/java/net/minecraft/server/TileEntityChest.java
+index 3b5af47..c146374 100644
 --- a/src/main/java/net/minecraft/server/TileEntityChest.java
 +++ b/src/main/java/net/minecraft/server/TileEntityChest.java
 @@ -4,6 +4,7 @@ import java.util.Iterator;
@@ -93,20 +95,24 @@ diff --git a/src/main/java/net/minecraft/server/TileEntityChest.java b/src/main/
  
              // CraftBukkit start - Call redstone event
 diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java b/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java
+index 85f3bb2..445f180 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftChest.java
-@@ -1,5 +1,7 @@
- package org.bukkit.craftbukkit.block;
- 
-+import javax.annotation.Nullable;
-+
- import net.minecraft.server.BlockPosition;
- import net.minecraft.server.TileEntityChest;
- 
-@@ -84,4 +86,14 @@ public class CraftChest extends CraftLootable implements Chest {
-     public TileEntityChest getTileEntity() {
-         return chest;
+@@ -75,4 +75,25 @@ public class CraftChest extends CraftLootable<TileEntityChest> implements Chest
+         }
+         return inventory;
      }
++
++    @Override
++    public boolean update(boolean force, boolean applyPhysics) {
++        boolean result = super.update(force, applyPhysics);
++
++        if (result) {
++            getTileEntity().update();
++        }
++
++        return result;
++    }
 +
 +    @Override
 +    public boolean setLid(Lid lid) {

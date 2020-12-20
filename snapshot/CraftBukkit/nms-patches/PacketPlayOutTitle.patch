@@ -19,21 +19,13 @@
      public PacketPlayOutTitle() {}
  
      public PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction packetplayouttitle_enumtitleaction, IChatBaseComponent ichatbasecomponent) {
-@@ -45,9 +57,22 @@
-     }
+@@ -46,8 +58,14 @@
  
      public void b(PacketDataSerializer packetdataserializer) throws IOException {
--        packetdataserializer.a((Enum) this.a);
-+        // SportBukkit start
-+        if(packetdataserializer.protocolVersion < 305 && this.a.ordinal() >= 2) {
-+            // ACTIONBAR doesn't exist
-+            packetdataserializer.writeVarInt(this.a.ordinal() - 1);
-+        } else {
-+            packetdataserializer.writeOrdinal(this.a);
-+        }
-+        // SportBukkit end
-         if (this.a == PacketPlayOutTitle.EnumTitleAction.TITLE || this.a == PacketPlayOutTitle.EnumTitleAction.SUBTITLE || this.a == PacketPlayOutTitle.EnumTitleAction.ACTIONBAR) {
+         packetdataserializer.a((Enum) this.a);
+-        if (this.a == PacketPlayOutTitle.EnumTitleAction.TITLE || this.a == PacketPlayOutTitle.EnumTitleAction.SUBTITLE || this.a == PacketPlayOutTitle.EnumTitleAction.ACTIONBAR) {
 -            packetdataserializer.a(this.b);
++        if (this.a == EnumTitleAction.TITLE || this.a == EnumTitleAction.SUBTITLE || this.a == EnumTitleAction.ACTIONBAR) {
 +            // SportBukkit start
 +            if(this.components != null) {
 +                packetdataserializer.a(net.md_5.bungee.chat.ComponentSerializer.toString(components));

@@ -6,7 +6,7 @@ import tc.oc.minecraft.api.scheduler.Task;
 /**
  * Represents a task being executed by the scheduler
  */
-public interface BukkitTask extends Task {
+public interface BukkitTask extends Task{
 
     /**
      * Returns the taskId for the task.
@@ -28,6 +28,13 @@ public interface BukkitTask extends Task {
      * @return true if the task is run by main thread
      */
     public boolean isSync();
+
+    /**
+     * Returns true if this task has been cancelled.
+     *
+     * @return true if the task has been cancelled
+     */
+    public boolean isCancelled();
 
     /**
      * Will attempt to cancel this task.

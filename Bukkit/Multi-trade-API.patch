@@ -1,12 +1,14 @@
+From 8a38ea47ebe4167ca96ee31dcec317707bb69d6f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 04:18:12 -0500
 Subject: [PATCH] Multi-trade API
 
 
 diff --git a/src/main/java/org/bukkit/entity/HumanEntity.java b/src/main/java/org/bukkit/entity/HumanEntity.java
+index 518aa2a..e6dbe96 100644
 --- a/src/main/java/org/bukkit/entity/HumanEntity.java
 +++ b/src/main/java/org/bukkit/entity/HumanEntity.java
-@@ -119,6 +119,14 @@ public interface HumanEntity extends LivingEntity, AnimalTamer, Permissible, Inv
+@@ -120,6 +120,14 @@ public interface HumanEntity extends LivingEntity, AnimalTamer, Permissible, Inv
      public InventoryView openMerchant(Villager trader, boolean force);
  
      /**

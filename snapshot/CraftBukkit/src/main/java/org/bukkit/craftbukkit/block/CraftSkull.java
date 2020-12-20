@@ -8,36 +8,35 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 
+import org.bukkit.Skin;
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
 import org.bukkit.craftbukkit.CraftWorld;
-
-import java.util.UUID;
-import org.bukkit.Skin;
 import org.bukkit.craftbukkit.util.Skins;
 
-public class CraftSkull extends CraftBlockState implements Skull {
+import java.util.UUID;
+
+public class CraftSkull extends CraftBlockEntityState<TileEntitySkull> implements Skull {
+
     private static final int MAX_OWNER_LENGTH = 16;
-    private final TileEntitySkull skull;
     private GameProfile profile;
     private SkullType skullType;
     private byte rotation;
 
     public CraftSkull(final Block block) {
-        super(block);
-
-        CraftWorld world = (CraftWorld) block.getWorld();
-        skull = (TileEntitySkull) world.getTileEntityAt(getX(), getY(), getZ());
-        profile = skull.getGameProfile();
-        skullType = getSkullType(skull.getSkullType());
-        rotation = (byte) skull.rotation;
+        super(block, TileEntitySkull.class);
     }
 
     public CraftSkull(final Material material, final TileEntitySkull te) {
-        super(material);
-        skull = te;
+        super(material, te);
+    }
+
+    @Override
+    public void load(TileEntitySkull skull) {
+        super.load(skull);
+
         profile = skull.getGameProfile();
         skullType = getSkullType(skull.getSkullType());
         rotation = (byte) skull.rotation;
@@ -157,14 +156,17 @@ public class CraftSkull extends CraftBlockState implements Skull {
         }
     }
 
+    @Override
     public boolean hasOwner() {
         return profile != null;
     }
 
+    @Override
     public String getOwner() {
         return hasOwner() ? profile.getName() : null;
     }
 
+    @Override
     public boolean setOwner(String name) {
         if (name == null || name.length() > MAX_OWNER_LENGTH) {
             return false;
@@ -222,17 +224,20 @@ public class CraftSkull extends CraftBlockState implements Skull {
     }
 
     public BlockFace getRotation() {
-    	return getBlockFace(rotation);
+        return getBlockFace(rotation);
     }
 
+    @Override
     public void setRotation(BlockFace rotation) {
         this.rotation = getBlockFace(rotation);
     }
 
+    @Override
     public SkullType getSkullType() {
         return skullType;
     }
 
+    @Override
     public void setSkullType(SkullType skullType) {
         this.skullType = skullType;
 
@@ -242,25 +247,15 @@ public class CraftSkull extends CraftBlockState implements Skull {
     }
 
     @Override
-    public boolean update(boolean force, boolean applyPhysics) {
-        boolean result = super.update(force, applyPhysics);
+    public void applyTo(TileEntitySkull skull) {
+        super.applyTo(skull);
 
-        if (result) {
-            if (skullType == SkullType.PLAYER) {
-                skull.setGameProfile(profile);
-            } else {
-                skull.setSkullType(getSkullType(skullType));
-            }
-
-            skull.setRotation(rotation);
-            skull.update();
+        if (skullType == SkullType.PLAYER) {
+            skull.setGameProfile(profile);
+        } else {
+            skull.setSkullType(getSkullType(skullType));
         }
 
-        return result;
-    }
-
-    @Override
-    public TileEntitySkull getTileEntity() {
-        return skull;
+        skull.setRotation(rotation);
     }
 }

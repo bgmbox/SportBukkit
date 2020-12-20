@@ -1,9 +1,11 @@
+From bf4bda25c91d9508210fcd7c620e1d2df5ed0ec1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 7 Jan 2017 00:25:37 -0500
 Subject: [PATCH] Reduce ItemStack copying
 
 
 diff --git a/src/main/java/org/bukkit/inventory/CraftingInventory.java b/src/main/java/org/bukkit/inventory/CraftingInventory.java
+index 106367e..d2d71db 100644
 --- a/src/main/java/org/bukkit/inventory/CraftingInventory.java
 +++ b/src/main/java/org/bukkit/inventory/CraftingInventory.java
 @@ -1,5 +1,8 @@
@@ -29,6 +31,7 @@ diff --git a/src/main/java/org/bukkit/inventory/CraftingInventory.java b/src/mai
      /**
       * Get the current recipe formed on the crafting inventory, if any.
 diff --git a/src/main/java/org/bukkit/inventory/Inventory.java b/src/main/java/org/bukkit/inventory/Inventory.java
+index 7166baa..c5043c6 100644
 --- a/src/main/java/org/bukkit/inventory/Inventory.java
 +++ b/src/main/java/org/bukkit/inventory/Inventory.java
 @@ -1,8 +1,10 @@
@@ -102,6 +105,7 @@ diff --git a/src/main/java/org/bukkit/inventory/Inventory.java b/src/main/java/o
 +    }
  }
 diff --git a/src/main/java/org/bukkit/inventory/PlayerInventory.java b/src/main/java/org/bukkit/inventory/PlayerInventory.java
+index 6ce8509..253fd79 100644
 --- a/src/main/java/org/bukkit/inventory/PlayerInventory.java
 +++ b/src/main/java/org/bukkit/inventory/PlayerInventory.java
 @@ -1,5 +1,7 @@

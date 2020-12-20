@@ -63,6 +63,7 @@ import org.bukkit.material.Wool;
 import com.google.common.collect.Maps;
 
 import org.bukkit.material.Banner;
+import org.bukkit.material.Observer;
 
 /**
  * An enum of all material IDs accepted by the official server and client
@@ -286,7 +287,7 @@ public enum Material {
     RED_NETHER_BRICK(215),
     BONE_BLOCK(216),
     STRUCTURE_VOID(217),
-    OBSERVER(218),
+    OBSERVER(218, Observer.class),
     WHITE_SHULKER_BOX(219, 1),
     ORANGE_SHULKER_BOX(220, 1),
     MAGENTA_SHULKER_BOX(221, 1),
@@ -303,6 +304,24 @@ public enum Material {
     GREEN_SHULKER_BOX(232, 1),
     RED_SHULKER_BOX(233, 1),
     BLACK_SHULKER_BOX(234, 1),
+    WHITE_GLAZED_TERRACOTTA(235),
+    ORANGE_GLAZED_TERRACOTTA(236),
+    MAGENTA_GLAZED_TERRACOTTA(237),
+    LIGHT_BLUE_GLAZED_TERRACOTTA(238),
+    YELLOW_GLAZED_TERRACOTTA(239),
+    LIME_GLAZED_TERRACOTTA(240),
+    PINK_GLAZED_TERRACOTTA(241),
+    GRAY_GLAZED_TERRACOTTA(242),
+    SILVER_GLAZED_TERRACOTTA(243),
+    CYAN_GLAZED_TERRACOTTA(244),
+    PURPLE_GLAZED_TERRACOTTA(245),
+    BLUE_GLAZED_TERRACOTTA(246),
+    BROWN_GLAZED_TERRACOTTA(247),
+    GREEN_GLAZED_TERRACOTTA(248),
+    RED_GLAZED_TERRACOTTA(249),
+    BLACK_GLAZED_TERRACOTTA(250),
+    CONCRETE(251),
+    CONCRETE_POWDER(252),
     STRUCTURE_BLOCK(255),
     // ----- Item Separator -----
     IRON_SPADE(256, 1, 250),
@@ -504,6 +523,7 @@ public enum Material {
     TOTEM(449, 1),
     SHULKER_SHELL(450),
     IRON_NUGGET(452),
+    KNOWLEDGE_BOOK(453, 1),
     GOLD_RECORD(2256, 1),
     GREEN_RECORD(2257, 1),
     RECORD_3(2258, 1),
@@ -945,6 +965,24 @@ public enum Material {
             case GREEN_SHULKER_BOX:
             case RED_SHULKER_BOX:
             case BLACK_SHULKER_BOX:
+            case WHITE_GLAZED_TERRACOTTA:
+            case ORANGE_GLAZED_TERRACOTTA:
+            case MAGENTA_GLAZED_TERRACOTTA:
+            case LIGHT_BLUE_GLAZED_TERRACOTTA:
+            case YELLOW_GLAZED_TERRACOTTA:
+            case LIME_GLAZED_TERRACOTTA:
+            case PINK_GLAZED_TERRACOTTA:
+            case GRAY_GLAZED_TERRACOTTA:
+            case SILVER_GLAZED_TERRACOTTA:
+            case CYAN_GLAZED_TERRACOTTA:
+            case PURPLE_GLAZED_TERRACOTTA:
+            case BLUE_GLAZED_TERRACOTTA:
+            case BROWN_GLAZED_TERRACOTTA:
+            case GREEN_GLAZED_TERRACOTTA:
+            case RED_GLAZED_TERRACOTTA:
+            case BLACK_GLAZED_TERRACOTTA:
+            case CONCRETE:
+            case CONCRETE_POWDER:
                 return true;
             default:
                 return false;
@@ -1142,6 +1180,84 @@ public enum Material {
     }
 
     /**
+     * Checks if this Material can be used as fuel in a Furnace
+     *
+     * @return true if this Material can be used as fuel.
+     */
+    public boolean isFuel() {
+        switch (this) {
+            case LAVA_BUCKET:
+            case COAL_BLOCK:
+            case BLAZE_ROD:
+            case COAL:
+            case BOAT:
+            case BOAT_ACACIA:
+            case BOAT_BIRCH:
+            case BOAT_DARK_OAK:
+            case BOAT_JUNGLE:
+            case BOAT_SPRUCE:
+            case LOG:
+            case LOG_2:
+            case WOOD:
+            case WOOD_PLATE:
+            case FENCE:
+            case ACACIA_FENCE:
+            case BIRCH_FENCE:
+            case DARK_OAK_FENCE:
+            case JUNGLE_FENCE:
+            case SPRUCE_FENCE:
+            case FENCE_GATE:
+            case ACACIA_FENCE_GATE:
+            case BIRCH_FENCE_GATE:
+            case DARK_OAK_FENCE_GATE:
+            case JUNGLE_FENCE_GATE:
+            case SPRUCE_FENCE_GATE:
+            case WOOD_STAIRS:
+            case ACACIA_STAIRS:
+            case BIRCH_WOOD_STAIRS:
+            case DARK_OAK_STAIRS:
+            case JUNGLE_WOOD_STAIRS:
+            case SPRUCE_WOOD_STAIRS:
+            case TRAP_DOOR:
+            case WORKBENCH:
+            case BOOKSHELF:
+            case CHEST:
+            case TRAPPED_CHEST:
+            case DAYLIGHT_DETECTOR:
+            case JUKEBOX:
+            case NOTE_BLOCK:
+            case HUGE_MUSHROOM_1:
+            case HUGE_MUSHROOM_2:
+            case BANNER:
+            case FISHING_ROD:
+            case LADDER:
+            case WOOD_SWORD:
+            case WOOD_PICKAXE:
+            case WOOD_AXE:
+            case WOOD_SPADE:
+            case WOOD_HOE:
+            case BOW:
+            case SIGN:
+            case WOOD_DOOR:
+            case ACACIA_DOOR_ITEM:
+            case BIRCH_DOOR_ITEM:
+            case DARK_OAK_DOOR_ITEM:
+            case JUNGLE_DOOR_ITEM:
+            case SPRUCE_DOOR_ITEM:
+            case WOOD_STEP:
+            case SAPLING:
+            case BOWL:
+            case STICK:
+            case WOOD_BUTTON:
+            case WOOL:
+            case CARPET:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
      * Check if the material is a block and completely blocks vision
      *
      * @return True if this material is a block and completely blocks vision
@@ -1231,6 +1347,24 @@ public enum Material {
             case NETHER_WART_BLOCK:
             case RED_NETHER_BRICK:
             case BONE_BLOCK:
+            case WHITE_GLAZED_TERRACOTTA:
+            case ORANGE_GLAZED_TERRACOTTA:
+            case MAGENTA_GLAZED_TERRACOTTA:
+            case LIGHT_BLUE_GLAZED_TERRACOTTA:
+            case YELLOW_GLAZED_TERRACOTTA:
+            case LIME_GLAZED_TERRACOTTA:
+            case PINK_GLAZED_TERRACOTTA:
+            case GRAY_GLAZED_TERRACOTTA:
+            case SILVER_GLAZED_TERRACOTTA:
+            case CYAN_GLAZED_TERRACOTTA:
+            case PURPLE_GLAZED_TERRACOTTA:
+            case BLUE_GLAZED_TERRACOTTA:
+            case BROWN_GLAZED_TERRACOTTA:
+            case GREEN_GLAZED_TERRACOTTA:
+            case RED_GLAZED_TERRACOTTA:
+            case BLACK_GLAZED_TERRACOTTA:
+            case CONCRETE:
+            case CONCRETE_POWDER:
                 return true;
             default:
                 return false;
@@ -1248,9 +1382,75 @@ public enum Material {
             case SAND:
             case GRAVEL:
             case ANVIL:
+            case CONCRETE_POWDER:
                 return true;
             default:
                 return false;
+        }
+    }
+
+    /**
+     * Checks if this Material is an obtainable item.
+     *
+     * @return true if this material is an item
+     */
+    public boolean isItem() {
+        switch (this) {
+            case ACACIA_DOOR:
+            case BED_BLOCK:
+            case BEETROOT_BLOCK:
+            case BIRCH_DOOR:
+            case BREWING_STAND:
+            case BURNING_FURNACE:
+            case CAKE_BLOCK:
+            case CARROT:
+            case CAULDRON:
+            case COCOA:
+            case CROPS:
+            case DARK_OAK_DOOR:
+            case DAYLIGHT_DETECTOR_INVERTED:
+            case DIODE_BLOCK_OFF:
+            case DIODE_BLOCK_ON:
+            case DOUBLE_STEP:
+            case DOUBLE_STONE_SLAB2:
+            case ENDER_PORTAL:
+            case END_GATEWAY:
+            case FIRE:
+            case FLOWER_POT:
+            case FROSTED_ICE:
+            case GLOWING_REDSTONE_ORE:
+            case IRON_DOOR_BLOCK:
+            case JUNGLE_DOOR:
+            case LAVA:
+            case MELON_STEM:
+            case NETHER_WARTS:
+            case PISTON_EXTENSION:
+            case PISTON_MOVING_PIECE:
+            case PORTAL:
+            case POTATO:
+            case PUMPKIN_STEM:
+            case PURPUR_DOUBLE_SLAB:
+            case REDSTONE_COMPARATOR_OFF:
+            case REDSTONE_COMPARATOR_ON:
+            case REDSTONE_LAMP_ON:
+            case REDSTONE_TORCH_OFF:
+            case REDSTONE_WIRE:
+            case SIGN_POST:
+            case SKULL:
+            case SPRUCE_DOOR:
+            case STANDING_BANNER:
+            case STATIONARY_LAVA:
+            case STATIONARY_WATER:
+            case SUGAR_CANE_BLOCK:
+            case TRIPWIRE:
+            case WALL_BANNER:
+            case WALL_SIGN:
+            case WATER:
+            case WOODEN_DOOR:
+            case WOOD_DOUBLE_STEP:
+                return false;
+            default:
+                return true;
         }
     }
 }

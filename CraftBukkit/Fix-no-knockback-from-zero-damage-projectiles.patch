@@ -1,23 +1,19 @@
+From 6ed8079d0978c470eba019bec630e74d6d52d7ed Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 23 Nov 2016 04:38:06 -0500
 Subject: [PATCH] Fix no knockback from zero-damage projectiles
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index 0352207..89ed51c 100644
 --- a/src/main/java/net/minecraft/server/EntityLiving.java
 +++ b/src/main/java/net/minecraft/server/EntityLiving.java
-@@ -1382,12 +1382,9 @@ public abstract class EntityLiving extends Entity {
-                 if (!human) {
-                     this.setAbsorptionHearts(this.getAbsorptionHearts() - f);
+@@ -1423,7 +1423,7 @@ public abstract class EntityLiving extends Entity {
+ 
+                     return false;
+                 } else {
+-                    return originalDamage > 0;
++                    return true;
                  }
--
--                return true;
--            } else {
--                return originalDamage > 0;
--                // CraftBukkit end
+                 // CraftBukkit end
              }
-+            return true;
-+            // CraftBukkit end
-         }
-         return false; // CraftBukkit
-     }

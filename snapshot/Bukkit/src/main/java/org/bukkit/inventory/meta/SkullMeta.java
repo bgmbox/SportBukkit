@@ -3,6 +3,7 @@ package org.bukkit.inventory.meta;
 import java.util.UUID;
 
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Skin;
 
 /**
@@ -14,7 +15,9 @@ public interface SkullMeta extends ItemMeta {
      * Gets the owner of the skull.
      *
      * @return the owner if the skull
+     * @deprecated see {@link #setOwningPlayer(org.bukkit.OfflinePlayer)}.
      */
+    @Deprecated
     String getOwner();
 
     /**
@@ -32,8 +35,28 @@ public interface SkullMeta extends ItemMeta {
      *
      * @param owner the new owner of the skull
      * @return true if the owner was successfully set
+     * @deprecated see {@link #setOwningPlayer(org.bukkit.OfflinePlayer)}.
      */
+    @Deprecated
     boolean setOwner(String owner);
+
+    /**
+     * Gets the owner of the skull.
+     *
+     * @return the owner if the skull
+     */
+    OfflinePlayer getOwningPlayer();
+
+    /**
+     * Sets the owner of the skull.
+     * <p>
+     * Plugins should check that hasOwner() returns true before calling this
+     * plugin.
+     *
+     * @param owner the new owner of the skull
+     * @return true if the owner was successfully set
+     */
+    boolean setOwningPlayer(OfflinePlayer owner);
 
     /**
      * Set the owner and appearance of this skull. A skull with this data set

@@ -97,7 +97,7 @@ public class SimpleCommandMap implements CommandMap {
      */
     private synchronized boolean register(String label, Command command, boolean isAlias, String fallbackPrefix) {
         knownCommands.put(fallbackPrefix + ":" + label, command);
-        if ((command instanceof VanillaCommand || isAlias) && knownCommands.containsKey(label)) {
+        if ((command instanceof BukkitCommand || isAlias) && knownCommands.containsKey(label)) {
             // Request is for an alias/fallback command and it conflicts with
             // a existing command or previous alias ignore it
             // Note: This will mean it gets removed from the commands list of active aliases
@@ -244,13 +244,14 @@ public class SimpleCommandMap implements CommandMap {
     public void registerServerAliases() {
         Map<String, String[]> values = server.getCommandAliases();
 
-        for (String alias : values.keySet()) {
+        for (Map.Entry<String, String[]> entry : values.entrySet()) {
+            String alias = entry.getKey();
             if (alias.contains(" ")) {
                 server.getLogger().warning("Could not register alias " + alias + " because it contains illegal characters");
                 continue;
             }
 
-            String[] commandStrings = values.get(alias);
+            String[] commandStrings = entry.getValue();
             List<String> targets = new ArrayList<String>();
             StringBuilder bad = new StringBuilder();
 

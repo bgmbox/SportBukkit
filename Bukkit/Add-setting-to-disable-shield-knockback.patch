@@ -1,0 +1,40 @@
+From 6eb1721c15ddd19cbfff0dc5785603e148242c18 Mon Sep 17 00:00:00 2001
+From: cswhite2000 <18whitechristop@gmail.com>
+Date: Mon, 12 Feb 2018 17:15:54 -0800
+Subject: [PATCH] Add setting to disable shield knockback
+
+
+diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index 791ed02..c163cde 100644
+--- a/src/main/java/org/bukkit/Bukkit.java
++++ b/src/main/java/org/bukkit/Bukkit.java
+@@ -368,6 +368,13 @@ public final class Bukkit {
+     }
+ 
+     /**
++     * @see Server#getDisableShieldKnockback()
++     */
++    public static boolean getDisableShieldKnockback() {
++        return server.getDisableShieldKnockback();
++    }
++
++    /**
+      * Gets default ticks per animal spawns value.
+      * <p>
+      * <b>Example Usage:</b>
+diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 874a92c..8a02d40 100644
+--- a/src/main/java/org/bukkit/Server.java
++++ b/src/main/java/org/bukkit/Server.java
+@@ -294,6 +294,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+     public boolean getAdvancementsEnabled();
+ 
+     /**
++     * Make shields less effective
++     */
++    public boolean getDisableShieldKnockback();
++
++    /**
+      * Gets default ticks per animal spawns value.
+      * <p>
+      * <b>Example Usage:</b>

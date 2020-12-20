@@ -1,12 +1,14 @@
+From 0439b3a380672a16603d6b05435790b23c8fd471 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 9 Dec 2014 02:54:19 -0500
 Subject: [PATCH] Log unhandled plugin exceptions as errors
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index b32d45d..5034601 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -631,7 +631,7 @@ public final class CraftServer implements Server {
+@@ -632,7 +632,7 @@ public final class CraftServer implements Server {
              this.playerCommandState = true;
              return dispatchCommand(sender, serverCommand.command);
          } catch (Exception ex) {
@@ -16,6 +18,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/ja
          } finally {
              this.playerCommandState = false;
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java b/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java
+index 33e8ea0..9dc1218 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandCompleter.java
 @@ -45,7 +45,7 @@ public class ConsoleCommandCompleter implements Completer {
@@ -28,6 +31,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/command/ConsoleCommandComplete
              Thread.currentThread().interrupt();
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+index 3c8fd1c..77e866f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -352,7 +352,7 @@ public class CraftScheduler implements BukkitScheduler {

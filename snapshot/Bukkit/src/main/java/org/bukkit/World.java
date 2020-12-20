@@ -3,26 +3,22 @@ package org.bukkit;
 import java.io.File;
 
 import org.bukkit.block.BlockImage;
-import org.bukkit.geometry.CoarseTransform;
-import org.bukkit.material.MaterialData;
-import org.bukkit.geometry.Vec3;
-import org.bukkit.region.BlockRegion;
 import org.bukkit.generator.ChunkGenerator;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+
+import java.util.*;
 import java.util.function.Predicate;
 
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.geometry.CoarseTransform;
+import org.bukkit.geometry.Vec3;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.messaging.PluginMessageRecipient;
+import org.bukkit.region.BlockRegion;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayBlockIntersection;
 import org.bukkit.util.Vector;
@@ -193,6 +189,78 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      * @return The chunk that contains the given block
      */
     public Chunk getChunkAt(Block block);
+
+    /**
+     * Used by {@link World#getChunkAtAsync(Location,ChunkLoadCallback)} methods
+     * to request a {@link Chunk} to be loaded, with this callback receiving
+     * the chunk when it is finished.
+     *
+     * This callback will be executed on synchronously on the main thread.
+     *
+     * Timing and order this callback is fired is intentionally not defined and
+     * and subject to change.
+     */
+    public static interface ChunkLoadCallback {
+        public void onLoad(Chunk chunk);
+    }
+
+    /**
+     * Requests a {@link Chunk} to be loaded at the given coordinates
+     *
+     * This method makes no guarantee on how fast the chunk will load,
+     * and will return the chunk to the callback at a later time.
+     *
+     * You should use this method if you need a chunk but do not need it
+     * immediately, and you wish to let the server control the speed
+     * of chunk loads, keeping performance in mind.
+     *
+     * The {@link ChunkLoadCallback} will always be executed synchronously
+     * on the main Server Thread.
+     *
+     * @param x Chunk X-coordinate of the chunk - (world coordinate / 16)
+     * @param z Chunk Z-coordinate of the chunk - (world coordinate / 16)
+     * @param cb Callback to receive the chunk when it is loaded.
+     *           will be executed synchronously
+     */
+    public void getChunkAtAsync(int x, int z, ChunkLoadCallback cb);
+
+    /**
+     * Requests a {@link Chunk} to be loaded at the given {@link Location}
+     *
+     * This method makes no guarantee on how fast the chunk will load,
+     * and will return the chunk to the callback at a later time.
+     *
+     * You should use this method if you need a chunk but do not need it
+     * immediately, and you wish to let the server control the speed
+     * of chunk loads, keeping performance in mind.
+     *
+     * The {@link ChunkLoadCallback} will always be executed synchronously
+     * on the main Server Thread.
+     *
+     * @param location Location of the chunk
+     * @param cb Callback to receive the chunk when it is loaded.
+     *           will be executed synchronously
+     */
+    public void getChunkAtAsync(Location location, ChunkLoadCallback cb);
+
+    /**
+     * Requests {@link Chunk} to be loaded that contains the given {@link Block}
+     *
+     * This method makes no guarantee on how fast the chunk will load,
+     * and will return the chunk to the callback at a later time.
+     *
+     * You should use this method if you need a chunk but do not need it
+     * immediately, and you wish to let the server control the speed
+     * of chunk loads, keeping performance in mind.
+     *
+     * The {@link ChunkLoadCallback} will always be executed synchronously
+     * on the main Server Thread.
+     *
+     * @param block Block to get the containing chunk from
+     * @param cb Callback to receive the chunk when it is loaded.
+     *           will be executed synchronously
+     */
+    public void getChunkAtAsync(Block block, ChunkLoadCallback cb);
 
     /**
      * Checks if the specified {@link Chunk} is loaded
@@ -424,7 +492,9 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      * @param delegate A class to call for each block changed as a result of
      *     this method
      * @return true if the tree was created successfully, otherwise false
+     * @deprecated rarely used API that was largely for implementation purposes
      */
+    @Deprecated
     public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate);
 
     /**
@@ -544,6 +614,16 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      * @return The spawn location of this world
      */
     public Location getSpawnLocation();
+
+    /**
+     * Sets the spawn location of the world.
+     * <br>
+     * The location provided must be equal to this world.
+     *
+     * @param location The {@link Location} to set the spawn for this world at.
+     * @return True if it was successfully set.
+     */
+    public boolean setSpawnLocation(Location location);
 
     /**
      * Sets the spawn location of the world

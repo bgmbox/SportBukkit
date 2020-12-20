@@ -12,20 +12,7 @@
  public class BlockSoil extends Block {
  
      public static final BlockStateInteger MOISTURE = BlockStateInteger.of("moisture", 0, 7);
-@@ -35,6 +40,12 @@
-             if (i > 0) {
-                 world.setTypeAndData(blockposition, iblockdata.set(BlockSoil.MOISTURE, Integer.valueOf(i - 1)), 2);
-             } else if (!this.c(world, blockposition)) {
-+                // CraftBukkit start
-+                org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
-+                if (CraftEventFactory.callBlockFadeEvent(block, Blocks.DIRT).isCancelled()) {
-+                    return;
-+                }
-+                // CraftBukkit end
-                 this.b(world, blockposition);
-             }
-         } else if (i < 7) {
-@@ -44,11 +55,29 @@
+@@ -45,14 +50,38 @@
      }
  
      public void fallOn(World world, BlockPosition blockposition, Entity entity, float f) {
@@ -48,11 +35,20 @@
 +                return;
 +            }
 +            // CraftBukkit end
-             this.b(world, blockposition);
+             b(world, blockposition);
          }
  
 -        super.fallOn(world, blockposition, entity, f);
 +        // super.fallOn(world, blockposition, entity, f); // CraftBukkit - moved up
      }
  
-     private void b(World world, BlockPosition blockposition) {
+     protected static void b(World world, BlockPosition blockposition) {
++        // CraftBukkit start
++        org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
++        if (CraftEventFactory.callBlockFadeEvent(block, Blocks.DIRT).isCancelled()) {
++            return;
++        }
++        // CraftBukkit end
+         world.setTypeUpdate(blockposition, Blocks.DIRT.getBlockData());
+         AxisAlignedBB axisalignedbb = BlockSoil.c.a(blockposition);
+         List list = world.getEntities((Entity) null, axisalignedbb);

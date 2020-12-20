@@ -8,10 +8,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 import net.minecraft.server.*;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -21,13 +23,13 @@ import org.bukkit.craftbukkit.CraftChunk;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+import org.bukkit.geometry.Vec3;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.RayBlockIntersection;
-import org.bukkit.geometry.Vec3;
 import org.bukkit.util.Vector;
 
 public class CraftBlock implements Block {
@@ -39,7 +41,7 @@ public class CraftBlock implements Block {
     }
 
     public CraftBlock(CraftChunk chunk, Vec3 position) {
-        this.worldId = chunk.getCraftWorld().getUID();
+        this.worldId = chunk.getWorldId();
         this.position = BlockPosition.copyOf(position);
     }
 
@@ -346,8 +348,17 @@ public class CraftBlock implements Block {
         case REDSTONE_COMPARATOR_OFF:
         case REDSTONE_COMPARATOR_ON:
             return new CraftComparator(this);
+        case BED_BLOCK:
+            return new CraftBed(this);
         default:
-            return new CraftBlockState(this);
+            TileEntity tileEntity = getWorld().getTileEntityAt(position.coarseX(), position.coarseY(), position.coarseZ());
+            if (tileEntity != null) {
+                // block with unhandled TileEntity:
+                return new CraftBlockEntityState<TileEntity>(this, (Class<TileEntity>) tileEntity.getClass());
+            } else {
+                // Block without TileEntity:
+                return new CraftBlockState(this);
+            }
         }
     }
 
@@ -364,7 +375,7 @@ public class CraftBlock implements Block {
             return null;
         }
 
-        return Biome.valueOf(BiomeBase.REGISTRY_ID.b(base).a().toUpperCase(java.util.Locale.ENGLISH));
+        return Biome.valueOf(BiomeBase.REGISTRY_ID.b(base).getKey().toUpperCase(java.util.Locale.ENGLISH));
     }
 
     public static BiomeBase biomeToBiomeBase(Biome bio) {
@@ -446,7 +457,7 @@ public class CraftBlock implements Block {
     }
 
     public PistonMoveReaction getPistonMoveReaction() {
-        return PistonMoveReaction.getById(getNMSBlock().getBlockData().getMaterial().getPushReaction().ordinal());
+        return PistonMoveReaction.getById(getNMSBlock().h(getNMSBlock().fromLegacyData(getData())).ordinal());
     }
 
     private boolean itemCausesDrops(ItemStack item) {
@@ -493,7 +504,6 @@ public class CraftBlock implements Block {
                     if (Blocks.SKULL == block) {
                         net.minecraft.server.ItemStack nmsStack = new net.minecraft.server.ItemStack(item, 1, block.getDropData(data));
                         TileEntitySkull tileentityskull = (TileEntitySkull) nmsWorld().getTileEntity(position);
-
                         if (tileentityskull.getSkullType() == 3 && tileentityskull.getGameProfile() != null) {
                             nmsStack.setTag(new NBTTagCompound());
                             NBTTagCompound nbttagcompound = new NBTTagCompound();

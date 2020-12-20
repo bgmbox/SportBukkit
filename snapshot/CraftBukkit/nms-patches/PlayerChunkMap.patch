@@ -102,7 +102,20 @@
              }
          }
      }
-@@ -402,4 +441,47 @@
+@@ -382,10 +421,12 @@
+     }
+ 
+     public void a(PlayerChunk playerchunk) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp("Async Player Chunk Add"); // Paper
+         this.f.add(playerchunk);
+     }
+ 
+     public void b(PlayerChunk playerchunk) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp("Async Player Chunk Remove"); // Paper
+         ChunkCoordIntPair chunkcoordintpair = playerchunk.a();
+         long i = d(chunkcoordintpair.x, chunkcoordintpair.z);
+ 
+@@ -402,4 +443,47 @@
          }
  
      }

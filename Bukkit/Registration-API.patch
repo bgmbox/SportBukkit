@@ -1,9 +1,11 @@
+From 1c7b6aa44de7aec664f981e925223f0d85d5a723 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:07:43 -0500
 Subject: [PATCH] Registration API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index fd615d5..0b162c6 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -37,6 +37,7 @@ import org.bukkit.permissions.Permissible;
@@ -56,7 +58,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
          Bukkit.server = server;
          server.getLogger().info("This server is running " + getName() + " version " + getVersion() + " (Implementing API version " + getBukkitVersion() + ")");
      }
-@@ -1084,7 +1104,7 @@ public final class Bukkit {
+@@ -1067,7 +1087,7 @@ public final class Bukkit {
       * @see ItemFactory
       */
      public static ItemFactory getItemFactory() {
@@ -65,7 +67,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
      }
  
      /**
-@@ -1225,4 +1245,12 @@ public final class Bukkit {
+@@ -1238,4 +1258,12 @@ public final class Bukkit {
      public static void broadcast(net.md_5.bungee.api.chat.BaseComponent... components) {
          server.broadcast(components);
      }
@@ -105,6 +107,7 @@ index 0000000..1ed31cb
 +    ItemFactory getItemFactory();
 +}
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 446acc4..48d7d4e 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -52,7 +52,7 @@ import org.bukkit.inventory.meta.ItemMeta;

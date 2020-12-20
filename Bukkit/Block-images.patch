@@ -1,42 +1,41 @@
+From 0056712e2410efcfb8ccdb5aca3ece397c32af9a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 16 Mar 2016 21:20:38 -0400
 Subject: [PATCH] Block images
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index bf05a0d..9bfa309 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -33,6 +33,7 @@ import org.bukkit.inventory.ItemStack;
- import org.bukkit.inventory.Merchant;
- import org.bukkit.inventory.Recipe;
- import org.bukkit.map.MapView;
+@@ -13,6 +13,7 @@ import java.util.UUID;
+ import java.util.logging.Logger;
+ 
+ import org.bukkit.Warning.WarningState;
 +import org.bukkit.block.BlockFactory;
- import org.bukkit.permissions.Permissible;
- import org.bukkit.plugin.Plugin;
- import org.bukkit.plugin.PluginManager;
-@@ -1269,6 +1270,7 @@ public final class Bukkit {
+ import org.bukkit.boss.BarColor;
+ import org.bukkit.boss.BarFlag;
+ import org.bukkit.boss.BarStyle;
+@@ -1282,6 +1283,8 @@ public final class Bukkit {
          return runtime().key(id);
      }
  
 +    public static BlockFactory blocks() { return runtime().blocks(); }
++
      public static VectorFactory vectors() { return runtime().vectors(); }
  
      public static PotionBrewRegistry potionRegistry() {
 diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/bukkit/BukkitRuntime.java
+index 9e083da..493fc98 100644
 --- a/src/main/java/org/bukkit/BukkitRuntime.java
 +++ b/src/main/java/org/bukkit/BukkitRuntime.java
-@@ -1,9 +1,10 @@
+@@ -1,5 +1,6 @@
  package org.bukkit;
  
 +import org.bukkit.block.BlockFactory;
+ import org.bukkit.geometry.VectorFactory;
  import org.bukkit.inventory.ItemFactory;
  import org.bukkit.inventory.meta.ItemMeta;
--import org.bukkit.potion.PotionEffectRegistry;
- import org.bukkit.potion.PotionBrewRegistry;
-+import org.bukkit.potion.PotionEffectRegistry;
- import org.bukkit.registry.Key;
- import org.bukkit.geometry.VectorFactory;
- 
 @@ -15,6 +16,8 @@ public interface BukkitRuntime {
  
      VectorFactory vectors();
@@ -47,30 +46,40 @@ diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/buk
       * Gets the instance of the item factory (for {@link ItemMeta}).
       *
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index 5af6f6f..6f8631c 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
-@@ -1,12 +1,20 @@
+@@ -1,21 +1,24 @@
  package org.bukkit;
  
  import java.io.File;
 +
 +import org.bukkit.block.BlockImage;
-+import org.bukkit.geometry.CoarseTransform;
-+import org.bukkit.material.MaterialData;
-+import org.bukkit.geometry.Vec3;
-+import org.bukkit.region.BlockRegion;
  import org.bukkit.generator.ChunkGenerator;
- import java.util.Collection;
- import java.util.HashMap;
- import java.util.List;
- import java.util.Map;
-+import java.util.Set;
- import java.util.UUID;
+-import java.util.Collection;
+-import java.util.HashMap;
+-import java.util.List;
+-import java.util.Map;
+-import java.util.UUID;
++
++import java.util.*;
 +import java.util.function.Predicate;
  
  import org.bukkit.block.Biome;
  import org.bukkit.block.Block;
-@@ -36,6 +44,8 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+ import org.bukkit.entity.*;
+ import org.bukkit.generator.BlockPopulator;
++import org.bukkit.geometry.CoarseTransform;
++import org.bukkit.geometry.Vec3;
+ import org.bukkit.inventory.ItemStack;
+ import org.bukkit.material.MaterialData;
+ import org.bukkit.metadata.Metadatable;
+ import org.bukkit.plugin.messaging.PluginMessageRecipient;
++import org.bukkit.region.BlockRegion;
+ import org.bukkit.util.Consumer;
+ import org.bukkit.util.RayBlockIntersection;
+ import org.bukkit.util.Vector;
+@@ -37,6 +40,8 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public Block getBlockAt(int x, int y, int z);
  
@@ -79,7 +88,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Gets the {@link Block} at the given {@link Location}
       *
-@@ -73,6 +83,30 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -74,6 +79,30 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
      public int getBlockTypeIdAt(Location location);
  
      /**
@@ -110,7 +119,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
       * Gets the y coordinate of the lowest block at this position such that the
       * block and all blocks above it are transparent for lighting purposes.
       *
-@@ -140,6 +174,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -141,6 +170,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public Chunk getChunkAt(int x, int z);
  
@@ -121,7 +130,96 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Gets the {@link Chunk} at the given {@link Location}
       *
-@@ -916,6 +954,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -275,6 +308,8 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+     @Deprecated
+     public boolean unloadChunk(int x, int z, boolean save, boolean safe);
+ 
++    int unloadAllChunks();
++
+     /**
+      * Safely queues the {@link Chunk} at the specified coordinates for
+      * unloading
+@@ -319,6 +354,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+     @Deprecated
+     public boolean refreshChunk(int x, int z);
+ 
++    int getPlayerCount();
++
++    boolean hasPlayers();
++
++    boolean isTicking();
++
+     /**
+      * Drops an item at the specified {@link Location}
+      *
+@@ -490,6 +531,11 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      */
+     public UUID getUID();
+ 
++    @Override
++    default UUID getWorldId() {
++        return getUID();
++    }
++
+     /**
+      * Gets the default spawn {@link Location} of this world
+      *
+@@ -767,7 +813,25 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      * @throws IllegalArgumentException if {@link Location} or {@link
+      *     MaterialData} are null or {@link Material} of the {@link MaterialData} is not a block
+      */
+-    public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException;
++    default FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException {
++        return spawnFallingBlock(location.position(), data);
++    }
++
++    /**
++     * Spawn a {@link FallingBlock} entity at the given position in this world.
++     *
++     * @see #spawnFallingBlock(Location, MaterialData)
++     */
++    FallingBlock spawnFallingBlock(Vec3 position, MaterialData data) throws IllegalArgumentException;
++
++    /**
++     * Spawn a {@link FallingBlock} entity at the given coarse position in this world.
++     * The spawned entity will initially be aligned with the block grid,
++     * as a naturally falling block would be.
++     *
++     * @see #spawnFallingBlock(Location, MaterialData)
++     */
++    FallingBlock spawnFallingBlockAligned(Vec3 position, MaterialData data) throws IllegalArgumentException;
+ 
+     /**
+      * Spawn a {@link FallingBlock} entity at the given {@link Location} of
+@@ -786,7 +850,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      * @deprecated Magic value
+      */
+     @Deprecated
+-    public FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException;
++    default FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException {
++        return spawnFallingBlock(location.position(), material, data);
++    }
++
++    @Deprecated
++    FallingBlock spawnFallingBlock(Vec3 position, Material material, byte data) throws IllegalArgumentException;
+ 
+     /**
+      * Spawn a {@link FallingBlock} entity at the given {@link Location} of
+@@ -802,7 +871,12 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+      * @deprecated Magic value
+      */
+     @Deprecated
+-    public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException;
++    default FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException {
++        return spawnFallingBlock(location.position(), blockId, blockData);
++    }
++
++    @Deprecated
++    FallingBlock spawnFallingBlock(Vec3 position, int blockId, byte blockData) throws IllegalArgumentException;
+ 
+     /**
+      * Plays an effect to all players within a default radius around a given
+@@ -929,6 +1003,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      Biome getBiome(int x, int z);
  
@@ -132,7 +230,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Sets the biome for the given block coordinates
       *
-@@ -925,6 +967,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -938,6 +1016,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      void setBiome(int x, int z, Biome bio);
  
@@ -143,7 +241,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Gets the temperature for the given block coordinates.
       * <p>
-@@ -937,6 +983,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -950,6 +1032,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public double getTemperature(int x, int z);
  
@@ -154,7 +252,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Gets the humidity for the given block coordinates.
       * <p>
-@@ -949,6 +999,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -962,6 +1048,10 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public double getHumidity(int x, int z);
  
@@ -165,7 +263,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Gets the maximum height of this world.
       * <p>
-@@ -1509,6 +1563,37 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
+@@ -1522,6 +1612,37 @@ public interface World extends PluginMessageRecipient, Metadatable, Physical {
       */
      public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
  
@@ -204,16 +302,17 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
      /**
       * Represents various map environment types that a world may be
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
+index ff597f1..410277e 100644
 --- a/src/main/java/org/bukkit/block/Block.java
 +++ b/src/main/java/org/bukkit/block/Block.java
-@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
+@@ -7,6 +7,7 @@ import org.bukkit.Locatable;
+ import org.bukkit.Material;
+ import org.bukkit.World;
+ import org.bukkit.Location;
++import org.bukkit.geometry.Vec3;
+ import org.bukkit.inventory.ItemStack;
  import org.bukkit.material.MaterialData;
  import org.bukkit.metadata.Metadatable;
- import org.bukkit.util.RayBlockIntersection;
-+import org.bukkit.geometry.Vec3;
- import org.bukkit.util.Vector;
- 
- /**
 @@ -118,6 +119,8 @@ public interface Block extends Metadatable, Locatable {
       */
      World getWorld();
@@ -322,23 +421,18 @@ index 0000000..defd64c
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
+index f081dd7..9aae2cc 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
-@@ -5,8 +5,13 @@ import org.bukkit.Locatable;
+@@ -5,6 +5,7 @@ import org.bukkit.Locatable;
  import org.bukkit.Location;
  import org.bukkit.Material;
  import org.bukkit.World;
-+import org.bukkit.geometry.BlockRotoflection;
-+import org.bukkit.geometry.BlockReflection;
-+import org.bukkit.geometry.BlockRotation;
-+import org.bukkit.geometry.CoarseTransform;
++import org.bukkit.geometry.*;
  import org.bukkit.material.MaterialData;
  import org.bukkit.metadata.Metadatable;
-+import org.bukkit.geometry.Vec3;
  
- /**
-  * Represents a captured state of a block, which will not change
-@@ -54,6 +59,14 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -55,6 +56,14 @@ public interface BlockState extends Metadatable, Locatable {
       */
      void setMaterialData(MaterialData materialData);
  
@@ -351,22 +445,20 @@ diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/
 +    void reorient(CoarseTransform transform);
 +
      /**
-      * Gets the metadata for this block
+      * Gets the metadata for this block state.
       *
-@@ -95,6 +108,12 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -98,6 +107,10 @@ public interface BlockState extends Metadatable, Locatable {
       */
      World getWorld();
  
-+    World tryWorld();
-+
 +    Vec3 getPosition();
 +
 +    Vec3 tryPosition();
 +
      /**
-      * Gets the x-coordinate of this block
+      * Gets the x-coordinate of this block state.
       *
-@@ -241,4 +260,6 @@ public interface BlockState extends Metadatable, Locatable {
+@@ -251,4 +264,6 @@ public interface BlockState extends Metadatable, Locatable {
       *         or 'virtual' (e.g. on an itemstack)
       */
      boolean isPlaced();
@@ -474,18 +566,8 @@ index 0000000..db43c72
 +        return new TransformedBlockImage(original, transform);
 +    }
 +}
-diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
---- a/src/main/java/org/bukkit/entity/Entity.java
-+++ b/src/main/java/org/bukkit/entity/Entity.java
-@@ -11,6 +11,7 @@ import org.bukkit.World;
- import org.bukkit.event.entity.EntityDamageEvent;
- import org.bukkit.geometry.Cuboid;
- import org.bukkit.metadata.Metadatable;
-+import org.bukkit.geometry.Cuboid;
- import org.bukkit.util.Vector;
- 
- import java.util.List;
 diff --git a/src/main/java/org/bukkit/material/Alignable.java b/src/main/java/org/bukkit/material/Alignable.java
+index c9ad81e..5759f6c 100644
 --- a/src/main/java/org/bukkit/material/Alignable.java
 +++ b/src/main/java/org/bukkit/material/Alignable.java
 @@ -1,6 +1,6 @@
@@ -497,6 +579,7 @@ diff --git a/src/main/java/org/bukkit/material/Alignable.java b/src/main/java/or
  public interface Alignable {
  
 diff --git a/src/main/java/org/bukkit/material/Lever.java b/src/main/java/org/bukkit/material/Lever.java
+index 3b76ed0..706b514 100644
 --- a/src/main/java/org/bukkit/material/Lever.java
 +++ b/src/main/java/org/bukkit/material/Lever.java
 @@ -2,7 +2,7 @@ package org.bukkit.material;

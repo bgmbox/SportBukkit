@@ -1,9 +1,11 @@
+From ddd3be3be79d6025b65e412ee4314f02569b87f4 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 3 Jun 2016 02:02:23 -0400
 Subject: [PATCH] Component support for signs
 
 
 diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit/block/Sign.java
+index f30666a..541e60e 100644
 --- a/src/main/java/org/bukkit/block/Sign.java
 +++ b/src/main/java/org/bukkit/block/Sign.java
 @@ -1,5 +1,7 @@
@@ -12,7 +14,7 @@ diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit
 +import net.md_5.bungee.api.chat.BaseComponent;
 +
  /**
-  * Represents either a SignPost or a WallSign
+  * Represents a captured state of either a SignPost or a WallSign.
   */
 @@ -8,8 +10,11 @@ public interface Sign extends BlockState {
      /**
@@ -47,20 +49,18 @@ diff --git a/src/main/java/org/bukkit/block/Sign.java b/src/main/java/org/bukkit
      public void setLine(int index, String line) throws IndexOutOfBoundsException;
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 8acf394..0f47486 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1,8 +1,10 @@
- package org.bukkit.entity;
- 
+@@ -3,6 +3,7 @@ package org.bukkit.entity;
  import java.net.InetSocketAddress;
-+import java.util.List;
  import java.util.Set;
  
 +import net.md_5.bungee.api.chat.BaseComponent;
- import org.bukkit.Achievement;
- import org.bukkit.ChatColor;
- import org.bukkit.Effect;
-@@ -509,6 +511,9 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+ import org.bukkit.*;
+ import org.bukkit.advancement.Advancement;
+ import org.bukkit.advancement.AdvancementProgress;
+@@ -498,6 +499,9 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       * @throws IllegalArgumentException if location is null
       * @throws IllegalArgumentException if lines is non-null and has a length less than 4
       */
@@ -71,6 +71,7 @@ diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/buk
  
      /**
 diff --git a/src/main/java/org/bukkit/event/block/SignChangeEvent.java b/src/main/java/org/bukkit/event/block/SignChangeEvent.java
+index f884f3d..47b0d1f 100644
 --- a/src/main/java/org/bukkit/event/block/SignChangeEvent.java
 +++ b/src/main/java/org/bukkit/event/block/SignChangeEvent.java
 @@ -1,5 +1,7 @@
@@ -116,12 +117,12 @@ diff --git a/src/main/java/org/bukkit/event/block/SignChangeEvent.java b/src/mai
       * @param index index of the line to get
 -     * @return the String containing the line of text associated with the
 +     * @return the BaseComponent containing the line of text associated with the
-      *     provided index
+      * provided index
       * @throws IndexOutOfBoundsException thrown when the provided index is {@literal > 3
-      *     or < 0}
+      *                                   or < 0}
       */
 -    public String getLine(int index) throws IndexOutOfBoundsException {
-+    public BaseComponent line(int index) {
++    public BaseComponent line(int index) throws IndexOutOfBoundsException {
          return lines[index];
      }
  
@@ -135,7 +136,7 @@ diff --git a/src/main/java/org/bukkit/event/block/SignChangeEvent.java b/src/mai
       *
 @@ -67,10 +79,15 @@ public class SignChangeEvent extends BlockEvent implements Cancellable, PlayerAc
       * @throws IndexOutOfBoundsException thrown when the provided index is {@literal > 3
-      *     or < 0}
+      *                                   or < 0}
       */
 -    public void setLine(int index, String line) throws IndexOutOfBoundsException {
 +    public void setLine(int index, BaseComponent line) {

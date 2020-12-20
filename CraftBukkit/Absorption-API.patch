@@ -1,12 +1,14 @@
+From 88f606c7e07eb38f25aa641081641cda926aedc2 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Fri, 4 Mar 2016 05:57:50 -0500
 Subject: [PATCH] Absorption API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+index e6ca2a9..ed2ad30 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -270,6 +270,16 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -233,6 +233,16 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
      }
  
      @Override

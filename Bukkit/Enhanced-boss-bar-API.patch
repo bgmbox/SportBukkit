@@ -1,12 +1,14 @@
+From ae71e2dd40b62a137dff2c3483c079e86b4d917d Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 5 Mar 2016 01:41:34 -0500
 Subject: [PATCH] Enhanced boss bar API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index cff4904..fd615d5 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -1195,7 +1195,7 @@ public final class Bukkit {
+@@ -1178,7 +1178,7 @@ public final class Bukkit {
       * @param flags an optional list of flags to set on the boss bar
       * @return the created boss bar
       */
@@ -16,18 +18,20 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
      }
  
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index ae3d7eb..446acc4 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -994,7 +994,7 @@ public interface Server extends PluginMessageRecipient, tc.oc.minecraft.api.serv
+@@ -979,7 +979,7 @@ public interface Server extends PluginMessageRecipient, tc.oc.minecraft.api.serv
       * @param flags an optional list of flags to set on the boss bar
       * @return the created boss bar
       */
--    BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag ...flags);
+-    BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags);
 +    BossBar createBossBar(net.md_5.bungee.api.chat.BaseComponent title, BarColor color, BarStyle style, BarFlag ...flags);
  
      /**
-      * @see UnsafeValues
+      * Gets an entity on the server by its UUID
 diff --git a/src/main/java/org/bukkit/boss/BossBar.java b/src/main/java/org/bukkit/boss/BossBar.java
+index effc329..2a19f28 100644
 --- a/src/main/java/org/bukkit/boss/BossBar.java
 +++ b/src/main/java/org/bukkit/boss/BossBar.java
 @@ -1,8 +1,10 @@
@@ -58,19 +62,20 @@ diff --git a/src/main/java/org/bukkit/boss/BossBar.java b/src/main/java/org/bukk
  
      /**
       * Returns the color of this boss bar
-@@ -49,6 +51,11 @@ public interface BossBar {
+@@ -49,6 +51,12 @@ public interface BossBar {
      void setStyle(BarStyle style);
  
      /**
-+     * Replace the entire set of flags for this boss bar
-+     */
++     +     * Replace the entire set of flags for this boss bar
++     +     */
 +    void setFlags(Set<BarFlag> flags);
 +
 +    /**
++     *
       * Remove an existing flag on this boss bar
       *
       * @param flag the existing flag to remove
-@@ -141,4 +148,11 @@ public interface BossBar {
+@@ -141,4 +149,11 @@ public interface BossBar {
       */
      @Deprecated
      void hide();

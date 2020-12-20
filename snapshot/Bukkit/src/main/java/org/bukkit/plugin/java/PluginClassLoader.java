@@ -1,5 +1,6 @@
 package org.bukkit.plugin.java;
 
+import com.google.common.io.ByteStreams;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,7 +12,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingInputStream;
-import com.google.common.io.ByteStreams;
 import com.google.inject.Module;
 import org.apache.commons.lang.Validate;
 import org.bukkit.plugin.InvalidPluginException;
@@ -35,7 +35,7 @@ final class PluginClassLoader extends URLClassLoader {
     }
 
     PluginClassLoader(final JavaPluginLoader pluginLoader, final ClassLoader parent, final Set<PluginClassLoader> dependencies, final PluginDescriptionFile description, final File dataFolder, final File file) throws MalformedURLException {
-        super(new URL[] {file.toURI().toURL()}, parent);
+        super(new URL[]{file.toURI().toURL()}, parent);
         Validate.notNull(pluginLoader, "Loader cannot be null");
         Validate.notNull(parent, "Parent loader cannot be null");
 
@@ -64,8 +64,8 @@ final class PluginClassLoader extends URLClassLoader {
                 plugin = new ModularPlugin(jarClass.asSubclass(Module.class).newInstance());
             } else {
                 throw new InvalidPluginException("main class `" + jarClass.getName() +
-                                                 "' must extend either " + JavaPlugin.class.getName() +
-                                                 " or " + Module.class.getName());
+                        "' must extend either " + JavaPlugin.class.getName() +
+                        " or " + Module.class.getName());
             }
 
             return plugin;
@@ -130,9 +130,9 @@ final class PluginClassLoader extends URLClassLoader {
         } finally {
             dependencyLock.readLock().unlock();
         }
-
         throw new ClassNotFoundException(name);
     }
+
 
     /**
      * Load a class from this plugin

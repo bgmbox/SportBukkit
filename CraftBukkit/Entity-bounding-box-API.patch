@@ -1,12 +1,14 @@
+From 1660072b00bf9c2bc9b83e140499aaa562c1fd01 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 29 Mar 2016 02:12:39 -0400
 Subject: [PATCH] Entity bounding box API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index 084b814..9fa3b22 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-@@ -31,6 +31,8 @@ import org.bukkit.permissions.PermissionAttachment;
+@@ -32,6 +32,8 @@ import org.bukkit.permissions.PermissionAttachment;
  import org.bukkit.permissions.PermissionAttachmentInfo;
  import org.bukkit.permissions.ServerOperator;
  import org.bukkit.plugin.Plugin;
@@ -15,7 +17,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/
  import org.bukkit.util.Vector;
  
  public abstract class CraftEntity implements org.bukkit.entity.Entity {
-@@ -818,4 +820,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+@@ -874,4 +876,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
      public Vector getPredictedVelocity() {
          return getVelocity();
      }
@@ -28,17 +30,19 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+index ed2ad30..6b8c9d8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -73,6 +73,7 @@ import org.bukkit.potion.PotionEffectType;
+@@ -74,6 +74,8 @@ import org.bukkit.potion.PotionEffect;
+ import org.bukkit.potion.PotionEffectType;
  import org.bukkit.potion.PotionType;
  import org.bukkit.util.BlockIterator;
- import org.bukkit.util.NumberConversions;
++import org.bukkit.util.NumberConversions;
 +import org.bukkit.geometry.Ray;
  import org.bukkit.util.Vector;
  
  public class CraftLivingEntity extends CraftEntity implements LivingEntity {
-@@ -245,6 +246,11 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -208,6 +210,11 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
          return loc;
      }
  

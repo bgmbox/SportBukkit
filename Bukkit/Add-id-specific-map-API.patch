@@ -1,12 +1,14 @@
+From 24ad26d7f78d5b3f898a171c9730e8ff8b01af2f Mon Sep 17 00:00:00 2001
 From: Pablete1234 <pabloherrerapalacio@gmail.com>
 Date: Mon, 9 Jan 2017 21:50:17 +0100
 Subject: [PATCH] Add id specific map API
 
 
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 2a09d82..fcfb129 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -538,6 +538,16 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -526,6 +526,16 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
      public MapView createMap(World world);
  
      /**

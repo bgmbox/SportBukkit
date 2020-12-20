@@ -1,17 +1,20 @@
+From bf41cced8a01bb18807a249fba748c1361c010e1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 3 Jun 2015 19:10:45 -0400
 Subject: [PATCH] Mutable ChunkSnapshots
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java b/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java
+index c0fb34b..f92339a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java
-@@ -1,10 +1,15 @@
+@@ -1,11 +1,16 @@
  package org.bukkit.craftbukkit;
  
 +import java.util.Arrays;
 +
  import org.bukkit.ChunkSnapshot;
+ import org.bukkit.Material;
  import org.bukkit.block.Biome;
 +import org.bukkit.block.BlockState;
  import org.bukkit.craftbukkit.block.CraftBlock;
@@ -22,7 +25,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java b/src/
  
  /**
   * Represents a static, thread-safe snapshot of chunk of blocks
-@@ -61,6 +66,16 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
+@@ -67,6 +72,16 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
          return (blockdata[y >> 4][off] >> ((x & 1) << 2)) & 0xF;
      }
  
@@ -39,7 +42,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunkSnapshot.java b/src/
      public final int getBlockSkyLight(int x, int y, int z) {
          int off = ((y & 0xF) << 7) | (z << 3) | (x >> 1);
          return (skylight[y >> 4][off] >> ((x & 1) << 2)) & 0xF;
-@@ -94,4 +109,58 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
+@@ -100,4 +115,58 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
      public final boolean isSectionEmpty(int sy) {
          return empty[sy];
      }

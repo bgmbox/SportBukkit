@@ -1,12 +1,14 @@
+From e671e9d08d6d180eda606c6235095e67331d1029 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Mon, 21 Mar 2016 04:31:06 -0400
 Subject: [PATCH] Natural regeneration API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index a8ca35e..8acf394 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -980,6 +980,14 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -981,6 +981,14 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       */
      public void setFoodLevel(int value);
  

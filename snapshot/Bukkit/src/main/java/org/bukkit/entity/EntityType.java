@@ -166,6 +166,10 @@ public enum EntityType {
      */
     VINDICATOR("vindication_illager", Vindicator.class, 36),
     /**
+     * @see Illusioner
+     */
+    ILLUSIONER("illusion_illager", Illusioner.class, 37),
+    /**
      * @see CommandMinecart
      */
     MINECART_COMMAND("commandblock_minecart", CommandMinecart.class, 40),
@@ -184,7 +188,7 @@ public enum EntityType {
     /**
      * @see PoweredMinecart
      */
-    MINECART_FURNACE("chest_minecart", PoweredMinecart.class, 44),
+    MINECART_FURNACE("furnace_minecart", PoweredMinecart.class, 44),
     /**
      * @see ExplosiveMinecart
      */
@@ -232,6 +236,7 @@ public enum EntityType {
     POLAR_BEAR("polar_bear", PolarBear.class, 102),
     LLAMA("llama", Llama.class, 103),
     LLAMA_SPIT("llama_spit", LlamaSpit.class, 104),
+    PARROT("parrot", Parrot.class, 105),
     VILLAGER("villager", Villager.class, 120),
     ENDER_CRYSTAL("ender_crystal", EnderCrystal.class, 200),
     // These don't have an entity ID in nms.EntityTypes.
@@ -256,7 +261,7 @@ public enum EntityType {
      * Like {@link #ARROW} but tipped with a specific potion which is applied on
      * contact.
      */
-    TIPPED_ARROW("TippedArrow", TippedArrow.class, -1),
+    TIPPED_ARROW(null, TippedArrow.class, -1),
     /**
      * An unknown entity without an Entity Class
      */

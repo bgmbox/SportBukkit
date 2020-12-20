@@ -14,8 +14,8 @@
      public int a;
 @@ -34,6 +40,7 @@
  
-     public void A_() {
-         super.A_();
+     public void B_() {
+         super.B_();
 +        EntityHuman prevTarget = this.targetPlayer;// CraftBukkit - store old target
          if (this.c > 0) {
              --this.c;
@@ -46,16 +46,29 @@
          }
  
          this.move(EnumMoveType.SELF, this.motX, this.motY, this.motZ);
-@@ -142,6 +161,7 @@
+@@ -142,18 +161,25 @@
          if (!this.world.isClientSide) {
-             if (this.c == 0 && entityhuman.bz == 0) {
-                 entityhuman.bz = 2;
+             if (this.c == 0 && entityhuman.bD == 0) {
+                 entityhuman.bD = 2;
 +                if(org.bukkit.craftbukkit.event.CraftEventFactory.callPlayerPickupExperienceEvent((EntityPlayer) entityhuman, this).isCancelled()) return; // SportBukkit - fire event
                  entityhuman.receive(this, 1);
                  ItemStack itemstack = EnchantmentManager.b(Enchantments.C, (EntityLiving) entityhuman);
  
-@@ -153,7 +173,7 @@
-                 }
+                 if (!itemstack.isEmpty() && itemstack.h()) {
+                     int i = Math.min(this.d(this.value), itemstack.i());
+ 
+-                    this.value -= this.c(i);
+-                    itemstack.setData(itemstack.i() - i);
+-                }
++                    // CraftBukkit start
++                    org.bukkit.event.player.PlayerItemMendEvent event = CraftEventFactory.callPlayerItemMendEvent(entityhuman, this, itemstack, i);
++                    i = event.getRepairAmount();
++                    if (!event.isCancelled()) {
++                        this.value -= this.c(i);
++                        itemstack.setData(itemstack.i() - i);
++                    }
++                    // CraftBukkit end
++				}
  
                  if (this.value > 0) {
 -                    entityhuman.giveExp(this.value);
@@ -63,7 +76,7 @@
                  }
  
                  this.die();
-@@ -175,6 +195,24 @@
+@@ -175,6 +201,24 @@
      }
  
      public static int getOrbValue(int i) {

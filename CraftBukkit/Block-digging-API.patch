@@ -1,12 +1,14 @@
+From e675c215c8817933a4c03273136795bfdd910a3f Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 9 May 2015 14:30:20 -0400
 Subject: [PATCH] Block digging API
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src/main/java/net/minecraft/server/PlayerInteractManager.java
+index 56b4b0a..0fbd76d 100644
 --- a/src/main/java/net/minecraft/server/PlayerInteractManager.java
 +++ b/src/main/java/net/minecraft/server/PlayerInteractManager.java
-@@ -13,9 +13,9 @@ public class PlayerInteractManager {
+@@ -14,9 +14,9 @@ public class PlayerInteractManager {
      public World world;
      public EntityPlayer player;
      private EnumGamemode gamemode;
@@ -18,7 +20,7 @@ diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src
      private int currentTick;
      private boolean h;
      private BlockPosition i;
-@@ -241,6 +241,7 @@ public class PlayerInteractManager {
+@@ -240,6 +240,7 @@ public class PlayerInteractManager {
      public void e() {
          this.d = false;
          this.world.c(this.player.getId(), this.f, -1);
@@ -27,11 +29,12 @@ diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src
  
      private boolean c(BlockPosition blockposition) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 5293a9b..c2ca5f7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -1900,4 +1900,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
-                                                              java.util.EnumSet.allOf(PacketPlayOutPosition.EnumPlayerTeleportFlags.class),
-                                                              cause);
+@@ -1963,4 +1963,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+                         java.util.EnumSet.allOf(PacketPlayOutPosition.EnumPlayerTeleportFlags.class),
+                         cause);
      }
 +
 +    @Override
@@ -46,9 +49,10 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/
 +    }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+index 4b97709..08871eb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -271,6 +271,14 @@ public class CraftEventFactory {
+@@ -274,6 +274,14 @@ public class CraftEventFactory {
          return event;
      }
  

@@ -1,23 +1,26 @@
+From 539ad8ff604482d1b6bacd7b0b36835817933c00 Mon Sep 17 00:00:00 2001
 From: Marcos Vives Del Sol <socram8888@gmail.com>
 Date: Sun, 28 Jul 2013 21:57:34 +0200
 Subject: [PATCH] Add getHostname to Player
 
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
+index 62e6a9c..4adca88 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
-@@ -67,6 +67,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
-     public boolean keepLevel = false;
+@@ -78,6 +78,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
      public double maxHealthCache;
      public boolean joining = true;
+     public boolean sentListPacket = false;
 +    public String hostname;
      // CraftBukkit end
  
      public EntityPlayer(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index e01d899..6809ee2 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
-@@ -463,6 +463,8 @@ public abstract class PlayerList {
+@@ -493,6 +493,8 @@ public abstract class PlayerList {
          SocketAddress socketaddress = loginlistener.networkManager.getSocketAddress();
  
          EntityPlayer entity = new EntityPlayer(server, server.getWorldServer(0), gameprofile, new PlayerInteractManager(server.getWorldServer(0)));
@@ -27,11 +30,12 @@ diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/
          PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress());
          String s;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 64902f3..0cf5df8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -1487,4 +1487,9 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
-         getHandle().playerConnection.sendPacket(packetplayoutworldparticles);
- 
+@@ -1562,4 +1562,9 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+     public String getLocale() {
+         return getHandle().locale;
      }
 +
 +    @Override

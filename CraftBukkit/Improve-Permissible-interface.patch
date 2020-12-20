@@ -1,9 +1,11 @@
+From b8756d84b47142bb14ec2635ee638e216450fea8 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 28 May 2015 04:31:39 -0400
 Subject: [PATCH] Improve Permissible interface
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
+index 12fb615..be7f7d8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 @@ -1,6 +1,7 @@
@@ -82,6 +84,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSe
          return getCaller().isOp();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
+index 8f875ca..716f7c8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 @@ -9,6 +9,7 @@ import org.bukkit.permissions.PermissionAttachment;
@@ -160,17 +163,19 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.ja
          return false;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index 1ce0dac..edea21f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-@@ -1,6 +1,7 @@
- package org.bukkit.craftbukkit.entity;
- 
+@@ -3,6 +3,8 @@ package org.bukkit.craftbukkit.entity;
+ import com.google.common.base.Function;
  import com.google.common.base.Preconditions;
+ import com.google.common.collect.Lists;
++
 +import java.util.Collection;
  import java.util.List;
  import java.util.Set;
  import java.util.UUID;
-@@ -569,6 +570,66 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+@@ -624,6 +626,66 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
      }
  
      @Override
@@ -238,17 +243,19 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/
          return getPermissibleBase().isOp();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
+index a54548f..38e7a34 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java
-@@ -1,6 +1,7 @@
+@@ -1,6 +1,8 @@
  package org.bukkit.craftbukkit.entity;
  
  import com.google.common.base.Preconditions;
++
 +import java.util.Collection;
  import java.util.Set;
  
  import net.minecraft.server.*;
-@@ -148,6 +149,66 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
+@@ -149,6 +151,66 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
          return perm.getEffectivePermissions();
      }
  
@@ -316,6 +323,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftHumanEntity.java b
          return mode;
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
+index 75c428b..77835cb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
 @@ -1,5 +1,6 @@
@@ -366,7 +374,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.ja
 +    @Override
 +    public Collection<PermissionAttachmentInfo> getAttachments(Plugin plugin) {
 +        return perm.getAttachments(plugin);
-+    }
++            }
 +
 +    @Override
 +    public Collection<PermissionAttachmentInfo> getAttachments(String name) {

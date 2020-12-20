@@ -37,7 +37,7 @@ public interface Chunk extends Physical {
      * Gets a block from this chunk
      *
      * @param x 0-15
-     * @param y 0-127
+     * @param y 0-255
      * @param z 0-15
      * @return the Block
      */
@@ -139,6 +139,13 @@ public interface Chunk extends Physical {
      * @return true if the chunk has unloaded successfully, otherwise false
      */
     boolean unload();
+
+    /**
+     * Checks if this chunk can spawn slimes without being a swamp biome.
+     *
+     * @return true if slimes are able to spawn in this chunk
+     */
+    boolean isSlimeChunk();
 
     /**
      * Replace all blocks of one material with another

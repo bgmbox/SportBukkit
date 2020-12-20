@@ -117,18 +117,18 @@ public enum EnchantmentTarget {
                 || item.equals(Material.IRON_PICKAXE)
                 || item.equals(Material.DIAMOND_PICKAXE)
                 || item.equals(Material.GOLD_PICKAXE)
-                || item.equals(Material.WOOD_HOE)         // NOTE: No vanilla enchantments for this
-                || item.equals(Material.STONE_HOE)        // NOTE: No vanilla enchantments for this
-                || item.equals(Material.IRON_HOE)         // NOTE: No vanilla enchantments for this
-                || item.equals(Material.DIAMOND_HOE)      // NOTE: No vanilla enchantments for this
-                || item.equals(Material.GOLD_HOE)         // NOTE: No vanilla enchantments for this
+                || item.equals(Material.WOOD_HOE)
+                || item.equals(Material.STONE_HOE)
+                || item.equals(Material.IRON_HOE)
+                || item.equals(Material.DIAMOND_HOE)
+                || item.equals(Material.GOLD_HOE)
                 || item.equals(Material.WOOD_AXE)
                 || item.equals(Material.STONE_AXE)
                 || item.equals(Material.IRON_AXE)
                 || item.equals(Material.DIAMOND_AXE)
                 || item.equals(Material.GOLD_AXE)
-                || item.equals(Material.SHEARS)           // NOTE: No vanilla enchantments for this
-                || item.equals(Material.FLINT_AND_STEEL); // NOTE: No vanilla enchantments for this
+                || item.equals(Material.SHEARS)
+                || item.equals(Material.FLINT_AND_STEEL);
         }
     },
 
@@ -159,6 +159,20 @@ public enum EnchantmentTarget {
         @Override
         public boolean includes(Material item) {
             return item.getMaxDurability() > 0 && item.getMaxStackSize() == 1;
+        }
+    },
+
+    /**
+     * Allows the enchantment to be placed on wearable items.
+     */
+    WEARABLE {
+        @Override
+        public boolean includes(Material item) {
+            return ARMOR.includes(item)
+                    || item.equals(Material.ELYTRA)
+                    || item.equals(Material.PUMPKIN)
+                    || item.equals(Material.JACK_O_LANTERN)
+                    || item.equals(Material.SKULL_ITEM);
         }
     };
 

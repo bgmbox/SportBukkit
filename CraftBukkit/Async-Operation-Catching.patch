@@ -1,0 +1,202 @@
+From 0a7cad1c71a3c31e7db03da40ff9dd2f3f84b9d0 Mon Sep 17 00:00:00 2001
+From: md_5 <git@md-5.net>
+Date: Tue, 25 Mar 2014 16:10:01 +1100
+Subject: [PATCH] Async Operation Catching
+
+Catch and throw an exception when a potentially unsafe operation occurs on a thread other than the main server thread.
+
+diff --git a/src/main/java/net/minecraft/server/Block.java b/src/main/java/net/minecraft/server/Block.java
+index 071a3d5..4c08ef2 100644
+--- a/src/main/java/net/minecraft/server/Block.java
++++ b/src/main/java/net/minecraft/server/Block.java
+@@ -316,9 +316,13 @@ public class Block {
+         return 10;
+     }
+ 
+-    public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {}
++    public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "block onPlace"); // Spigot
++    }
+ 
+-    public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {}
++    public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "block remove"); // Spigot
++    }
+ 
+     public int a(Random random) {
+         return 1;
+diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index 6857516..74d5760 100644
+--- a/src/main/java/net/minecraft/server/EntityLiving.java
++++ b/src/main/java/net/minecraft/server/EntityLiving.java
+@@ -682,6 +682,7 @@ public abstract class EntityLiving extends Entity {
+     }
+ 
+     public void addEffect(MobEffect mobeffect) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "effect add"); // Spigot
+         if (this.d(mobeffect)) {
+             MobEffect mobeffect1 = (MobEffect) this.effects.get(mobeffect.getMobEffect());
+ 
+diff --git a/src/main/java/net/minecraft/server/EntityTracker.java b/src/main/java/net/minecraft/server/EntityTracker.java
+index 3367a28..55c806a 100644
+--- a/src/main/java/net/minecraft/server/EntityTracker.java
++++ b/src/main/java/net/minecraft/server/EntityTracker.java
+@@ -105,6 +105,7 @@ public class EntityTracker {
+     }
+ 
+     public void addEntity(Entity entity, int i, final int j, boolean flag) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "entity track"); // Spigot
+         try {
+             if (this.trackedEntities.b(entity.getId())) {
+                 throw new IllegalStateException("Entity is already tracked!");
+@@ -149,6 +150,7 @@ public class EntityTracker {
+     }
+ 
+     public void untrackEntity(Entity entity) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "entity untrack"); // Spigot
+         if (entity instanceof EntityPlayer) {
+             EntityPlayer entityplayer = (EntityPlayer) entity;
+             Iterator iterator = this.c.iterator();
+diff --git a/src/main/java/net/minecraft/server/EntityTrackerEntry.java b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
+index 0c2214a..e01f089 100644
+--- a/src/main/java/net/minecraft/server/EntityTrackerEntry.java
++++ b/src/main/java/net/minecraft/server/EntityTrackerEntry.java
+@@ -357,6 +357,7 @@ public class EntityTrackerEntry {
+     }
+ 
+     public void updatePlayer(EntityPlayer entityplayer) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "player tracker update"); // Spigot
+         if (entityplayer != this.tracker) {
+             if (this.c(entityplayer)) {
+                 if (!this.trackedPlayers.contains(entityplayer) && (this.e(entityplayer) || this.tracker.attachedToPlayer)) {
+@@ -598,6 +599,7 @@ public class EntityTrackerEntry {
+     }
+ 
+     public void clear(EntityPlayer entityplayer) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "player tracker clear"); // Spigot
+         if (this.trackedPlayers.contains(entityplayer)) {
+             this.trackedPlayers.remove(entityplayer);
+             this.tracker.c(entityplayer);
+diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
+index 42b7aa0..7a24ad1 100644
+--- a/src/main/java/net/minecraft/server/World.java
++++ b/src/main/java/net/minecraft/server/World.java
+@@ -983,6 +983,7 @@ public abstract class World implements IBlockAccess {
+     }
+ 
+     public boolean addEntity(Entity entity, SpawnReason spawnReason) { // Changed signature, added SpawnReason
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "entity add"); // Spigot
+         if (entity == null) return false;
+ 
+         // Workaround for https://bugs.mojang.com/browse/MC-72248
+@@ -1077,6 +1078,7 @@ public abstract class World implements IBlockAccess {
+     }
+ 
+     public void kill(Entity entity) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "entity kill"); // Spigot
+         if (entity.isVehicle()) {
+             entity.ejectPassengers();
+         }
+@@ -1095,6 +1097,7 @@ public abstract class World implements IBlockAccess {
+     }
+ 
+     public void removeEntity(Entity entity) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "entity remove"); // Spigot
+         entity.b(false);
+         entity.die();
+         if (entity instanceof EntityHuman) {
+@@ -2518,6 +2521,7 @@ public abstract class World implements IBlockAccess {
+     }
+ 
+     public void a(Collection<Entity> collection) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "entity world add"); // Spigot
+         // CraftBukkit start
+         // this.entityList.addAll(collection);
+         Iterator iterator = collection.iterator();
+diff --git a/src/main/java/org/bukkit/craftbukkit/AsyncCatcher.java b/src/main/java/org/bukkit/craftbukkit/AsyncCatcher.java
+new file mode 100644
+index 0000000..5bd5ba3
+--- /dev/null
++++ b/src/main/java/org/bukkit/craftbukkit/AsyncCatcher.java
+@@ -0,0 +1,17 @@
++package org.bukkit.craftbukkit;
++
++import net.minecraft.server.MinecraftServer;
++
++public class AsyncCatcher
++{
++
++    public static boolean enabled = true;
++
++    public static void catchOp(String reason)
++    {
++        if ( enabled && Thread.currentThread() != MinecraftServer.getServer().primaryThread )
++        {
++            throw new IllegalStateException( "Asynchronous " + reason + "!" );
++        }
++    }
++}
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index 5bfa570..c09760e 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+@@ -250,6 +250,7 @@ public class CraftWorld implements World {
+     }
+ 
+     public boolean unloadChunkRequest(int x, int z, boolean safe) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "chunk unload"); // Spigot
+         if (safe && isChunkInUse(x, z)) {
+             return false;
+         }
+@@ -263,6 +264,7 @@ public class CraftWorld implements World {
+     }
+ 
+     public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "chunk unload"); // Spigot
+         if (isChunkInUse(x, z)) {
+             return false;
+         }
+@@ -338,6 +340,7 @@ public class CraftWorld implements World {
+     }
+ 
+     public boolean loadChunk(int x, int z, boolean generate) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "chunk load"); // Spigot
+         chunkLoadCount++;
+         if (generate) {
+             // Use the default variant of loadChunk when generate == true.
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 0cd93aa..80ce19e 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+@@ -491,6 +491,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+ 
+     @Override
+     public void kickPlayer(String message) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "player kick"); // Spigot
+         if (getHandle().playerConnection == null) return;
+ 
+         getHandle().playerConnection.disconnect(message == null ? "" : message);
+diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java
+index 69fcb10..7ad643e 100644
+--- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java
++++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java
+@@ -42,6 +42,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
+     }
+ 
+     public CraftScoreboard getNewScoreboard() {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "scoreboard creation"); // Spigot
+         CraftScoreboard scoreboard = new CraftScoreboard(new ScoreboardServer(server));
+         scoreboards.add(scoreboard);
+         return scoreboard;
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
+index ae3481b..ce2a2bb 100644
+--- a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
++++ b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
+@@ -12,6 +12,7 @@ public class ServerShutdownThread extends Thread {
+ 
+     @Override
+     public void run() {
++        org.bukkit.craftbukkit.AsyncCatcher.enabled = false; // Spigot
+         try {
+             server.stop();
+         } catch (ExceptionWorldConflict ex) {

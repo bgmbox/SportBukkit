@@ -1,9 +1,11 @@
+From 79aaa395070200d8e36a22e898fc485628df2e28 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 26 May 2015 04:00:58 -0400
 Subject: [PATCH] Accurate block hit checking
 
 
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index 19fc9f7..e5f7fcd 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -17,6 +17,7 @@ import org.bukkit.material.MaterialData;
@@ -42,6 +44,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
       *
       * @param x X-coordinate of the chunk
 diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukkit/block/Block.java
+index 235c15b..fe32537 100644
 --- a/src/main/java/org/bukkit/block/Block.java
 +++ b/src/main/java/org/bukkit/block/Block.java
 @@ -8,6 +8,8 @@ import org.bukkit.World;
@@ -74,17 +77,18 @@ diff --git a/src/main/java/org/bukkit/block/Block.java b/src/main/java/org/bukki
 +    RayBlockIntersection rayTrace(Location start, double distance);
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index f7ae829..8a168da 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -24,6 +24,7 @@ import org.bukkit.event.player.PlayerResourcePackStatusEvent;
- import org.bukkit.map.MapView;
+@@ -13,6 +13,7 @@ import org.bukkit.map.MapView;
+ import org.bukkit.plugin.Plugin;
  import org.bukkit.plugin.messaging.PluginMessageRecipient;
  import org.bukkit.scoreboard.Scoreboard;
 +import org.bukkit.util.RayBlockIntersection;
  
  /**
   * Represents a player, connected or not
-@@ -1619,4 +1620,29 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -1690,4 +1691,29 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       * or null if they are not digging any block.
       */
      public org.bukkit.block.Block getDiggingBlock();

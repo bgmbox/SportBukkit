@@ -2,7 +2,6 @@ package org.bukkit.event.block;
 
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 /**
@@ -15,13 +14,15 @@ import org.bukkit.event.HandlerList;
  * <ul>
  * <li>Snow forming due to a snow storm.
  * <li>Ice forming in a snowy Biome like Taiga or Tundra.
+ * <li> Obsidian / Cobblestone forming due to contact with water.
+ * <li> Concrete forming due to mixing of concrete powder and water.
  * </ul>
  * <p>
  * If a Block Form event is cancelled, the block will not be formed.
  *
  * @see BlockSpreadEvent
  */
-public class BlockFormEvent extends BlockGrowEvent implements Cancellable {
+public class BlockFormEvent extends BlockGrowEvent {
     private static final HandlerList handlers = new HandlerList();
 
     public BlockFormEvent(final Block block, final BlockState newState) {

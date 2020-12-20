@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.ItemAttributeModifier;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.enchantments.Enchantment;
@@ -45,6 +44,30 @@ public interface ItemMeta extends Cloneable, ConfigurationSerializable {
      * @param name the name to set
      */
     void setDisplayName(String name);
+
+    /**
+     * Checks for existence of a localized name.
+     *
+     * @return true if this has a localized name
+     */
+    boolean hasLocalizedName();
+
+    /**
+     * Gets the localized display name that is set.
+     * <p>
+     * Plugins should check that hasLocalizedName() returns <code>true</code>
+     * before calling this method.
+     *
+     * @return the localized name that is set
+     */
+    String getLocalizedName();
+
+    /**
+     * Sets the localized name.
+     *
+     * @param name the name to set
+     */
+    void setLocalizedName(String name);
 
     /**
      * Checks for existence of lore.
@@ -123,13 +146,13 @@ public interface ItemMeta extends Cloneable, ConfigurationSerializable {
      */
     boolean removeEnchant(Enchantment ench);
 
-   /**
-    * Checks if the specified enchantment conflicts with any enchantments in
-    * this ItemMeta.
-    *
-    * @param ench enchantment to test
-    * @return true if the enchantment conflicts, false otherwise
-    */
+    /**
+     * Checks if the specified enchantment conflicts with any enchantments in
+     * this ItemMeta.
+     *
+     * @param ench enchantment to test
+     * @return true if the enchantment conflicts, false otherwise
+     */
     boolean hasConflictingEnchant(Enchantment ench);
 
     /**

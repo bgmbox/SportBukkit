@@ -1,9 +1,11 @@
+From 29389cccea8c9678aaff8ad5c6c66631d9fe78bb Mon Sep 17 00:00:00 2001
 From: thinkofdeath <purggames@gmail.com>
 Date: Fri, 12 Apr 2013 18:19:11 +0100
 Subject: [PATCH] Allow playEffect to spawn particles
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java b/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
+index 1672183..582d7bf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftEffect.java
 @@ -58,6 +58,8 @@ public class CraftEffect {
@@ -16,9 +18,10 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftEffect.java b/src/main/ja
              datavalue = 0;
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index 8f6653f..11f17e2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -813,6 +813,10 @@ public class CraftWorld implements World {
+@@ -822,6 +822,10 @@ public class CraftWorld implements World {
          playEffect(player.getLocation(), effect, data, 0);
      }
  
@@ -29,7 +32,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/jav
      public void playEffect(Location location, Effect effect, int data) {
          playEffect(location, effect, data, 64);
      }
-@@ -828,16 +832,44 @@ public class CraftWorld implements World {
+@@ -837,16 +841,44 @@ public class CraftWorld implements World {
              Validate.isTrue(effect.getData() == null, "Wrong kind of data for this effect!");
          }
  
@@ -79,17 +82,18 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/jav
          radius *= radius;
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index 1866d52..64902f3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -59,6 +59,7 @@ import org.bukkit.event.player.PlayerUnregisterChannelEvent;
+@@ -65,6 +65,7 @@ import org.bukkit.event.player.PlayerUnregisterChannelEvent;
  import org.bukkit.inventory.InventoryView.Property;
  import org.bukkit.map.MapCursor;
  import org.bukkit.map.MapView;
 +import org.bukkit.material.MaterialData;
  import org.bukkit.metadata.MetadataValue;
+ import org.bukkit.plugin.IllegalPluginAccessException;
  import org.bukkit.plugin.Plugin;
- import org.bukkit.plugin.messaging.StandardMessenger;
-@@ -346,15 +347,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -377,15 +378,6 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
      }
  
      @Override
@@ -105,7 +109,7 @@ diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/
      public <T> void playEffect(Location loc, Effect effect, T data) {
          if (data != null) {
              Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
-@@ -362,8 +354,50 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -393,8 +385,50 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
              Validate.isTrue(effect.getData() == null, "Wrong kind of data for this effect!");
          }
  

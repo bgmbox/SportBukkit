@@ -1,0 +1,52 @@
+From 09d3e1f859e1d0e1ccb80f8f23b662971bb36813 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Sun, 4 Nov 2018 16:52:40 -0600
+Subject: [PATCH] Buff knockback from explosions
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index 756378d..b6f9ad3 100644
+--- a/src/main/java/net/minecraft/server/EntityLiving.java
++++ b/src/main/java/net/minecraft/server/EntityLiving.java
+@@ -956,7 +956,8 @@ public abstract class EntityLiving extends Entity {
+                         }
+ 
+                         this.aA = (float) (MathHelper.c(d1, d0) * 57.2957763671875D - (double) this.yaw);
+-                        this.a(entity1, f, d0, d1); // SportBukkit - use direct damage source instead of owner
++
++                        this.a(entity1, f, d0, d1, damagesource.isExplosion()); // SportBukkit - use direct damage source instead of owner
+                     } else {
+                         this.aA = (float) ((int) (Math.random() * 2.0D) * 180);
+                     }
+@@ -1160,21 +1161,25 @@ public abstract class EntityLiving extends Entity {
+     }
+ 
+     public void a(Entity entity, float magnitude, double fromX, double fromZ) {
++        a(entity, magnitude, fromX, fromZ, false);
++    }
++
++    public void a(Entity entity, float magnitude, double fromX, double fromZ, boolean explosion) {
+         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
+             this.impulse = true;
+             float f1 = MathHelper.sqrt(fromX * fromX + fromZ * fromZ);
+-            float f2 = 0.36F;
++            float knockbackConstant = explosion ? 0.40F : 0.36F;
+ 
+-            double horizontalFriction = 1.65;
+-            double verticalFriction = 1.75;
++            double horizontalFriction = explosion ? 2 : 1.65;
++            double verticalFriction = explosion ? 2 : 1.75;
+ 
+             this.motX /= horizontalFriction;
+             this.motY /= verticalFriction;
+             this.motZ /= horizontalFriction;
+ 
+-            this.motX -= fromX / (double) f1 * (double) f2;
+-            this.motY += (double) f2;
+-            this.motZ -= fromZ / (double) f1 * (double) f2;
++            this.motX -= fromX / (double) f1 * (double) knockbackConstant;
++            this.motY += (double) knockbackConstant;
++            this.motZ -= fromZ / (double) f1 * (double) knockbackConstant;
+ 
+             if (this.motY > 0.41) {
+                 this.motY = 0.41;

@@ -1,12 +1,14 @@
+From 0ad4647b4a9267ff7a8ed78ecf603182a367ff25 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Fri, 1 Aug 2014 12:51:06 -0500
 Subject: [PATCH] Simplify junk login messages
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index 6809ee2..c1c3eca 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
-@@ -213,7 +213,7 @@ public abstract class PlayerList {
+@@ -219,7 +219,7 @@ public abstract class PlayerList {
  
          entityplayer.syncInventory();
          // CraftBukkit - Moved from above, added world

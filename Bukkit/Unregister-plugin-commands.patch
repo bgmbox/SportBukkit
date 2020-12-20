@@ -1,9 +1,11 @@
+From 088691a2adedca1dec36127aa6f13397aad077f6 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 17:23:54 -0500
 Subject: [PATCH] Unregister plugin commands
 
 
 diff --git a/src/main/java/org/bukkit/command/CommandMap.java b/src/main/java/org/bukkit/command/CommandMap.java
+index 30d6024..ee94434 100644
 --- a/src/main/java/org/bukkit/command/CommandMap.java
 +++ b/src/main/java/org/bukkit/command/CommandMap.java
 @@ -1,6 +1,8 @@
@@ -27,6 +29,7 @@ diff --git a/src/main/java/org/bukkit/command/CommandMap.java b/src/main/java/or
       * Looks for the requested command and executes it if found.
       *
 diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+index 07721d8..7a4b52e 100644
 --- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
 +++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
 @@ -8,6 +8,7 @@ import java.util.HashMap;
@@ -62,24 +65,17 @@ diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/j
       * {@inheritDoc}
       */
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+index 72797b2..6e1d9df 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -21,6 +21,7 @@ import org.apache.commons.lang.Validate;
- import org.bukkit.Server;
- import org.bukkit.command.Command;
- import org.bukkit.command.PluginCommandYamlParser;
-+import org.bukkit.command.PluginIdentifiableCommand;
- import org.bukkit.command.SimpleCommandMap;
- import org.bukkit.configuration.serialization.ConfigurationSerialization;
- import org.bukkit.event.Event;
-@@ -472,6 +473,13 @@ public final class SimplePluginManager implements PluginManager {
+@@ -475,6 +475,13 @@ public final class SimplePluginManager implements PluginManager {
              } catch (Throwable ex) {
-                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering serializables " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering commands for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
              }
 +
 +            try {
 +                server.getCommandMap().unregisterAll(command -> command instanceof PluginIdentifiableCommand &&
-+                                                                plugin == ((PluginIdentifiableCommand) command).getPlugin());
++                        plugin == ((PluginIdentifiableCommand) command).getPlugin());
 +            } catch (Throwable ex) {
 +                server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering commands for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
 +            }

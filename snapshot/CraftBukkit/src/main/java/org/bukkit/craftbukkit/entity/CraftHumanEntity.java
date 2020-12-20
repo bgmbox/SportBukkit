@@ -1,6 +1,7 @@
 package org.bukkit.craftbukkit.entity;
 
 import com.google.common.base.Preconditions;
+
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
@@ -29,6 +30,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.inventory.CraftMerchant;
 import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
@@ -313,6 +315,13 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
                     openCustomInventory(inventory, player, "minecraft:anvil");
                 }
                 break;
+            case SHULKER_BOX:
+                if (iinventory instanceof TileEntityShulkerBox) {
+                    getHandle().openContainer((TileEntityShulkerBox) iinventory);
+                } else {
+                    openCustomInventory(inventory, player, "minecraft:shulker_box");
+                }
+                break;
             case CREATIVE:
             case CRAFTING:
                 throw new IllegalArgumentException("Can't open a " + type + " inventory!");
@@ -326,7 +335,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
 
     private void openCustomInventory(Inventory inventory, EntityPlayer player, String windowType) {
         if (player.playerConnection == null) return;
-        Container container = new CraftContainer(inventory, this, player.nextContainerCounter());
+        Container container = new CraftContainer(inventory, this.getHandle(), player.nextContainerCounter());
 
         container = CraftEventFactory.callInventoryOpenEvent(player, container);
         if(container == null) return;
@@ -381,9 +390,12 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
         }
 
         // If there isn't an enchant table we can force create one, won't be very useful though.
-        TileEntity container = getHandle().world.getTileEntity(new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
+        BlockPosition pos = new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+        TileEntity container = getHandle().world.getTileEntity(pos);
         if (container == null && force) {
             container = new TileEntityEnchantTable();
+            container.a(getHandle().world);
+            container.setPosition(pos);
         }
         getHandle().openTileEntity((ITileEntityContainer) container);
 
@@ -405,7 +417,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
         if (inventory instanceof CraftInventoryView) {
             container = ((CraftInventoryView) inventory).getHandle();
         } else {
-            container = new CraftContainer(inventory, player.nextContainerCounter());
+            container = new CraftContainer(inventory, this.getHandle(), player.nextContainerCounter());
         }
 
         // Trigger an INVENTORY_OPEN event
@@ -428,7 +440,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     public InventoryView openMerchant(Villager villager, boolean force) {
         Preconditions.checkNotNull(villager, "villager cannot be null");
 
-        return this.openMerchant(villager, force);
+        return this.openMerchant((Merchant) villager, force);
     }
 
     @Override
@@ -508,13 +520,20 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
+    public boolean hasCooldown(Material material) {
+        Preconditions.checkArgument(material != null, "material");
+
+        return getHandle().getCooldownTracker().a(CraftMagicNumbers.getItem(material));
+    }
+
+    @Override
     public int getAttackCooldownTicks() {
         return Math.max(getHandle().ticksSinceLastAttack(), getHandle().clientTicksSinceLastAttack);
     }
 
     @Override
     public float getAttackCooldownCoefficient() {
-        final float f = getHandle().o(0.5f);
+        final float f = getHandle().n(0.5f);
         return 0.2f + f * f * 0.8f;
     }
 
@@ -524,5 +543,59 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
         if(isSleeping()) flags.add(PoseFlag.SLEEPING);
         if(isBlocking()) flags.add(PoseFlag.BLOCKING);
         return flags;
+    }
+
+    @Override
+    public int getCooldown(Material material) {
+        Preconditions.checkArgument(material != null, "material");
+
+        ItemCooldown.Info cooldown = getHandle().getCooldownTracker().cooldowns.get(CraftMagicNumbers.getItem(material));
+        return (cooldown == null) ? 0 : Math.max(0, cooldown.endTick - getHandle().getCooldownTracker().currentTick);
+    }
+
+    @Override
+    public void setCooldown(Material material, int ticks) {
+        Preconditions.checkArgument(material != null, "material");
+        Preconditions.checkArgument(ticks >= 0, "Cannot have negative cooldown");
+
+        getHandle().getCooldownTracker().a(CraftMagicNumbers.getItem(material), ticks);
+    }
+
+    @Override
+    public org.bukkit.entity.Entity getShoulderEntityLeft() {
+        if (!getHandle().getShoulderEntityLeft().isEmpty()) {
+            Entity shoulder = EntityTypes.a(getHandle().getShoulderEntityLeft(), getHandle().world);
+
+            return (shoulder == null) ? null : shoulder.getBukkitEntity();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void setShoulderEntityLeft(org.bukkit.entity.Entity entity) {
+        getHandle().setShoulderEntityLeft(entity == null ? new NBTTagCompound() : ((CraftEntity) entity).save());
+        if (entity != null) {
+            entity.remove();
+        }
+    }
+
+    @Override
+    public org.bukkit.entity.Entity getShoulderEntityRight() {
+        if (!getHandle().getShoulderEntityRight().isEmpty()) {
+            Entity shoulder = EntityTypes.a(getHandle().getShoulderEntityRight(), getHandle().world);
+
+            return (shoulder == null) ? null : shoulder.getBukkitEntity();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void setShoulderEntityRight(org.bukkit.entity.Entity entity) {
+        getHandle().setShoulderEntityRight(entity == null ? new NBTTagCompound() : ((CraftEntity) entity).save());
+        if (entity != null) {
+            entity.remove();
+        }
     }
 }

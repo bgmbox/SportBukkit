@@ -1,24 +1,11 @@
+From f6de16f053d8a095b8a9bbb85eb9cb420a001d82 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 4 Feb 2016 04:59:45 -0500
 Subject: [PATCH] Implement minecraft-api
 
 
-diff --git a/pom.xml b/pom.xml
---- a/pom.xml
-+++ b/pom.xml
-@@ -95,10 +95,8 @@
-         </dependency>
-         <dependency>
-             <groupId>tc.oc</groupId>
--            <artifactId>bungeecord-chat</artifactId>
-+            <artifactId>minecraft-api</artifactId>
-             <version>1.11-SNAPSHOT</version>
--            <type>jar</type>
--            <scope>compile</scope>
-         </dependency>
- 
-         <!-- testing -->
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 98eace7..ae3d7eb 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -52,7 +52,7 @@ import org.bukkit.inventory.meta.ItemMeta;
@@ -31,6 +18,7 @@ diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Ser
      /**
       * Used for all administrative messages, such as an operator using a
 diff --git a/src/main/java/org/bukkit/command/CommandSender.java b/src/main/java/org/bukkit/command/CommandSender.java
+index 52c5947..76c386b 100644
 --- a/src/main/java/org/bukkit/command/CommandSender.java
 +++ b/src/main/java/org/bukkit/command/CommandSender.java
 @@ -3,7 +3,7 @@ package org.bukkit.command;
@@ -53,6 +41,7 @@ diff --git a/src/main/java/org/bukkit/command/CommandSender.java b/src/main/java
 +    }
  }
 diff --git a/src/main/java/org/bukkit/command/ConsoleCommandSender.java b/src/main/java/org/bukkit/command/ConsoleCommandSender.java
+index f309c2e..a460d33 100644
 --- a/src/main/java/org/bukkit/command/ConsoleCommandSender.java
 +++ b/src/main/java/org/bukkit/command/ConsoleCommandSender.java
 @@ -2,5 +2,5 @@ package org.bukkit.command;
@@ -63,6 +52,7 @@ diff --git a/src/main/java/org/bukkit/command/ConsoleCommandSender.java b/src/ma
 +public interface ConsoleCommandSender extends CommandSender, Conversable, tc.oc.minecraft.api.command.ConsoleCommandSender {
  }
 diff --git a/src/main/java/org/bukkit/configuration/Configuration.java b/src/main/java/org/bukkit/configuration/Configuration.java
+index 52e3ac4..5d9636d 100644
 --- a/src/main/java/org/bukkit/configuration/Configuration.java
 +++ b/src/main/java/org/bukkit/configuration/Configuration.java
 @@ -5,7 +5,7 @@ import java.util.Map;
@@ -75,9 +65,10 @@ diff --git a/src/main/java/org/bukkit/configuration/Configuration.java b/src/mai
       * Sets the default value of the given path as provided.
       * <p>
 diff --git a/src/main/java/org/bukkit/configuration/ConfigurationSection.java b/src/main/java/org/bukkit/configuration/ConfigurationSection.java
+index d8575d1..970926a 100644
 --- a/src/main/java/org/bukkit/configuration/ConfigurationSection.java
 +++ b/src/main/java/org/bukkit/configuration/ConfigurationSection.java
-@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
+@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
  /**
   * Represents a section of a {@link Configuration}
   */
@@ -86,7 +77,7 @@ diff --git a/src/main/java/org/bukkit/configuration/ConfigurationSection.java b/
      /**
       * Gets a set containing all keys in this section.
       * <p>
-@@ -767,6 +767,8 @@ public interface ConfigurationSection {
+@@ -800,6 +800,8 @@ public interface ConfigurationSection {
       */
      public boolean isColor(String path);
  
@@ -95,7 +86,7 @@ diff --git a/src/main/java/org/bukkit/configuration/ConfigurationSection.java b/
      /**
       * Gets the requested ConfigurationSection by path.
       * <p>
-@@ -825,4 +827,6 @@ public interface ConfigurationSection {
+@@ -858,4 +860,6 @@ public interface ConfigurationSection {
       * @throws IllegalArgumentException Thrown if path is null.
       */
      public void addDefault(String path, Object value);
@@ -103,6 +94,7 @@ diff --git a/src/main/java/org/bukkit/configuration/ConfigurationSection.java b/
 +    ConfigurationSection needSection(String path) throws tc.oc.minecraft.api.configuration.InvalidConfigurationException;
  }
 diff --git a/src/main/java/org/bukkit/configuration/InvalidConfigurationException.java b/src/main/java/org/bukkit/configuration/InvalidConfigurationException.java
+index d23480e..8944900 100644
 --- a/src/main/java/org/bukkit/configuration/InvalidConfigurationException.java
 +++ b/src/main/java/org/bukkit/configuration/InvalidConfigurationException.java
 @@ -4,7 +4,7 @@ package org.bukkit.configuration;
@@ -115,10 +107,11 @@ diff --git a/src/main/java/org/bukkit/configuration/InvalidConfigurationExceptio
      /**
       * Creates a new instance of InvalidConfigurationException without a
 diff --git a/src/main/java/org/bukkit/configuration/MemorySection.java b/src/main/java/org/bukkit/configuration/MemorySection.java
+index fe7762b..6d5b91f 100644
 --- a/src/main/java/org/bukkit/configuration/MemorySection.java
 +++ b/src/main/java/org/bukkit/configuration/MemorySection.java
-@@ -14,11 +14,12 @@ import org.bukkit.Color;
- import org.bukkit.OfflinePlayer;
+@@ -15,11 +15,12 @@ import org.bukkit.OfflinePlayer;
+ import org.bukkit.configuration.serialization.ConfigurationSerializable;
  import org.bukkit.inventory.ItemStack;
  import org.bukkit.util.Vector;
 +import tc.oc.minecraft.api.configuration.AbstractConfigurationSection;
@@ -131,7 +124,7 @@ diff --git a/src/main/java/org/bukkit/configuration/MemorySection.java b/src/mai
      protected final Map<String, Object> map = new LinkedHashMap<String, Object>();
      private final Configuration root;
      private final ConfigurationSection parent;
-@@ -68,6 +69,11 @@ public class MemorySection implements ConfigurationSection {
+@@ -69,6 +70,11 @@ public class MemorySection implements ConfigurationSection {
          this.fullPath = createPath(parent, path);
      }
  
@@ -143,8 +136,8 @@ diff --git a/src/main/java/org/bukkit/configuration/MemorySection.java b/src/mai
      public Set<String> getKeys(boolean deep) {
          Set<String> result = new LinkedHashSet<String>();
  
-@@ -683,6 +689,17 @@ public class MemorySection implements ConfigurationSection {
-         return val instanceof Color;
+@@ -686,6 +692,17 @@ public class MemorySection implements ConfigurationSection {
+         return getSerializable(path, Color.class) != null;
      }
  
 +    @Override
@@ -162,9 +155,10 @@ diff --git a/src/main/java/org/bukkit/configuration/MemorySection.java b/src/mai
          Object val = get(path, null);
          if (val != null) {
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 8a168da..c059b15 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -29,7 +29,7 @@ import org.bukkit.util.RayBlockIntersection;
+@@ -18,7 +18,7 @@ import org.bukkit.util.RayBlockIntersection;
  /**
   * Represents a player, connected or not
   */
@@ -174,6 +168,7 @@ diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/buk
      /**
       * Set a fake name for this player when viewed by the given player.
 diff --git a/src/main/java/org/bukkit/event/Listener.java b/src/main/java/org/bukkit/event/Listener.java
+index ff083e6..2dbb6ad 100644
 --- a/src/main/java/org/bukkit/event/Listener.java
 +++ b/src/main/java/org/bukkit/event/Listener.java
 @@ -3,4 +3,4 @@ package org.bukkit.event;
@@ -183,6 +178,7 @@ diff --git a/src/main/java/org/bukkit/event/Listener.java b/src/main/java/org/bu
 -public interface Listener {}
 +public interface Listener extends tc.oc.minecraft.api.event.Listener {}
 diff --git a/src/main/java/org/bukkit/permissions/Permissible.java b/src/main/java/org/bukkit/permissions/Permissible.java
+index a7c0ef5..bebbcb7 100644
 --- a/src/main/java/org/bukkit/permissions/Permissible.java
 +++ b/src/main/java/org/bukkit/permissions/Permissible.java
 @@ -7,7 +7,7 @@ import org.bukkit.plugin.Plugin;
@@ -195,9 +191,10 @@ diff --git a/src/main/java/org/bukkit/permissions/Permissible.java b/src/main/ja
      /**
       * Checks if this object contains an override for the specified
 diff --git a/src/main/java/org/bukkit/plugin/Plugin.java b/src/main/java/org/bukkit/plugin/Plugin.java
+index 55debf5..1d0d2f1 100644
 --- a/src/main/java/org/bukkit/plugin/Plugin.java
 +++ b/src/main/java/org/bukkit/plugin/Plugin.java
-@@ -16,7 +16,7 @@ import com.avaje.ebean.EbeanServer;
+@@ -14,7 +14,7 @@ import org.bukkit.generator.ChunkGenerator;
   * <p>
   * The use of {@link PluginBase} is recommended for actual Implementation
   */
@@ -207,9 +204,10 @@ diff --git a/src/main/java/org/bukkit/plugin/Plugin.java b/src/main/java/org/buk
       * Returns the folder that the plugin data's files are located in. The
       * folder may not yet exist.
 diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
+index 09198ae..545dbff 100644
 --- a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 +++ b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
-@@ -174,7 +174,7 @@ import com.google.common.collect.ImmutableSet;
+@@ -169,7 +169,7 @@ import com.google.common.collect.ImmutableSet;
   *      inferno.burningdeaths: true
   *</pre></blockquote>
   */
@@ -219,6 +217,7 @@ diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/ma
          @Override
          protected Yaml initialValue() {
 diff --git a/src/main/java/org/bukkit/plugin/PluginLogger.java b/src/main/java/org/bukkit/plugin/PluginLogger.java
+index f409a28..577ad70 100644
 --- a/src/main/java/org/bukkit/plugin/PluginLogger.java
 +++ b/src/main/java/org/bukkit/plugin/PluginLogger.java
 @@ -40,7 +40,7 @@ public class PluginLogger extends Logger {
@@ -231,6 +230,7 @@ diff --git a/src/main/java/org/bukkit/plugin/PluginLogger.java b/src/main/java/o
          pluginName = prefix != null ? new StringBuilder().append("[").append(prefix).append("] ").toString() : "[" + context.getDescription().getName() + "] ";
          setParent(context.getServer().getLogger());
 diff --git a/src/main/java/org/bukkit/plugin/PluginManager.java b/src/main/java/org/bukkit/plugin/PluginManager.java
+index e5638d5..15f6218 100644
 --- a/src/main/java/org/bukkit/plugin/PluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/PluginManager.java
 @@ -8,11 +8,13 @@ import org.bukkit.event.EventPriority;
@@ -249,10 +249,11 @@ diff --git a/src/main/java/org/bukkit/plugin/PluginManager.java b/src/main/java/
      /**
       * Registers the specified plugin loader
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+index 3049d04..37696aa 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -365,6 +365,11 @@ public final class SimplePluginManager implements PluginManager {
-         return plugins.toArray(new Plugin[0]);
+@@ -363,6 +363,11 @@ public final class SimplePluginManager implements PluginManager {
+         return plugins.toArray(new Plugin[plugins.size()]);
      }
  
 +    @Override
@@ -263,7 +264,7 @@ diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main
      /**
       * Checks if the given plugin is enabled or not
       * <p>
-@@ -537,6 +542,21 @@ public final class SimplePluginManager implements PluginManager {
+@@ -535,6 +540,21 @@ public final class SimplePluginManager implements PluginManager {
          }
      }
  

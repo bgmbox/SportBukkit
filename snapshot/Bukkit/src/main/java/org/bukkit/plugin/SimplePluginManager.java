@@ -2,6 +2,7 @@ package org.bukkit.plugin;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,11 +25,7 @@ import org.bukkit.command.PluginCommandYamlParser;
 import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.event.Event;
-import org.bukkit.event.EventHandlerMeta;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -44,7 +41,7 @@ public final class SimplePluginManager implements PluginManager {
     private final Map<Pattern, PluginLoader> fileAssociations = new HashMap<Pattern, PluginLoader>();
     private final List<Plugin> plugins = new ArrayList<Plugin>();
     private final Map<String, Plugin> lookupNames = new HashMap<String, Plugin>();
-    private static File updateDirectory = null;
+    private File updateDirectory;
     private final SimpleCommandMap commandMap;
     private final Map<String, Permission> permissions = new HashMap<String, Permission>();
     private final Map<Boolean, Set<Permission>> defaultPerms = new LinkedHashMap<Boolean, Set<Permission>>();
@@ -137,11 +134,8 @@ public final class SimplePluginManager implements PluginManager {
                     server.getLogger().log(Level.SEVERE, "Could not load '" + file.getPath() + "' in folder '" + directory.getPath() + "': Restricted Name");
                     continue;
                 } else if (description.rawName.indexOf(' ') != -1) {
-                    server.getLogger().warning(String.format(
-                        "Plugin `%s' uses the space-character (0x20) in its name `%s' - this is discouraged",
-                        description.getFullName(),
-                        description.rawName
-                        ));
+                    server.getLogger().log(Level.SEVERE, "Could not load '" + file.getPath() + "' in folder '" + directory.getPath() + "': uses the space-character (0x20) in its name");
+                    continue;
                 }
             } catch (InvalidDescriptionException ex) {
                 server.getLogger().log(Level.SEVERE, "Could not load '" + file.getPath() + "' in folder '" + directory.getPath() + "'", ex);
@@ -191,10 +185,11 @@ public final class SimplePluginManager implements PluginManager {
 
         while (!plugins.isEmpty()) {
             boolean missingDependency = true;
-            Iterator<String> pluginIterator = plugins.keySet().iterator();
+            Iterator<Map.Entry<String, File>> pluginIterator = plugins.entrySet().iterator();
 
             while (pluginIterator.hasNext()) {
-                String plugin = pluginIterator.next();
+                Map.Entry<String, File> entry = pluginIterator.next();
+                String plugin = entry.getKey();
 
                 if (dependencies.containsKey(plugin)) {
                     Iterator<String> dependencyIterator = dependencies.get(plugin).iterator();
@@ -209,14 +204,13 @@ public final class SimplePluginManager implements PluginManager {
                         // We have a dependency not found
                         } else if (!plugins.containsKey(dependency)) {
                             missingDependency = false;
-                            File file = plugins.get(plugin);
                             pluginIterator.remove();
                             softDependencies.remove(plugin);
                             dependencies.remove(plugin);
 
                             server.getLogger().log(
                                 Level.SEVERE,
-                                "Could not load '" + file.getPath() + "' in folder '" + directory.getPath() + "'",
+                                "Could not load '" + entry.getValue().getPath() + "' in folder '" + directory.getPath() + "'",
                                 new UnknownDependencyException(dependency));
                             break;
                         }
@@ -261,15 +255,16 @@ public final class SimplePluginManager implements PluginManager {
             if (missingDependency) {
                 // We now iterate over plugins until something loads
                 // This loop will ignore soft dependencies
-                pluginIterator = plugins.keySet().iterator();
+                pluginIterator = plugins.entrySet().iterator();
 
                 while (pluginIterator.hasNext()) {
-                    String plugin = pluginIterator.next();
+                    Map.Entry<String, File> entry = pluginIterator.next();
+                    String plugin = entry.getKey();
 
                     if (!dependencies.containsKey(plugin)) {
                         softDependencies.remove(plugin);
                         missingDependency = false;
-                        File file = plugins.get(plugin);
+                        File file = entry.getValue();
                         pluginIterator.remove();
 
                         try {
@@ -362,7 +357,7 @@ public final class SimplePluginManager implements PluginManager {
     }
 
     public synchronized Plugin[] getPlugins() {
-        return plugins.toArray(new Plugin[0]);
+        return plugins.toArray(new Plugin[plugins.size()]);
     }
 
     @Override
@@ -476,7 +471,14 @@ public final class SimplePluginManager implements PluginManager {
 
             try {
                 server.getCommandMap().unregisterAll(command -> command instanceof PluginIdentifiableCommand &&
-                                                                plugin == ((PluginIdentifiableCommand) command).getPlugin());
+                        plugin == ((PluginIdentifiableCommand) command).getPlugin());
+            } catch (Throwable ex) {
+                server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering commands for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+            }
+
+            try {
+                server.getCommandMap().unregisterAll(command -> command instanceof PluginIdentifiableCommand &&
+                        plugin == ((PluginIdentifiableCommand) command).getPlugin());
             } catch (Throwable ex) {
                 server.getLogger().log(Level.SEVERE, "Error occurred (in the plugin loader) while unregistering commands for " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
             }
@@ -496,7 +498,6 @@ public final class SimplePluginManager implements PluginManager {
         }
     }
 
-    @Override
     public void callEvent(Event event) {
         server.eventBus().callEvent(event);
     }
@@ -530,6 +531,11 @@ public final class SimplePluginManager implements PluginManager {
     }
 
     public void addPermission(Permission perm) {
+        addPermission(perm, true);
+    }
+
+    @Deprecated
+    public void addPermission(Permission perm, boolean dirty) {
         String name = perm.getName().toLowerCase(java.util.Locale.ENGLISH);
 
         if (permissions.containsKey(name)) {
@@ -537,7 +543,7 @@ public final class SimplePluginManager implements PluginManager {
         }
 
         permissions.put(name, perm);
-        calculatePermissionDefault(perm);
+        calculatePermissionDefault(perm, dirty);
     }
 
     public Set<Permission> getDefaultPermissions(boolean op) {
@@ -557,19 +563,29 @@ public final class SimplePluginManager implements PluginManager {
             defaultPerms.get(true).remove(perm);
             defaultPerms.get(false).remove(perm);
 
-            calculatePermissionDefault(perm);
+            calculatePermissionDefault(perm, true);
         }
     }
 
-    private void calculatePermissionDefault(Permission perm) {
+    private void calculatePermissionDefault(Permission perm, boolean dirty) {
         if ((perm.getDefault() == PermissionDefault.OP) || (perm.getDefault() == PermissionDefault.TRUE)) {
             defaultPerms.get(true).add(perm);
-            dirtyPermissibles(true);
+            if (dirty) {
+                dirtyPermissibles(true);
+            }
         }
         if ((perm.getDefault() == PermissionDefault.NOT_OP) || (perm.getDefault() == PermissionDefault.TRUE)) {
             defaultPerms.get(false).add(perm);
-            dirtyPermissibles(false);
+            if (dirty) {
+                dirtyPermissibles(false);
+            }
         }
+    }
+
+    @Deprecated
+    public void dirtyPermissibles() {
+        dirtyPermissibles(true);
+        dirtyPermissibles(false);
     }
 
     private void dirtyPermissibles(boolean op) {

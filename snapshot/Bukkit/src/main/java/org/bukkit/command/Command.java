@@ -261,7 +261,7 @@ public abstract class Command {
      * outstanding changes
      *
      * @param commandMap the CommandMap to unregister
-     * @return true if the unregistration was successfull (the current
+     * @return true if the unregistration was successful (the current
      *     registered CommandMap was the passed CommandMap or null) false
      *     otherwise
      */
@@ -410,7 +410,7 @@ public abstract class Command {
         }
 
         for (Permissible user : users) {
-            if (user instanceof CommandSender) {
+            if (user instanceof CommandSender && user.hasPermission(Server.BROADCAST_CHANNEL_ADMINISTRATIVE)) {
                 CommandSender target = (CommandSender) user;
 
                 if (target instanceof ConsoleCommandSender) {

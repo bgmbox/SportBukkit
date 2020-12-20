@@ -51,11 +51,12 @@ public interface BossBar {
     void setStyle(BarStyle style);
 
     /**
-     * Replace the entire set of flags for this boss bar
-     */
+     +     * Replace the entire set of flags for this boss bar
+     +     */
     void setFlags(Set<BarFlag> flags);
 
     /**
+     *
      * Remove an existing flag on this boss bar
      *
      * @param flag the existing flag to remove

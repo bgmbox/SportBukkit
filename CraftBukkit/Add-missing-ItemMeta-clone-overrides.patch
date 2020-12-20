@@ -1,41 +1,11 @@
+From dc9f29b0a2edcc87ecf9fa3fc5ea7b0d03cb41a9 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Wed, 4 Jan 2017 15:16:32 -0500
 Subject: [PATCH] Add missing ItemMeta clone overrides
 
 
-diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBanner.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBanner.java
---- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBanner.java
-+++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBanner.java
-@@ -201,4 +201,11 @@ public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
-     boolean applicableTo(Material type) {
-         return type == Material.BANNER;
-     }
-+
-+    @Override
-+    public CraftMetaBanner clone() {
-+        final CraftMetaBanner that = (CraftMetaBanner) super.clone();
-+        that.patterns = new ArrayList<>(this.patterns);
-+        return that;
-+    }
- }
-diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java
---- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java
-+++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBlockState.java
-@@ -497,4 +497,13 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
-         blockEntityTag = new NBTTagCompound();
-         te.save(blockEntityTag);
-     }
-+
-+    @Override
-+    public CraftMetaBlockState clone() {
-+        final CraftMetaBlockState that = (CraftMetaBlockState) super.clone();
-+        if(this.blockEntityTag != null) {
-+            that.blockEntityTag = (NBTTagCompound) this.blockEntityTag.clone();
-+        }
-+        return that;
-+    }
- }
 diff --git a/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java b/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java
+index f1b4ec0..d3c4ee0 100644
 --- a/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java
 +++ b/src/test/java/org/bukkit/craftbukkit/inventory/ItemMetaImplementationOverrideTest.java
 @@ -47,7 +47,11 @@ public class ItemMetaImplementationOverrideTest {

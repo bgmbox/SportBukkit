@@ -3,7 +3,7 @@ package org.bukkit.block;
 import net.md_5.bungee.api.chat.BaseComponent;
 
 /**
- * Represents either a SignPost or a WallSign
+ * Represents a captured state of either a SignPost or a WallSign.
  */
 public interface Sign extends BlockState {
 

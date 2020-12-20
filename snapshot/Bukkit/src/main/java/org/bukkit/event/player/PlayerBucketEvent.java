@@ -55,7 +55,7 @@ public abstract class PlayerBucketEvent extends PlayerActionBase implements Canc
     /**
      * Return the block clicked
      *
-     * @return the blicked block
+     * @return the clicked block
      */
     public Block getBlockClicked() {
         return blockClicked;

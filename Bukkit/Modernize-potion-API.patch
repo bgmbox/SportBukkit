@@ -1,9 +1,11 @@
+From e77a189c6af7c39824354d8c4c57172274a0202a Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Thu, 10 Mar 2016 15:08:23 -0500
 Subject: [PATCH] Modernize potion API
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index 0b162c6..de1fe56 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -37,6 +37,8 @@ import org.bukkit.permissions.Permissible;
@@ -15,7 +17,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
  import org.bukkit.registry.Key;
  import org.bukkit.scheduler.BukkitScheduler;
  import org.bukkit.scoreboard.ScoreboardManager;
-@@ -1253,4 +1255,12 @@ public final class Bukkit {
+@@ -1266,4 +1268,12 @@ public final class Bukkit {
      public static Key key(String id) {
          return runtime().key(id);
      }
@@ -29,6 +31,7 @@ diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Buk
 +    }
  }
 diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/bukkit/BukkitRuntime.java
+index 1ed31cb..b452cd3 100644
 --- a/src/main/java/org/bukkit/BukkitRuntime.java
 +++ b/src/main/java/org/bukkit/BukkitRuntime.java
 @@ -2,6 +2,8 @@ package org.bukkit;
@@ -50,6 +53,7 @@ diff --git a/src/main/java/org/bukkit/BukkitRuntime.java b/src/main/java/org/buk
 +    PotionEffectRegistry potionEffectRegistry();
  }
 diff --git a/src/main/java/org/bukkit/inventory/meta/PotionMeta.java b/src/main/java/org/bukkit/inventory/meta/PotionMeta.java
+index d915125..2160d64 100644
 --- a/src/main/java/org/bukkit/inventory/meta/PotionMeta.java
 +++ b/src/main/java/org/bukkit/inventory/meta/PotionMeta.java
 @@ -1,6 +1,7 @@
@@ -115,6 +119,7 @@ index 0000000..724b62f
 +    PotionEffectType forLegacyName(String legacyName);
 +}
 diff --git a/src/main/java/org/bukkit/potion/PotionEffectType.java b/src/main/java/org/bukkit/potion/PotionEffectType.java
+index b7c068b..416faee 100644
 --- a/src/main/java/org/bukkit/potion/PotionEffectType.java
 +++ b/src/main/java/org/bukkit/potion/PotionEffectType.java
 @@ -1,163 +1,158 @@
@@ -448,6 +453,7 @@ diff --git a/src/main/java/org/bukkit/potion/PotionEffectType.java b/src/main/ja
      }
  }
 diff --git a/src/main/java/org/bukkit/potion/PotionEffectTypeWrapper.java b/src/main/java/org/bukkit/potion/PotionEffectTypeWrapper.java
+index 356a866..02ea7a1 100644
 --- a/src/main/java/org/bukkit/potion/PotionEffectTypeWrapper.java
 +++ b/src/main/java/org/bukkit/potion/PotionEffectTypeWrapper.java
 @@ -1,10 +1,15 @@
@@ -495,6 +501,7 @@ diff --git a/src/main/java/org/bukkit/potion/PotionEffectTypeWrapper.java b/src/
  
      @Override
 diff --git a/src/main/java/org/bukkit/potion/PotionType.java b/src/main/java/org/bukkit/potion/PotionType.java
+index 60470b8..f68c127 100644
 --- a/src/main/java/org/bukkit/potion/PotionType.java
 +++ b/src/main/java/org/bukkit/potion/PotionType.java
 @@ -1,41 +1,60 @@

@@ -8,6 +8,15 @@
      }
  
      protected void i() {}
+@@ -127,7 +128,7 @@
+             if (entity1.isInteractable()) {
+                 if (entity1 == this.d) {
+                     flag = true;
+-                } else if (this.shooter != null && this.ticksLived < 2 && this.d == null) {
++                } else if (this.shooter != null && this.ticksLived < 2 && this.d == null && this.shooter == entity1) { // CraftBukkit - MC-88491
+                     this.d = entity1;
+                     flag = true;
+                 } else {
 @@ -164,6 +165,11 @@
                  this.e(movingobjectposition.a());
              } else {

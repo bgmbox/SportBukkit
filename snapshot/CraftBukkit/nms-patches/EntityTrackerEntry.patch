@@ -26,8 +26,12 @@
  
      public EntityTrackerEntry(Entity entity, int i, int j, int k, boolean flag) {
          this.tracker = entity;
-@@ -79,13 +89,14 @@
-             this.broadcast(new PacketPlayOutMount(this.tracker));
+@@ -76,16 +86,17 @@
+ 
+         if (!list1.equals(this.w)) {
+             this.w = list1;
+-            this.broadcast(new PacketPlayOutMount(this.tracker));
++            this.broadcastIncludingSelf(new PacketPlayOutMount(this.tracker)); // CraftBukkit
          }
  
 -        if (this.tracker instanceof EntityItemFrame && this.a % 10 == 0) {
@@ -171,7 +175,11 @@
                  this.broadcastIncludingSelf(new PacketPlayOutUpdateAttributes(this.tracker.getId(), set));
              }
  
-@@ -276,7 +360,17 @@
+@@ -273,10 +357,21 @@
+     }
+ 
+     public void updatePlayer(EntityPlayer entityplayer) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "player tracker update"); // Spigot
          if (entityplayer != this.tracker) {
              if (this.c(entityplayer)) {
                  if (!this.trackedPlayers.contains(entityplayer) && (this.e(entityplayer) || this.tracker.attachedToPlayer)) {
@@ -190,7 +198,7 @@
                      Packet packet = this.e();
  
                      entityplayer.playerConnection.sendPacket(packet);
-@@ -290,6 +384,12 @@
+@@ -290,6 +385,12 @@
                          AttributeMapServer attributemapserver = (AttributeMapServer) ((EntityLiving) this.tracker).getAttributeMap();
                          Collection collection = attributemapserver.c();
  
@@ -203,7 +211,7 @@
                          if (!collection.isEmpty()) {
                              entityplayer.playerConnection.sendPacket(new PacketPlayOutUpdateAttributes(this.tracker.getId(), collection));
                          }
-@@ -328,6 +428,13 @@
+@@ -328,6 +429,13 @@
                          }
                      }
  
@@ -217,7 +225,7 @@
                      if (this.tracker instanceof EntityLiving) {
                          EntityLiving entityliving = (EntityLiving) this.tracker;
                          Iterator iterator = entityliving.getEffects().iterator();
-@@ -380,7 +487,10 @@
+@@ -380,7 +488,10 @@
  
      private Packet<?> e() {
          if (this.tracker.dead) {
@@ -229,3 +237,11 @@
          }
  
          if (this.tracker instanceof EntityPlayer) {
+@@ -488,6 +599,7 @@
+     }
+ 
+     public void clear(EntityPlayer entityplayer) {
++        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "player tracker clear"); // Spigot
+         if (this.trackedPlayers.contains(entityplayer)) {
+             this.trackedPlayers.remove(entityplayer);
+             this.tracker.c(entityplayer);

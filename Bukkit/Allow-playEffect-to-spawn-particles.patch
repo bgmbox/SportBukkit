@@ -1,9 +1,11 @@
+From 2a26cfefc8352fa1fc0894cbae519ddad45fcd64 Mon Sep 17 00:00:00 2001
 From: Thinkofdeath <purgames@gmail.com>
 Date: Sun, 17 Mar 2013 22:56:14 +0000
 Subject: [PATCH] Allow playEffect to spawn particles
 
 
 diff --git a/src/main/java/org/bukkit/Effect.java b/src/main/java/org/bukkit/Effect.java
+index 21f7db5..d9cb0ca 100644
 --- a/src/main/java/org/bukkit/Effect.java
 +++ b/src/main/java/org/bukkit/Effect.java
 @@ -5,6 +5,7 @@ import java.util.Map;
@@ -14,7 +16,7 @@ diff --git a/src/main/java/org/bukkit/Effect.java b/src/main/java/org/bukkit/Eff
  import org.bukkit.potion.Potion;
  
  /**
-@@ -196,23 +197,173 @@ public enum Effect {
+@@ -196,12 +197,147 @@ public enum Effect {
       * The sound of an enderdragon growling
       */
      ENDERDRAGON_GROWL(3001, Type.SOUND),
@@ -162,11 +164,8 @@ diff --git a/src/main/java/org/bukkit/Effect.java b/src/main/java/org/bukkit/Eff
 +    private final String particleName;
  
      Effect(int id, Type type) {
--        this(id,type,null);
-+        this(id, type, null);
-     }
- 
-     Effect(int id, Type type, Class<?> data) {
+         this(id, type, null);
+@@ -211,8 +347,23 @@ public enum Effect {
          this.id = id;
          this.type = type;
          this.data = data;
@@ -246,9 +245,10 @@ diff --git a/src/main/java/org/bukkit/Effect.java b/src/main/java/org/bukkit/Eff
 +    public enum Type {SOUND, VISUAL, PARTICLE}
  }
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index c8344c6..19fc9f7 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
-@@ -775,6 +775,16 @@ public interface World extends PluginMessageRecipient, Metadatable {
+@@ -787,6 +787,16 @@ public interface World extends PluginMessageRecipient, Metadatable {
       * Plays an effect to all players within a default radius around a given
       * location.
       *
@@ -265,7 +265,7 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
       * @param location the {@link Location} around which players must be to
       *     hear the sound
       * @param effect the {@link Effect}
-@@ -818,6 +828,27 @@ public interface World extends PluginMessageRecipient, Metadatable {
+@@ -830,6 +840,27 @@ public interface World extends PluginMessageRecipient, Metadatable {
      public <T> void playEffect(Location location, Effect effect, T data, int radius);
  
      /**
@@ -294,9 +294,10 @@ diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/Worl
       * including valid biome data. Used for representing an ungenerated chunk,
       * or for fetching only biome data without loading a chunk.
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 082302d..f5ec669 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -321,6 +321,8 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+@@ -325,6 +325,8 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
       */
      public <T> void playEffect(Location loc, Effect effect, T data);
  
@@ -306,6 +307,7 @@ diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/buk
       * Send a block change. This fakes a block change packet for a user at a
       * certain location. This will not actually change the world in any way.
 diff --git a/src/test/java/org/bukkit/EffectTest.java b/src/test/java/org/bukkit/EffectTest.java
+index 08aa71d..5217aec 100644
 --- a/src/test/java/org/bukkit/EffectTest.java
 +++ b/src/test/java/org/bukkit/EffectTest.java
 @@ -9,7 +9,11 @@ public class EffectTest {

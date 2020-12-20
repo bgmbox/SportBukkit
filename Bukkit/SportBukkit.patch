@@ -1,9 +1,11 @@
+From 2cf37cbf86fa1c53e56f2a60c7556735bf35b9e1 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Tue, 17 Jan 2017 07:10:05 -0500
 Subject: [PATCH] SportBukkit
 
 
 diff --git a/README.md b/README.md
+index eb5af6b..b2bea51 100644
 --- a/README.md
 +++ b/README.md
 @@ -1,4 +1,4 @@
@@ -13,6 +15,7 @@ diff --git a/README.md b/README.md
  A plugin API for [Minecraft](https://minecraft.net/) servers, currently maintained by [SpigotMC](http://www.spigotmc.org/).
  
 diff --git a/src/main/java/org/bukkit/OfflinePlayer.java b/src/main/java/org/bukkit/OfflinePlayer.java
+index 3a48184..4038513 100644
 --- a/src/main/java/org/bukkit/OfflinePlayer.java
 +++ b/src/main/java/org/bukkit/OfflinePlayer.java
 @@ -9,8 +9,9 @@ import org.bukkit.entity.Player;
@@ -27,9 +30,10 @@ diff --git a/src/main/java/org/bukkit/OfflinePlayer.java b/src/main/java/org/buk
      /**
       * Checks if this player is currently online
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 8a02d40..456f53c 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -674,6 +674,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
+@@ -670,6 +670,11 @@ public interface Server extends PluginMessageRecipient, BukkitRuntime, tc.oc.min
       */
      public void shutdown();
  
@@ -41,37 +45,8 @@ diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Ser
      /**
       * Broadcasts the specified message to every user with the given
       * permission name.
-diff --git a/src/main/java/org/bukkit/ServerModule.java b/src/main/java/org/bukkit/ServerModule.java
---- a/src/main/java/org/bukkit/ServerModule.java
-+++ b/src/main/java/org/bukkit/ServerModule.java
-@@ -18,6 +18,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
- import tc.oc.inject.SingletonModule;
- import tc.oc.minecraft.api.plugin.PluginFinder;
- import tc.oc.minecraft.api.server.LocalServer;
-+import tc.oc.minecraft.api.server.MinecraftServerModule;
- 
- /**
-  * Bindings for things that belong to a {@link Server}.
-@@ -31,6 +32,7 @@ public class ServerModule extends SingletonModule {
-     @Override
-     protected void configure() {
-         install(new BukkitModule());
-+        install(new MinecraftServerModule());
- 
-         bind(tc.oc.minecraft.api.server.Server.class).to(LocalServer.class);
-         bind(LocalServer.class).to(Server.class);
-diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
---- a/src/main/java/org/bukkit/entity/Player.java
-+++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1,7 +1,6 @@
- package org.bukkit.entity;
- 
- import java.net.InetSocketAddress;
--import java.util.List;
- import java.util.Set;
- 
- import net.md_5.bungee.api.chat.BaseComponent;
 diff --git a/src/main/java/org/bukkit/event/server/ServerListPingEvent.java b/src/main/java/org/bukkit/event/server/ServerListPingEvent.java
+index 343f238..ef43a39 100644
 --- a/src/main/java/org/bukkit/event/server/ServerListPingEvent.java
 +++ b/src/main/java/org/bukkit/event/server/ServerListPingEvent.java
 @@ -1,7 +1,9 @@
@@ -108,6 +83,7 @@ diff --git a/src/main/java/org/bukkit/event/server/ServerListPingEvent.java b/sr
      public HandlerList getHandlers() {
          return handlers;
 diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
+index 545dbff..53c316c 100644
 --- a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 +++ b/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java
 @@ -24,6 +24,7 @@ import org.yaml.snakeyaml.nodes.Tag;
@@ -118,13 +94,34 @@ diff --git a/src/main/java/org/bukkit/plugin/PluginDescriptionFile.java b/src/ma
  
  /**
   * This type is the runtime-container for the information in the plugin.yml.
-@@ -958,7 +959,8 @@ public final class PluginDescriptionFile implements tc.oc.minecraft.api.plugin.P
+@@ -929,7 +930,8 @@ public final class PluginDescriptionFile implements tc.oc.minecraft.api.plugin.P
              classLoaderOf = map.get("class-loader-of").toString();
          }
  
 -        depend = makePluginNameList(map, "depend");
 +        depend = ConcatenatedList.of(makePluginNameList(map, "depend"),
-+                                     makePluginNameList(map, "depends"));
++                makePluginNameList(map, "depends"));
          softDepend = makePluginNameList(map, "softdepend");
          loadBefore = makePluginNameList(map, "loadbefore");
  
+diff --git a/src/test/java/org/bukkit/LocationTest.java b/src/test/java/org/bukkit/LocationTest.java
+index fa24776..4d56747 100644
+--- a/src/test/java/org/bukkit/LocationTest.java
++++ b/src/test/java/org/bukkit/LocationTest.java
+@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
+ 
+ import java.util.List;
+ import java.util.Random;
++import java.util.UUID;
+ 
+ import org.bukkit.util.Vector;
+ import org.junit.Test;
+@@ -184,7 +185,7 @@ public class LocationTest {
+     }
+ 
+     private static Location getEmptyLocation() {
+-        return new Location(null, 0, 0, 0);
++        return new Location(new UUID(0, 0), 0, 0, 0);
+     }
+ 
+     private Location getLocation() {

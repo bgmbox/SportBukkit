@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import net.minecraft.server.WorldMap;
 
@@ -143,13 +144,17 @@ public final class CraftMapView implements MapView {
             }
 
             canvas.setBase(render.buffer);
-            renderer.render(this, canvas, player);
+            try {
+                renderer.render(this, canvas, player);
+            } catch (Throwable ex) {
+                Bukkit.getLogger().log(Level.SEVERE, "Could not render map using renderer " + renderer.getClass().getName(), ex);
+            }
 
             byte[] buf = canvas.getBuffer();
             for (int i = 0; i < buf.length; ++i) {
                 byte color = buf[i];
-                // There are 143 valid color id's, 0 -> 127 and -128 -> -113
-                if (color >= 0 || color <= -113) render.buffer[i] = color;
+                // There are 208 valid color id's, 0 -> 127 and -128 -> -49
+                if (color >= 0 || color <= -49) render.buffer[i] = color;
             }
 
             for (int i = 0; i < canvas.getCursors().size(); ++i) {

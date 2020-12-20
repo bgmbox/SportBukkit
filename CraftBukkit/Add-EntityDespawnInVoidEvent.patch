@@ -1,23 +1,36 @@
+From 1afa92339ec4d00268338b63d73ac217deccdf08 Mon Sep 17 00:00:00 2001
 From: Isaac Moore <rmsy@me.com>
 Date: Wed, 25 Dec 2013 20:11:34 -0600
 Subject: [PATCH] Add EntityDespawnInVoidEvent
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
+index 88f324a..531985d 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
-@@ -26,6 +26,7 @@ import org.bukkit.entity.Hanging;
+@@ -25,7 +25,7 @@ import org.bukkit.block.BlockFace;
+ import org.bukkit.entity.Hanging;
  import org.bukkit.entity.LivingEntity;
  import org.bukkit.entity.Vehicle;
- import org.bukkit.event.entity.EntityCombustByEntityEvent;
-+import org.bukkit.event.entity.EntityDespawnInVoidEvent;
+-import org.bukkit.event.entity.EntityCombustByEntityEvent;
++import org.bukkit.event.entity.*;
  import org.bukkit.event.hanging.HangingBreakByEntityEvent;
  import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
  import org.bukkit.event.vehicle.VehicleEnterEvent;
-@@ -447,6 +448,9 @@ public abstract class Entity implements ICommandListener {
+@@ -34,9 +34,6 @@ import org.bukkit.craftbukkit.CraftWorld;
+ import org.bukkit.craftbukkit.entity.CraftEntity;
+ import org.bukkit.craftbukkit.entity.CraftPlayer;
+ import org.bukkit.craftbukkit.event.CraftEventFactory;
+-import org.bukkit.event.entity.EntityAirChangeEvent;
+-import org.bukkit.event.entity.EntityCombustEvent;
+-import org.bukkit.event.entity.EntityPortalEvent;
+ import org.bukkit.plugin.PluginManager;
+ // CraftBukkit end
+ 
+@@ -503,6 +500,9 @@ public abstract class Entity implements ICommandListener {
      }
  
-     protected void Y() {
+     protected void ac() {
 +        // SportBukkit start - call EntityDespawnInVoidEvent
 +        this.world.getServer().getPluginManager().callEvent(new EntityDespawnInVoidEvent(this.bukkitEntity));
 +        // SportBukkit end

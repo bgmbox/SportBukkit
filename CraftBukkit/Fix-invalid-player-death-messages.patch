@@ -1,3 +1,4 @@
+From faaf0be92a6249dc9723aec5213e732bc0ee17b5 Mon Sep 17 00:00:00 2001
 From: mrapple <tony@oc.tc>
 Date: Thu, 4 Apr 2013 21:36:54 -0500
 Subject: [PATCH] Fix invalid player death messages
@@ -5,9 +6,10 @@ Subject: [PATCH] Fix invalid player death messages
 This bug affects the /kill command and any plugin that sets a player's health to zero
 
 diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
+index 730acd9..62e6a9c 100644
 --- a/src/main/java/net/minecraft/server/EntityPlayer.java
 +++ b/src/main/java/net/minecraft/server/EntityPlayer.java
-@@ -410,7 +410,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -426,7 +426,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
              }
          }
  
@@ -16,9 +18,9 @@ diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/jav
  
          String deathmessage = chatmessage.toPlainText();
          org.bukkit.event.entity.PlayerDeathEvent event = CraftEventFactory.callPlayerDeathEvent(this, loot, deathmessage, keepInventory);
-@@ -456,7 +456,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+@@ -473,7 +473,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
  
-         EntityLiving entityliving = this.ca();
+         EntityLiving entityliving = this.ci();
  
 -        if (entityliving != null) {
 +        if (entityliving != null && damagesource != DamageSource.GENERIC) { // SportBukkit - can't have a combat tracked killer with a generic damage source

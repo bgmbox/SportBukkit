@@ -32,14 +32,10 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockImage;
-import org.bukkit.geometry.CoarseTransform;
-import org.bukkit.region.BlockRegion;
 import org.bukkit.block.BlockState;
-import org.bukkit.geometry.Transform;
-import org.bukkit.geometry.Vec3;
 import org.bukkit.craftbukkit.block.CraftBlock;
-import org.bukkit.craftbukkit.block.CraftBlockImage;
 import org.bukkit.craftbukkit.block.CraftBlockState;
+import org.bukkit.craftbukkit.block.CraftBlockImage;
 import org.bukkit.craftbukkit.entity.*;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.metadata.BlockMetadataStore;
@@ -57,6 +53,9 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.world.SpawnChangeEvent;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.geometry.CoarseTransform;
+import org.bukkit.geometry.Transform;
+import org.bukkit.geometry.Vec3;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
@@ -64,6 +63,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import org.bukkit.region.BlockRegion;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayBlockIntersection;
 import org.bukkit.util.Vector;
@@ -137,12 +137,12 @@ public class CraftWorld implements World {
         return this;
     }
 
-    public Block getBlockAt(int x, int y, int z) {
+    public org.bukkit.block.Block getBlockAt(int x, int y, int z) {
         return getChunkAt(x >> 4, z >> 4).getBlock(x & 0xF, y, z & 0xF);
     }
 
     @Override
-    public Block getBlockAt(Vec3 position) {
+    public org.bukkit.block.Block getBlockAt(Vec3 position) {
         return new CraftBlock((CraftChunk) getChunkAt(position), position);
     }
 
@@ -163,6 +163,13 @@ public class CraftWorld implements World {
         return new Location(this, spawn.getX(), spawn.getY(), spawn.getZ());
     }
 
+    @Override
+    public boolean setSpawnLocation(Location location) {
+        Preconditions.checkArgument(location != null, "location");
+
+        return equals(location.getWorld()) ? setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ()) : false;
+    }
+
     public boolean setSpawnLocation(int x, int y, int z) {
         try {
             Location previousLocation = getSpawnLocation();
@@ -178,11 +185,31 @@ public class CraftWorld implements World {
         }
     }
 
+    // Paper start - Async chunk load API
+    public void getChunkAtAsync(final int x, final int z, final ChunkLoadCallback callback) {
+        final ChunkProviderServer cps = this.world.getChunkProviderServer();
+        cps.getChunkAt(x, z, new Runnable() {
+            @Override
+            public void run() {
+                callback.onLoad(cps.getChunkAt(x, z).bukkitChunk);
+            }
+        });
+    }
+
+    public void getChunkAtAsync(Block block, ChunkLoadCallback callback) {
+        getChunkAtAsync(block.getX() >> 4, block.getZ() >> 4, callback);
+    }
+
+    public void getChunkAtAsync(Location location, ChunkLoadCallback callback) {
+        getChunkAtAsync(location.getBlockX() >> 4, location.getBlockZ() >> 4, callback);
+    }
+    // Paper end
+
     public Chunk getChunkAt(int x, int z) {
         return this.world.getChunkProviderServer().getChunkAt(x, z).bukkitChunk;
     }
 
-    public Chunk getChunkAt(Block block) {
+    public Chunk getChunkAt(org.bukkit.block.Block block) {
         return getChunkAt(block.getX() >> 4, block.getZ() >> 4);
     }
 
@@ -223,6 +250,7 @@ public class CraftWorld implements World {
     }
 
     public boolean unloadChunkRequest(int x, int z, boolean safe) {
+        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "chunk unload"); // Spigot
         if (safe && isChunkInUse(x, z)) {
             return false;
         }
@@ -236,6 +264,7 @@ public class CraftWorld implements World {
     }
 
     public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
+        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "chunk unload"); // Spigot
         if (isChunkInUse(x, z)) {
             return false;
         }
@@ -311,6 +340,7 @@ public class CraftWorld implements World {
     }
 
     public boolean loadChunk(int x, int z, boolean generate) {
+        org.bukkit.craftbukkit.AsyncCatcher.catchOp( "chunk load"); // Spigot
         chunkLoadCount++;
         if (generate) {
             // Use the default variant of loadChunk when generate == true.
@@ -610,7 +640,7 @@ public class CraftWorld implements World {
         }
     }
 
-    public Block getBlockAt(Location location) {
+    public org.bukkit.block.Block getBlockAt(Location location) {
         return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
@@ -634,11 +664,11 @@ public class CraftWorld implements World {
         return populators;
     }
 
-    public Block getHighestBlockAt(int x, int z) {
+    public org.bukkit.block.Block getHighestBlockAt(int x, int z) {
         return getBlockAt(x, getHighestBlockYAt(x, z), z);
     }
 
-    public Block getHighestBlockAt(Location location) {
+    public org.bukkit.block.Block getHighestBlockAt(Location location) {
         return getHighestBlockAt(location.getBlockX(), location.getBlockZ());
     }
 
@@ -678,7 +708,7 @@ public class CraftWorld implements World {
                 byte[] biomevals = chunk.getBiomeIndex();
                 biomevals[((z & 0xF) << 4) | (x & 0xF)] = (byte) BiomeBase.REGISTRY_ID.a(bb);
 
-                chunk.e(); // SPIGOT-2890 // PAIL: markDirty
+                chunk.markDirty(); // SPIGOT-2890
             }
         }
     }
@@ -850,6 +880,7 @@ public class CraftWorld implements World {
 
     public void setStorm(boolean hasStorm) {
         world.worldData.setStorm(hasStorm);
+        setWeatherDuration(0); // Reset weather duration (legacy behaviour)
     }
 
     public int getWeatherDuration() {
@@ -866,6 +897,7 @@ public class CraftWorld implements World {
 
     public void setThundering(boolean thundering) {
         world.worldData.setThundering(thundering);
+        setThunderDuration(0); // Reset weather duration (legacy behaviour)
     }
 
     public int getThunderDuration() {
@@ -1018,6 +1050,7 @@ public class CraftWorld implements World {
         // order is important for some of these
         if (Boat.class.isAssignableFrom(clazz)) {
             entity = new EntityBoat(world, x, y, z);
+            entity.setPositionRotation(x, y, z, yaw, pitch);
         } else if (FallingBlock.class.isAssignableFrom(clazz)) {
             entity = new EntityFallingBlock(world, x, y, z, world.getType(new BlockPosition(x, y, z)));
         } else if (Projectile.class.isAssignableFrom(clazz)) {
@@ -1158,6 +1191,8 @@ public class CraftWorld implements World {
                     entity = new EntityWolf(world);
                 } else if (Ocelot.class.isAssignableFrom(clazz)) {
                     entity = new EntityOcelot(world);
+                } else if (Parrot.class.isAssignableFrom(clazz)) {
+                    entity = new EntityParrot(world);
                 }
             } else if (PigZombie.class.isAssignableFrom(clazz)) {
                 entity = new EntityPigZombie(world);
@@ -1205,19 +1240,26 @@ public class CraftWorld implements World {
                 entity = new EntityArmorStand(world, x, y, z);
             } else if (PolarBear.class.isAssignableFrom(clazz)) {
                 entity = new EntityPolarBear(world);
-            } else if (Evoker.class.isAssignableFrom(clazz)) {
-                entity = new EntityEvoker(world);
             } else if (Vex.class.isAssignableFrom(clazz)) {
                 entity = new EntityVex(world);
-            } else if (Vindicator.class.isAssignableFrom(clazz)) {
-                entity = new EntityVindicator(world);
+            } else if (Illager.class.isAssignableFrom(clazz)) {
+                if (Spellcaster.class.isAssignableFrom(clazz)) {
+                    if (Evoker.class.isAssignableFrom(clazz)) {
+                        entity = new EntityEvoker(world);
+                    } else if (Illusioner.class.isAssignableFrom(clazz)) {
+                        entity = new EntityIllagerIllusioner(world);
+                    }
+                } else if (Vindicator.class.isAssignableFrom(clazz)) {
+                    entity = new EntityVindicator(world);
+                }
             }
 
             if (entity != null) {
                 entity.setLocation(x, y, z, yaw, pitch);
+                entity.setHeadRotation(yaw); // SPIGOT-3587
             }
         } else if (Hanging.class.isAssignableFrom(clazz)) {
-            Block block = getBlockAt(location);
+            org.bukkit.block.Block block = getBlockAt(location);
             BlockFace face = BlockFace.SELF;
 
             int width = 16; // 1 full block, also painting smallest size.
@@ -1344,7 +1386,7 @@ public class CraftWorld implements World {
     }
 
     public int getSeaLevel() {
-        return 64;
+        return world.getSeaLevel();
     }
 
     public boolean getKeepSpawnInMemory() {

@@ -1,9 +1,11 @@
+From e4cb09edcd0baecc4362168219f6b48809d87958 Mon Sep 17 00:00:00 2001
 From: Jedediah Smith <jedediah@silencegreys.com>
 Date: Sat, 19 Mar 2016 00:45:13 -0400
 Subject: [PATCH] Legacy potion support
 
 
 diff --git a/src/main/java/org/bukkit/potion/Potion.java b/src/main/java/org/bukkit/potion/Potion.java
+index 1413b36..ffe7630 100644
 --- a/src/main/java/org/bukkit/potion/Potion.java
 +++ b/src/main/java/org/bukkit/potion/Potion.java
 @@ -6,6 +6,7 @@ import org.apache.commons.lang.Validate;
@@ -67,13 +69,14 @@ diff --git a/src/main/java/org/bukkit/potion/Potion.java b/src/main/java/org/buk
 -            level++;
 -            potion = new Potion(type, level);
 -        }
+-        if ((damage & SPLASH_BIT) != 0) {
 +
 +        Potion potion = new Potion(type, type.isUpgradeable() ? level : 1);
 +
-         if ((damage & SPLASH_BIT) > 0) {
++        if ((damage & SPLASH_BIT) > 0) {
              potion = potion.splash();
          }
--        if ((damage & EXTENDED_BIT) > 0) {
+-        if ((damage & EXTENDED_BIT) != 0) {
 +        if ((damage & EXTENDED_BIT) > 0 && type.isExtendable()) {
              potion = potion.extend();
          }

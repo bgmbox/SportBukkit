@@ -1,0 +1,23 @@
+From 19415a9abf590d0fd109a8184228d0f0e3ee3281 Mon Sep 17 00:00:00 2001
+From: cswhite2000 <18whitechristop@gmail.com>
+Date: Sun, 10 Sep 2017 01:50:53 -0700
+Subject: [PATCH] Fix respawning
+
+
+diff --git a/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java b/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java
+index 1b4f28e..a8a1700 100644
+--- a/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java
++++ b/src/main/java/net/minecraft/server/PacketPlayOutWorldBorder.java
+@@ -18,10 +18,8 @@ public class PacketPlayOutWorldBorder implements Packet<PacketListenerPlayOut> {
+ 
+     public PacketPlayOutWorldBorder(WorldBorder worldborder, PacketPlayOutWorldBorder.EnumWorldBorderAction packetplayoutworldborder_enumworldborderaction) {
+         this.a = packetplayoutworldborder_enumworldborderaction;
+-        // CraftBukkit start - multiply out nether border
+-        this.c = worldborder.getCenterX() * (worldborder.world.worldProvider instanceof WorldProviderHell ? 8 : 1);
+-        this.d = worldborder.getCenterZ() * (worldborder.world.worldProvider instanceof WorldProviderHell ? 8 : 1);
+-        // CraftBukkit end
++        this.c = worldborder.getCenterX();
++        this.d = worldborder.getCenterZ();
+         this.f = worldborder.getSize();
+         this.e = worldborder.j();
+         this.g = worldborder.i();

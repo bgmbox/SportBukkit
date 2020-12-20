@@ -10,6 +10,7 @@ import net.minecraft.server.BlockFire;
 import net.minecraft.server.Item;
 import net.minecraft.server.ItemFood;
 import net.minecraft.server.ItemRecord;
+import net.minecraft.server.TileEntityFurnace;
 
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
@@ -131,6 +132,11 @@ public class PerMaterialTest extends AbstractTestingBase {
     }
 
     @Test
+    public void isFuel() {
+        assertThat(material.isFuel(), is(TileEntityFurnace.isFuel(new net.minecraft.server.ItemStack(CraftMagicNumbers.getItem(material)))));
+    }
+
+    @Test
     public void isOccluding() {
         if (material.isBlock()) {
             assertThat(material.isOccluding(), is(CraftMagicNumbers.getBlock(material).isOccluding(CraftMagicNumbers.getBlock(material).getBlockData())));
@@ -154,6 +160,24 @@ public class PerMaterialTest extends AbstractTestingBase {
             assertThat(EnchantmentTarget.BREAKABLE.includes(material), is(CraftMagicNumbers.getItem(material).usesDurability()));
         } else {
             assertFalse(EnchantmentTarget.BREAKABLE.includes(material));
+        }
+    }
+
+    @Test
+    public void testBlock() {
+        if (material == Material.AIR) {
+            assertTrue(material.isBlock());
+        } else {
+            assertThat(material.isBlock(), is(equalTo(CraftMagicNumbers.getBlock(material) != Blocks.AIR)));
+        }
+    }
+
+    @Test
+    public void testItem() {
+        if (material == Material.AIR) {
+            assertTrue(material.isItem());
+        } else {
+            assertThat(material.isItem(), is(equalTo(CraftMagicNumbers.getItem(material) != null)));
         }
     }
 }

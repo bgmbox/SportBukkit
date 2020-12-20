@@ -1,0 +1,48 @@
+From d0a3375b5fa4e15a99151b2b06693f974d659232 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Fri, 10 Aug 2018 13:57:42 -0500
+Subject: [PATCH] Modify kb
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index 7493223..3e0431f 100644
+--- a/src/main/java/net/minecraft/server/EntityLiving.java
++++ b/src/main/java/net/minecraft/server/EntityLiving.java
+@@ -1164,27 +1164,21 @@ public abstract class EntityLiving extends Entity {
+         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
+             this.impulse = true;
+             float f1 = MathHelper.sqrt(fromX * fromX + fromZ * fromZ);
+-            float f2 = 0.4F;
++            float f2 = 0.36F;
+ 
+-            // CraftBukkit start
+-//            double knockbackReduction = this.getBukkitEntity().getKnockbackReduction();
+-//            double friction = 2.0d - knockbackReduction;
+-            double friction = 1.775;
+-//            f2 *= (1d - knockbackReduction);
+-
+-            this.motX /= friction;
+-            this.motY /= friction;
+-            this.motZ /= friction;
+-            // CraftBukkit end
++            double horizontalFriction = 1.65;
++            double verticalFriction = 1.75;
++
++            this.motX /= horizontalFriction;
++            this.motY /= verticalFriction;
++            this.motZ /= horizontalFriction;
+ 
+             this.motX -= fromX / (double) f1 * (double) f2;
+             this.motY += (double) f2;
+             this.motZ -= fromZ / (double) f1 * (double) f2;
+-//            if (this.motY > 0.4000000059604645D) {
+-//                this.motY = 0.4000000059604645D;
+-//            }
+-            if (this.motY > 0.42) {
+-                this.motY = 0.42;
++
++            if (this.motY > 0.41) {
++                this.motY = 0.41;
+             }
+         }
+     }

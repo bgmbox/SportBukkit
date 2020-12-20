@@ -2,6 +2,7 @@ package org.bukkit.scoreboard;
 
 import java.util.Set;
 
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.potion.PotionEffectType;
 
@@ -77,6 +78,28 @@ public interface Team {
     void setSuffix(String suffix) throws IllegalStateException, IllegalArgumentException;
 
     /**
+     * Gets the color of the team.
+     * <br>
+     * This only sets the team outline, other occurrences of colors such as in
+     * names are handled by prefixes / suffixes.
+     *
+     * @return team color, defaults to {@link ChatColor#RESET}
+     * @throws IllegalStateException
+     */
+    ChatColor getColor() throws IllegalStateException;
+
+    /**
+     * Sets the color of the team.
+     * <br>
+     * This only sets the team outline, other occurrences of colors such as in
+     * names are handled by prefixes / suffixes.
+     *
+     * @param color new color, must be non-null. Use {@link ChatColor#RESET} for
+     * no color
+     */
+    void setColor(ChatColor color);
+
+    /**
      * Gets the team friendly fire state
      *
      * @return true if friendly fire is enabled
@@ -113,7 +136,7 @@ public interface Team {
     /**
      * Gets the team's ability to see name tags
      *
-     * @return the current name tag visibilty for the team
+     * @return the current name tag visibility for the team
      * @throws IllegalArgumentException if this team has been unregistered
      * @deprecated see {@link #getOption(org.bukkit.scoreboard.Team.Option)}
      */
